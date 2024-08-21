@@ -13,7 +13,6 @@ func physics_update(delta):
 func _handle_inputs(delta):
 	if Input.is_action_just_pressed("jump"):
 		%AnimationPlayer.play("jump")
-		#entity.jump(64)
 	if Input.is_action_just_pressed("attack") and not entity.is_damaged:
 		entity.is_charging = true
 	if Input.is_action_just_released("attack") and entity.is_charging:

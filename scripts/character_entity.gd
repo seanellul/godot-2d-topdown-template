@@ -63,7 +63,6 @@ func _process(delta):
 		is_target_reached = round(velocity) == Vector2.ZERO
 		if is_target_reached:
 			target_reached.emit(target)
-	_process_jump(delta)
 
 func _physics_process(delta):
 	# Apply gravity.
@@ -129,7 +128,7 @@ func _get_is_attacking():
 	return is_attacking
 
 func _get_is_jumping():
-	return _jump_timer < 1.1
+	return is_in_air
 
 func _get_is_landing():
 	# return !is_on_floor() and velocity.y < 0
@@ -182,29 +181,6 @@ func take_damage(value := 0, from = ""):
 
 func knockback(force:= 0.0):
 	velocity += -facing * force
-
-var _jump_timer = 1.1
-var _jump_start
-var _jump_destination
-var _jump_height
-
-func jump(distance = 32.0):
-	if is_jumping:
-		return
-	_jump_start = position
-	_jump_destination = position + (velocity.normalized() * distance)
-	_jump_height = distance * 0.4
-	_jump_timer = 0.0
-
-func _process_jump(delta, time = 0.3):
-	if _jump_timer <= 1.0:
-		var height = sin(PI * _jump_timer) * _jump_height
-		position = _jump_start.lerp(_jump_destination, _jump_timer) - Vector2(0, height)
-		_jump_timer += delta / time
-		if _jump_timer > 1.0:
-			position = _jump_destination
-	else:
-		_jump_timer = 1.1
 
 func reset():
 	pass
