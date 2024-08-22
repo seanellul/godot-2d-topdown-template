@@ -29,7 +29,7 @@ func _update_animation():
 		player_action = Const.ANIM.ATTACK
 	elif entity.is_charging:
 		player_action = Const.ANIM.CHARGING
-	elif entity.is_landing or entity.is_jumping:
+	elif entity.is_jumping:
 		player_action = Const.ANIM.JUMP
 	elif entity.is_running:
 		player_action = Const.ANIM.RUN
@@ -43,8 +43,5 @@ func _set_player_action(value):
 		return
 	player_action = value
 	Globals.player_action.emit(owner, value, entity.facing)
-	if value in entity.anim_params:
+	if entity.animation_state and value in entity.anim_params:
 		entity.animation_state.travel(value)
-
-func _unhandled_input(event):
-	pass

@@ -3,11 +3,8 @@ class_name CharacterEntity
 
 @export_group("Movement")
 @export var max_speed = 5.0
-@export var afflicted_by_gravity = false
-@export var gravity: float = 0.0
 @export var target_is_player: = false
 @export var target: Node2D = null: set = _set_target ## A Node to be followed by this entity.
-@export var is_in_air = false
 @export_group("Health")
 @export var max_hp := 10
 @export var immortal := false
@@ -21,23 +18,20 @@ class_name CharacterEntity
 @export var on_screen_entered: BaseState ## State to enable when this entity is visible on screen.
 @export var on_screen_exited: BaseState ## State to enable when this entity is outside the visible screen.
 @export_group("Settings")
+@export var main_sprite: Sprite2D
+@export var animation_tree: AnimationTree
 @export var canvas_layer: Node ## Needed for: health_bar.
-@export var collision_shape: CollisionShape2D = null
-
-@export var sprites: Array[Sprite3D] ## The list of sprites to update with this entity.
 @export var anim_params: Array[String] = [] ## The animations available in the AnimationTree. Used to set the blend_position of each animation (facing direction).
 
 @onready var hp := max_hp: set = _set_hp
+
 var hp_bar: Node
-var animation_tree: AnimationTree
 var animation_state: AnimationNodeStateMachinePlayback
 var screen_notifier: VisibleOnScreenNotifier3D
-var facing := Vector2.DOWN: set = _set_facing
-#var round_facing := Vector3.BACK: get = _get_round_facing
+var facing := Vector2.DOWN: get = _get_facing, set = _set_facing
 var is_moving: bool: get = _get_is_moving
 var is_running: bool: get = _get_is_running
 var is_jumping: bool: get = _get_is_jumping
-var is_landing: bool: get = _get_is_landing
 var is_attacking: bool: get = _get_is_attacking, set = _set_is_attacking
 var is_charging := false: set = _set_is_charging
 var is_damaged: bool
@@ -58,20 +52,16 @@ func _ready():
 	_init_screen_notifier()
 	hit.connect(func(): if on_attack: on_attack.enable())
 
-func _process(delta):
+func _process(_delta):
 	if !is_target_reached:
 		is_target_reached = round(velocity) == Vector2.ZERO
 		if is_target_reached:
 			target_reached.emit(target)
 
-func _physics_process(delta):
-	# Apply gravity.
-	if not is_on_floor() and afflicted_by_gravity:
-		velocity.y -= gravity * delta
+func _physics_process(_delta):
 	move_and_slide()
 
 func _init_animation_tree():
-	animation_tree = get_node_or_null("AnimationTree")
 	if animation_tree:
 		animation_tree.active = true
 		animation_state = animation_tree.get("parameters/playback")
@@ -108,9 +98,8 @@ func _set_hp(value):
 	print("%s HP is: %s" % [name, hp])
 	hp_changed.emit(hp)
 
-#func _get_round_facing():
-	#var facing_y = roundf(facing.y) if facing.x == 0 else 0.0
-	#return Vector2(roundf(facing.x), facing_y)
+func _get_facing():
+	return facing.floor()
 
 func _set_facing(value):
 	facing = value
@@ -128,11 +117,7 @@ func _get_is_attacking():
 	return is_attacking
 
 func _get_is_jumping():
-	return is_in_air
-
-func _get_is_landing():
-	# return !is_on_floor() and velocity.y < 0
-	pass
+	return main_sprite and main_sprite.position.y != 0
 
 func _set_target(value):
 	target = value
@@ -158,10 +143,11 @@ func _set_data(value):
 		target = get_node_or_null(data.target)
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
-	for sprite in sprites:
-		sprite.material_overlay.set_shader_parameter("power", power)
+	var nodes_to_flash = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
+	for n in nodes_to_flash:
+		n.material_overlay.set_shader_parameter("power", power)
 		if color != Color.TRANSPARENT:
-			sprite.material_overlay.set_shader_parameter("flash_color", color)
+			n.material_overlay.set_shader_parameter("flash_color", color)
 	if (power > 0):
 		await get_tree().create_timer(duration).timeout
 		flash(0)

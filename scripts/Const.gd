@@ -19,27 +19,23 @@ const DIRECTION = {
 	DOWN = "down",
 	LEFT = "left",
 	RIGHT = "right",
-	UP = "up"
-}
-
-const DIR_NAME = {
-	Vector3(0, 0, 1): DIRECTION.DOWN,
-	Vector3(-1, 0, 0): DIRECTION.LEFT,
-	Vector3(1, 0, 0): DIRECTION.RIGHT,
-	Vector3(0, 0, -1): DIRECTION.UP,
+	UP = "up",
 }
 
 const DIR_BIT = {
-	Vector3(0, 0, 1): 1 << 0,
-	Vector3(-1, 0, 0): 1 << 1,
-	Vector3(1, 0, 0): 1 << 2,
-	Vector3(0, 0, -1): 1 << 3,
+	Vector2(0, 1): 1 << 0, #down
+	Vector2(-1, 0): 1 << 1, #left
+	Vector2(1, 0): 1 << 2, #right
+	Vector2(0, -1): 1 << 3, #up
+	Vector2(-1, -1): 1 << 4, #up left
+	Vector2(0, 0): 1 << 7, #down right
 }
 
 const GROUP = {
 	PLAYER = "player",
 	ENEMY = "enemy",
-	SAVE = "save"
+	SAVE = "save",
+	FLASH = "flash"
 }
 
 const ANIM = {

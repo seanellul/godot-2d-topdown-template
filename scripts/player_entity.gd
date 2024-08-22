@@ -4,7 +4,6 @@ class_name PlayerEntity
 @export_group("Movement")
 @export var acceleration = 25.0
 @export var friction = 10.0
-@export var jump_velocity = 6.5
 
 @export_group("Attack")
 @export var impulse_force = 5.0
@@ -30,7 +29,7 @@ func _process(delta):
 	super._process(delta)
 	input_dir = Input.get_vector("left", "right", "up", "down")
 	if smoke_particles:
-		smoke_particles.emitting = is_running && not (is_jumping or is_landing)
+		smoke_particles.emitting = is_running && not is_jumping
 
 func _init_attack_cooldown_timer():
 	attack_cooldown_timer = Timer.new()

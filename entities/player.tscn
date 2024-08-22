@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7mgtepd7t41i"]
+[gd_scene load_steps=11 format=3 uid="uid://b7mgtepd7t41i"]
 
 [ext_resource type="Script" path="res://scripts/player_entity.gd" id="1_3gx8b"]
 [ext_resource type="Texture2D" uid="uid://cguffgb631jgt" path="res://assets/tilesets/tilemap_packed.png" id="2_tnjls"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_xnu42"]
 [ext_resource type="Script" path="res://scripts/states/state_player_input.gd" id="4_b1v48"]
+[ext_resource type="Script" path="res://scripts/interaction_handler.gd" id="5_ksqkr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
 size = Vector2(20, 16)
@@ -13,7 +14,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,22 +26,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:is_in_air")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -54,7 +43,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,22 +55,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:is_in_air")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -94,20 +71,23 @@ _data = {
 "jump": SubResource("Animation_sf6qr")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqewt"]
+radius = 23.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("main_sprite") groups=["player"]]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_3gx8b")
-acceleration = 2000.0
-friction = 1000.0
-jump_velocity = 650.0
+acceleration = 3000.0
+friction = 2000.0
 impulse_force = 50.0
 attack_friction = 1000.0
 max_speed = 300.0
+main_sprite = NodePath("Sprite2D")
 anim_params = Array[String](["jump"])
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["flash"]]
 texture = ExtResource("2_tnjls")
 hframes = 12
 vframes = 11
@@ -130,3 +110,13 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_x7gvq")
 }
+
+[node name="InteractionHandler" type="Area2D" parent="."]
+collision_mask = 8
+monitorable = false
+script = ExtResource("5_ksqkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_hqewt")
+debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
