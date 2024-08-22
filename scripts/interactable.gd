@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Area2D
 class_name Interactable
 
 @export_group("Constraints")
@@ -12,12 +12,23 @@ class_name Interactable
 @export_group("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
+@export var on_interaction: BaseState ## The state to enable on interaction.
 
 var entity: CharacterEntity
 var interacting := false
 
+func _init() -> void:
+	monitoring = false
+	monitorable = true
+	collision_layer = 1 << 3 # set layer to layer "item"
+
 func _enter_tree():
-	child_order_changed.connect(update_configuration_warnings)
+	if not child_order_changed.is_connected(update_configuration_warnings):
+		child_order_changed.connect(update_configuration_warnings)
+
+func _exit_tree() -> void:
+	if  child_order_changed.is_connected(update_configuration_warnings):
+		child_order_changed.disconnect(update_configuration_warnings)
 
 func interact(sender):
 	if sender is CharacterEntity:
@@ -40,7 +51,8 @@ func _can_interact() -> bool:
 	return can_interact and !interacting
 
 func do_interaction():
-	pass
+	if on_interaction:
+		on_interaction.enable()
 
 func reset_interaction():
 	await get_tree().create_timer(1).timeout
@@ -48,7 +60,7 @@ func reset_interaction():
 
 func _get_configuration_warnings():
 	var warnings: PackedStringArray = []
-	var area = null
+	var area = get_node(".")
 	for c in get_children():
 		if c is Area2D:
 			area = c
