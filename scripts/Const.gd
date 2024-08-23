@@ -1,5 +1,7 @@
 class_name Const extends Node
 
+const SAVE_FILE_BASE_PATH := "user://save"
+
 const MENU = {
 	TITLE_SCREEN = "res://scenes/menus/start_screen.gd"
 }

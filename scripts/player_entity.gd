@@ -45,6 +45,10 @@ func _set_is_attacking(value):
 func _set_is_charging(value):
 	is_charging = value
 
+func _set_data(value):
+	if data == null:
+		super._set_data(value)
+
 func move(delta, speed: float):
 	if is_attacking or is_charging:
 		return

@@ -7,17 +7,9 @@ var user_prefs:UserPrefs
 
 var settings_menu_scene:PackedScene = preload("res://scenes/menus/settings_menu.tscn")
 var settings_menu = null
-
-#signal game_loading
-#signal game_saving
-#signal game_loaded
-#signal game_saved
-#
-#signal screen_fade_start(value)
-#signal screen_fade_finished(value)
+# var current_scene = null
 
 signal player_action(node, action, direction)
-
 signal enemy_hurt
  
 func _ready():

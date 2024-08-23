@@ -21,6 +21,7 @@ Globals="*res://scripts/autoloads/Globals.gd"
 SceneManager="*res://scripts/autoloads/SceneManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Steering="*res://scripts/autoloads/Steering.gd"
+DataManager="*res://scripts/DataManager.gd"
 
 [display]
 
@@ -42,6 +43,7 @@ import/blender/enabled=false
 [global_group]
 
 player=""
+save=""
 
 [importer_defaults]
 

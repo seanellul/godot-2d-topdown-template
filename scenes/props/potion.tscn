@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://m68w6dpmito0"]
+[gd_scene load_steps=11 format=3 uid="uid://m68w6dpmito0"]
 
+[ext_resource type="Script" path="res://scenes/props/item.gd" id="1_altnv"]
 [ext_resource type="Texture2D" uid="uid://c0r4412fyaf48" path="res://assets/props/props.tres" id="2_jn5tb"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="2_qbpvf"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_g7kv4"]
@@ -18,20 +19,25 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"disable"
 }]
 }
 
+[sub_resource type="Animation" id="Animation_oojgl"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tjjem"]
 _data = {
+"RESET": SubResource("Animation_oojgl"),
 "pick": SubResource("Animation_eura6")
 }
 
 [node name="Potion" type="Node2D"]
+script = ExtResource("1_altnv")
 
 [node name="Interactable" type="Area2D" parent="." node_paths=PackedStringArray("on_interaction")]
 collision_layer = 8
@@ -54,7 +60,7 @@ libraries = {
 "": SubResource("AnimationLibrary_tjjem")
 }
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state") groups=["save"]]
 script = ExtResource("3_g7kv4")
 current_state = NodePath("idle")
 
