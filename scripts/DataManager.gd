@@ -10,7 +10,7 @@ signal game_loaded
 
 func _ready():
 	create_or_load_file()
-	SceneManager.scene_added.connect(load_scene)
+	SceneManager.scene_added.connect(_load_level_data)
 
 func create_or_load_file() -> void:
 	if SaveFileManager.save_file_exists():
@@ -18,24 +18,29 @@ func create_or_load_file() -> void:
 	else:
 		game_data = SaveFileManager.new()
 		save_game()
-	# After creating or loading a save resource, we need to dispatch its data
-	# to the various nodes that need it.
-	_load_game()
+	# After creating or loading a save resource, we need to dispatch its data to the various nodes that need it.
+	#_load_game()
 
-func load_scene(_loaded_scene:Node, _loading_screen):
-	_load_game()
-
-func _load_game() -> void:
+func _load_level_data(_loaded_scene:Node, _loading_screen):
 	await get_tree().create_timer(0.1).timeout
+	load_game()
+
+func load_game() -> void:
 	print_debug("loading...")
 	_load_nodes_data()
 	game_loaded.emit()
 
 func save_game() -> void:
 	print_debug("saving...")
+	_save_current_level()
 	_save_nodes_data()
 	game_data.write_save_file()
 	game_saved.emit()
+
+func _save_current_level():
+	var level = get_tree().get_first_node_in_group("level")
+	if level:
+		game_data.current_level = level.scene_file_path
 
 func _load_nodes_data():
 	for node in _get_save_nodes():

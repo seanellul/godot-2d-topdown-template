@@ -2,10 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://b7mgtepd7t41i" path="res://entities/player.tscn" id="1_5gygf"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="1_c5qtb"]
-[ext_resource type="PackedScene" uid="uid://tnmhm6k0reud" path="res://scenes/system/debugger.tscn" id="3_nukir"]
+[ext_resource type="Script" path="res://scenes/system/camera_controller.gd" id="3_1l7tx"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="4_pjhfj"]
 
-[node name="Level01" type="Node2D"]
+[node name="Level01" type="Node2D" groups=["level"]]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(262, 176)
+limit_smoothed = true
+script = ExtResource("3_1l7tx")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -18,20 +23,13 @@ tile_set = ExtResource("1_c5qtb")
 tile_map_data = PackedByteArray("AAABAAUAAQABAAAAAAABAAYAAQABAAEAAAABAAcAAQABAAIAAAACAAUAAQACAAAAAAACAAYAAQACAAEAAAACAAcAAQACAAIAAAADAAUAAQADAAAAAAADAAYAAQADAAEAAAADAAcAAQADAAIAAAALAAEAAQABAAAAAAALAAIAAQABAAEAAAALAAMAAQABAAIAAAAMAAEAAQACAAAAAAAMAAIAAQACAAEAAAAMAAMAAQACAAIAAAANAAEAAQADAAAAAAANAAIAAQADAAEAAAANAAMAAQADAAIAAAAKAAgAAQABAAAAAAAKAAkAAQABAAEAAAAKAAoAAQABAAIAAAALAAgAAQACAAAAAAALAAkAAQACAAEAAAALAAoAAQACAAIAAAAMAAgAAQADAAAAAAAMAAkAAQADAAEAAAAMAAoAAQADAAIAAAA=")
 tile_set = ExtResource("1_c5qtb")
 
-[node name="CharacterEntity" parent="." instance=ExtResource("1_5gygf")]
+[node name="Player" parent="." instance=ExtResource("1_5gygf")]
 position = Vector2(262, 176)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="CharacterEntity"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 update_rotation = false
 update_scale = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(262, 176)
-limit_smoothed = true
-position_smoothing_enabled = true
-
-[node name="Debugger" parent="." instance=ExtResource("3_nukir")]
 
 [node name="Props" type="Node2D" parent="."]
 

@@ -29,7 +29,7 @@ func _unhandled_key_input(event: InputEvent):
 			KEY_F1:
 				DataManager.save_game()
 			KEY_F2:
-				DataManager.create_or_load_file()
+				DataManager.load_game()
 			KEY_CTRL:
 				_set_player_ghost()
 			KEY_5:

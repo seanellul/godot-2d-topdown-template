@@ -10,6 +10,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uq30"]
 radius = 21.0238
 
+[sub_resource type="Animation" id="Animation_oojgl"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_eura6"]
 resource_name = "pick"
 tracks/0/type = "method"
@@ -26,9 +29,6 @@ tracks/0/keys = {
 "method": &"disable"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_oojgl"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tjjem"]
 _data = {

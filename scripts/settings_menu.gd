@@ -12,7 +12,7 @@ signal language_changed(language: String)
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 
-var user_prefs:UserPrefs
+var user_prefs: UserPrefs
 
 func _ready():
 	_populate_language_dropdown()
