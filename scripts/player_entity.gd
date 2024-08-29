@@ -22,6 +22,9 @@ func _ready():
 	super._ready()
 	_init_attack_cooldown_timer()
 
+func _on_set_current_level():
+	pass
+
 func _get_is_running():
 	return is_moving && Input.get_action_strength("run") > 0
 

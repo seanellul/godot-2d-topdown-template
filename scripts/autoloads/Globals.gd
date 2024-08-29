@@ -7,10 +7,11 @@ var user_prefs:UserPrefs
 
 var settings_menu_scene:PackedScene = preload("res://scenes/menus/settings_menu.tscn")
 var settings_menu = null
-# var current_scene = null
 
 signal player_action(node, action, direction)
 signal enemy_hurt
+signal transfer_start
+signal transfer_complete
  
 func _ready():
 	user_prefs = UserPrefs.load_or_create()

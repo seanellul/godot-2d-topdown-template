@@ -12,6 +12,7 @@ class_name Interactable
 @export_group("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
+@export_group("")
 @export var on_interaction: BaseState ## The state to enable on interaction.
 
 var entity: CharacterEntity
@@ -52,7 +53,9 @@ func _can_interact() -> bool:
 
 func do_interaction():
 	if on_interaction:
-		on_interaction.enable()
+		on_interaction.enable({
+			"entity": entity
+		})
 
 func reset_interaction():
 	await get_tree().create_timer(1).timeout

@@ -3,11 +3,12 @@ class_name BaseState
 
 @export var active := true ## Set to false to don't process this state.
 @export_group("Timer")
-@export var time_range := Vector2.ZERO ## If greather than 0 the state is timer and after N seconds the on_timeout state will be enabled. Random time range between min (x) and max (y).
+@export var time_range := Vector2.ZERO ## If greather than 0 the state is timed and after N seconds the on_timeout state will be enabled. Random time range between min (x) and max (y).
 @export var on_timeout: BaseState ## State to enable after time_range times out.
 
 var current := false ## Check if the state is currently enabled.
 var timer: TimedState
+var params = {}
 
 signal state_changed(new_state)
 
@@ -20,12 +21,14 @@ func _enter_tree():
 		timer.create(self, time_range)
 
 ## Enables this state.
-func enable():
+func enable(_params = null):
+	if _params:
+		params = _params
 	state_changed.emit(self)
 	if timer:
 		timer.start()
 		await timer.timeout
-		on_timeout.enable()
+		on_timeout.enable(params)
 
 func enter():
 	pass

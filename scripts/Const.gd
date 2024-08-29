@@ -8,7 +8,8 @@ const MENU = {
 
 const LEVEL = {
 	GAME_START = "res://scenes/game.tscn",
-	LEVEL_1 = "res://scenes/levels/Level01.tscn"
+	LEVEL_1 = "res://scenes/levels/Level01.tscn",
+	LEVEL_2 = "res://scenes/levels/Level02.tscn"
 }
 
 const TRANSITION = {
@@ -38,7 +39,8 @@ const GROUP = {
 	PLAYER = "player",
 	ENEMY = "enemy",
 	SAVE = "save",
-	FLASH = "flash"
+	FLASH = "flash",
+	LEVEL = "level"
 }
 
 const ANIM = {

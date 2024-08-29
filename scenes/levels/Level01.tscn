@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=4 uid="uid://dakphwh8q4546"]
+[gd_scene load_steps=11 format=4 uid="uid://dakphwh8q4546"]
 
 [ext_resource type="PackedScene" uid="uid://b7mgtepd7t41i" path="res://entities/player.tscn" id="1_5gygf"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="1_c5qtb"]
 [ext_resource type="Script" path="res://scenes/system/camera_controller.gd" id="3_1l7tx"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="4_pjhfj"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="5_unfqs"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="6_kln7f"]
+[ext_resource type="Script" path="res://scripts/states/base_state.gd" id="7_mklma"]
+[ext_resource type="Script" path="res://scripts/states/state_transfer.gd" id="8_ddfmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5aihk"]
+size = Vector2(32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdyxv"]
+size = Vector2(64, 32)
 
 [node name="Level01" type="Node2D" groups=["level"]]
 
@@ -20,7 +30,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAA
 tile_set = ExtResource("1_c5qtb")
 
 [node name="walls" type="TileMapLayer" parent="Layers"]
-tile_map_data = PackedByteArray("AAABAAUAAQABAAAAAAABAAYAAQABAAEAAAABAAcAAQABAAIAAAACAAUAAQACAAAAAAACAAYAAQACAAEAAAACAAcAAQACAAIAAAADAAUAAQADAAAAAAADAAYAAQADAAEAAAADAAcAAQADAAIAAAALAAEAAQABAAAAAAALAAIAAQABAAEAAAALAAMAAQABAAIAAAAMAAEAAQACAAAAAAAMAAIAAQACAAEAAAAMAAMAAQACAAIAAAANAAEAAQADAAAAAAANAAIAAQADAAEAAAANAAMAAQADAAIAAAAKAAgAAQABAAAAAAAKAAkAAQABAAEAAAAKAAoAAQABAAIAAAALAAgAAQACAAAAAAALAAkAAQACAAEAAAALAAoAAQACAAIAAAAMAAgAAQADAAAAAAAMAAkAAQADAAEAAAAMAAoAAQADAAIAAAA=")
+tile_map_data = PackedByteArray("AAABAAUAAQABAAAAAAABAAYAAQABAAEAAAABAAcAAQABAAIAAAACAAUAAQACAAAAAAACAAYAAQACAAEAAAACAAcAAQACAAIAAAADAAUAAQADAAAAAAADAAYAAQADAAEAAAADAAcAAQADAAIAAAALAAEAAQABAAAAAAALAAIAAQABAAEAAAALAAMAAQABAAIAAAAMAAEAAQACAAAAAAAMAAIAAQACAAEAAAAMAAMAAQACAAIAAAANAAEAAQADAAAAAAANAAIAAQADAAEAAAANAAMAAQADAAIAAAAKAAgAAQABAAAAAAAKAAkAAQABAAEAAAAKAAoAAQABAAIAAAALAAgAAQACAAAAAAALAAkAAQACAAEAAAALAAoAAQACAAIAAAAMAAgAAQADAAAAAAAMAAkAAQADAAEAAAAMAAoAAQADAAIAAAAQAAQAAQACAAIAAAARAAQAAQACAAIAAAAQAAcAAQACAAAAAAARAAcAAQACAAAAAAA=")
 tile_set = ExtResource("1_c5qtb")
 
 [node name="Player" parent="." instance=ExtResource("1_5gygf")]
@@ -38,3 +48,54 @@ position = Vector2(284, 70)
 
 [node name="Potion2" parent="Props" instance=ExtResource("4_pjhfj")]
 position = Vector2(111, 126)
+
+[node name="Transfer" type="Area2D" parent="." node_paths=PackedStringArray("on_interaction")]
+position = Vector2(528, 192)
+collision_layer = 8
+monitoring = false
+script = ExtResource("5_unfqs")
+direction = 4
+one_shot = false
+on_interaction = NodePath("StateMachine/transfer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transfer"]
+shape = SubResource("RectangleShape2D_5aihk")
+
+[node name="StateMachine" type="Node" parent="Transfer" node_paths=PackedStringArray("current_state")]
+script = ExtResource("6_kln7f")
+current_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="Transfer/StateMachine"]
+script = ExtResource("7_mklma")
+
+[node name="transfer" type="Node" parent="Transfer/StateMachine" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("8_ddfmt")
+destination_name = "Level01/Transfer2"
+time_range = Vector2(1, 1)
+on_timeout = NodePath("../idle")
+
+[node name="Transfer2" type="Area2D" parent="." node_paths=PackedStringArray("on_interaction")]
+position = Vector2(16, 224)
+collision_layer = 8
+monitoring = false
+script = ExtResource("5_unfqs")
+direction = 8
+one_shot = false
+on_interaction = NodePath("StateMachine/transfer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transfer2"]
+shape = SubResource("RectangleShape2D_mdyxv")
+
+[node name="StateMachine" type="Node" parent="Transfer2" node_paths=PackedStringArray("current_state")]
+script = ExtResource("6_kln7f")
+current_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="Transfer2/StateMachine"]
+script = ExtResource("7_mklma")
+
+[node name="transfer" type="Node" parent="Transfer2/StateMachine" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("8_ddfmt")
+level_key = "LEVEL_2"
+destination_name = "Level01/Transfer"
+time_range = Vector2(1, 1)
+on_timeout = NodePath("../idle")
