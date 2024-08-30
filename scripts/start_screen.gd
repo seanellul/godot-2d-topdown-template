@@ -15,7 +15,7 @@ func _on_start_button_up() -> void:
 	SceneManager.swap_scenes(Const.LEVEL.GAME_START, get_tree().root, self, Const.TRANSITION.FADE_TO_WHITE)	
 
 func _on_continue_button_up() -> void:
-	level_to_load = DataManager.game_data.current_level
+	level_to_load = DataManager.game_data.player_data.level
 	_on_start_button_up()
 
 func _on_settings_button_up() -> void:

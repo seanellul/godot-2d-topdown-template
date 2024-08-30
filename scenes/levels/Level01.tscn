@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://dakphwh8q4546"]
+[gd_scene load_steps=12 format=4 uid="uid://dakphwh8q4546"]
 
 [ext_resource type="PackedScene" uid="uid://b7mgtepd7t41i" path="res://entities/player.tscn" id="1_5gygf"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="1_c5qtb"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_fpxwa"]
 [ext_resource type="Script" path="res://scenes/system/camera_controller.gd" id="3_1l7tx"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="4_pjhfj"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="5_unfqs"]
@@ -16,6 +17,7 @@ size = Vector2(32, 64)
 size = Vector2(64, 32)
 
 [node name="Level01" type="Node2D" groups=["level"]]
+script = ExtResource("1_fpxwa")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(262, 176)
@@ -70,7 +72,7 @@ script = ExtResource("7_mklma")
 
 [node name="transfer" type="Node" parent="Transfer/StateMachine" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("8_ddfmt")
-destination_name = "Level01/Transfer2"
+destination_path = "Transfer2"
 time_range = Vector2(1, 1)
 on_timeout = NodePath("../idle")
 
@@ -96,6 +98,6 @@ script = ExtResource("7_mklma")
 [node name="transfer" type="Node" parent="Transfer2/StateMachine" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("8_ddfmt")
 level_key = "LEVEL_2"
-destination_name = "Level01/Transfer"
+destination_path = "Marker2D"
 time_range = Vector2(1, 1)
 on_timeout = NodePath("../idle")

@@ -23,37 +23,44 @@ func create_or_load_file() -> void:
 
 func _load_level_data(_loaded_scene:Node, _loading_screen):
 	await get_tree().create_timer(0.1).timeout
-	load_game()
+	_load_nodes_data()
 
 func load_game() -> void:
 	print_debug("loading...")
 	_load_nodes_data()
+	_load_player_data()
 	game_loaded.emit()
 
 func save_game() -> void:
 	print_debug("saving...")
-	_save_current_level()
 	_save_nodes_data()
+	_save_player_data()
 	game_data.write_save_file()
 	game_saved.emit()
 
-func _save_current_level():
-	var level = get_tree().get_first_node_in_group("level")
-	if level:
-		game_data.current_level = level.scene_file_path
-
 func _load_nodes_data():
-	for node in _get_save_nodes():
+	for node: Node in _get_save_nodes():
 		var path = String(node.get_path())
 		if path not in game_data.nodes_data:
 			game_data.nodes_data[path] = _get_node_data(node)
-		node.data = game_data.nodes_data[path]
+		if node.has_method("receive_data"):
+			node.receive_data(game_data.nodes_data[path])
+
+func _load_player_data():
+	var player: PlayerEntity = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("receive_data"):
+		player.receive_data(game_data.player_data)
 
 func _save_nodes_data():
 	for node in _get_save_nodes():
 		if node != null:
 			var path = String(node.get_path())
 			game_data.nodes_data[path] = _get_node_data(node)
+
+func _save_player_data():
+	var player: PlayerEntity = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("get_data"):
+		game_data.player_data = player.get_data()
 
 func _get_node_data(node):
 	if node is CharacterEntity:

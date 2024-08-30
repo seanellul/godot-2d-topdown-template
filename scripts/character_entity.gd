@@ -37,8 +37,6 @@ var is_charging := false: set = _set_is_charging
 var is_damaged: bool
 var is_target_reached := false
 
-var data: DataEntity: set = _set_data
-
 signal hp_changed(value)
 signal damaged(hp)
 signal hit
@@ -135,8 +133,7 @@ func _set_is_attacking(value):
 func _set_is_charging(_value):
 	pass
 
-func _set_data(value):
-	data = value
+func receive_data(data: DataEntity):
 	if data:
 		global_position = data.position
 		facing = data.facing
@@ -173,3 +170,6 @@ func reset():
 
 func stop():
 	velocity = Vector2.ZERO
+
+func disable_entity(value: bool):
+	set_process(!value)

@@ -6,8 +6,6 @@ class_name StateMachine
 var previous_state: BaseState = null
 var states: Array[BaseState]
 
-var data: DataState: set = _set_data
-
 func _ready():
 	await owner.ready
 	_init_states()
@@ -63,8 +61,7 @@ func _physics_update_states(delta):
 	for state in states:
 		state.physics_update(delta)
 
-func _set_data(value):
-	data = value
+func receive_data(data: DataState):
 	if data:
 		var state_node: BaseState = get_child(data.state_index)
 		state_node.enable()

@@ -3,6 +3,7 @@ extends Resource
 class_name SaveFileManager
 
 @export var nodes_data: Dictionary = {}: set = _set_nodes_data
+@export var player_data: DataPlayer = null
 @export var current_level: String = ""
 
 func write_save_file() -> void:

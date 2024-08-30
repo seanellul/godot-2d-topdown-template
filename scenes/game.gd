@@ -8,7 +8,7 @@ class_name GameManager
 static var gm: GameManager = self
 
 var level_to_load
-var current_level
+var current_level: Level
 
 func _ready() -> void:
 	gm = self
@@ -22,7 +22,7 @@ func _load_level():
 	current_level = world.get_child(0)
 
 func _on_level_loaded(level: Node2D):
-	if level.is_in_group(Const.GROUP.LEVEL):
+	if level is Level:
 		current_level = level
 
 func receive_data(current_level):

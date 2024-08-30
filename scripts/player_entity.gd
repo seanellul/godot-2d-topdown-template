@@ -21,6 +21,8 @@ const damage_flash_power = 0.3
 func _ready():
 	super._ready()
 	_init_attack_cooldown_timer()
+	Globals.transfer_start.connect(func(): disable_entity(true))
+	Globals.transfer_complete.connect(func(): disable_entity(false))
 
 func _on_set_current_level():
 	pass
@@ -47,10 +49,6 @@ func _set_is_attacking(value):
 
 func _set_is_charging(value):
 	is_charging = value
-
-func _set_data(value):
-	if data == null:
-		super._set_data(value)
 
 func move(delta, speed: float):
 	if is_attacking or is_charging:
@@ -85,3 +83,15 @@ func take_damage(value := 0, from = ""):
 func reset():
 	is_charging = false
 	end_attack()
+
+func get_data():
+	var data = DataPlayer.new()
+	data.facing = facing
+	data.position = position
+	data.level = GameManager.gm.current_level.scene_file_path
+	return data
+
+func receive_data(data):
+	if data:
+		global_position = data.position
+		facing = data.facing

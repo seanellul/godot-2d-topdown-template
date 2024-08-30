@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://dnoqqlsjmqg3y"]
+[gd_scene load_steps=11 format=4 uid="uid://dnoqqlsjmqg3y"]
 
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_5mkg2"]
 [ext_resource type="Script" path="res://scenes/system/camera_controller.gd" id="1_bs4lq"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="2_awxom"]
 [ext_resource type="PackedScene" uid="uid://b7mgtepd7t41i" path="res://entities/player.tscn" id="3_fwtnw"]
@@ -13,6 +14,7 @@
 size = Vector2(32, 64)
 
 [node name="Level02" type="Node2D" groups=["level"]]
+script = ExtResource("1_5mkg2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(262, 176)
@@ -31,7 +33,7 @@ tile_map_data = PackedByteArray("AAALAAEAAQABAAAAAAALAAIAAQABAAEAAAALAAMAAQABAAI
 tile_set = ExtResource("2_awxom")
 
 [node name="Player" parent="." instance=ExtResource("3_fwtnw")]
-position = Vector2(192, 64)
+position = Vector2(16, 192)
 
 [node name="Props" type="Node2D" parent="."]
 
@@ -61,4 +63,7 @@ script = ExtResource("7_qfsxs")
 [node name="transfer" type="Node" parent="Transfer/StateMachine"]
 script = ExtResource("8_yg5kq")
 level_key = "LEVEL_1"
-destination_name = "Transfer"
+destination_path = "Transfer"
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(512, 32)
