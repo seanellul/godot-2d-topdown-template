@@ -2,9 +2,7 @@ extends CharacterEntity
 class_name PlayerEntity
 
 @export_group("Attack")
-@export var impulse_force = 5.0
-@export var impulse_duration = 0.1
-@export var attack_friction = 100.0
+
 
 @export var smoke_particles: PackedScene = null
 @export var hurtbox: PackedScene = null
@@ -44,13 +42,14 @@ func _set_is_charging(value):
 	is_charging = value
 
 func start_attack(delta):
-	if is_attacking or attack_cooldown_timer.time_left > 0:
-		return
-	is_attacking = true
-	attack_cooldown_timer.stop()
-	velocity += facing * impulse_force
-	await get_tree().create_timer(impulse_duration).timeout
-	velocity = velocity.move_toward(Vector2.ZERO, attack_friction * delta)
+	pass
+	# if is_attacking or attack_cooldown_timer.time_left > 0:
+	# 	return
+	# is_attacking = true
+	# attack_cooldown_timer.stop()
+	# velocity += facing * impulse_force
+	# await get_tree().create_timer(impulse_duration).timeout
+	# velocity = velocity.move_toward(Vector2.ZERO, attack_friction * delta)
 
 func end_attack():
 	is_attacking = false

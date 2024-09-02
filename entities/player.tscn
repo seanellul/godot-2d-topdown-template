@@ -90,7 +90,7 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_eryce"]
-length = 0.0333367
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -117,6 +117,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_dsidh"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -143,6 +144,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_bi6uj"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -169,6 +171,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ylboh"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -262,6 +265,7 @@ parameters/conditions/is_moving = false
 parameters/attack/blend_position = Vector2(0, 0)
 parameters/idle/BlendSpace2D/blend_position = Vector2(-0.000882626, 1.02577)
 parameters/idle/TimeScale/scale = 0.16
+parameters/jump/Add2/add_amount = 1.0
 parameters/jump/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/jump/TimeScale/scale = 1.0
 parameters/walk/BlendSpace2D/blend_position = Vector2(0, 0)

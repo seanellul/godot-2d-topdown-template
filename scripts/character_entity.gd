@@ -6,20 +6,15 @@ class_name CharacterEntity
 @export var run_speed_increment: = 1.5
 @export var acceleration = 3000.0
 @export var friction = 2000.0
-@export var target_is_player: = false
-@export var target: Node2D = null: set = _set_target ## A Node to be followed by this entity.
-@export var animations: Dictionary = {
-	"idle": preload("res://assets/sprites/hero_idle.tres"),
-	"walk": preload("res://assets/sprites/hero_idle.tres"),
-	"run": preload("res://assets/sprites/hero_idle.tres"),
-	"jump": preload("res://assets/sprites/hero_idle.tres"),
-}
 @export_group("Health")
 @export var max_hp := 10
 @export var immortal := false
 @export var health_bar: PackedScene ## It needs the canvas_layer.
 @export_group("Attack")
 @export var attack_power := 2
+@export var impulse_force = 5.0
+@export var impulse_duration = 0.1
+@export var attack_friction = 100.0
 @export_group("States")
 @export var on_attack: BaseState ## State to enable when this entity has damaged another entity.
 @export var on_damage: BaseState ## State to enable when this entity takes damage.
@@ -27,10 +22,10 @@ class_name CharacterEntity
 @export var on_screen_entered: BaseState ## State to enable when this entity is visible on screen.
 @export var on_screen_exited: BaseState ## State to enable when this entity is outside the visible screen.
 @export_group("Settings")
-@export var main_sprite: Sprite2D
 @export var animation_tree: AnimationTree
 @export var canvas_layer: Node ## Needed for: health_bar.
-@export var anim_params: Array[String] = [] ## The animations available in the AnimationTree. Used to set the blend_position of each animation (facing direction).
+@export var target_is_player: = false
+@export var target: Node2D = null: set = _set_target ## A Node to be followed by this entity.
 
 @onready var hp := max_hp: set = _set_hp
 
