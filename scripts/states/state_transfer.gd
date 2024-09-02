@@ -4,8 +4,8 @@ extends BaseState
 @export var destination_path: String = ""
 
 func _ready() -> void:
-	SceneManager.load_start.connect(func(loading_screen): Globals.transfer_start.emit())
-	SceneManager.load_complete.connect(func(loaded_scene): Globals.transfer_complete.emit())
+	SceneManager.load_start.connect(func(_loading_screen): Globals.transfer_start.emit())
+	SceneManager.load_complete.connect(func(_loaded_scene): Globals.transfer_complete.emit())
 
 func enter():
 	if level_key:

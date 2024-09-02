@@ -26,8 +26,8 @@ func _on_level_loaded(level: Node2D):
 	if level is Level:
 		current_level = level
 
-func receive_data(current_level):
-	level_to_load = current_level
+func receive_data(_current_level):
+	level_to_load = _current_level
 
 func init_scene():
 	_load_level()

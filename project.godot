@@ -146,7 +146,7 @@ interact={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localization/globals.en.translation", "res://Localization/globals.it.translation")
+locale/translations=PackedStringArray("res://local/translations.en.translation", "res://local/translations.it.translation")
 
 [layer_names]
 

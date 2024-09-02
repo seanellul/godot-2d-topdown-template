@@ -14,7 +14,7 @@ static func save_file_exists() -> bool:
 static func load_save_file() -> Resource:
 	var save_path := get_save_file_path()
 	if ResourceLoader.exists(save_path):
-		return ResourceLoader.load(save_path, "", 0)
+		return ResourceLoader.load(save_path, "")
 	return null
 
 static func get_save_file_path() -> String:

@@ -8,10 +8,15 @@ var user_prefs:UserPrefs
 var settings_menu_scene:PackedScene = preload("res://scenes/menus/settings_menu.tscn")
 var settings_menu = null
 
+@warning_ignore("unused_signal")
 signal player_action(node, action, direction)
+@warning_ignore("unused_signal")
 signal enemy_hurt
+@warning_ignore("unused_signal")
 signal transfer_start
+@warning_ignore("unused_signal")
 signal transfer_complete
+@warning_ignore("unused_signal")
 signal player_ready(player)
 
 func _ready():
