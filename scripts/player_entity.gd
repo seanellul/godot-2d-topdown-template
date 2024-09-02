@@ -23,6 +23,7 @@ func _ready():
 	_init_attack_cooldown_timer()
 	Globals.transfer_start.connect(func(): disable_entity(true))
 	Globals.transfer_complete.connect(func(): disable_entity(false))
+	Globals.player_ready.emit(self)
 
 func _on_set_current_level():
 	pass

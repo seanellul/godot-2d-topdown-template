@@ -3,7 +3,7 @@ class_name GameManager
 
 @onready var world: Node2D = $World
 
-@onready var debug_level: Node2D = get_tree().get_first_node_in_group("level")
+@onready var debug_level: Node2D = get_tree().get_first_node_in_group(Const.GROUP.LEVEL)
 
 static var gm: GameManager = self
 
@@ -15,7 +15,8 @@ func _ready() -> void:
 	SceneManager.load_complete.connect(_on_level_loaded)
 
 func _load_level():
-	level_to_load = level_to_load if level_to_load else Const.LEVEL.LEVEL_1
+	if not level_to_load:
+		level_to_load = Const.LEVEL.LEVEL_1
 	if level_to_load and not debug_level:
 		var level = load(level_to_load)
 		world.add_child(level.instantiate())

@@ -1151,6 +1151,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r03hu")
 text = "new_game"
 
 [node name="Continue" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontFile_licy4")
@@ -1194,7 +1196,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "version"
 
-[connection signal="button_up" from="VBoxContainer/HBoxContainer/GridContainer/NewGame" to="." method="_on_start_button_up"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/GridContainer/NewGame" to="." method="_on_new_game_button_up"]
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/GridContainer/Continue" to="." method="_on_continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/GridContainer/Settings" to="." method="_on_settings_button_up"]
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/GridContainer/Quit" to="." method="_on_quit_button_up"]

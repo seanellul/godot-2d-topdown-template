@@ -9,20 +9,22 @@ signal game_saved
 signal game_loaded
 
 func _ready():
-	create_or_load_file()
 	SceneManager.scene_added.connect(_load_level_data)
+	SceneManager.load_start.connect(_save_level_data)
 
-func create_or_load_file() -> void:
-	if SaveFileManager.save_file_exists():
-		game_data = SaveFileManager.load_save_file()
-	else:
-		game_data = SaveFileManager.new()
-		save_game()
-	# After creating or loading a save resource, we need to dispatch its data to the various nodes that need it.
-	#_load_game()
+func reset_game_data():
+	game_data = SaveFileManager.new()
+
+func load_game_data():
+	game_data = SaveFileManager.load_save_file()
+
+func _save_level_data(_loading_screen):
+	#Used to save nodes state data of the level before removing the level
+	_save_nodes_data()
 
 func _load_level_data(_loaded_scene:Node, _loading_screen):
-	await get_tree().create_timer(0.1).timeout
+	#Used to load nodes state data of the level when entering the level
+	await get_tree().create_timer(0.01).timeout
 	_load_nodes_data()
 
 func load_game() -> void:
@@ -39,6 +41,7 @@ func save_game() -> void:
 	game_saved.emit()
 
 func _load_nodes_data():
+	print_debug(_get_save_nodes().size())
 	for node: Node in _get_save_nodes():
 		var path = String(node.get_path())
 		if path not in game_data.nodes_data:
@@ -47,7 +50,7 @@ func _load_nodes_data():
 			node.receive_data(game_data.nodes_data[path])
 
 func _load_player_data():
-	var player: PlayerEntity = get_tree().get_first_node_in_group("player")
+	var player: PlayerEntity = get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
 	if player and player.has_method("receive_data"):
 		player.receive_data(game_data.player_data)
 
@@ -58,7 +61,7 @@ func _save_nodes_data():
 			game_data.nodes_data[path] = _get_node_data(node)
 
 func _save_player_data():
-	var player: PlayerEntity = get_tree().get_first_node_in_group("player")
+	var player: PlayerEntity = get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
 	if player and player.has_method("get_data"):
 		game_data.player_data = player.get_data()
 

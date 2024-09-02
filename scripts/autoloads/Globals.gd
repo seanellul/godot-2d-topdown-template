@@ -12,7 +12,8 @@ signal player_action(node, action, direction)
 signal enemy_hurt
 signal transfer_start
 signal transfer_complete
- 
+signal player_ready(player)
+
 func _ready():
 	user_prefs = UserPrefs.load_or_create()
 	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(user_prefs.sfx_volume))

@@ -66,4 +66,4 @@ level_key = "LEVEL_1"
 destination_path = "Transfer"
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(512, 32)
+position = Vector2(160, 192)
