@@ -232,7 +232,6 @@ func _on_content_finished_loading(incoming_scene) -> void:
 		# Remove the old scene
 	if _scene_to_unload != null:
 		if _scene_to_unload != get_tree().root: 
-			print_debug(_scene_to_unload.name)
 			_scene_to_unload.queue_free()
 	
 	# called right after scene is added to tree (presuming _ready has fired)

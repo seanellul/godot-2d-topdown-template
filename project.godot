@@ -27,7 +27,6 @@ DataManager="*res://scripts/DataManager.gd"
 
 window/size/viewport_width=960
 window/size/viewport_height=540
-window/size/resizable=false
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"

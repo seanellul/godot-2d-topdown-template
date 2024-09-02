@@ -10,9 +10,9 @@ func _ready():
 	if entity and offset_y == 0:
 		offset_y = entity.global_position.y
 
-func enter():
-	_start_animation()
-
-func _start_animation():
-	if animation && entity && entity.animation_state:
-		entity.animation_state.start(animation)
+#func enter():
+	#_start_animation()
+#
+#func _start_animation():
+	#if animation && entity && entity.animation_state:
+		#entity.animation_state.start(animation)

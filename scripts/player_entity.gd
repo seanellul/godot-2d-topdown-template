@@ -1,10 +1,6 @@
 extends CharacterEntity
 class_name PlayerEntity
 
-@export_group("Movement")
-@export var acceleration = 25.0
-@export var friction = 10.0
-
 @export_group("Attack")
 @export var impulse_force = 5.0
 @export var impulse_duration = 0.1
@@ -13,7 +9,7 @@ class_name PlayerEntity
 @export var smoke_particles: PackedScene = null
 @export var hurtbox: PackedScene = null
 
-var input_dir: Vector2
+# var input_dir: Vector2
 var attack_cooldown_timer: Timer
 
 const damage_flash_power = 0.3
@@ -28,12 +24,8 @@ func _ready():
 func _on_set_current_level():
 	pass
 
-func _get_is_running():
-	return is_moving && Input.get_action_strength("run") > 0
-
 func _process(delta):
 	super._process(delta)
-	input_dir = Input.get_vector("left", "right", "up", "down")
 	if smoke_particles:
 		smoke_particles.emitting = is_running && not is_jumping
 
@@ -50,19 +42,6 @@ func _set_is_attacking(value):
 
 func _set_is_charging(value):
 	is_charging = value
-
-func move(delta, speed: float):
-	if is_attacking or is_charging:
-		return
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Vector2(input_dir.x, input_dir.y).normalized()
-	if direction:
-		facing = direction
-		var target_velocity = Vector2(input_dir.x * speed, input_dir.y * speed)
-		velocity = velocity.move_toward(target_velocity, acceleration * delta)
-	else:
-		var target_velocity = Vector2(0, 0)
-		velocity = velocity.move_toward(target_velocity, friction * delta)
 
 func start_attack(delta):
 	if is_attacking or attack_cooldown_timer.time_left > 0:

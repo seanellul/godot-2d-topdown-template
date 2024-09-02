@@ -47,7 +47,7 @@ func _on_interact(sender):
 func _can_interact() -> bool:
 	var can_interact := true
 	if entity:
-		var entity_dir = Const.DIR_BIT[entity.facing]
+		var entity_dir = Const.DIR_BIT[entity.facing.floor()]
 		can_interact = direction == null or direction > 0 and direction & entity_dir != 0
 	return can_interact and !interacting
 

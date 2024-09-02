@@ -41,7 +41,6 @@ func save_game() -> void:
 	game_saved.emit()
 
 func _load_nodes_data():
-	print_debug(_get_save_nodes().size())
 	for node: Node in _get_save_nodes():
 		var path = String(node.get_path())
 		if path not in game_data.nodes_data:
