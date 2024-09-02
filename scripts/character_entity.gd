@@ -32,12 +32,12 @@ class_name CharacterEntity
 var hp_bar: Node
 var screen_notifier: VisibleOnScreenNotifier3D
 var facing := Vector2.DOWN
-var is_idle: bool: set = _set_is_idle
-var is_moving: bool: set = _set_is_moving
-var is_running: bool: set = _set_is_running
-@export var is_jumping: bool: set = _set_is_jumping
-var is_attacking: bool: set = _set_is_attacking
-var is_charging := false: set = _set_is_charging
+var is_idle: bool
+var is_moving: bool
+var is_running: bool
+@export var is_jumping: bool
+var is_attacking: bool
+var is_charging := false
 var is_damaged: bool
 var is_target_reached := false
 
@@ -100,33 +100,10 @@ func _update_animation():
 	if current_anim:
 			animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
 
-func _set_is_idle(value):
-	animation_tree.set("parameters/conditions/is_idle", value)
-	is_idle = value
-
-func _set_is_moving(value):
-	animation_tree.set("parameters/conditions/is_moving", value)
-	is_idle = !value
-	is_moving = value
-
-func _set_is_jumping(value):
-	animation_tree.set("parameters/conditions/is_jumping", value)
-	is_jumping = value
-
-func _set_is_running(value):
-	animation_tree.set("parameters/conditions/is_running", value)
-	is_running = value
-
 func _set_target(value):
 	target = value
 	target_changed.emit(value)
 	_reset_target_reached()
-
-func _set_is_attacking(value):
-	is_attacking = value
-
-func _set_is_charging(_value):
-	pass
 
 func _reset_target_reached():
 	if is_inside_tree():

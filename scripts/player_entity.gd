@@ -33,14 +33,6 @@ func _init_attack_cooldown_timer():
 	attack_cooldown_timer.wait_time = 0.08 ## TODO: set based on weapon speed
 	add_child(attack_cooldown_timer)
 
-func _set_is_attacking(value):
-	super._set_is_attacking(value)
-	if hurtbox:
-		hurtbox.disabled = value
-
-func _set_is_charging(value):
-	is_charging = value
-
 func start_attack(delta):
 	pass
 	# if is_attacking or attack_cooldown_timer.time_left > 0:
