@@ -90,8 +90,7 @@ nodes/output/position = Vector2(400, 200)
 node_connections = [&"TimeScale", 0, &"BlendSpace2D", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_qhvpr"]
-filter_enabled = true
-filters = ["", ".:is_jumping", "CollisionShape2D:disabled", "Sprite2D:frame_coords", "Sprite2D:position", "Sprite2D:texture"]
+filters = [".:is_jumping", "Sprite2D:texture"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mfevt"]
 animation = &"jump"
@@ -122,7 +121,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_nra1d"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bdjvg"]
-graph_offset = Vector2(-743, 104.243)
+graph_offset = Vector2(-735.3, -20.7671)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_qhvpr")
 nodes/Add2/position = Vector2(-200, 100)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_mfevt")
@@ -130,7 +129,7 @@ nodes/Animation/position = Vector2(-460, 320)
 nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_f3x7a")
 nodes/BlendSpace2D/position = Vector2(-480, 120)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_nra1d")
-nodes/TimeScale/position = Vector2(60, 140)
+nodes/TimeScale/position = Vector2(40, 220)
 node_connections = [&"Add2", 0, &"BlendSpace2D", &"Add2", 1, &"Animation", &"TimeScale", 0, &"Add2", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oi5dv"]
@@ -325,4 +324,4 @@ states/run/position = Vector2(687.437, 100)
 states/walk/node = SubResource("AnimationNodeBlendTree_ihnb7")
 states/walk/position = Vector2(523, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_u0qfq"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_x4s6j"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_2j8tp"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_i637u"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_00v3x"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_0cfwg"), "jump", "walk", SubResource("AnimationNodeStateMachineTransition_q2pdy"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_kdh48"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_6dtnj"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_xwndv"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_u26lj"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_ia6cb"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_exohp"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_snuet"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_q8dg1"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_we5nh"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_g23i7")]
-graph_offset = Vector2(-91.25, -46.7653)
+graph_offset = Vector2(-83.25, -73.7653)

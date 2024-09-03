@@ -27,7 +27,7 @@ motion_mode = 1
 script = ExtResource("1_3gx8b")
 animation_tree = NodePath("AnimationTree")
 max_speed = 300.0
-impulse_force = 500.0
+impulse_force = 300.0
 attack_friction = 1000.0
 on_attack = NodePath("StateMachine/attack")
 
@@ -63,7 +63,7 @@ libraries = {
 "char-run": ExtResource("8_ihl0c"),
 "char-walk": ExtResource("9_i4x26")
 }
-autoplay = "RESET"
+autoplay = "char-idle/down"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("4_q1wi3")
@@ -73,7 +73,7 @@ parameters/attack/TimeScale/scale = 0.5
 parameters/idle/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/idle/TimeScale/scale = 0.16
 parameters/jump/Add2/add_amount = 1.0
-parameters/jump/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/jump/BlendSpace2D/blend_position = Vector2(-0.005059, 0.992908)
 parameters/jump/TimeScale/scale = 1.0
 parameters/run/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/run/TimeScale/scale = 0.3

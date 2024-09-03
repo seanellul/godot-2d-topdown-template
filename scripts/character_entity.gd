@@ -55,10 +55,7 @@ var facing := Vector2.DOWN
 @export_group("Actions")
 var is_moving: bool
 var is_running: bool
-@export var is_jumping: bool: #exported because used in animation "jump"
-	set(value):
-		print_debug("is_jumping ",value)
-		pass
+@export var is_jumping: bool #exported because used in animation "jump"
 @export var is_attacking: bool: #exported because used in animation "attack"
 	set(value):
 		is_attacking = value
@@ -154,13 +151,20 @@ func move(direction):
 	is_moving = velocity != Vector2.ZERO
 
 func jump():
-	is_jumping = true
+	if not is_jumping:
+		is_jumping = true
+
+func end_jump():
+	is_jumping = false
 
 func attack():
-	if is_attacking or attack_cooldown_timer.time_left > 0:
+	if is_attacking or is_jumping or attack_cooldown_timer.time_left > 0:
 		return
 	else:
 		is_attacking = true
+
+func end_attack():
+	is_attacking = false
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 	var nodes_to_flash = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
