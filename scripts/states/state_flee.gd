@@ -12,7 +12,6 @@ func physics_update(delta):
 
 func flee(_delta):
 	var target_pos = target.position
-	target_pos.y += offset_y
 	var direction = entity.position.direction_to(target_pos) * entity.max_speed * speed_multiplier
 	var target_velocity = Vector3(-direction.x, entity.velocity.y, -direction.z)
 	entity.velocity = target_velocity

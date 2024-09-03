@@ -42,14 +42,3 @@ const GROUP = {
 	FLASH = "flash",
 	LEVEL = "level"
 }
-
-const ANIM = {
-	JUMP = "jump",
-	WALK = "walk",
-	IDLE = "idle",
-	RECALL = "recall",
-	INTERACT = "interact",
-	RUN = "run",
-	ATTACK = "attack",
-	CHARGING = "charging"
-}

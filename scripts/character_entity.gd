@@ -1,57 +1,89 @@
 extends CharacterBody2D
 class_name CharacterEntity
 
+@export_group("Settings")
+@export var animation_tree: AnimationTree
+@export var canvas_layer: Node ## Needed for: health_bar.
+@export var target_is_player: = false
+@export var target: Node2D = null: ## A Node to be followed by this entity.
+	set(value):
+		target = value
+		target_changed.emit(value)
+		_reset_target_reached()
 @export_group("Movement")
 @export var max_speed = 5.0
 @export var run_speed_increment: = 1.5
 @export var acceleration = 3000.0
 @export var friction = 2000.0
+@export var smoke_particles: PackedScene = null
 @export_group("Health")
 @export var max_hp := 10
 @export var immortal := false
 @export var health_bar: PackedScene ## It needs the canvas_layer.
+@export var damage_flash_power = 0.3
 @export_group("Attack")
 @export var attack_power := 2
+@export var attack_speed := 0.08
 @export var impulse_force = 5.0
 @export var impulse_duration = 0.1
 @export var attack_friction = 100.0
 @export_group("States")
-@export var on_attack: BaseState ## State to enable when this entity has damaged another entity.
-@export var on_damage: BaseState ## State to enable when this entity takes damage.
+@export var on_attack: BaseState ## State to enable when this entity attacks.
+@export var on_hit: BaseState ## State to enable when this entity damages another entity.
+@export var on_hurt: BaseState ## State to enable when this entity takes damage.
 @export var on_death: BaseState ## State to enable when this entity dies.
 @export var on_screen_entered: BaseState ## State to enable when this entity is visible on screen.
 @export var on_screen_exited: BaseState ## State to enable when this entity is outside the visible screen.
-@export_group("Settings")
-@export var animation_tree: AnimationTree
-@export var canvas_layer: Node ## Needed for: health_bar.
-@export var target_is_player: = false
-@export var target: Node2D = null: set = _set_target ## A Node to be followed by this entity.
 
-@onready var hp := max_hp: set = _set_hp
+@onready var hp := max_hp:
+	set(value):
+		if immortal:
+			return
+		if value < 0:
+			value = 0
+		elif value > max_hp:
+			value = max_hp
+		hp = value
+		print("%s HP is: %s" % [name, hp])
+		hp_changed.emit(hp)
 
 var hp_bar: Node
 var screen_notifier: VisibleOnScreenNotifier3D
+var attack_cooldown_timer: Timer
 var facing := Vector2.DOWN
-var is_idle: bool
+
+@export_group("Actions")
 var is_moving: bool
 var is_running: bool
-@export var is_jumping: bool
-var is_attacking: bool
+@export var is_jumping: bool: #exported because used in animation "jump"
+	set(value):
+		print_debug("is_jumping ",value)
+		pass
+@export var is_attacking: bool: #exported because used in animation "attack"
+	set(value):
+		is_attacking = value
+		if value == true:
+			attack_cooldown_timer.stop()
+			if on_attack:
+				on_attack.enable()
+		elif attack_cooldown_timer:
+			attack_cooldown_timer.start(attack_speed)
 var is_charging := false
 var is_damaged: bool
 var is_target_reached := false
 
+signal target_changed(target)
+signal target_reached(target)
 signal hp_changed(value)
 signal damaged(hp)
 signal hit
-signal target_changed(target)
-signal target_reached(target)
 
 func _ready():
 	_init_health_bar()
 	_init_target()
 	_init_screen_notifier()
-	hit.connect(func(): if on_attack: on_attack.enable())
+	_init_attack_cooldown_timer()
+	hit.connect(func(): if on_hit: on_hit.enable())
 
 func _process(_delta):
 	if !is_target_reached:
@@ -83,27 +115,16 @@ func _init_screen_notifier():
 		if on_screen_exited:
 			screen_notifier.screen_exited.connect(func(): on_screen_exited.enable())
 		add_child(screen_notifier)
-	
-func _set_hp(value):
-	if immortal:
-		return
-	if value < 0:
-		value = 0
-	elif value > max_hp:
-		value = max_hp
-	hp = value
-	print("%s HP is: %s" % [name, hp])
-	hp_changed.emit(hp)
+
+func _init_attack_cooldown_timer():
+	attack_cooldown_timer = Timer.new()
+	attack_cooldown_timer.one_shot = true
+	add_child(attack_cooldown_timer)
 
 func _update_animation():
 	var current_anim = animation_tree.get("parameters/playback").get_current_node()
 	if current_anim:
-			animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
-
-func _set_target(value):
-	target = value
-	target_changed.emit(value)
-	_reset_target_reached()
+		animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
 
 func _reset_target_reached():
 	if is_inside_tree():
@@ -116,9 +137,10 @@ func receive_data(data: DataEntity):
 		facing = data.facing
 		target = get_node_or_null(data.target)
 
-func move(delta, direction):
+func move(direction):
 	if is_attacking or is_charging:
 		return
+	var delta = get_process_delta_time()
 	# Get the input direction and handle the movement/deceleration.
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	if moving_direction:
@@ -130,6 +152,15 @@ func move(delta, direction):
 		var target_velocity = Vector2(0, 0)
 		velocity = velocity.move_toward(target_velocity, friction * delta)
 	is_moving = velocity != Vector2.ZERO
+
+func jump():
+	is_jumping = true
+
+func attack():
+	if is_attacking or attack_cooldown_timer.time_left > 0:
+		return
+	else:
+		is_attacking = true
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 	var nodes_to_flash = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
@@ -146,8 +177,8 @@ func take_damage(value := 0, from = ""):
 	print_debug("%s damaged by %s" % [name, from.name])
 	hp -= value
 	if hp > 0:
-		if on_damage:
-			on_damage.enable()
+		if on_hurt:
+			on_hurt.enable()
 	else:
 		if on_death:
 			on_death.enable()

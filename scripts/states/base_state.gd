@@ -1,12 +1,12 @@
 extends Node
 class_name BaseState
 
-@export var active := true ## Set to false to don't process this state.
+@export var active := true ##Set to false to don't process this state.
 @export_group("Timer")
-@export var time_range := Vector2.ZERO ## If greather than 0 the state is timed and after N seconds the on_timeout state will be enabled. Random time range between min (x) and max (y).
-@export var on_timeout: BaseState ## State to enable after time_range times out.
+@export var time_range := Vector2.ZERO ##If greather than 0, after N seconds the on_timeout state will be enabled. N = random time range between min (x) and max (y).
+@export var on_timeout: BaseState ##State to enable after time_range times out.
 
-var current := false ## Check if the state is currently enabled.
+var current := false ##Check if the state is currently enabled.
 var timer: TimedState
 var params = {}
 
@@ -20,8 +20,7 @@ func _enter_tree():
 		timer = TimedState.new()
 		timer.create(self, time_range)
 
-## Enables this state.
-func enable(_params = null):
+func enable(_params = null): ##Enables this state.
 	if _params:
 		params = _params
 	state_changed.emit(self)

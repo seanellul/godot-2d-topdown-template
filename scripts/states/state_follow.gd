@@ -19,7 +19,6 @@ func follow():
 	if !target:
 		return
 	var target_pos = target.position
-	target_pos.y += offset_y
 	var direction = entity.position.direction_to(target_pos)
 	if target is CharacterBody2D and !target.is_on_floor():
 		direction.y = 0
