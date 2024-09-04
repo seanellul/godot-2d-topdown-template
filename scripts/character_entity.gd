@@ -3,9 +3,9 @@ class_name CharacterEntity
 
 @export_group("Settings")
 @export var animation_tree: AnimationTree
-@export var canvas_layer: Node ## Needed for: health_bar.
+@export var canvas_layer: Node ##Needed for: health_bar.
 @export var target_is_player: = false
-@export var target: Node2D = null: ## A Node to be followed by this entity.
+@export var target: Node2D = null: ##A Node to be followed by this entity.
 	set(value):
 		target = value
 		target_changed.emit(value)

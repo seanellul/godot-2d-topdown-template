@@ -20,6 +20,7 @@ script = ExtResource("1_5mkg2")
 position = Vector2(262, 176)
 limit_smoothed = true
 script = ExtResource("1_bs4lq")
+target_is_player = true
 
 [node name="Layers" type="Node2D" parent="."]
 
