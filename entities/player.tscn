@@ -66,6 +66,7 @@ libraries = {
 autoplay = "char-idle/down"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+deterministic = false
 tree_root = ExtResource("4_q1wi3")
 anim_player = NodePath("../AnimationPlayer")
 parameters/attack/BlendSpace2D/blend_position = Vector2(0, 0)

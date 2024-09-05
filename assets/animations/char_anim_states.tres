@@ -254,6 +254,7 @@ advance_mode = 2
 advance_expression = "get_parent().is_jumping == true"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_00v3x"]
+break_loop_at_end = true
 switch_mode = 2
 advance_mode = 2
 advance_expression = "get_parent().is_moving == false"
@@ -263,6 +264,7 @@ advance_mode = 2
 advance_expression = "get_parent().is_jumping == true"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2pdy"]
+break_loop_at_end = true
 switch_mode = 2
 advance_mode = 2
 advance_expression = "get_parent().is_moving == true and get_parent().is_running == false"
@@ -280,6 +282,7 @@ advance_mode = 2
 advance_expression = "get_parent().is_jumping == true"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u26lj"]
+break_loop_at_end = true
 switch_mode = 2
 advance_mode = 2
 advance_expression = "get_parent().is_running == true"
