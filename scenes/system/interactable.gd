@@ -8,15 +8,17 @@ class_name Interactable
 	Const.DIRECTION.LEFT, 
 	Const.DIRECTION.RIGHT, 
 	Const.DIRECTION.UP
-) var direction ## The direction the character must face to trigger the interaction.
+) var direction ##The direction the character must face to trigger the interaction.
 @export_group("Settings")
-@export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
-@export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
+@export var one_shot := true ##If true, it can be interacted only once. Useful for chests or pickable items.
+@export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_group("")
-@export var on_interaction: BaseState ## The state to enable on interaction.
+@export var on_interaction: BaseState ##The state to enable on interaction.
 
 var entity: CharacterEntity
 var interacting := false
+
+signal interacted()
 
 func _init() -> void:
 	monitoring = false
@@ -52,6 +54,7 @@ func _can_interact() -> bool:
 	return can_interact and !interacting
 
 func do_interaction():
+	interacted.emit(entity)
 	if on_interaction:
 		on_interaction.enable({
 			"entity": entity

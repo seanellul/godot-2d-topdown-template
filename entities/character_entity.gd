@@ -200,3 +200,5 @@ func stop():
 
 func disable_entity(value: bool):
 	set_process(!value)
+	set_physics_process(!value)
+	velocity = Vector2.ZERO

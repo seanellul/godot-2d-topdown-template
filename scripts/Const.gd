@@ -8,8 +8,8 @@ const MENU = {
 
 const LEVEL = {
 	GAME_START = "res://scenes/game.tscn",
-	LEVEL_1 = "res://scenes/levels/Level01.tscn",
-	LEVEL_2 = "res://scenes/levels/Level02.tscn"
+	LEVEL_1 = "res://scenes/levels/level_01.tscn",
+	LEVEL_2 = "res://scenes/levels/level_02.tscn"
 }
 
 const TRANSITION = {
@@ -24,6 +24,13 @@ const DIRECTION = {
 	LEFT = "left",
 	RIGHT = "right",
 	UP = "up",
+}
+
+const DIR_VECTOR = {
+	0: Vector2(0, 1),
+	1: Vector2(-1, 0),
+	2: Vector2(1, 0),
+	3: Vector2(0, -1),
 }
 
 const DIR_BIT = {

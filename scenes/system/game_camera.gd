@@ -10,10 +10,9 @@ extends Camera2D
 		print("%s target set to: %s" %[name, target.name if target else "null"])
 
 func _ready() -> void:
-	Globals.transfer_start.connect(_disable_camera)
 	Globals.transfer_complete.connect(_enable_camera)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not target:
 		_set_player_target()
 	else:
