@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/props/item.gd" id="1_altnv"]
 [ext_resource type="Texture2D" uid="uid://c0r4412fyaf48" path="res://assets/props/props.tres" id="2_jn5tb"]
-[ext_resource type="Script" path="res://scripts/interactable.gd" id="2_qbpvf"]
+[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_qbpvf"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_g7kv4"]
 [ext_resource type="Script" path="res://scripts/states/base_state.gd" id="4_m3myy"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="5_d4kg4"]

@@ -2,8 +2,8 @@
 extends Resource
 class_name SaveFileManager
 
-@export var nodes_data: Dictionary = {}: set = _set_nodes_data
-@export var player_data: DataPlayer = null
+@export var nodes_data: Dictionary = {}
+@export var player_data: Dictionary = {}
 
 func write_save_file() -> void:
 	ResourceSaver.save(self, get_save_file_path())
@@ -21,6 +21,3 @@ static func get_save_file_path() -> String:
 	# This check allows to save and load a text resource in debug builds and a binary resource in the released project.
 	var extension := ".tres" if OS.is_debug_build() else ".res"
 	return Const.SAVE_FILE_BASE_PATH + extension
-
-func _set_nodes_data(value):
-	nodes_data = value

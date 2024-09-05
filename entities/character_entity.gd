@@ -15,7 +15,7 @@ class_name CharacterEntity
 @export var run_speed_increment: = 1.5
 @export var acceleration = 3000.0
 @export var friction = 2000.0
-@export var smoke_particles: PackedScene = null
+@export var running_particles: PackedScene = null
 @export_group("Health")
 @export var max_hp := 10
 @export var immortal := false

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://db4e7jrgweeab"]
+
+[ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_xnu42"]
+[ext_resource type="Script" path="res://scripts/states/state_player_input.gd" id="4_b1v48"]
+[ext_resource type="Script" path="res://entities/player/interaction_handler.gd" id="5_ksqkr"]
+[ext_resource type="Script" path="res://scripts/states/state_player_attack.gd" id="12_m3ydn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
+radius = 23.0
+
+[node name="Player" instance=ExtResource("1_fnaeb")]
+
+[node name="InteractionHandler" type="Area2D" parent="." index="2"]
+position = Vector2(0, -19)
+collision_mask = 8
+monitorable = false
+script = ExtResource("5_ksqkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_1npff")
+debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
+
+[node name="StateMachine" type="Node" parent="." index="5" node_paths=PackedStringArray("current_state")]
+script = ExtResource("3_xnu42")
+current_state = NodePath("move")
+
+[node name="move" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_b1v48")
+
+[node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("12_m3ydn")
+time_range = Vector2(0.2, 0.2)
+on_timeout = NodePath("../move")

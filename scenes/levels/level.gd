@@ -26,7 +26,7 @@ func init_scene():
 		if destination:
 			player.position = destination.position
 		elif DataManager.game_data and DataManager.game_data.player_data:
-			player.position = DataManager.game_data.player_data.position
+			player.position = DataManager.game_data.player_data[1].position
 
 func start_scene():
 	if player:

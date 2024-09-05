@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://f0ljdodnvnix"]
+
+[ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
+[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_8mcj0"]
+[ext_resource type="PackedScene" uid="uid://dvstq1nmsqmvq" path="res://scenes/system/transfer.tscn" id="3_3aj8g"]
+
+[node name="Level" instance=ExtResource("1_xvd2c")]
+
+[node name="Potion" parent="Props" index="0" instance=ExtResource("2_8mcj0")]
+position = Vector2(284, 70)
+
+[node name="Potion2" parent="Props" index="1" instance=ExtResource("2_8mcj0")]
+position = Vector2(111, 126)
+
+[node name="Transfer" parent="Transfers" index="0" instance=ExtResource("3_3aj8g")]
+direction = 4
+
+[node name="Transfer2" parent="Transfers" index="1" instance=ExtResource("3_3aj8g")]
+position = Vector2(68, 178)
+direction = 8

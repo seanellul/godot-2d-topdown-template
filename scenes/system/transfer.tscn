@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvstq1nmsqmvq"]
+
+[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="1_3gn14"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_xfdl5"]
+[ext_resource type="Script" path="res://scripts/states/base_state.gd" id="3_o72xl"]
+[ext_resource type="Script" path="res://scripts/states/state_transfer.gd" id="4_i2byq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0rut"]
+size = Vector2(32, 64)
+
+[node name="Transfer" type="Area2D"]
+position = Vector2(528, 192)
+collision_layer = 8
+monitoring = false
+script = ExtResource("1_3gn14")
+one_shot = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e0rut")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_xfdl5")
+current_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_o72xl")
+
+[node name="transfer" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("4_i2byq")
+time_range = Vector2(1, 1)
+on_timeout = NodePath("../idle")
