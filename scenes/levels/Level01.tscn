@@ -23,6 +23,7 @@ script = ExtResource("1_fpxwa")
 position = Vector2(262, 176)
 limit_smoothed = true
 script = ExtResource("3_1l7tx")
+target_is_player = true
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -37,11 +38,6 @@ tile_set = ExtResource("1_c5qtb")
 
 [node name="Player" parent="." instance=ExtResource("1_5gygf")]
 position = Vector2(262, 176)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
 
 [node name="Props" type="Node2D" parent="."]
 

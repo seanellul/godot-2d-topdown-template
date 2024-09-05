@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://b7mgtepd7t41i"]
 
 [ext_resource type="Script" path="res://scripts/player_entity.gd" id="1_3gx8b"]
-[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://assets/sprites/chara-hero.png" id="2_gcbbh"]
+[ext_resource type="Texture2D" uid="uid://ckloogqtld8qe" path="res://assets/sprites/chara-hero.png" id="2_gcbbh"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_xnu42"]
 [ext_resource type="Script" path="res://scripts/states/state_player_input.gd" id="4_b1v48"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://ks1203fyuyfg" path="res://assets/animations/char_anim_states.tres" id="4_q1wi3"]
