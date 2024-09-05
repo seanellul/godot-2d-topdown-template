@@ -7,7 +7,7 @@ extends Camera2D
 @export var target: Node2D = null: ##A Node to be followed by this entity.
 	set(value):
 		target = value
-		print("%s target set to: %s" %[name, target.name if target else "null"])
+		print("%s target set to: %s" %[name, target])
 
 func _ready() -> void:
 	Globals.transfer_complete.connect(_enable_camera)

@@ -1,20 +1,27 @@
 extends Node2D
 class_name Transfer
 
-@export var interactable: Interactable
-@export var level_key: String  = "" ##Leave empty to transfer inside the same level
+@export_category("Transfer settings")
+@export var interactable: Interactable ##Set an interactable to trigger the transfer on interaction.
+@export var level_key: String  = "" ##Leave empty to transfer inside the same level.
 @export var destination_path: String = ""
+@export_category("Destination settings")
 @export_enum(
 	Const.DIRECTION.DOWN,
 	Const.DIRECTION.LEFT,
 	Const.DIRECTION.RIGHT,
 	Const.DIRECTION.UP
-) var facing
+) var facing ##Force player to face this direction upon arriving to this destination. Leave empty to keep the same facing direction.
 
 func _ready() -> void:
 	SceneManager.load_start.connect(func(_loading_screen): Globals.transfer_start.emit())
-	SceneManager.load_complete.connect(func(_loaded_scene): Globals.transfer_complete.emit())
-	interactable.interacted.connect(transfer)
+	SceneManager.load_complete.connect(_complete_transfer)
+	if interactable:
+		interactable.interacted.connect(transfer)
+
+func _complete_transfer(_loaded_scene):
+	Globals.transfer_complete.emit()
+	process_mode = PROCESS_MODE_INHERIT
 
 func transfer(entity):
 	if level_key:
@@ -51,3 +58,6 @@ func set_player_facing(player, player_facing, facing_dir):
 	if facing_dir != null:
 		_facing = Const.DIR_VECTOR[facing_dir]
 	player.facing = _facing
+
+func disable():
+	process_mode = PROCESS_MODE_DISABLED

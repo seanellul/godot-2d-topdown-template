@@ -13,21 +13,25 @@ func _ready() -> void:
 
 func _set_player(_player):
 	player = _player
-	player_facing = player.facing
 
 func get_data():
-	return destination_path
+	return {
+		"destination_path": destination_path, 
+		"player_facing": player.facing
+	}
 
-func receive_data(_destination_path):
-	destination_path = _destination_path
-		
+func receive_data(data):
+	destination_path = data.destination_path
+	player_facing = data.player_facing
+
 func init_scene():
 	var destination = get_node_or_null(destination_path)
 	if player:
 		if destination:
+			if destination is Transfer:
+				destination.disable()
+				destination.set_player_facing(player, player_facing, destination.facing)
 			player.position = destination.position
-		if destination is Transfer:
-			destination.set_player_facing(player, player_facing, destination.facing)
 		elif DataManager.game_data and DataManager.game_data.player_data:
 			player.position = DataManager.game_data.player_data[1].position
 

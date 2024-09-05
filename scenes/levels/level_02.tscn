@@ -30,7 +30,7 @@ direction = 8
 
 [node name="Transfer2" parent="Transfers" index="1" instance=ExtResource("3_t1lh4")]
 position = Vector2(600, 200)
-rotation = 1.57079
+rotation = 1.5708
 level_key = "LEVEL_1"
 destination_path = "Transfers/Transfer2"
 facing = 1
