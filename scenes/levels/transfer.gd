@@ -2,7 +2,7 @@ extends Node2D
 class_name Transfer
 
 @export_category("Transfer settings")
-@export var interactable: Interactable ##Set an interactable to trigger the transfer on interaction.
+@export var interactable: Interactable ##Assign an interactable to trigger the transfer on interaction.
 @export var level_key: String  = "" ##Leave empty to transfer inside the same level.
 @export var destination_path: String = ""
 @export_category("Destination settings")
@@ -30,14 +30,17 @@ func transfer(entity):
 		_transfer_to_position(entity)
 
 func _transfer_to_level(entity):
-	GameManager.gm.current_level.destination_path = destination_path
-	GameManager.gm.current_level.player_facing = entity.facing
-	SceneManager.swap_scenes(
-		Const.LEVEL[level_key],
-		GameManager.gm.world,
-		GameManager.gm.current_level,
-		Const.TRANSITION.FADE_TO_BLACK
-	)
+	if GameManager.gm:
+		GameManager.gm.current_level.destination_path = destination_path
+		GameManager.gm.current_level.player_facing = entity.facing
+		SceneManager.swap_scenes(
+			Const.LEVEL[level_key],
+			GameManager.gm.world,
+			GameManager.gm.current_level,
+			Const.TRANSITION.FADE_TO_BLACK
+		)
+	else:
+		push_error("Level can be tested stand-alone, but transfer between levels requires a GameManager at the tree root.")
 
 func _transfer_to_position(entity):
 	Globals.transfer_start.emit()

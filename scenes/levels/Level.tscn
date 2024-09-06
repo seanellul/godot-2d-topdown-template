@@ -9,6 +9,7 @@
 script = ExtResource("1_cq0rv")
 
 [node name="GameCamera2D" parent="." instance=ExtResource("2_d25mt")]
+position = Vector2(0, 0)
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -16,8 +17,17 @@ script = ExtResource("1_cq0rv")
 position = Vector2(-104, 12)
 tile_set = ExtResource("3_r7s3x")
 
+[node name="terrain2" type="TileMapLayer" parent="Layers"]
+tile_set = ExtResource("3_r7s3x")
+
 [node name="walls" type="TileMapLayer" parent="Layers"]
 tile_set = ExtResource("3_r7s3x")
+
+[node name="top" type="TileMapLayer" parent="Layers"]
+z_index = 10
+y_sort_enabled = true
+tile_set = ExtResource("3_r7s3x")
+y_sort_origin = 10
 
 [node name="Entities" type="Node2D" parent="."]
 
