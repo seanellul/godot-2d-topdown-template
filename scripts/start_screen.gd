@@ -5,8 +5,9 @@ const template_version: String = "0.1"
 var level_to_load
 var user_prefs: UserPrefs
 
+@onready var newgame_button: Button = %NewGame
+@onready var continue_button: Button = %Continue
 @onready var version_num: Label = %VersionNum
-@onready var continueButton: Button = %Continue
 
 func _ready() -> void:
 	version_num.text = "v%s" % template_version
@@ -16,7 +17,10 @@ func _ready() -> void:
 
 func _check_continue():
 	if SaveFileManager.save_file_exists():
-		continueButton.visible = true
+		continue_button.visible = true
+		continue_button.grab_focus()
+	else:
+		newgame_button.grab_focus()
 
 func _on_new_game_button_up() -> void:
 	DataManager.reset_game_data()

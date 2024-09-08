@@ -18,7 +18,7 @@ class_name Interactable
 var entity: CharacterEntity
 var interacting := false
 
-signal interacted()
+signal interacted(entity: CharacterEntity)
 
 func _init() -> void:
 	monitoring = false

@@ -3,7 +3,6 @@ class_name CharacterEntity
 
 @export_group("Settings")
 @export var animation_tree: AnimationTree
-@export var canvas_layer: Node ##Needed for: health_bar.
 @export var target_is_player: = false
 @export var target: Node2D = null: ##A Node to be followed by this entity.
 	set(value):
@@ -15,7 +14,7 @@ class_name CharacterEntity
 @export var run_speed_increment: = 1.5
 @export var acceleration = 3000.0
 @export var friction = 2000.0
-@export var running_particles: PackedScene = null
+@export var running_particles: GPUParticles2D = null
 @export_group("Health")
 @export var max_hp := 10
 @export var immortal := false
@@ -93,10 +92,10 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _init_health_bar():
-	if health_bar && canvas_layer:
+	if health_bar:
 		hp_bar = health_bar.instantiate()
-		hp_bar.init_health(self)
-		canvas_layer.add_child(hp_bar)
+		hp_bar.init_hud(self)
+		add_child(hp_bar)
 
 func _init_target():
 	if target_is_player:
@@ -167,6 +166,7 @@ func end_attack():
 	is_attacking = false
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
+	return #TODO: add flash
 	var nodes_to_flash = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
 	for n in nodes_to_flash:
 		n.material_overlay.set_shader_parameter("power", power)
@@ -178,7 +178,8 @@ func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 
 func take_damage(value := 0, from = ""):
 	is_damaged = true
-	print_debug("%s damaged by %s" % [name, from.name])
+	if from:
+		print_debug("%s damaged by %s" % [name, from])
 	hp -= value
 	if hp > 0:
 		if on_hurt:

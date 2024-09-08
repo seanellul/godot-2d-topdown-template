@@ -13,7 +13,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
 size = Vector2(20, 16)
 
-[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "on_attack") groups=["player"]]
+[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree") groups=["player"]]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
@@ -22,9 +22,9 @@ animation_tree = NodePath("AnimationTree")
 max_speed = 300.0
 impulse_force = 300.0
 attack_friction = 1000.0
-on_attack = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["flash"]]
+y_sort_enabled = true
 texture = ExtResource("2_dy2m5")
 offset = Vector2(0, -23)
 hframes = 3

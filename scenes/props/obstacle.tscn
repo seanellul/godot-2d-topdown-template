@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3bqel753lyi4"]
+
+[ext_resource type="Script" path="res://scenes/props/obstacle.gd" id="1_ndky6"]
+[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="1_w721t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hctn7"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okr0y"]
+size = Vector2(32, 32)
+
+[node name="Obstacle" type="StaticBody2D" node_paths=PackedStringArray("interactable")]
+collision_layer = 16
+collision_mask = 6
+script = ExtResource("1_ndky6")
+interactable = NodePath("Interactable")
+damage_value = 2
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+monitoring = false
+script = ExtResource("1_w721t")
+one_shot = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("RectangleShape2D_hctn7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_okr0y")

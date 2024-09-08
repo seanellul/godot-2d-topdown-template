@@ -29,11 +29,11 @@ y_sort_enabled = true
 tile_set = ExtResource("3_r7s3x")
 y_sort_origin = 10
 
+[node name="Props" type="Node2D" parent="."]
+
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("4_u3o8y")]
 position = Vector2(262, 176)
-
-[node name="Props" type="Node2D" parent="."]
 
 [node name="Transfers" type="Node2D" parent="."]
