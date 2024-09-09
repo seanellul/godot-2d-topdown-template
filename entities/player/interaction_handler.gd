@@ -20,12 +20,12 @@ func _on_area_entered(area: Node2D):
 		interactable = area
 	elif area.get_parent() is Interactable:
 		interactable = area.get_parent()
-	if interactable and interactable.action_trigger.is_empty():
+	if interactable:
 		interactable.interact(owner)
 
 func _on_area_exited(_area: Area2D):
 	interactable = null
 
 func _unhandled_input(event):
-	if interactable and not interactable.action_trigger.is_empty() and event.is_action_pressed(interactable.action_trigger):
+	if interactable and not interactable.action_trigger.is_empty() and event.is_action(interactable.action_trigger):
 		interactable.interact(owner)

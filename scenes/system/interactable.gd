@@ -17,6 +17,7 @@ class_name Interactable
 
 var entity: CharacterEntity
 var interacting := false
+var action_pressed = true
 
 signal interacted(entity: CharacterEntity)
 
@@ -25,13 +26,8 @@ func _init() -> void:
 	monitorable = true
 	collision_layer = 1 << 3 # set layer to layer "item"
 
-func _enter_tree():
-	if not child_order_changed.is_connected(update_configuration_warnings):
-		child_order_changed.connect(update_configuration_warnings)
-
-func _exit_tree() -> void:
-	if  child_order_changed.is_connected(update_configuration_warnings):
-		child_order_changed.disconnect(update_configuration_warnings)
+func _process(_delta: float) -> void:
+	action_pressed = action_trigger.is_empty() or Input.is_action_pressed(action_trigger)
 
 func interact(sender):
 	if sender is CharacterEntity:
@@ -47,11 +43,11 @@ func _on_interact(sender):
 		do_interaction()
 
 func _can_interact() -> bool:
-	var can_interact := true
+	var can_interact = true
 	if entity:
 		var entity_dir = Const.DIR_BIT[entity.facing.floor()]
 		can_interact = direction == null or direction > 0 and direction & entity_dir != 0
-	return can_interact and !interacting
+	return can_interact and !interacting and action_pressed
 
 func do_interaction():
 	interacted.emit(entity)
@@ -61,16 +57,5 @@ func do_interaction():
 		})
 
 func reset_interaction():
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	interacting = false
-
-func _get_configuration_warnings():
-	var warnings: PackedStringArray = []
-	var area = get_node(".")
-	for c in get_children():
-		if c is Area2D:
-			area = c
-			break
-	if area == null:
-		warnings.append("Interactable needs an %s node to work.\nConsider adding an %s node with 'monitoring' off and 'monitorable' on." % ["Area2D"])
-	return warnings
