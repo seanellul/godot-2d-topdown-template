@@ -9,7 +9,7 @@ func _ready() -> void:
 	if interactable:
 		interactable.interacted.connect(consume_item)
 
-func consume_item(entity):
+func consume_item(entity: CharacterEntity):
 	if entity and recover_hp > 0:
 		entity.recover_hp(recover_hp, self.name)
 	if entity and reduce_hp > 0:

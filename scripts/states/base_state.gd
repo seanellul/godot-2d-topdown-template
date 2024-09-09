@@ -2,6 +2,7 @@ extends Node
 class_name BaseState
 
 @export var active := true ##Set to false to don't process this state.
+@export_category("Advance")
 @export_group("Timer")
 @export var time_range := Vector2.ZERO ##If greather than 0, after N seconds the on_timeout state will be enabled. N = random time range between min (x) and max (y).
 @export var on_timeout: BaseState ##State to enable after time_range times out.
