@@ -13,6 +13,7 @@ script = ExtResource("1_cq0rv")
 position = Vector2(0, 0)
 
 [node name="Layers" type="Node2D" parent="."]
+z_index = -1
 
 [node name="terrain" type="TileMapLayer" parent="Layers"]
 position = Vector2(-104, 12)
