@@ -26,7 +26,6 @@ position = Vector2(284, 70)
 position = Vector2(111, 126)
 
 [node name="Player2" parent="Entities" index="0" instance=ExtResource("3_tyy7r")]
-y_sort_enabled = false
 position = Vector2(304, 208)
 
 [node name="Transfer1" parent="Transfers" index="0" instance=ExtResource("3_t1lh4")]

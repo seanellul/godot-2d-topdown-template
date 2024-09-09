@@ -31,7 +31,7 @@ position = Vector2(360, 129)
 position = Vector2(536, 160)
 
 [node name="Player" parent="Entities" index="0"]
-position = Vector2(248, 108)
+position = Vector2(360, 168)
 
 [node name="Transfer1" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
 position = Vector2(96, 8)

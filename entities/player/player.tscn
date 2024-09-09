@@ -41,5 +41,3 @@ script = ExtResource("4_b1v48")
 script = ExtResource("12_m3ydn")
 time_range = Vector2(0.2, 0.2)
 on_timeout = NodePath("../move")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
