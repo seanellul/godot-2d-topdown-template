@@ -1,7 +1,7 @@
 extends StateEntity
 class_name StatePlayerInput
 
-@export var walls_detector: RayCast3D
+@export var walls_detector: RayCast2D
 
 var input_dir: Vector2
 

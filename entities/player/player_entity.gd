@@ -3,13 +3,16 @@ class_name PlayerEntity
 
 @export var player_id: int = 1 ##Add players incrementing this value to create more players
 @export var equipped = 0
+@export_group("States")
+@export var on_transfer_start: BaseState ## State to enable when player starts transfering
+@export var on_transfer_end: BaseState ## State to enable when player starts transfering
 
 var inventory: Array[DataItem] = []
 
 func _ready():
 	super._ready()
-	Globals.transfer_start.connect(func(): disable_entity(true))
-	Globals.transfer_complete.connect(func(): disable_entity(false))
+	Globals.transfer_start.connect(func(): on_transfer_start.enable())
+	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
 	Globals.player_ready.emit(self)
 
 func _process(delta):
