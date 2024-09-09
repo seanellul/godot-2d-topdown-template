@@ -12,14 +12,15 @@
 radius = 23.0
 
 [node name="Player" node_paths=PackedStringArray("running_particles") instance=ExtResource("1_fnaeb")]
+y_sort_enabled = false
 running_particles = NodePath("SmokeParticles")
 health_bar = ExtResource("2_kl4cw")
 
 [node name="SmokeParticles" parent="." index="0" instance=ExtResource("6_dxaj8")]
-position = Vector2(0, 4)
+position = Vector2(-1, 11)
 
 [node name="InteractionHandler" type="Area2D" parent="." index="3"]
-position = Vector2(0, -19)
+position = Vector2(0, -5)
 collision_mask = 8
 monitorable = false
 script = ExtResource("5_ksqkr")

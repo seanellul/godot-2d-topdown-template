@@ -25,13 +25,13 @@ position = Vector2(111, 126)
 recover_hp = 2
 
 [node name="Chest" parent="Props" index="2" instance=ExtResource("5_x1hn0")]
-position = Vector2(368, 112)
+position = Vector2(360, 129)
 
 [node name="Spikes" parent="Props" index="3" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
 
 [node name="Player" parent="Entities" index="0"]
-position = Vector2(312, 200)
+position = Vector2(248, 108)
 
 [node name="Transfer1" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
 position = Vector2(96, 8)

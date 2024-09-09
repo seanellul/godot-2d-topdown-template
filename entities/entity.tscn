@@ -14,26 +14,27 @@
 size = Vector2(20, 16)
 
 [node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree") groups=["player"]]
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_fshou")
 animation_tree = NodePath("AnimationTree")
 max_speed = 300.0
+max_hp = 20
 impulse_force = 300.0
 attack_friction = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["flash"]]
-y_sort_enabled = true
+position = Vector2(0, -16)
 texture = ExtResource("2_dy2m5")
-offset = Vector2(0, -23)
 hframes = 3
 vframes = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 120, 200)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_c7fes")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

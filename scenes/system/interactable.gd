@@ -9,15 +9,18 @@ class_name Interactable
 	Const.DIRECTION.RIGHT, 
 	Const.DIRECTION.UP
 ) var direction ##The direction the character must face to trigger the interaction.
+@export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_group("Settings")
 @export var one_shot := true ##If true, it can be interacted only once. Useful for chests or pickable items.
-@export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
+@export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 @export_group("")
 @export var on_interaction: BaseState ##The state to enable on interaction.
 
 var entity: CharacterEntity
 var interacting := false
 var action_pressed = true
+
+@onready var collider: CollisionShape2D = get_node_or_null("CollisionShape2D")
 
 signal interacted(entity: CharacterEntity)
 
@@ -31,6 +34,20 @@ func _process(_delta: float) -> void:
 		return
 	action_pressed = action_trigger.is_empty() or Input.is_action_pressed(action_trigger)
 
+func enable():
+	if Engine.is_editor_hint():
+		return
+	process_mode = PROCESS_MODE_INHERIT
+	if collider:
+		collider.disabled = false
+
+func disable():
+	if Engine.is_editor_hint():
+		return
+	process_mode = PROCESS_MODE_DISABLED
+	if collider:
+		collider.disabled = true
+
 func interact(sender):
 	if sender is CharacterEntity:
 		entity = sender
@@ -41,23 +58,23 @@ func _on_interact(sender):
 		interacting = true
 		print(sender.name, " interacted with ", owner.name)
 		if !one_shot:
-			reset_interaction()
-		do_interaction()
+			_reset_interaction()
+		_do_interaction()
 
 func _can_interact() -> bool:
 	var can_interact = true
 	if entity:
 		var entity_dir = Const.DIR_BIT[entity.facing.floor()]
 		can_interact = direction == null or direction > 0 and direction & entity_dir != 0
-	return can_interact and !interacting and action_pressed
+	return can_interact and !interacting and action_pressed and is_processing()
 
-func do_interaction():
+func _do_interaction():
 	interacted.emit(entity)
 	if on_interaction:
 		on_interaction.enable({
 			"entity": entity
 		})
 
-func reset_interaction():
-	await get_tree().create_timer(0.5).timeout
+func _reset_interaction():
+	await get_tree().create_timer(reset_delay).timeout
 	interacting = false
