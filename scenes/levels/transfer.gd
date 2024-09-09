@@ -1,8 +1,8 @@
 extends Node2D
 class_name Transfer
 
-@export_category("Transfer settings")
 @export var interactable: Interactable ##Assign an interactable to trigger the transfer on interaction.
+@export_category("Transfer settings")
 @export var level_key: String  = "" ##Leave empty to transfer inside the same level.
 @export var destination_path: String = ""
 @export_category("Destination settings")

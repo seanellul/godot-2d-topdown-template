@@ -11,15 +11,14 @@ func _ready():
 	Globals.transfer_start.connect(func(): disable_entity(true))
 	Globals.transfer_complete.connect(func(): disable_entity(false))
 	Globals.player_ready.emit(self)
-	print_debug(DataManager.game_data.player_data)
 
 func _process(delta):
 	super._process(delta)
 	if running_particles:
 		running_particles.emitting = is_running && not is_jumping
 
-func take_damage(value := 0, from = ""):
-	super.take_damage(value, from)
+func reduce_hp(value := 0, from = ""):
+	super.reduce_hp(value, from)
 	flash(damage_flash_power)
 
 func reset():

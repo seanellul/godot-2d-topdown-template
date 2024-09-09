@@ -7,8 +7,8 @@ class_name StateAnimation
 var saved_position
 
 func enter():
-	if animation_player:
-		animation_player.current_animation = animation
+	if animation_player and not animation.is_empty():
+		animation_player.play(animation)
 	if saved_position:
 		animation_player.seek(saved_position)
 

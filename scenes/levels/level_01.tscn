@@ -22,6 +22,7 @@ position = Vector2(284, 70)
 
 [node name="Potion2" parent="Props" index="1" instance=ExtResource("2_8mcj0")]
 position = Vector2(111, 126)
+recover_hp = 2
 
 [node name="Damager" parent="Props" index="2" instance=ExtResource("3_lm3d5")]
 position = Vector2(456, 144)

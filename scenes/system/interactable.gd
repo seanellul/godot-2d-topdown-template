@@ -27,6 +27,8 @@ func _init() -> void:
 	collision_layer = 1 << 3 # set layer to layer "item"
 
 func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	action_pressed = action_trigger.is_empty() or Input.is_action_pressed(action_trigger)
 
 func interact(sender):
@@ -37,7 +39,7 @@ func interact(sender):
 func _on_interact(sender):
 	if _can_interact():
 		interacting = true
-		print_debug(sender.name, " interacted with ", self.name)
+		print(sender.name, " interacted with ", owner.name)
 		if !one_shot:
 			reset_interaction()
 		do_interaction()

@@ -9,5 +9,5 @@ func _ready() -> void:
 
 func _apply_damage(entity: CharacterEntity):
 	if entity:
-		entity.take_damage(damage_value, entity.name)
+		entity.reduce_hp(damage_value, entity.name)
 	
