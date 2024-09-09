@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=7 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="PackedScene" uid="uid://c3bqel753lyi4" path="res://scenes/props/obstacle.tscn" id="3_lm3d5"]
 [ext_resource type="Texture2D" uid="uid://b0vygdtwb6oyk" path="res://scenes/props/spikes.png" id="4_xdhgt"]
+[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
 
 [node name="Level_01" instance=ExtResource("1_xvd2c")]
 
@@ -35,6 +36,9 @@ y_sort_enabled = true
 texture = ExtResource("4_xdhgt")
 vframes = 4
 frame = 3
+
+[node name="Chest" parent="Props" index="3" instance=ExtResource("5_x1hn0")]
+position = Vector2(368, 112)
 
 [node name="Player" parent="Entities" index="0"]
 position = Vector2(312, 200)

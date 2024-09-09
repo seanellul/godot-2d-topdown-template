@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3 uid="uid://qsqg6qm4ts7x"]
+
+[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="1_al7ul"]
+[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://scenes/props/chest.png" id="2_mny2i"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_qxnsf"]
+[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="5_pbvis"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
+size = Vector2(40, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkupk"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_jcv77"]
+resource_name = "open"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.133333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable_next_state"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cqrp8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Interactable:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r5a30"]
+resource_name = "opened"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Interactable:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_atw4n"]
+resource_name = "idle"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jt1pw"]
+_data = {
+"RESET": SubResource("Animation_cqrp8"),
+"idle": SubResource("Animation_atw4n"),
+"open": SubResource("Animation_jcv77"),
+"opened": SubResource("Animation_r5a30")
+}
+
+[node name="Chest" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_niryh")
+
+[node name="Interactable" type="Area2D" parent="." node_paths=PackedStringArray("on_interaction")]
+collision_layer = 8
+monitoring = false
+script = ExtResource("1_al7ul")
+direction = 8
+action_trigger = "interact"
+on_interaction = NodePath("../StateMachine/open")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_mkupk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mny2i")
+hframes = 5
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jt1pw")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state") groups=["save"]]
+script = ExtResource("3_qxnsf")
+current_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("5_pbvis")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "idle"
+
+[node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("5_pbvis")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "open"
+
+[node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("5_pbvis")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "opened"

@@ -5,14 +5,11 @@ extends Node
 
 var current_player_action = ""
 
-@onready var players: Array[Node] = []
-
 func _ready():
 	if not OS.is_debug_build():
 		set_process_unhandled_key_input(false)
 		print("DEBUGGER DISABLED.")
 		return
-	players = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
 	Globals.player_action.connect(_on_player_action)
 	DataManager.game_saved.connect(_on_game_saved)
 	DataManager.game_loaded.connect(_on_game_loaded)
@@ -34,15 +31,13 @@ func _unhandled_key_input(event: InputEvent):
 				_set_player_ghost()
 			KEY_5:
 				_stop_all_enemies()
-			# KEY_F:
-			# 	_fade_screen()
 
 
 func _set_player_ghost():
+	var players = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
 	for player in players:
-		var coll: CollisionShape3D = player.get_node_or_null("CollisionShape3d")
+		var coll: CollisionShape2D = player.get_node_or_null("CollisionShape2D")
 		if coll:
-			player.afflicted_by_gravity = !player.afflicted_by_gravity
 			coll.disabled = !coll.disabled
 
 func _stop_all_enemies():
@@ -52,12 +47,6 @@ func _stop_all_enemies():
 			enemy.process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			enemy.process_mode = Node.PROCESS_MODE_DISABLED
-
-# func _fade_screen():
-# 	if ScreenFader.SCREEN_STATUS == "out":
-# 		Messenger.screen_fade_start.emit("in")
-# 	else:
-# 		Messenger.screen_fade_start.emit("out")
 
 func _on_game_saved():
 	if info_label:
