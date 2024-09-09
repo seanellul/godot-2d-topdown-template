@@ -15,11 +15,14 @@ func _ready() -> void:
 	SceneManager.load_complete.connect(_on_level_loaded)
 
 func _load_level():
+	var loading = level_to_load != null
 	if not level_to_load:
 		level_to_load = Const.LEVEL.LEVEL_1
 	if level_to_load and not debug_level:
 		var level = load(level_to_load)
 		world.add_child(level.instantiate())
+		if loading:
+			DataManager.load_game()
 	current_level = world.get_child(0)
 
 func _on_level_loaded(level: Node2D):

@@ -11,6 +11,7 @@ func _ready():
 	Globals.transfer_start.connect(func(): disable_entity(true))
 	Globals.transfer_complete.connect(func(): disable_entity(false))
 	Globals.player_ready.emit(self)
+	print_debug(DataManager.game_data.player_data)
 
 func _process(delta):
 	super._process(delta)
@@ -25,21 +26,24 @@ func reset():
 	is_charging = false
 	is_attacking = false
 
-func get_data():
+func get_data(soft):
 	var data = DataPlayer.new()
-	data.position = position
-	data.facing = facing
+	if not soft:
+		data.position = position
+		data.facing = facing
+		data.level = GameManager.gm.current_level.scene_file_path
 	data.hp = hp
 	data.max_hp = max_hp
 	data.inventory = inventory
 	data.equipped = 0
-	data.level = GameManager.gm.current_level.scene_file_path
 	return data
 
-func receive_data(data):
+func receive_data(data, soft = false):
 	if data:
-		global_position = data.position
-		facing = data.facing
+		if not soft:
+			global_position = data.position
+			facing = data.facing
+			#level = data.level #TODO: handle level loading
 		hp = data.hp
 		max_hp = data.max_hp
 		inventory = data.inventory

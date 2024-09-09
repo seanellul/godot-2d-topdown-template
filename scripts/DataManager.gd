@@ -21,22 +21,24 @@ func load_game_data():
 func _save_level_data(_loading_screen):
 	#Used to save nodes state data of the level before removing the level
 	_save_nodes_data()
+	_save_player_data(true)
 
-func _load_level_data(_loaded_scene:Node, _loading_screen):
+func _load_level_data(_loaded_scene, _loading_screen):
 	#Used to load nodes state data of the level when entering the level
 	await get_tree().create_timer(0.01).timeout
 	_load_nodes_data()
+	_load_player_data(true)
 
 func load_game() -> void:
 	print_debug("loading...")
 	_load_nodes_data()
-	_load_player_data()
+	_load_player_data(false)
 	game_loaded.emit()
 
 func save_game() -> void:
 	print_debug("saving...")
 	_save_nodes_data()
-	_save_player_data()
+	_save_player_data(false)
 	game_data.write_save_file()
 	game_saved.emit()
 
@@ -48,11 +50,11 @@ func _load_nodes_data():
 		if node.has_method("receive_data"):
 			node.receive_data(game_data.nodes_data[path])
 
-func _load_player_data():
+func _load_player_data(soft):
 	var players = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
 	for player in players:
-		if player.has_method("receive_data"):
-			player.receive_data(game_data.player_data[player.player_id])
+		if player.has_method("receive_data") and game_data.player_data:
+			player.receive_data(game_data.player_data[player.player_id], soft)
 
 func _save_nodes_data():
 	for node in _get_save_nodes():
@@ -60,11 +62,11 @@ func _save_nodes_data():
 			var path = String(node.get_path())
 			game_data.nodes_data[path] = _get_node_data(node)
 
-func _save_player_data():
+func _save_player_data(soft):
 	var players = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
 	for player in players:
 		if player.has_method("get_data"):
-			game_data.player_data[player.player_id] = player.get_data()
+			game_data.player_data[player.player_id] = player.get_data(soft)
 
 func _get_node_data(node):
 	if node is CharacterEntity:

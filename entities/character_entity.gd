@@ -127,7 +127,7 @@ func _reset_target_reached():
 		await get_tree().create_timer(0.5).timeout
 	is_target_reached = false
 
-func receive_data(data: DataEntity):
+func receive_data(data: DataEntity, _soft = false):
 	if data:
 		global_position = data.position
 		facing = data.facing
