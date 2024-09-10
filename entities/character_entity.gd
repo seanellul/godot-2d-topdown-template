@@ -47,6 +47,7 @@ var hp_bar: Node
 var screen_notifier: VisibleOnScreenNotifier3D
 var attack_cooldown_timer: Timer
 var facing := Vector2.DOWN
+var speed := 0.0
 
 @export_group("Actions")
 var is_moving: bool
@@ -84,6 +85,7 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO
+	is_running = is_moving and speed > max_speed
 	move_and_slide()
 
 func _init_health_bar():
@@ -143,7 +145,7 @@ func move(direction, speed_increment = 1.0):
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	if moving_direction:
 		facing = moving_direction
-		var speed = max_speed * speed_increment
+		speed = max_speed * speed_increment
 		target_velocity = moving_direction * speed
 	velocity = velocity.move_toward(target_velocity, friction * delta)
 
