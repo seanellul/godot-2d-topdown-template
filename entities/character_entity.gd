@@ -167,12 +167,11 @@ func end_attack():
 	is_attacking = false
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
-	return #TODO: add flash
-	var nodes_to_flash = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
-	for n in nodes_to_flash:
-		n.material_overlay.set_shader_parameter("power", power)
+	var nodes_to_flash: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
+	for n: Sprite2D in nodes_to_flash:
+		n.material.set_shader_parameter("power", power)
 		if color != Color.TRANSPARENT:
-			n.material_overlay.set_shader_parameter("flash_color", color)
+			n.material.set_shader_parameter("flash_color", color)
 	if (power > 0):
 		await get_tree().create_timer(duration).timeout
 		flash(0)

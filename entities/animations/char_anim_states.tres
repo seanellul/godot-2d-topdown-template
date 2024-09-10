@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=67 format=3 uid="uid://ks1203fyuyfg"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=70 format=3 uid="uid://ks1203fyuyfg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t7wic"]
 animation = &"char-attack/down"
@@ -51,6 +51,18 @@ nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_liqcw")
 nodes/BlendSpace2D/position = Vector2(-340, 80)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_eeb7u")
 nodes/TimeScale/position = Vector2(20, 100)
+node_connections = [&"TimeScale", 0, &"BlendSpace2D", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_byubv"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lxeno"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_d2fqe"]
+graph_offset = Vector2(-531, -39)
+nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_byubv")
+nodes/BlendSpace2D/position = Vector2(-340, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lxeno")
+nodes/TimeScale/position = Vector2(27, 175)
 node_connections = [&"TimeScale", 0, &"BlendSpace2D", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8m0vj"]
@@ -318,6 +330,8 @@ advance_expression = "get_parent().is_attacking == true"
 states/Start/position = Vector2(202, 100)
 states/attack/node = SubResource("AnimationNodeBlendTree_34yq6")
 states/attack/position = Vector2(434, 201.235)
+states/hurt/node = SubResource("AnimationNodeBlendTree_d2fqe")
+states/hurt/position = Vector2(787.75, -22.7653)
 states/idle/node = SubResource("AnimationNodeBlendTree_olu4t")
 states/idle/position = Vector2(352, 100)
 states/jump/node = SubResource("AnimationNodeBlendTree_bdjvg")
