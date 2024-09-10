@@ -23,9 +23,6 @@ class_name CharacterEntity
 @export_group("Attack")
 @export var attack_power := 2
 @export var attack_speed := 0.08
-@export var impulse_force = 5.0
-@export var impulse_duration = 0.1
-@export var attack_friction = 100.0
 @export_group("States")
 @export var on_attack: BaseState ## State to enable when this entity attacks.
 @export var on_hit: BaseState ## State to enable when this entity damages another entity.
@@ -66,7 +63,7 @@ var is_running: bool
 		elif attack_cooldown_timer:
 			attack_cooldown_timer.start(attack_speed)
 var is_charging := false
-var is_damaged: bool
+var is_hurting := false
 var is_target_reached := false
 
 signal target_changed(target)
@@ -177,7 +174,6 @@ func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 		flash(0)
 
 func reduce_hp(value := 0, from = ""):
-	is_damaged = true
 	if from:
 		print("%s damaged by %s" % [name, from])
 	hp -= value
@@ -188,7 +184,6 @@ func reduce_hp(value := 0, from = ""):
 		if on_death:
 			on_death.enable()
 	damaged.emit(hp)
-	is_damaged = false
 
 func recover_hp(value := 0, from = ""):
 	if from:
@@ -206,7 +201,7 @@ func reset():
 func stop():
 	velocity = Vector2.ZERO
 
-func disable_entity(value: bool):
-	set_process(!value)
-	set_physics_process(!value)
+func disable_entity(value: bool, delay = 0.0):
+	await get_tree().create_timer(delay).timeout
+	process_mode = PROCESS_MODE_DISABLED if value else PROCESS_MODE_INHERIT
 	stop()

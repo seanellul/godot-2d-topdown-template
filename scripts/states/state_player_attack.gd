@@ -1,6 +1,10 @@
 extends StateEntity
 
+@export var impulse_force := 300.0
+@export var impulse_duration := 0.1
+@export var friction := 1000.0
+
 func enter():
-  entity.velocity += entity.facing * entity.impulse_force
-  await get_tree().create_timer(entity.impulse_duration).timeout
-  entity.velocity = entity.velocity.move_toward(Vector2.ZERO, entity.attack_friction * get_physics_process_delta_time())
+  entity.velocity += entity.facing * impulse_force
+  await get_tree().create_timer(impulse_duration).timeout
+  entity.velocity = entity.velocity.move_toward(Vector2.ZERO, friction * get_physics_process_delta_time())

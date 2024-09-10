@@ -8,7 +8,7 @@ var value: = 0:
 	set(new_value):
 		value = new_value
 		tex_progress.size.x = gap * new_value
-		tex_progress.visible = tex_progress.size.x / 2 != gap
+		tex_progress.visible = value > 0
 var max_value: = 0:
 	set(new_value):
 		max_value = new_value
