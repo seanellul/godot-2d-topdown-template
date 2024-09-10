@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://db4e7jrgweeab"]
+[gd_scene load_steps=15 format=3 uid="uid://db4e7jrgweeab"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" uid="uid://dayieakdoxw36" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_xnu42"]
+[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="4_8hp4k"]
 [ext_resource type="Script" path="res://scripts/states/state_player_input.gd" id="4_b1v48"]
 [ext_resource type="Script" path="res://entities/player/interaction_handler.gd" id="5_ksqkr"]
 [ext_resource type="PackedScene" uid="uid://cmdq8met1qt2s" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
@@ -11,6 +12,11 @@
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="9_p7spi"]
 [ext_resource type="Script" path="res://scripts/states/state_gameover.gd" id="11_rnd5j"]
 [ext_resource type="Script" path="res://scripts/states/state_player_attack.gd" id="12_m3ydn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lky8i"]
+shader = ExtResource("4_8hp4k")
+shader_parameter/flash_color = Color(0.927755, 0, 0.189122, 1)
+shader_parameter/power = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
@@ -27,6 +33,9 @@ on_death = NodePath("StateMachine/death")
 
 [node name="SmokeParticles" parent="." index="0" instance=ExtResource("6_dxaj8")]
 position = Vector2(-1, 11)
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_lky8i")
 
 [node name="InteractionHandler" type="Area2D" parent="." index="3"]
 position = Vector2(0, -5)

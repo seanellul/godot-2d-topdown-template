@@ -31,6 +31,8 @@ func _unhandled_key_input(event: InputEvent):
 				_set_player_ghost()
 			KEY_5:
 				_stop_all_enemies()
+			KEY_3:
+				_restore_player_health()
 
 
 func _set_player_ghost():
@@ -39,6 +41,11 @@ func _set_player_ghost():
 		var coll: CollisionShape2D = player.get_node_or_null("CollisionShape2D")
 		if coll:
 			coll.disabled = !coll.disabled
+
+func _restore_player_health():
+	var players = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
+	for player in players:
+		player.recover_hp(100)
 
 func _stop_all_enemies():
 	var enemies = get_tree().get_nodes_in_group(Const.GROUP.ENEMY)
