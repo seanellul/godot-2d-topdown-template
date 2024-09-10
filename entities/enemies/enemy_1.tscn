@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://2c84y1k62jlc"]
+[gd_scene load_steps=8 format=3 uid="uid://2c84y1k62jlc"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_ftgfs"]
 [ext_resource type="Texture2D" uid="uid://dgbach7bmy1wn" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="4_6nhlw"]
 [ext_resource type="Script" path="res://scripts/states/state_wander.gd" id="5_m5d4g"]
 [ext_resource type="Script" path="res://scripts/states/state_follow.gd" id="6_sayg6"]
+[ext_resource type="Script" path="res://scripts/states/state_path.gd" id="7_afqyo"]
 
 [node name="Enemy1" instance=ExtResource("1_ftgfs")]
 target_is_player = true
@@ -30,3 +31,6 @@ wander_time_range = Vector2(1, 2)
 [node name="follow" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_target_reached")]
 script = ExtResource("6_sayg6")
 on_target_reached = NodePath("../wander")
+
+[node name="path" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("7_afqyo")

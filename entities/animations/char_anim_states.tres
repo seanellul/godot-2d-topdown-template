@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=75 format=3 uid="uid://ks1203fyuyfg"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=79 format=3 uid="uid://ks1203fyuyfg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t7wic"]
 animation = &"char-attack/down"
@@ -79,7 +79,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lxeno"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_d2fqe"]
-graph_offset = Vector2(-605, 51)
+graph_offset = Vector2(-591, 4)
 nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_byubv")
 nodes/BlendSpace2D/position = Vector2(-340, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lxeno")
@@ -140,6 +140,18 @@ animation = &"char-jump/right"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3b5l"]
 animation = &"char-jump/left"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qr4sq"]
+animation = &"char-jump/left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fi174"]
+animation = &"char-jump/left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r02bb"]
+animation = &"char-jump/right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bxt3c"]
+animation = &"char-jump/right"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_f3x7a"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_spfje")
 blend_point_0/pos = Vector2(0, 1)
@@ -149,12 +161,20 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_bhowl")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_e3b5l")
 blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_qr4sq")
+blend_point_4/pos = Vector2(-1, 1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_fi174")
+blend_point_5/pos = Vector2(-1, -1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_r02bb")
+blend_point_6/pos = Vector2(1, 1)
+blend_point_7/node = SubResource("AnimationNodeAnimation_bxt3c")
+blend_point_7/pos = Vector2(1, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_nra1d"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bdjvg"]
-graph_offset = Vector2(-735.3, -20.7671)
+graph_offset = Vector2(-767.3, 127.233)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_qhvpr")
 nodes/Add2/position = Vector2(-200, 100)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_mfevt")

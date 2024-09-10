@@ -10,7 +10,6 @@ class_name CharacterEntity
 		target_changed.emit(value)
 		_reset_target_reached()
 @export var distance_threshold: = 21.0
-@export var slow_radius_size: = 5.0 ##It's multiplied by the distance_threshold
 @export_group("Movement")
 @export var max_speed = 300.0
 @export var friction = 2000.0
@@ -80,7 +79,7 @@ func _ready():
 	hit.connect(func(): if on_hit: on_hit.enable())
 
 func _process(_delta):
-	_calc_target_reached()
+	_check_target_reached()
 	_update_animation()
 
 func _physics_process(_delta):
@@ -118,7 +117,7 @@ func _update_animation():
 	if current_anim:
 		animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
 
-func _calc_target_reached():
+func _check_target_reached():
 	if !is_target_reached and target:
 		var distance = global_position.distance_to(target.position)
 		is_target_reached = distance < distance_threshold
@@ -148,12 +147,14 @@ func move(direction, speed_increment = 1.0):
 		target_velocity = moving_direction * speed
 	velocity = velocity.move_toward(target_velocity, friction * delta)
 
+func move_towards(_position, speed_increment = 1.0):
+	var moving_direction = global_position.direction_to(_position)
+	move(moving_direction, speed_increment)
+
 func move_towards_target(speed_multiplier = 1.0):
 	if not target:
 		return
-	var target_pos = target.global_position
-	var direction = global_position.direction_to(target_pos)
-	move(direction, speed_multiplier)
+	move_towards(target.global_position, speed_multiplier)
 
 func jump():
 	if not is_jumping:

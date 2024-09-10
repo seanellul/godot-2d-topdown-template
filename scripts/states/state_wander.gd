@@ -7,19 +7,19 @@ class_name StateWander
 var wander_time: float
 var direction = Vector2.ZERO
 
-func randomize_wander():
-	direction = Vector2(randf_range(-1, 1), randf_range(-1 , 1)).normalized()
-	wander_time = randf_range(wander_time_range.x, wander_time_range.y)
-
 func enter():
 	super.enter()
-	randomize_wander()
+	_randomize_wander()
 
 func update(delta: float):
 	if wander_time > 0:
 		wander_time -= delta
 	else:
-		randomize_wander()
+		_randomize_wander()
 
 func physics_update(_delta: float):
 	entity.move(direction, speed_multiplier)
+
+func _randomize_wander():
+	direction = Vector2(randf_range(-1, 1), randf_range(-1 , 1)).normalized()
+	wander_time = randf_range(wander_time_range.x, wander_time_range.y)

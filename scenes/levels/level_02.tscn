@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=7 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_5wwg2"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_t1lh4"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
 [ext_resource type="Script" path="res://entities/player/player_entity.gd" id="4_icv2o"]
+
+[sub_resource type="Curve2D" id="Curve2D_gjsqd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 416, 144, 0, 0, 0, 0, 752, 128, 0, 0, 0, 0, 592, 320, 0, 0, 0, 0, 416, 144)
+}
+point_count = 4
 
 [node name="Level_02" instance=ExtResource("1_d5yvb")]
 
@@ -35,6 +41,12 @@ script = ExtResource("4_icv2o")
 player_id = 1
 equipped = 0
 
+[node name="StateMachine" parent="Entities/Enemy1" index="4" node_paths=PackedStringArray("current_state")]
+current_state = NodePath("path")
+
+[node name="path" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
+path = NodePath("../../../../Path2D")
+
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_t1lh4")]
 position = Vector2(96, 0)
 destination_path = "Transfers/Transfer_Est"
@@ -62,6 +74,10 @@ destination_path = "Transfers/Transfer_Est"
 [node name="Interactable" parent="Transfers/Transfer_West" index="0"]
 direction = 2
 
+[node name="Path2D" type="Path2D" parent="." index="5"]
+curve = SubResource("Curve2D_gjsqd")
+
+[editable path="Entities/Enemy1"]
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_Est"]
 [editable path="Transfers/Transfer_West"]
