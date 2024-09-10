@@ -9,14 +9,14 @@ class_name CharacterEntity
 		target = value
 		target_changed.emit(value)
 		_reset_target_reached()
+@export var distance_threshold: = 21.0
+@export var slow_radius_size: = 5.0 ##It's multiplied by the distance_threshold
 @export_group("Movement")
-@export var max_speed = 5.0
-@export var run_speed_increment: = 1.5
-@export var acceleration = 3000.0
+@export var max_speed = 300.0
 @export var friction = 2000.0
 @export var running_particles: GPUParticles2D = null
 @export_group("Health")
-@export var max_hp := 10
+@export var max_hp := 20
 @export var immortal := false
 @export var health_bar: PackedScene ## It needs the canvas_layer.
 @export var damage_flash_power = 0.3
@@ -80,13 +80,11 @@ func _ready():
 	hit.connect(func(): if on_hit: on_hit.enable())
 
 func _process(_delta):
-	if !is_target_reached:
-		is_target_reached = round(velocity) == Vector2.ZERO
-		if is_target_reached:
-			target_reached.emit(target)
+	_calc_target_reached()
 	_update_animation()
 
 func _physics_process(_delta):
+	is_moving = velocity != Vector2.ZERO
 	move_and_slide()
 
 func _init_health_bar():
@@ -120,6 +118,13 @@ func _update_animation():
 	if current_anim:
 		animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
 
+func _calc_target_reached():
+	if !is_target_reached and target:
+		var distance = global_position.distance_to(target.position)
+		is_target_reached = distance < distance_threshold
+		if is_target_reached:
+			target_reached.emit(target)
+
 func _reset_target_reached():
 	if is_inside_tree():
 		await get_tree().create_timer(0.5).timeout
@@ -131,21 +136,24 @@ func receive_data(data: DataEntity, _soft = false):
 		facing = data.facing
 		target = get_node_or_null(data.target)
 
-func move(direction):
+func move(direction, speed_increment = 1.0):
 	if is_attacking or is_charging:
 		return
 	var delta = get_process_delta_time()
-	# Get the input direction and handle the movement/deceleration.
+	var target_velocity = Vector2(0, 0)
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	if moving_direction:
 		facing = moving_direction
-		var speed = max_speed if !is_running else max_speed * run_speed_increment
-		var target_velocity = Vector2(direction.x * speed, direction.y * speed)
-		velocity = velocity.move_toward(target_velocity, acceleration * delta)
-	else:
-		var target_velocity = Vector2(0, 0)
-		velocity = velocity.move_toward(target_velocity, friction * delta)
-	is_moving = velocity != Vector2.ZERO
+		var speed = max_speed * speed_increment
+		target_velocity = moving_direction * speed
+	velocity = velocity.move_toward(target_velocity, friction * delta)
+
+func move_towards_target(speed_multiplier = 1.0):
+	if not target:
+		return
+	var target_pos = target.global_position
+	var direction = global_position.direction_to(target_pos)
+	move(direction, speed_multiplier)
 
 func jump():
 	if not is_jumping:

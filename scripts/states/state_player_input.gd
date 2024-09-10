@@ -2,6 +2,7 @@ extends StateEntity
 class_name StatePlayerInput
 
 @export var walls_detector: RayCast2D
+@export var run_speed_increment := 1.5
 
 var input_dir: Vector2
 
@@ -21,4 +22,5 @@ func _handle_inputs():
 	# 	entity.is_charging = false
 	if Input.is_action_just_pressed("attack"):
 		entity.attack()
-	entity.move(input_dir)
+	var speed_increment = run_speed_increment if entity.is_running else 1.0 
+	entity.move(input_dir, speed_increment)

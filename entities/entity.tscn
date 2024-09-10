@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://dyfyo3gh4e2la"]
 
-[ext_resource type="Script" path="res://entities/player/player_entity.gd" id="1_fshou"]
+[ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
 [ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="4_hhyyf"]
@@ -25,10 +25,8 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
-script = ExtResource("1_fshou")
+script = ExtResource("1_g6455")
 animation_tree = NodePath("AnimationTree")
-max_speed = 300.0
-max_hp = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["flash"]]
 material = SubResource("ShaderMaterial_26lqd")
