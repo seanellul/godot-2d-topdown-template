@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dgbach7bmy1wn" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
 
 [node name="Enemy1" instance=ExtResource("1_ftgfs")]
-target_is_player = true
 max_speed = 100.0
 friction = 1500.0
 max_hp = 10

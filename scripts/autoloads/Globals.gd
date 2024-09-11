@@ -16,6 +16,8 @@ signal enemy_hurt
 signal transfer_start
 @warning_ignore("unused_signal")
 signal transfer_complete
+@warning_ignore("unused_signal")
+signal player_added_to_scene(player: PlayerEntity)
 
 func _ready():
 	user_prefs = UserPrefs.load_or_create()
@@ -48,3 +50,10 @@ func open_settings_menu():
 		get_tree().root.add_child(settings_menu)
 	else:
 		push_warning('settings menu already exists in this scene')
+
+func get_player(id: int):
+	if GameManager.gm and GameManager.gm.current_level and GameManager.gm.current_level.players.size() > 0:
+		print_debug(GameManager.gm.current_level)
+		return GameManager.gm.current_level.players[id - 1]
+	else:
+		return get_tree().get_first_node_in_group(Const.GROUP.PLAYER)

@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://b8ms04atei243" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
 
-[node name="Level" type="Node2D" groups=["level"]]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("entities") groups=["level"]]
 y_sort_enabled = true
 script = ExtResource("1_cq0rv")
+entities = NodePath("Entities")
 
 [node name="GameCamera2D" parent="." instance=ExtResource("2_d25mt")]
 position = Vector2(0, 0)

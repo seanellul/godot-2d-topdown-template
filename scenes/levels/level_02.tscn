@@ -55,7 +55,9 @@ wander_time_range = Vector2(1, 2)
 
 [node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2" node_paths=PackedStringArray("on_target_reached")]
 script = ExtResource("7_n4gru")
+target_player_id = 1
 on_target_reached = NodePath("../wander")
+speed_multiplier = 1.25
 
 [node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
 script = ExtResource("8_po55j")

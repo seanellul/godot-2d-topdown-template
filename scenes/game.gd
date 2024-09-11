@@ -13,7 +13,6 @@ var current_level: Level
 
 func _ready() -> void:
 	gm = self
-	SceneManager.load_complete.connect(_on_level_loaded)
 
 func _load_level():
 	var loading = level_to_load != null
@@ -25,10 +24,6 @@ func _load_level():
 		if loading:
 			DataManager.load_game()
 	current_level = world.get_child(0)
-
-func _on_level_loaded(level: Node2D):
-	if level is Level:
-		current_level = level
 
 func receive_data(_current_level):
 	level_to_load = _current_level

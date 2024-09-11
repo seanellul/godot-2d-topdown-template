@@ -4,13 +4,6 @@ class_name CharacterEntity
 @export_group("Settings")
 @export var animation_tree: AnimationTree
 @export var collision_shape: CollisionShape2D
-@export var target_is_player: = false
-@export var target: Node2D = null: ##A Node to be followed by this entity.
-	set(value):
-		target = value
-		target_changed.emit(value)
-		_reset_target_reached()
-@export var distance_threshold: = 21.0
 @export var sync_rotation: Array[Node2D] ##A list of nodes to sync rotation based on the entity facing direction.
 @export_group("Movement")
 @export var max_speed = 300.0
@@ -76,23 +69,18 @@ var is_hurting := false
 var is_blocked := false:
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
-var is_target_reached := false
 
-signal target_changed(target)
-signal target_reached(target)
 signal hp_changed(value)
 signal damaged(hp)
 signal hit
 
 func _ready():
 	_init_health_bar()
-	_init_target()
 	_init_screen_notifier()
 	_init_attack_cooldown_timer()
 	hit.connect(func(): if on_hit: on_hit.enable())
 
 func _process(_delta):
-	_check_target_reached()
 	_update_animation()
 
 func _physics_process(_delta):
@@ -106,12 +94,6 @@ func _init_health_bar():
 		hp_bar = health_bar.instantiate()
 		hp_bar.init_hud(self)
 		add_child(hp_bar)
-
-func _init_target():
-	if target_is_player:
-		target = GameManager.gm.current_level.players[0] if GameManager.gm else get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
-	elif target:
-		target = target
 
 func _init_screen_notifier():
 	if on_screen_entered or on_screen_exited:
@@ -131,18 +113,6 @@ func _update_animation():
 	var current_anim = animation_tree.get("parameters/playback").get_current_node()
 	if current_anim:
 		animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
-
-func _check_target_reached():
-	if !is_target_reached and target:
-		var distance = global_position.distance_to(target.position)
-		is_target_reached = distance < distance_threshold
-		if is_target_reached:
-			target_reached.emit(target)
-
-func _reset_target_reached():
-	if is_inside_tree():
-		await get_tree().create_timer(0.5).timeout
-	is_target_reached = false
 
 func receive_data(data: DataEntity, _soft = false):
 	if data:
@@ -164,11 +134,6 @@ func move(direction, speed_increment = 1.0):
 func move_towards(_position, speed_increment = 1.0):
 	var moving_direction = global_position.direction_to(_position)
 	move(moving_direction, speed_increment)
-
-func move_towards_target(speed_multiplier = 1.0):
-	if not target:
-		return
-	move_towards(target.global_position, speed_multiplier)
 
 func jump():
 	if not is_jumping:

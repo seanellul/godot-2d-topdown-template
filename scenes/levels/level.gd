@@ -1,12 +1,19 @@
 extends Node2D
 class_name Level
 
+@export var entities: Node2D
+
 var players: Array[PlayerEntity]
 var player_facing: Vector2
 var destination_path: String
 var player_res = preload("res://entities/player/player.tscn")
 
 @onready var n_of_players = GameManager.gm.n_of_players if GameManager.gm else 1
+
+func _enter_tree() -> void:
+	if GameManager.gm:
+		print_debug("Set current level: ", self)
+		GameManager.gm.current_level = self
 
 func _ready() -> void:
 	_init_players()
@@ -18,10 +25,12 @@ func _init_players():
 		var player_id = n + 1
 		player.player_id = player_id
 		players.append(player)
-		add_child(player)
-		var p_pos = get_node_or_null("Entities/P%s" %[player_id])
+		entities.add_child(player)
+		Globals.player_added_to_scene.emit(player)
+		var p_pos = entities.get_node_or_null("P%s" %[player_id])
 		if player and p_pos:
 			player.global_position = p_pos.global_position
+			p_pos.queue_free()
 
 func get_data():
 	return {

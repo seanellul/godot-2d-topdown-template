@@ -45,12 +45,12 @@ func _physics_process(delta):
 
 func _enter_states():
 	for state in states:
-		print("%s entered state: %s" % [owner.name, state.name])
+		print("%s entered state: %s" % [get_parent().name, state.name])
 		state.enter()
 
 func _exit_states():
 	for state in states:
-		print("%s exited state: %s" % [owner.name, state.name])
+		print("%s exited state: %s" % [get_parent().name, state.name])
 		state.exit()
 
 func _update_states(delta):

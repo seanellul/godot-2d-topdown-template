@@ -6,4 +6,4 @@
 position = Vector2(262, 176)
 limit_smoothed = true
 script = ExtResource("1_eihhq")
-target_is_player = true
+target_player_id = 1
