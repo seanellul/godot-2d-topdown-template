@@ -75,11 +75,9 @@ func _get_node_data(node):
 		return _get_state_data(node)
 
 func _get_entity_data(entity: CharacterEntity) -> DataEntity:
-	var target: NodePath = ""
 	var data := DataEntity.new()
 	data.position = entity.global_position
 	data.facing = entity.facing
-	data.target = entity.target.get_path() if entity.target else target
 	return data
 
 func _get_state_data(state: StateMachine) -> DataState:

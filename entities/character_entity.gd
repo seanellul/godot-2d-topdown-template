@@ -92,7 +92,7 @@ func _ready():
 	hit.connect(func(): if on_hit: on_hit.enable())
 
 func _process(_delta):
-	# _check_target_reached()
+	_check_target_reached()
 	_update_animation()
 
 func _physics_process(_delta):
@@ -109,7 +109,6 @@ func _init_health_bar():
 
 func _init_target():
 	if target_is_player:
-		print_debug(GameManager.gm)
 		target = GameManager.gm.current_level.players[0] if GameManager.gm else get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
 	elif target:
 		target = target
@@ -149,7 +148,6 @@ func receive_data(data: DataEntity, _soft = false):
 	if data:
 		global_position = data.position
 		facing = data.facing
-		target = get_node_or_null(data.target)
 
 func move(direction, speed_increment = 1.0):
 	if is_attacking or is_charging:
