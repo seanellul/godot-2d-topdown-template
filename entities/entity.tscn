@@ -20,13 +20,14 @@ shader_parameter/power = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
 size = Vector2(20, 16)
 
-[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "sync_rotation", "blocks_detector") groups=["player"]]
+[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "collision_shape", "sync_rotation", "blocks_detector") groups=["player"]]
 y_sort_enabled = true
 collision_layer = 2
-collision_mask = 3
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_g6455")
 animation_tree = NodePath("AnimationTree")
+collision_shape = NodePath("CollisionShape2D")
 sync_rotation = [NodePath("BlocksDetector")]
 blocks_detector = NodePath("BlocksDetector")
 

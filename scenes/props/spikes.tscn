@@ -162,6 +162,8 @@ _data = {
 }
 
 [node name="Spikes" type="StaticBody2D" node_paths=PackedStringArray("interactable")]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_107wa")
 interactable = NodePath("Interactable")
 reduce_hp = 2

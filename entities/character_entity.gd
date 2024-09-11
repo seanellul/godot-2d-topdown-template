@@ -3,6 +3,7 @@ class_name CharacterEntity
 
 @export_group("Settings")
 @export var animation_tree: AnimationTree
+@export var collision_shape: CollisionShape2D
 @export var target_is_player: = false
 @export var target: Node2D = null: ##A Node to be followed by this entity.
 	set(value):
@@ -58,7 +59,9 @@ var speed := 0.0
 @export_group("Actions")
 var is_moving: bool
 var is_running: bool
-@export var is_jumping: bool #exported because used in animation "jump"
+@export var is_jumping: bool: #exported because used in animation "jump"
+	set(value):
+		is_jumping = value
 @export var is_attacking: bool: #exported because used in animation "attack"
 	set(value):
 		is_attacking = value
@@ -95,6 +98,7 @@ func _process(_delta):
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO
 	is_running = is_moving and speed > max_speed
+	collision_shape.disabled = is_jumping if not is_blocked else false
 	move_and_slide()
 
 func _init_health_bar():

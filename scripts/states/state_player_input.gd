@@ -12,7 +12,7 @@ func physics_update(_delta):
 	_handle_inputs()
 
 func _handle_inputs():
-	if Input.is_action_just_pressed("jump") and not entity.is_blocked:
+	if Input.is_action_just_pressed("jump"):
 		entity.jump()
 	# if Input.is_action_just_pressed("attack") and not entity.is_hurting:
 	# 	entity.is_charging = true

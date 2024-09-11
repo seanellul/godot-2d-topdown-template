@@ -150,7 +150,7 @@ locale/translations=PackedStringArray("res://local/translations.en.translation",
 
 2d_physics/layer_1="block"
 2d_physics/layer_2="character"
-2d_physics/layer_3="enemy"
+2d_physics/layer_3="body"
 2d_physics/layer_4="item"
 
 [rendering]
