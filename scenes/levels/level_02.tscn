@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=11 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_5wwg2"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_t1lh4"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
-[ext_resource type="Script" path="res://entities/player/player_entity.gd" id="4_icv2o"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_qmq1u"]
+[ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="5_4l2eg"]
+[ext_resource type="Script" path="res://scripts/states/state_wander.gd" id="6_rdt3e"]
+[ext_resource type="Script" path="res://scripts/states/state_follow.gd" id="7_n4gru"]
+[ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_po55j"]
 
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
 _data = {
@@ -32,22 +36,29 @@ position = Vector2(284, 70)
 [node name="Potion2" parent="Props" index="1" instance=ExtResource("2_5wwg2")]
 position = Vector2(111, 126)
 
-[node name="Player" parent="Entities" index="0"]
-position = Vector2(272, 208)
-collision_mask = 3
+[node name="P1" parent="Entities" index="0"]
+position = Vector2(224, 352)
 
-[node name="Enemy1" parent="Entities" index="1" node_paths=PackedStringArray("sync_rotation") instance=ExtResource("3_vnork")]
-position = Vector2(576, 224)
-collision_mask = 3
-script = ExtResource("4_icv2o")
-player_id = 1
-equipped = 0
-sync_rotation = []
+[node name="Enemy1" parent="Entities" index="1" instance=ExtResource("3_vnork")]
+position = Vector2(576, 192)
 
-[node name="StateMachine" parent="Entities/Enemy1" index="4" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="Entities/Enemy1" index="6" node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_qmq1u")
 current_state = NodePath("path")
 
-[node name="path" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
+[node name="idle" type="Node" parent="Entities/Enemy1/StateMachine" index="0"]
+script = ExtResource("5_4l2eg")
+
+[node name="wander" type="Node" parent="Entities/Enemy1/StateMachine" index="1"]
+script = ExtResource("6_rdt3e")
+wander_time_range = Vector2(1, 2)
+
+[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2" node_paths=PackedStringArray("on_target_reached")]
+script = ExtResource("7_n4gru")
+on_target_reached = NodePath("../wander")
+
+[node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
+script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_t1lh4")]
@@ -80,7 +91,6 @@ direction = 2
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
 
-[editable path="Entities/Enemy1"]
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_Est"]
 [editable path="Transfers/Transfer_West"]

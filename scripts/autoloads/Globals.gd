@@ -16,8 +16,6 @@ signal enemy_hurt
 signal transfer_start
 @warning_ignore("unused_signal")
 signal transfer_complete
-@warning_ignore("unused_signal")
-signal player_ready(player)
 
 func _ready():
 	user_prefs = UserPrefs.load_or_create()

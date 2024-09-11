@@ -22,7 +22,7 @@ shader_parameter/power = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
 
-[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "running_particles", "on_attack", "on_hurt", "on_death") instance=ExtResource("1_fnaeb")]
+[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "running_particles", "on_attack", "on_hurt", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
 y_sort_enabled = false
 script = ExtResource("2_x37y0")
 player_id = 1
@@ -38,7 +38,7 @@ on_death = NodePath("StateMachine/death")
 [node name="SmokeParticles" parent="." index="0" instance=ExtResource("6_dxaj8")]
 position = Vector2(-1, 11)
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_lky8i")
 
 [node name="InteractionHandler" type="Area2D" parent="." index="3"]

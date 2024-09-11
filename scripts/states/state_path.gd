@@ -20,10 +20,14 @@ func update(_delta: float):
 	_check_point_reached()
 
 func physics_update(_delta: float):
+	if not entity:
+		return
 	var position = path_curve.get_point_position(current_point_id)
 	entity.move_towards(position)
 
 func _check_point_reached():
+	if not entity:
+		return
 	var position = path_curve.get_point_position(current_point_id)
 	var distance = entity.global_position.distance_to(position)
 	if distance < distance_threshold:

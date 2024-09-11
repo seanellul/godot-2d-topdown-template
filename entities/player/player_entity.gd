@@ -13,7 +13,6 @@ func _ready():
 	super._ready()
 	Globals.transfer_start.connect(func(): on_transfer_start.enable())
 	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
-	Globals.player_ready.emit(self)
 
 func _process(delta):
 	super._process(delta)
