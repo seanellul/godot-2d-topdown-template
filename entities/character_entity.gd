@@ -10,9 +10,11 @@ class_name CharacterEntity
 		target_changed.emit(value)
 		_reset_target_reached()
 @export var distance_threshold: = 21.0
+@export var sync_rotation: Array[Node2D] ##A list of nodes to sync rotation based on the entity facing direction.
 @export_group("Movement")
 @export var max_speed = 300.0
 @export var friction = 2000.0
+@export var blocks_detector: RayCast2D
 @export var running_particles: GPUParticles2D = null
 @export_group("Health")
 @export var max_hp := 20
@@ -46,7 +48,11 @@ class_name CharacterEntity
 var hp_bar: Node
 var screen_notifier: VisibleOnScreenNotifier3D
 var attack_cooldown_timer: Timer
-var facing := Vector2.DOWN
+var facing := Vector2.DOWN:
+	set(value):
+		facing = value
+		for n in sync_rotation:
+			n.rotation = facing.angle()
 var speed := 0.0
 
 @export_group("Actions")
@@ -64,6 +70,9 @@ var is_running: bool
 			attack_cooldown_timer.start(attack_speed)
 var is_charging := false
 var is_hurting := false
+var is_blocked := false:
+	get():
+		return blocks_detector.is_colliding() if blocks_detector != null else false
 var is_target_reached := false
 
 signal target_changed(target)

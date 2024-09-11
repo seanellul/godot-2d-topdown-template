@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://8u5h1ar8jt2f"]
+[gd_scene load_steps=5 format=3 uid="uid://8u5h1ar8jt2f"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_cq0rv"]
 [ext_resource type="PackedScene" uid="uid://b8ms04atei243" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
 [ext_resource type="PackedScene" uid="uid://db4e7jrgweeab" path="res://entities/player/player.tscn" id="4_u3o8y"]
-[ext_resource type="Script" path="res://entities/player/player_entity.gd" id="5_yygbr"]
 
 [node name="Level" type="Node2D" groups=["level"]]
 y_sort_enabled = true
@@ -39,8 +38,5 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Player" parent="Entities" instance=ExtResource("4_u3o8y")]
-script = ExtResource("5_yygbr")
-player_id = 1
-equipped = 0
 
 [node name="Transfers" type="Node2D" parent="."]
