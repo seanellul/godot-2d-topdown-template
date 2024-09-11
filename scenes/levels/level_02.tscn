@@ -44,7 +44,7 @@ position = Vector2(576, 192)
 
 [node name="StateMachine" type="Node" parent="Entities/Enemy1" index="6" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_qmq1u")
-current_state = NodePath("path")
+current_state = NodePath("follow")
 
 [node name="idle" type="Node" parent="Entities/Enemy1/StateMachine" index="0"]
 script = ExtResource("5_4l2eg")

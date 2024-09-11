@@ -12,7 +12,7 @@ var player_res = preload("res://entities/player/player.tscn")
 
 func _enter_tree() -> void:
 	if GameManager.gm:
-		print_debug("Set current level: ", self)
+		print("Current level is: ", self.name)
 		GameManager.gm.current_level = self
 
 func _ready() -> void:

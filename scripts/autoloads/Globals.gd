@@ -35,7 +35,7 @@ enum GLOBAL_STATE {
 
 const LANGUAGES:Array = [
 	"en",
-	"it"	
+	"it"
 ]
 
 func get_selected_language() -> String:
@@ -53,7 +53,8 @@ func open_settings_menu():
 
 func get_player(id: int):
 	if GameManager.gm and GameManager.gm.current_level and GameManager.gm.current_level.players.size() > 0:
-		print_debug(GameManager.gm.current_level)
 		return GameManager.gm.current_level.players[id - 1]
-	else:
+	elif is_inside_tree():
 		return get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
+	else:
+		return null

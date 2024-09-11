@@ -7,7 +7,8 @@ extends Camera2D
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
-		print("%s target set to: %s" %[name, target])
+		if name:
+			print("%s target set to: %s" %[name, target])
 
 func _ready() -> void:
 	Globals.player_added_to_scene.connect(_try_to_set_player_target)

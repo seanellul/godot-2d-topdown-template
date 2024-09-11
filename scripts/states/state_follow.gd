@@ -9,6 +9,8 @@ class_name StateFollow
 	set(value):
 		target = value
 		_reset_target_reached()
+		if entity_name and target:
+			print("%s is following: %s" %[entity_name, target])
 @export var distance_threshold: = 21.0
 @export var on_target_reached: BaseState
 @export var speed_multiplier: = 1.0
@@ -18,11 +20,11 @@ var is_target_reached := false
 signal target_reached(target)
 
 func enter():
-	entity.target_reached.connect(_on_target_reached)
+	target_reached.connect(_on_target_reached)
 	_init_target()
 
 func exit():
-	entity.target_reached.disconnect(_on_target_reached)
+	target_reached.disconnect(_on_target_reached)
 
 func update(_delta):
 	_check_target_reached()
@@ -31,10 +33,12 @@ func physics_update(_delta):
 	_follow()
 
 func _follow():
-	if target:
+	if target and entity:
 		entity.move_towards(target.global_position, speed_multiplier)
 
 func _init_target():
+	# if not current:
+		# return
 	_reset_target_reached()
 	if target_player_id > 0:
 		target = Globals.get_player(target_player_id)
@@ -54,6 +58,6 @@ func _reset_target_reached():
 	is_target_reached = false
 
 func _on_target_reached(_target):
-	if on_target_reached:
+	if entity and on_target_reached:
 		entity.stop()
 		on_target_reached.enable()
