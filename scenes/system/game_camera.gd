@@ -7,7 +7,7 @@ extends Camera2D
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
-		if name:
+		if is_node_ready():
 			print("%s target set to: %s" %[name, target])
 
 func _ready() -> void:

@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=11 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
 [ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
+[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
+[ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e7qi"]
+size = Vector2(64, 64)
+
+[sub_resource type="Curve2D" id="Curve2D_uycfk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -88, 0, 0, 0, 0, 88, -88, 0, 0, 0, 0, 88, -160, 0, 0, 0, 0, 280, -160, 0, 0, 0, 0, 280, -56, 0, 0, 0, 0, 344, -56)
+}
+point_count = 6
 
 [node name="Level_01" instance=ExtResource("1_xvd2c")]
 
@@ -55,6 +67,29 @@ destination_path = "Transfers/Transfer_West"
 
 [node name="Interactable" parent="Transfers/Transfer_Est" index="0"]
 direction = 4
+
+[node name="PlayerPath" type="Area2D" parent="Events" index="0" node_paths=PackedStringArray("on_interaction")]
+position = Vector2(360, 288)
+collision_layer = 8
+monitoring = false
+script = ExtResource("6_16m3t")
+on_interaction = NodePath("StateMachine/StatePath")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/PlayerPath" index="0"]
+shape = SubResource("RectangleShape2D_4e7qi")
+
+[node name="StateMachine" type="Node" parent="Events/PlayerPath" index="1"]
+script = ExtResource("7_e6yb8")
+
+[node name="StatePath" type="Node" parent="Events/PlayerPath/StateMachine" index="0" node_paths=PackedStringArray("path")]
+script = ExtResource("8_285dh")
+path = NodePath("../../Path2D")
+distance_threshold = 3.0
+friction_increment = 5.0
+entity_player_id = 1
+
+[node name="Path2D" type="Path2D" parent="Events/PlayerPath" index="2"]
+curve = SubResource("Curve2D_uycfk")
 
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_South"]

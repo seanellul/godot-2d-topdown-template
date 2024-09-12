@@ -7,6 +7,7 @@ class_name StateImpulse
 @export var friction := 1000.0
 
 func enter():
+  super.enter()
   entity.velocity += entity.facing * impulse_force
   await get_tree().create_timer(impulse_duration).timeout
   entity.velocity = entity.velocity.move_toward(Vector2.ZERO, friction * get_physics_process_delta_time())

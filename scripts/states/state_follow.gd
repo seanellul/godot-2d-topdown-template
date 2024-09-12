@@ -10,17 +10,19 @@ class_name StateFollow
 	set(value):
 		target = value
 		_reset_target_reached()
-		if entity_name and target:
+		if is_node_ready():
 			print("%s is following: %s" %[entity_name, target])
 @export var distance_threshold: = 21.0
 @export var on_target_reached: BaseState
 @export var speed_multiplier: = 1.0
+@export var friction_multiplier: = 1.0
 
 var is_target_reached := false
 
 signal target_reached(target)
 
 func enter():
+	super.enter()
 	target_reached.connect(_on_target_reached)
 	_init_target()
 

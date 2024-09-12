@@ -4,6 +4,7 @@ class_name StateWander
 
 @export var wander_time_range: = Vector2.ZERO ##Min (x) and max (y) range time values.
 @export var speed_multiplier: = 1.0
+@export var friction_multiplier: = 1.0
 
 var wander_time: float
 var direction = Vector2.ZERO
@@ -19,7 +20,7 @@ func update(delta: float):
 		_randomize_wander()
 
 func physics_update(_delta: float):
-	entity.move(direction, speed_multiplier)
+	entity.move(direction, speed_multiplier, friction_multiplier)
 
 func _randomize_wander():
 	direction = Vector2(randf_range(-1, 1), randf_range(-1 , 1)).normalized()

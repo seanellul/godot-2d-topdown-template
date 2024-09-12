@@ -119,21 +119,23 @@ func receive_data(data: DataEntity, _soft = false):
 		global_position = data.position
 		facing = data.facing
 
-func move(direction, speed_increment = 1.0):
+func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 	if is_attacking or is_charging:
 		return
 	var delta = get_process_delta_time()
 	var target_velocity = Vector2(0, 0)
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
+	var new_friction = friction
 	if moving_direction:
 		facing = moving_direction
 		speed = max_speed * speed_increment
+		new_friction = friction * friction_increment
 		target_velocity = moving_direction * speed
-	velocity = velocity.move_toward(target_velocity, friction * delta)
+	velocity = velocity.move_toward(target_velocity, new_friction * delta)
 
-func move_towards(_position, speed_increment = 1.0):
+func move_towards(_position, speed_increment = 1.0, friction_increment = 1.0):
 	var moving_direction = global_position.direction_to(_position)
-	move(moving_direction, speed_increment)
+	move(moving_direction, speed_increment, friction_increment)
 
 func jump():
 	if not is_jumping:

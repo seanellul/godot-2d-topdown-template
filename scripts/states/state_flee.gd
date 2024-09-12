@@ -4,6 +4,7 @@ class_name StateFlee
 
 var target: Node2D = null
 @export var speed_multiplier: = 1.0
+@export var friction_multiplier: = 1.0
 
 func _ready():
 	entity.target_changed.connect(_on_target_changed)

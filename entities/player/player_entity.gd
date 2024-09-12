@@ -1,11 +1,12 @@
 extends CharacterEntity
 class_name PlayerEntity
 
-@export var player_id: int = 1 ##Add players incrementing this value to create more players
+@export var player_id: int = 1 ##Add players incrementing this value to create more players.
 @export var equipped = 0
 @export_group("States")
-@export var on_transfer_start: BaseState ## State to enable when player starts transfering
-@export var on_transfer_end: BaseState ## State to enable when player starts transfering
+@export var on_transfer_start: BaseState ##State to enable when player starts transfering.
+@export var on_transfer_end: BaseState ##State to enable when player ends transfering.
+@export var on_auto_move: BaseState ##State to enable when player moves automatically.
 
 var inventory: Array[DataItem] = []
 
@@ -26,6 +27,11 @@ func reduce_hp(value := 0, from = ""):
 func reset():
 	is_charging = false
 	is_attacking = false
+
+func start_auto_move():
+	stop()
+	if on_auto_move:
+		on_auto_move.enable()
 
 func get_data(soft):
 	var data = DataPlayer.new()

@@ -1,13 +1,14 @@
 extends BaseState
+##Applies a material to a Sprite2D.
 class_name StateMaterial
 
-@export var mesh_instance: MeshInstance3D = null
-@export var material: StandardMaterial3D = null
+@export var sprite: Sprite2D = null
+@export var material: Material = null
 
 func enter():
-	if mesh_instance:
-		mesh_instance.set_surface_override_material(0, material)
+	if sprite:
+		sprite.material = material
 
 func exit():
-	if mesh_instance and mesh_instance.get_surface_override_material_count() > 0:
-		mesh_instance.set_surface_override_material(0, null)
+	if sprite:
+		sprite.material = null
