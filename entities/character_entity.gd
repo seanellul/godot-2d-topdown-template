@@ -38,6 +38,7 @@ class_name CharacterEntity
 		hp = value
 		print("%s HP is: %s" % [name, hp])
 		hp_changed.emit(hp)
+@onready var state_machine: StateMachine = get_node_or_null("StateMachine")
 
 var hp_bar: Node
 var screen_notifier: VisibleOnScreenNotifier3D

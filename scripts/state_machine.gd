@@ -13,6 +13,11 @@ func _ready():
 	_get_states()
 	_enter_states()
 
+func _init_states():
+	for state in get_children(true):
+		state.state_changed.connect(_on_state_changed)
+		state.state_disabled.connect(_on_state_disabled)
+
 func _get_states():
 	if !current_state or current_state and !current_state.active:
 		return
@@ -21,10 +26,6 @@ func _get_states():
 	for child in current_state.get_children():
 		if child is BaseState and child.active:
 			states.append(child)
-
-func _init_states():
-	for state in get_children(true):
-		state.state_changed.connect(_on_state_changed)
 
 func _on_state_changed(new_state):
 	if new_state == current_state:
@@ -37,6 +38,12 @@ func _on_state_changed(new_state):
 	current_state.current = true
 	_get_states()
 	_enter_states()
+
+func _on_state_disabled(state):
+	_exit_states()
+	states = []
+	state.current = false
+	current_state = null
 
 func _process(delta):
 	_update_states(delta)
@@ -61,6 +68,13 @@ func _update_states(delta):
 func _physics_update_states(delta):
 	for state in states:
 		state.physics_update(delta)
+
+func enable_state_by_name(state_name: String):
+	var state_node: BaseState =  get_node_or_null(state_name)
+	if state_node:
+		state_node.enable()
+	else:
+		push_warning("Can't find state with name: %s." %[state_name])
 
 func receive_data(data: DataState):
 	if data:

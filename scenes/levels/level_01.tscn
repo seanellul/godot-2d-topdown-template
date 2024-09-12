@@ -85,7 +85,7 @@ script = ExtResource("7_e6yb8")
 script = ExtResource("8_285dh")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
-friction_increment = 5.0
+enable_state_by_name = "move"
 entity_player_id = 1
 
 [node name="Path2D" type="Path2D" parent="Events/PlayerPath" index="2"]

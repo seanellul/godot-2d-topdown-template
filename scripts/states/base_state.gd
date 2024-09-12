@@ -13,6 +13,7 @@ var timer: TimedState
 var params = {}
 
 signal state_changed(new_state)
+signal state_disabled(state)
 
 func _enter_tree():
 	if !active:
@@ -30,6 +31,9 @@ func enable(_params = null): ##Enables this state.
 		timer.start()
 		await timer.timeout
 		on_timeout.enable(params)
+
+func disable():
+	state_disabled.emit(self)
 
 func enter():
 	pass
