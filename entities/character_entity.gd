@@ -19,13 +19,13 @@ class_name CharacterEntity
 @export var attack_power := 2
 @export var attack_speed := 0.08
 @export_group("States")
-@export var on_attack: BaseState ## State to enable when this entity attacks.
-@export var on_hit: BaseState ## State to enable when this entity damages another entity.
-@export var on_hurt: BaseState ## State to enable when this entity takes damage.
-@export var on_recovery: BaseState ## State to enable when this entity recovers.
-@export var on_death: BaseState ## State to enable when this entity dies.
-@export var on_screen_entered: BaseState ## State to enable when this entity is visible on screen.
-@export var on_screen_exited: BaseState ## State to enable when this entity is outside the visible screen.
+@export var on_attack: BaseState ##State to enable when this entity attacks.
+@export var on_hit: BaseState ##State to enable when this entity damages another entity.
+@export var on_hurt: BaseState ##State to enable when this entity takes damage.
+@export var on_recovery: BaseState ##State to enable when this entity recovers.
+@export var on_death: BaseState ##State to enable when this entity dies.
+@export var on_screen_entered: BaseState ##State to enable when this entity is visible on screen.
+@export var on_screen_exited: BaseState ##State to enable when this entity is outside the visible screen.
 
 @onready var hp := max_hp:
 	set(value):

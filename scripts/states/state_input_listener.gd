@@ -6,13 +6,11 @@ class_name StateInputListener
 
 var input_dir: Vector2
 
-func update(_delta):
-	input_dir = Input.get_vector("left", "right", "up", "down")
-
 func physics_update(_delta):
 	_handle_inputs()
 
 func _handle_inputs():
+	input_dir = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_just_pressed("jump"):
 		entity.jump()
 	# if Input.is_action_just_pressed("attack") and not entity.is_hurting:

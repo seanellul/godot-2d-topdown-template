@@ -14,7 +14,7 @@ class_name Interactable
 @export var one_shot := true ##If true, it can be interacted only once. Useful for chests or pickable items.
 @export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 @export_group("")
-@export var on_interaction: BaseState ##The state to enable on interaction.
+@export var on_interaction: BaseState ##The state to enable on interaction. The entity that interacted will be passed down to the state.
 
 var entity: CharacterEntity
 var interacting := false
@@ -56,7 +56,7 @@ func interact(sender):
 func _on_interact(sender):
 	if _can_interact():
 		interacting = true
-		print(sender.name, " interacted with ", owner.name)
+		print(sender.name, " interacted with ", get_parent().name)
 		if !one_shot:
 			_reset_interaction()
 		_do_interaction()

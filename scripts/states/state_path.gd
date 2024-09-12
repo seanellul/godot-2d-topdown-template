@@ -7,9 +7,6 @@ class_name StatePath
 @export var distance_threshold: = 2.0
 @export var speed_multiplier: = 1.0
 @export var friction_multiplier: = 1.0
-@export_group("On path completed")
-@export var enable_state_by_reference: BaseState ##State to enable when entity reaches the last point of the path.
-@export var enable_state_by_name: String ##State name to enable when entity reaches the last point of the path.
 
 @onready var path_curve = path.curve
 @onready var current_point_id: int = 0:
@@ -18,11 +15,9 @@ class_name StatePath
 		if new_id == path_curve.point_count:
 			if loop:
 				new_id = 0
-			elif enable_state_by_reference:
-				enable_state_by_reference.enable()
-			elif enable_state_by_name and entity.state_machine:
-				disable()
-				entity.state_machine.enable_state_by_name(enable_state_by_name)
+			else:
+				entity.stop()
+			complete()
 		elif new_id < 0:
 			new_id = path_curve.point_count - 1
 		current_point_id = new_id
@@ -33,8 +28,6 @@ var target_position := Vector2.ZERO
 
 func enter():
 	super.enter()
-	if entity is PlayerEntity:
-		entity.start_auto_move()
 	_set_target_position()
 
 func update(_delta: float):

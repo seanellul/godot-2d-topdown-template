@@ -22,14 +22,13 @@ shader_parameter/power = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
 
-[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "on_auto_move", "running_particles", "on_attack", "on_hurt", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
+[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "running_particles", "on_attack", "on_hurt", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
 y_sort_enabled = false
 script = ExtResource("2_x37y0")
 player_id = 1
 equipped = 0
 on_transfer_start = NodePath("StateMachine/auto")
 on_transfer_end = NodePath("StateMachine/move")
-on_auto_move = NodePath("StateMachine/auto")
 running_particles = NodePath("SmokeParticles")
 health_bar = ExtResource("2_kl4cw")
 on_attack = NodePath("StateMachine/attack")
