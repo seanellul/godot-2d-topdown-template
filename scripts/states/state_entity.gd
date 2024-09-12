@@ -1,7 +1,9 @@
 extends BaseState
+##Base class for all entity states.
 class_name StateEntity
 
-var entity: CharacterEntity
+@export var entity: CharacterEntity ##The entity to apply this state. If left empty and this state is child of a CharacterEntity, that entity will be taken.
+
 var entity_name := ""
 
 func _ready() -> void:

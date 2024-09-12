@@ -40,3 +40,5 @@ y_sort_enabled = true
 [node name="P1" type="Marker2D" parent="Entities"]
 
 [node name="Transfers" type="Node2D" parent="."]
+
+[node name="Events" type="Node2D" parent="."]

@@ -1,5 +1,6 @@
 extends StateEntity
-class_name StatePlayerInput
+##Moves and controls an entity through inputs.
+class_name StateInputListener
 
 @export var run_speed_increment := 1.5
 

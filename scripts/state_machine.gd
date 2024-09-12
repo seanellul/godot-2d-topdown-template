@@ -1,4 +1,5 @@
 extends Node
+##Main controller for the states. States should be placed as children of a StateMachine node.
 class_name StateMachine
 
 @export var current_state: BaseState = null

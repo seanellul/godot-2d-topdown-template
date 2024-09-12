@@ -1,4 +1,5 @@
 extends BaseState
+##Starts an animation from AnimationPlayer or AnimationTree.
 class_name StateAnimation
 
 @export var animation_player: AnimationPlayer

@@ -1,4 +1,5 @@
 extends Node
+##Base class for all states.
 class_name BaseState
 
 @export var active := true ##Set to false to don't process this state.

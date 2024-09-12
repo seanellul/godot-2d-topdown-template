@@ -1,4 +1,5 @@
 extends StateEntity
+##Makes an entity flee away from the target.
 class_name StateFlee
 
 var target: Node2D = null

@@ -1,4 +1,5 @@
 extends StateEntity
+##Makes an entity knockback.
 class_name StateHurt
 
 @export var knockback_force := 200.0

@@ -1,4 +1,5 @@
 extends StateEntity
+##Makes an entity follow a target.
 class_name StateFollow
 
 @export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.

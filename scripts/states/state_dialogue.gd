@@ -1,4 +1,5 @@
 extends BaseState
+##Starts a dialogue from DialogueManager.
 class_name StateDialogue
 
 @export var dialogue: DialogueResource

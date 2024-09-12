@@ -1,4 +1,5 @@
 extends StateEntity
+##Disables an entity.
 class_name StateGameOver
 
 func enter():

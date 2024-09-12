@@ -1,4 +1,5 @@
 extends StateEntity
+##Makes an entity wander around randomly.
 class_name StateWander
 
 @export var wander_time_range: = Vector2.ZERO ##Min (x) and max (y) range time values.
