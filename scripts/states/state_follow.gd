@@ -37,7 +37,7 @@ func physics_update(_delta):
 
 func _follow():
 	if target and entity:
-		entity.move_towards(target.global_position, speed_multiplier)
+		entity.move_towards(target.global_position, speed_multiplier, friction_multiplier)
 
 func _init_target():
 	# if not current:

@@ -39,7 +39,7 @@ func _set_target_position():
 func physics_update(_delta: float):
 	if not entity:
 		return
-	entity.move_towards(target_position)
+	entity.move_towards(target_position, speed_multiplier, friction_multiplier)
 
 func _check_point_reached():
 	if not entity:
