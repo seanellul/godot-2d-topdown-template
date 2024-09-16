@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
-[ext_resource type="PackedScene" uid="uid://dymx12daw3oyr" path="res://scenes/props/gate.tscn" id="5_qx002"]
 [ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
+[ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side.tscn" id="6_5b3ge"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/lever.tscn" id="6_gowkh"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
@@ -46,17 +46,17 @@ position = Vector2(360, 129)
 [node name="Spikes" parent="Props" index="3" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
 
-[node name="Gate" parent="Props" index="4" instance=ExtResource("5_qx002")]
-position = Vector2(96, 24)
-
-[node name="Lever" parent="Props" index="5" instance=ExtResource("6_gowkh")]
-position = Vector2(184, 32)
+[node name="Lever" parent="Props" index="4" instance=ExtResource("6_gowkh")]
+position = Vector2(672, 80)
 
 [node name="StateSwitch" parent="Props/Lever/StateMachine/idle_off" index="0" node_paths=PackedStringArray("state_to_enable")]
-state_to_enable = NodePath("../../../../Gate/StateMachine/on")
+state_to_enable = NodePath("../../../../Gate_Side/StateMachine/on")
 
 [node name="StateSwitch" parent="Props/Lever/StateMachine/idle_on" index="0" node_paths=PackedStringArray("state_to_enable")]
-state_to_enable = NodePath("../../../../Gate/StateMachine/off")
+state_to_enable = NodePath("../../../../Gate_Side/StateMachine/off")
+
+[node name="Gate_Side" parent="Props" index="5" instance=ExtResource("6_5b3ge")]
+position = Vector2(720, 208)
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(152, 224)
@@ -102,12 +102,14 @@ sequence = true
 script = ExtResource("8_285dh")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
+friction_multiplier = 4.0
 disable_entity_state_machine = true
 await_completion = true
 
 [node name="wait" type="Node" parent="Events/PlayerPath/StateMachine" index="1"]
 script = ExtResource("9_o85tp")
-time_range = Vector2(2, 2)
+active = false
+time_range = Vector2(1, 1)
 
 [node name="enable_entity" type="Node" parent="Events/PlayerPath/StateMachine" index="2"]
 script = ExtResource("9_5gqp7")
@@ -115,8 +117,8 @@ script = ExtResource("9_5gqp7")
 [node name="Path2D" type="Path2D" parent="Events/PlayerPath" index="2"]
 curve = SubResource("Curve2D_uycfk")
 
-[editable path="Props/Gate"]
 [editable path="Props/Lever"]
+[editable path="Props/Gate_Side"]
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_South"]
 [editable path="Transfers/Transfer_Est"]
