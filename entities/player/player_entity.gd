@@ -23,6 +23,13 @@ func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
 	flash(damage_flash_power)
 
+func is_item_in_inventory(item_name: String) -> bool:
+	var found_item := false
+	for item: DataItem in inventory:
+		if item.resource_name == item_name:
+			found_item = true
+	return found_item
+
 func reset():
 	is_charging = false
 	is_attacking = false

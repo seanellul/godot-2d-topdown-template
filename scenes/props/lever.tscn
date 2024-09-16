@@ -13,66 +13,6 @@ size = Vector2(34, 22)
 [sub_resource type="CircleShape2D" id="CircleShape2D_y7r3o"]
 radius = 31.1448
 
-[sub_resource type="Animation" id="Animation_txne3"]
-resource_name = "on"
-length = 0.26667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Handle:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.610865, 0.610865]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.266667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"enable_next_state"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_3htn3"]
-resource_name = "off"
-length = 0.26667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Handle:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.610865, -0.610865]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.266667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["idle_off"],
-"method": &"enable_state_by_name"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_4k428"]
 length = 0.001
 tracks/0/type = "value"
@@ -120,6 +60,66 @@ tracks/0/keys = {
 "values": [0.610865]
 }
 
+[sub_resource type="Animation" id="Animation_3htn3"]
+resource_name = "off"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.610865, -0.610865]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["idle_off"],
+"method": &"enable_state_by_name"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_txne3"]
+resource_name = "on"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.610865, 0.610865]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable_next_state"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ch07o"]
 _data = {
 "RESET": SubResource("Animation_4k428"),
@@ -162,6 +162,7 @@ collision_layer = 8
 monitoring = false
 script = ExtResource("2_vmr3i")
 action_trigger = "interact"
+item = null
 one_shot = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]

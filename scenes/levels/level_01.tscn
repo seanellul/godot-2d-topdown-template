@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
-[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_8mcj0"]
+[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
 [ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
@@ -48,6 +48,9 @@ position = Vector2(536, 160)
 
 [node name="Lever" parent="Props" index="4" instance=ExtResource("6_gowkh")]
 position = Vector2(672, 80)
+
+[node name="Interactable" parent="Props/Lever" index="3"]
+item = ""
 
 [node name="StateSwitch" parent="Props/Lever/StateMachine/idle_off" index="0" node_paths=PackedStringArray("state_to_enable")]
 state_to_enable = NodePath("../../../../Gate_Side/StateMachine/on")
