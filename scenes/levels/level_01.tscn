@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=15 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/potion.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
+[ext_resource type="PackedScene" uid="uid://dymx12daw3oyr" path="res://scenes/props/gate.tscn" id="5_qx002"]
 [ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
+[ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/lever.tscn" id="6_gowkh"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" path="res://scripts/states/state_entity.gd" id="9_5gqp7"]
@@ -43,6 +45,18 @@ position = Vector2(360, 129)
 
 [node name="Spikes" parent="Props" index="3" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
+
+[node name="Gate" parent="Props" index="4" instance=ExtResource("5_qx002")]
+position = Vector2(96, 24)
+
+[node name="Lever" parent="Props" index="5" instance=ExtResource("6_gowkh")]
+position = Vector2(184, 32)
+
+[node name="StateSwitch" parent="Props/Lever/StateMachine/idle_off" index="0" node_paths=PackedStringArray("state_to_enable")]
+state_to_enable = NodePath("../../../../Gate/StateMachine/on")
+
+[node name="StateSwitch" parent="Props/Lever/StateMachine/idle_on" index="0" node_paths=PackedStringArray("state_to_enable")]
+state_to_enable = NodePath("../../../../Gate/StateMachine/off")
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(152, 224)
@@ -101,6 +115,8 @@ script = ExtResource("9_5gqp7")
 [node name="Path2D" type="Path2D" parent="Events/PlayerPath" index="2"]
 curve = SubResource("Curve2D_uycfk")
 
+[editable path="Props/Gate"]
+[editable path="Props/Lever"]
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_South"]
 [editable path="Transfers/Transfer_Est"]

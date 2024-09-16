@@ -1,0 +1,177 @@
+[gd_scene load_steps=11 format=3 uid="uid://dymx12daw3oyr"]
+
+[ext_resource type="Texture2D" uid="uid://djbvsgdhhldvl" path="res://scenes/props/gate_front.tres" id="1_r4vlh"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_4jk5e"]
+[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_h0g83"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
+size = Vector2(48, 12)
+
+[sub_resource type="Animation" id="Animation_muw3c"]
+resource_name = "on"
+length = 0.100003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["idle_on"],
+"method": &"enable_state_by_name"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2uv2s"]
+resource_name = "off"
+length = 0.100003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable_next_state"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_u6bpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3vpsv"]
+resource_name = "idle_off"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oct5m"]
+resource_name = "idle_on"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6wxc"]
+_data = {
+"RESET": SubResource("Animation_u6bpn"),
+"idle_off": SubResource("Animation_3vpsv"),
+"idle_on": SubResource("Animation_oct5m"),
+"off": SubResource("Animation_2uv2s"),
+"on": SubResource("Animation_muw3c")
+}
+
+[node name="Gate" type="StaticBody2D" groups=["save"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_pt5lc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_r4vlh")
+hframes = 4
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w6wxc")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_4jk5e")
+current_state = NodePath("idle_on")
+
+[node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_h0g83")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "idle_on"
+
+[node name="off" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_h0g83")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "off"
+
+[node name="idle_off" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_h0g83")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "idle_off"
+
+[node name="on" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_h0g83")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "on"
