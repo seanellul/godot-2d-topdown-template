@@ -67,7 +67,7 @@ func _can_interact() -> bool: # Check constraints
 	if entity:
 		var entity_dir = Const.DIR_BIT[entity.facing.floor()]
 		can_interact = direction == null or direction > 0 and direction & entity_dir != 0
-		if entity is PlayerEntity:
+		if can_interact and entity is PlayerEntity:
 			can_interact = has_item.is_empty() or entity.is_item_in_inventory(has_item) >= 0
 	return can_interact and !interacting and action_pressed and is_processing()
 

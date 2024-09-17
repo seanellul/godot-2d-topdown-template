@@ -87,7 +87,6 @@ func _process(_delta):
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO
 	is_running = is_moving and speed > max_speed
-	collision_shape.disabled = is_jumping if not is_blocked else false
 	move_and_slide()
 
 func _init_health_bar():
@@ -141,9 +140,11 @@ func move_towards(_position, speed_increment = 1.0, friction_increment = 1.0):
 func jump():
 	if not is_jumping:
 		is_jumping = true
+		collision_mask ^= 1 << 2
 
 func end_jump():
 	is_jumping = false
+	collision_mask ^= 1 << 2
 
 func attack():
 	if is_attacking or is_jumping or attack_cooldown_timer.time_left > 0:

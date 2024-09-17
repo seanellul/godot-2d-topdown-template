@@ -1,20 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://i8k8wxpo4hpv"]
+[gd_scene load_steps=3 format=3 uid="uid://i8k8wxpo4hpv"]
 
-[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="1_87fte"]
 [ext_resource type="Script" path="res://scenes/levels/transfer.gd" id="1_k1ki1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khsv3"]
 size = Vector2(64, 32)
 
-[node name="Transfer" type="Node2D" node_paths=PackedStringArray("interactable")]
-script = ExtResource("1_k1ki1")
-interactable = NodePath("Interactable")
-
-[node name="Interactable" type="Area2D" parent="."]
+[node name="Transfer" type="Area2D"]
 collision_layer = 8
 monitoring = false
-script = ExtResource("1_87fte")
+script = ExtResource("1_k1ki1")
 one_shot = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_khsv3")

@@ -1,8 +1,9 @@
 extends StaticBody2D
 
-@export var interactable: Interactable
 @export var states: Array[BaseState]
 @export var start_state_index := 0
+
+@onready var interactable: Interactable = get_node("Interactable")
 
 func _ready() -> void:
 	if interactable:

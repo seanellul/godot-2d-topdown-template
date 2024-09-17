@@ -1,7 +1,7 @@
-extends Node2D
+@tool
+extends Interactable
 class_name Transfer
 
-@export var interactable: Interactable ##Assign an interactable to trigger the transfer on interaction.
 @export_category("Transfer settings")
 @export var level_key: String  = "" ##Leave empty to transfer inside the same level.
 @export var destination_path: String = ""
@@ -14,22 +14,23 @@ class_name Transfer
 ) var facing ##Force player to face this direction upon arriving to this destination. Leave empty to keep the same facing direction.
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	SceneManager.load_start.connect(func(_loading_screen): Globals.transfer_start.emit())
 	SceneManager.load_complete.connect(_complete_transfer)
-	if interactable:
-		interactable.interacted.connect(transfer)
+	interacted.connect(transfer)
 
 func _complete_transfer(_loaded_scene):
 	Globals.transfer_complete.emit()
 	process_mode = PROCESS_MODE_INHERIT
 
-func transfer(entity):
+func transfer(_entity):
 	if level_key:
-		_transfer_to_level(entity)
-	elif destination_path and entity:
-		_transfer_to_position(entity)
+		_transfer_to_level(_entity)
+	elif destination_path and _entity:
+		_transfer_to_position(_entity)
 
-func _transfer_to_level(entity):
+func _transfer_to_level(_entity):
 	if GameManager.gm:
 		GameManager.gm.current_level.destination_path = destination_path
 		GameManager.gm.current_level.player_facing = entity.facing
@@ -42,7 +43,7 @@ func _transfer_to_level(entity):
 	else:
 		push_error("Level can be tested stand-alone, but transfer between levels requires a GameManager at the tree root.")
 
-func _transfer_to_position(entity):
+func _transfer_to_position(_entity):
 	Globals.transfer_start.emit()
 	var destination = owner.get_node_or_null(destination_path)
 	if destination:
@@ -61,6 +62,3 @@ func set_player_facing(player, player_facing, facing_dir):
 	if facing_dir != null:
 		_facing = Const.DIR_VECTOR[facing_dir]
 	player.facing = _facing
-
-func disable():
-	process_mode = PROCESS_MODE_DISABLED

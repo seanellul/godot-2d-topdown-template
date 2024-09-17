@@ -129,11 +129,10 @@ _data = {
 "on": SubResource("Animation_txne3")
 }
 
-[node name="Lever" type="StaticBody2D" node_paths=PackedStringArray("interactable", "states") groups=["save"]]
+[node name="Lever" type="StaticBody2D" node_paths=PackedStringArray("states") groups=["save"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_bd8vj")
-interactable = NodePath("Interactable")
 states = [NodePath("StateMachine/off"), NodePath("StateMachine/on")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

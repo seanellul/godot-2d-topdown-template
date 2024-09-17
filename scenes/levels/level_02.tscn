@@ -86,8 +86,6 @@ loop = true
 position = Vector2(96, 0)
 destination_path = "Transfers/Transfer_Est"
 facing = 0
-
-[node name="Interactable" parent="Transfers/Transfer_North" index="0"]
 direction = 8
 
 [node name="Transfer_Est" parent="Transfers" index="1" instance=ExtResource("3_t1lh4")]
@@ -96,8 +94,6 @@ rotation = 1.5708
 level_key = "LEVEL_1"
 destination_path = "Transfers/Transfer_North"
 facing = 1
-
-[node name="Interactable" parent="Transfers/Transfer_Est" index="0"]
 direction = 4
 
 [node name="Transfer_West" parent="Transfers" index="2" instance=ExtResource("3_t1lh4")]
@@ -105,13 +101,8 @@ position = Vector2(-32, 224)
 rotation = 1.5708
 level_key = "LEVEL_1"
 destination_path = "Transfers/Transfer_Est"
-
-[node name="Interactable" parent="Transfers/Transfer_West" index="0"]
+facing = 2
 direction = 2
 
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
-
-[editable path="Transfers/Transfer_North"]
-[editable path="Transfers/Transfer_Est"]
-[editable path="Transfers/Transfer_West"]
