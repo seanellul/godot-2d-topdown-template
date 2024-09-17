@@ -67,6 +67,7 @@ position = Vector2(536, 160)
 position = Vector2(672, 80)
 
 [node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
+y_sort_enabled = false
 position = Vector2(720, 208)
 
 [node name="Potion" parent="Props" index="5" instance=ExtResource("2_8mcj0")]
