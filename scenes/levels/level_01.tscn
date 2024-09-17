@@ -66,6 +66,7 @@ position = Vector2(360, 129)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_s81bk")])
 
 [node name="Interactable" type="Area2D" parent="Props/Chest" index="3"]
+z_index = -1
 collision_layer = 8
 monitoring = false
 script = ExtResource("6_16m3t")
@@ -82,6 +83,7 @@ region_rect = Rect2(0, 114, 210, 38)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_qmq7a")])
 
 [node name="Interactable" type="Area2D" parent="Props/Chest2" index="3"]
+z_index = -1
 collision_layer = 8
 monitoring = false
 script = ExtResource("6_16m3t")
@@ -101,6 +103,7 @@ position = Vector2(672, 80)
 sync_switch = NodePath("../Gate_Side")
 
 [node name="Interactable" type="Area2D" parent="Props/Lever" index="5"]
+z_index = -1
 collision_layer = 8
 monitoring = false
 script = ExtResource("6_16m3t")
@@ -110,7 +113,6 @@ one_shot = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Lever/Interactable" index="0"]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_ctfky")
-debug_color = Color(0.478792, 0.587903, 0, 0.42)
 
 [node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
 y_sort_enabled = false
@@ -121,6 +123,7 @@ position = Vector2(96, 24)
 switch_on_interaction = true
 
 [node name="Interactable" type="Area2D" parent="Props/Gate_Front" index="3"]
+z_index = -1
 collision_layer = 8
 monitoring = false
 script = ExtResource("6_16m3t")
@@ -140,16 +143,19 @@ contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_op2ue")])
 position = Vector2(96, 72)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
+z_index = -1
 position = Vector2(96, -32)
 destination_path = "Transfers/Transfer_South"
 direction = 8
 
 [node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("3_2cetp")]
+z_index = -1
 position = Vector2(96, 400)
 destination_path = "Transfers/Transfer_North"
 direction = 1
 
 [node name="Transfer_Est" parent="Transfers" index="2" instance=ExtResource("3_2cetp")]
+z_index = -1
 position = Vector2(752, 224)
 rotation = 1.57079
 level_key = "LEVEL_2"
@@ -157,6 +163,7 @@ destination_path = "Transfers/Transfer_West"
 direction = 4
 
 [node name="PlayerPath" type="Area2D" parent="Events" index="0"]
+z_index = -1
 position = Vector2(360, 288)
 collision_layer = 8
 monitoring = false

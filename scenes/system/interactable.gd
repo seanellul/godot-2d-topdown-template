@@ -19,14 +19,13 @@ var entity: CharacterEntity
 var interacting := false
 var action_pressed = true
 
-@onready var collider: CollisionShape2D = get_node_or_null("CollisionShape2D")
-
 signal interacted(entity: CharacterEntity)
 
 func _init() -> void:
 	monitoring = false
 	monitorable = true
 	collision_layer = 1 << 3 # set layer to layer "item"
+	z_index = -1
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -37,15 +36,11 @@ func enable():
 	if Engine.is_editor_hint():
 		return
 	process_mode = PROCESS_MODE_INHERIT
-	if collider:
-		collider.disabled = false
 
 func disable():
 	if Engine.is_editor_hint():
 		return
 	process_mode = PROCESS_MODE_DISABLED
-	if collider:
-		collider.disabled = true
 
 func interact(sender):
 	if sender is CharacterEntity:

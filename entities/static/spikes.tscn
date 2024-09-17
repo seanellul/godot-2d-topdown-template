@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dpbc6iw62na4q"]
 
-[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://entities/static/blocks.png" id="1_2ngps"]
+[ext_resource type="Texture2D" uid="uid://dmgmy8jx6vhm3" path="res://entities/static/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_q6b6s"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_b2v87"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_18kok"]
@@ -206,6 +206,7 @@ shape = SubResource("RectangleShape2D_oeede")
 disabled = true
 
 [node name="Interactable" type="Area2D" parent="."]
+z_index = -1
 position = Vector2(0, 16)
 collision_layer = 8
 monitoring = false
@@ -215,6 +216,7 @@ one_shot = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
 shape = SubResource("RectangleShape2D_g4cjj")
+debug_color = Color(0.478431, 0.588235, 0, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

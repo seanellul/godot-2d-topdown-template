@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
-[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
-[ext_resource type="Texture2D" uid="uid://b6peokk0rkltn" path="res://entities/shadow.png" id="2_xhiia"]
+[ext_resource type="Texture2D" uid="uid://pf5qhikid84j" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
+[ext_resource type="Texture2D" uid="uid://b8p4m6e7n0ket" path="res://entities/shadow.png" id="2_xhiia"]
 [ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="4_hhyyf"]
 [ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="5_gfoxn"]
 [ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="6_3jrrx"]

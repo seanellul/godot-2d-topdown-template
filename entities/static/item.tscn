@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_moawm"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_qbpvf"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_g7kv4"]
-[ext_resource type="Texture2D" uid="uid://b4m17oa1l8f77" path="res://entities/static/objs1.png" id="3_qb7gm"]
+[ext_resource type="Texture2D" uid="uid://cx4gcjocy0ubi" path="res://entities/static/objs1.png" id="3_qb7gm"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="5_d4kg4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uq30"]
@@ -96,6 +96,7 @@ states = [NodePath("StateMachine/pick")]
 switch_on_interaction = true
 
 [node name="Interactable" type="Area2D" parent="."]
+z_index = -1
 collision_layer = 8
 collision_mask = 0
 monitoring = false
@@ -103,6 +104,7 @@ script = ExtResource("2_qbpvf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
 shape = SubResource("CircleShape2D_5uq30")
+debug_color = Color(0.478431, 0.588235, 0, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 deterministic = true
