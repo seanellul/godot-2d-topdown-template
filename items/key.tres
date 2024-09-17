@@ -6,6 +6,5 @@
 [resource]
 resource_name = "key"
 script = ExtResource("1_rb7uh")
-name = "key"
 icon = ExtResource("1_ue3wi")
 change_hp = 0

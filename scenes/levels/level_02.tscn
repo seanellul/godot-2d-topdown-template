@@ -82,12 +82,14 @@ path = NodePath("../../../../Path2D")
 loop = true
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_t1lh4")]
+z_index = -1
 position = Vector2(96, 0)
 destination_path = "Transfers/Transfer_Est"
 facing = 0
 direction = 8
 
 [node name="Transfer_Est" parent="Transfers" index="1" instance=ExtResource("3_t1lh4")]
+z_index = -1
 position = Vector2(992, 192)
 rotation = 1.5708
 level_key = "LEVEL_1"
@@ -96,6 +98,7 @@ facing = 1
 direction = 4
 
 [node name="Transfer_West" parent="Transfers" index="2" instance=ExtResource("3_t1lh4")]
+z_index = -1
 position = Vector2(-32, 224)
 rotation = 1.5708
 level_key = "LEVEL_1"

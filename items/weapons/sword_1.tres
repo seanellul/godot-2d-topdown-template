@@ -8,6 +8,5 @@ resource_name = "sword"
 script = ExtResource("1_81vel")
 power = 1
 speed = 0.5
-name = ""
 icon = ExtResource("1_n305n")
 change_hp = 0

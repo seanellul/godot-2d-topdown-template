@@ -139,6 +139,9 @@ position = Vector2(160, 112)
 region_rect = Rect2(0, 144, 108, 36)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_op2ue")])
 
+[node name="Lever2" parent="Props" index="7" instance=ExtResource("6_gowkh")]
+position = Vector2(96, 192)
+
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(96, 72)
 
