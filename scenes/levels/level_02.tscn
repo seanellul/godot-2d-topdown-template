@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=17 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_5wwg2"]
@@ -10,12 +10,18 @@
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" path="res://scripts/states/state_wander.gd" id="6_rdt3e"]
+[ext_resource type="Resource" uid="uid://dghubnld0jtgg" path="res://items/weapons/sword_1.tres" id="6_ywhth"]
 [ext_resource type="Script" path="res://scripts/states/state_follow.gd" id="7_n4gru"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_po55j"]
 
 [sub_resource type="Resource" id="Resource_x0mcm"]
 script = ExtResource("3_46s3h")
 item = ExtResource("4_glfvo")
+quantity = 2
+
+[sub_resource type="Resource" id="Resource_iwour"]
+script = ExtResource("3_46s3h")
+item = ExtResource("6_ywhth")
 quantity = 1
 
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
@@ -46,6 +52,7 @@ contents = Array[ExtResource("3_46s3h")]([SubResource("Resource_x0mcm")])
 position = Vector2(224, 32)
 region_rect = Rect2(0, 114, 210, 38)
 item_required = "key"
+contents = Array[ExtResource("3_46s3h")]([SubResource("Resource_iwour")])
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(224, 352)

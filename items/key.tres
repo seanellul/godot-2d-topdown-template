@@ -4,9 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://kjlg4wypf1wv" path="res://items/key_icon.tres" id="1_ue3wi"]
 
 [resource]
+resource_name = "key"
 script = ExtResource("1_rb7uh")
 name = "key"
 icon = ExtResource("1_ue3wi")
-quantity = 1
-storable = true
 change_hp = 0

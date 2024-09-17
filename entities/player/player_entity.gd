@@ -7,7 +7,7 @@ class_name PlayerEntity
 @export var on_transfer_start: BaseState ##State to enable when player starts transfering.
 @export var on_transfer_end: BaseState ##State to enable when player ends transfering.
 
-var inventory: Array[InventoryItem] = []
+var inventory: Array[ContentItem] = []
 
 func _ready():
 	super._ready()
@@ -26,21 +26,22 @@ func reduce_hp(value := 0, from = ""):
 func is_item_in_inventory(item_name: String) -> int: ##Get the index of the item in inventory, -1 if not found.
 	var item_index := -1
 	for i in inventory.size():
-		var item = inventory[i]
-		if item.name == item_name:
+		var content: ContentItem = inventory[i]
+		if content.item.resource_name == item_name:
 			item_index = i
 	return item_index
 
 func add_item_to_inventory(item: DataItem, quantity: int):
-	var item_index = is_item_in_inventory(item.name)
+	var item_index = is_item_in_inventory(item.resource_name)
 	if item_index >= 0:
 		inventory[item_index].quantity += quantity
-		print("%s updated in %s's inventory! q: %s" %[item.name, self.name, inventory[item_index].quantity])
+		print("%s updated in %s's inventory! q: %s" %[item.resource_name, self.name, inventory[item_index].quantity])
 	else:
-		var _item = InventoryItem.new()
-		_item.create(item, quantity)
-		inventory.append(_item)
-		print("%s added to %s's inventory! q: %s" %[item.name, self.name, quantity])
+		var content = ContentItem.new()
+		content.item = item
+		content.quantity = quantity
+		inventory.append(content)
+		print("%s added to %s's inventory! q: %s" %[item.resource_name, self.name, quantity])
 
 func remove_item_from_inventory(item_name: String, quantity: int):
 	var item_index = is_item_in_inventory(item_name)

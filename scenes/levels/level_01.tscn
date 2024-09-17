@@ -62,13 +62,9 @@ contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_qmq7a")])
 
 [node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
-contents = Array[ExtResource("3_myhjs")]([])
 
 [node name="Lever" parent="Props" index="3" instance=ExtResource("6_gowkh")]
 position = Vector2(672, 80)
-
-[node name="Interactable" parent="Props/Lever" index="3"]
-has_item = ""
 
 [node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
 position = Vector2(720, 208)

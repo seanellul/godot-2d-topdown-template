@@ -4,9 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cvelw1vkjed73" path="res://items/potion_icon.tres" id="1_x2q68"]
 
 [resource]
+resource_name = "potion"
 script = ExtResource("1_ej3gy")
 name = "potion"
 icon = ExtResource("1_x2q68")
-quantity = 1
-storable = false
 change_hp = 2

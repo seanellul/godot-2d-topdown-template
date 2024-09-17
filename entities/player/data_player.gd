@@ -5,6 +5,6 @@ class_name DataPlayer
 @export var facing = Vector2.ZERO
 @export var hp: int
 @export var max_hp: int
-@export var inventory: Array[InventoryItem]
+@export var inventory: Array[ContentItem] = []
 @export var equipped: int
 @export var level = ""
