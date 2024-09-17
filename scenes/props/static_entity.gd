@@ -1,16 +1,10 @@
-@tool
 extends Node2D
 class_name StaticEntity
 
-@export var item_required: String ##The item required in player's inventory to get the content.
-@export var sprite_index := 0:
-	set(value):
-		sprite_index = value
-		_set_sprite_index(value)
-@export var content: DataItem
+@export var item_required: String ##The item required in player's inventory to get the contents.
+@export var contents: Array[DataItem]
 
 @onready var interactable: Interactable = get_node("Interactable")
-@onready var sprite: Sprite2D = get_node("Sprite2D")
 
 var entity: PlayerEntity
 
@@ -18,19 +12,31 @@ var entity: PlayerEntity
 func _ready() -> void:
 	if interactable:
 		interactable.interacted.connect(_set_entity)
-		interactable.item = item_required
-
-func _set_sprite_index(index):
-	if not sprite:
-		return
-	sprite.region_rect.position.y = sprite.region_rect.size.y * index
+		interactable.has_item = item_required
 
 func _set_entity(_entity):
 	entity = _entity
 
 func get_content():
-	if content and entity:
-		entity.add_item_to_inventory(content)
-		
+	if contents.size() == 0 or not entity:
+		return
+	for content in contents:
+		if content.storable:
+			entity.add_item_to_inventory(content)
+		else:
+			consume_content(content)
+
+func consume_content(content: DataItem):
+	var hp = content.change_hp
+	if hp > 0:
+		entity.recover_hp(hp, self.name)
+	elif hp < 0:
+		entity.reduce_hp(-hp, self.name)
+
+func disable():
+	visible = false
+	process_mode = PROCESS_MODE_DISABLED
+	if interactable:
+		interactable.disable()
 			
 			

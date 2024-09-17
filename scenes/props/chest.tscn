@@ -19,7 +19,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ length = 0.0333367
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +65,7 @@ length = 0.16667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -109,7 +109,7 @@ length = 0.0333367
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -166,13 +166,19 @@ delay = 0.0
 property = "position"
 end_value = "Vector2(10,0)"
 
-[node name="Chest" type="StaticBody2D"]
+[node name="Chest" type="Sprite2D"]
 y_sort_enabled = true
-collision_layer = 4
-collision_mask = 0
+texture = ExtResource("2_mny2i")
+hframes = 5
+region_enabled = true
+region_rect = Rect2(0, 0, 210, 38)
 script = ExtResource("1_u7slb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_niryh")
 
@@ -187,12 +193,6 @@ on_interaction = NodePath("../StateMachine/open")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
 position = Vector2(0, 16)
 shape = SubResource("CircleShape2D_mkupk")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_mny2i")
-hframes = 5
-region_enabled = true
-region_rect = Rect2(0, 0, 210, 38)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

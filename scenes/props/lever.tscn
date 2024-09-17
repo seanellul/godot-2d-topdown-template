@@ -162,7 +162,7 @@ collision_layer = 8
 monitoring = false
 script = ExtResource("2_vmr3i")
 action_trigger = "interact"
-item = null
+has_item = null
 one_shot = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]

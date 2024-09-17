@@ -7,6 +7,8 @@ class_name StateTween
 @export var loops := 1
 
 func enter():
+	if not object:
+		return
 	for t in tweens:
 		t.start_value = object[t.property]
 		t.target_value = t.start_value + str_to_var(t.end_value)

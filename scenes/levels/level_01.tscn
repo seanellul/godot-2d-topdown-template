@@ -1,14 +1,17 @@
-[gd_scene load_steps=15 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=18 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
+[ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_qx1j4"]
 [ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
 [ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side.tscn" id="6_5b3ge"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/lever.tscn" id="6_gowkh"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
+[ext_resource type="Script" path="res://items/data_item.gd" id="7_ls7gq"]
+[ext_resource type="Resource" uid="uid://cpyqrspyr8pq3" path="res://items/potion.tres" id="8_6qcnt"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" path="res://scripts/states/state_entity.gd" id="9_5gqp7"]
 [ext_resource type="Script" path="res://scripts/states/base_state.gd" id="9_o85tp"]
@@ -33,27 +36,31 @@ tile_map_data = PackedByteArray("AAAAAAAACAAAAAIAAAABAAAACAACAAIAAAABAP//CAACAAA
 [node name="top" parent="Layers" index="3"]
 tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAEAAAAWAP3/CQABAAAAAAAVAP7/CQABAAIAAAAVAP3/CQABAAAAAAAUAP7/CQABAAIAAAAUAP3/CQABAAAAAAATAP7/CQABAAIAAAATAP3/CQABAAAAAAASAP7/CQABAAIAAAASAP3/CQABAAAAAAARAP7/CQABAAIAAAARAP3/CQABAAAAAAAQAP7/CQABAAIAAAAQAP3/CQABAAAAAAAPAP7/CQABAAIAAAAPAP3/CQABAAAAAAAOAP7/CQABAAIAAAAOAP3/CQABAAAAAAANAP7/CQABAAIAAAANAP3/CQABAAAAAAAMAP7/CQABAAIAAAAMAP3/CQABAAAAAAALAP7/CQABAAIAAAALAP3/CQABAAAAAAAKAP7/CQABAAIAAAAKAP3/CQABAAAAAAAJAP7/CQABAAIAAAAJAP3/CQABAAAAAAAIAP7/CQABAAIAAAAIAP3/CQABAAAAAAAHAP7/CQABAAIAAAAHAP3/CQABAAAAAAAGAP7/CQABAAIAAAAGAP3/CQABAAAAAAAFAP7/CQABAAIAAAAFAP3/CQABAAAAAAAEAP7/CQAAAAIAAAAEAP3/CQAAAAAAAAABAP7/CQACAAIAAAABAP3/CQACAAAAAAAAAP7/CQABAAIAAAAAAP3/CQABAAAAAAD///7/CQAFAAEAAAD///3/CQABAAAAAAD+//7/CQAAAAEAAAD+//3/CQAAAAAAAAAXAAsACQABAAIAAAAXAAoACQABAAEAAAAXAAkACQABAAEAAAAXAAgACQABAAAAAAAXAAMACQABAAIAAAAXAAIACQAFAAIAAAAXAAEACQACAAEAAAAXAAAACQACAAEAAAAXAP//CQACAAEAAAAWAAsACQABAAIAAAAWAAoACQAGAAIAAAAWAAkACQAAAAEAAAAWAAgACQAAAAAAAAAWAAMACQAAAAIAAAAWAAIACQAAAAEAAAAWAAEACQAAAAEAAAAWAAAACQAAAAEAAAAWAP//CQAAAAEAAAAVAAsACQABAAIAAAAVAAoACQABAAAAAAAUAAsACQABAAIAAAAUAAoACQABAAAAAAATAAsACQABAAIAAAATAAoACQABAAAAAAASAAsACQABAAIAAAASAAoACQABAAAAAAARAAsACQABAAIAAAARAAoACQABAAAAAAAQAAsACQABAAIAAAAQAAoACQABAAAAAAAPAAsACQABAAIAAAAPAAoACQABAAAAAAAOAAsACQABAAIAAAAOAAoACQABAAAAAAANAAsACQABAAIAAAANAAoACQABAAAAAAAMAAsACQABAAIAAAAMAAoACQABAAAAAAALAAsACQABAAIAAAALAAoACQABAAAAAAAKAAsACQABAAIAAAAKAAoACQABAAAAAAAJAAsACQABAAIAAAAJAAoACQABAAAAAAAIAAsACQABAAIAAAAIAAoACQABAAAAAAAHAAsACQABAAIAAAAHAAoACQABAAAAAAAGAAsACQABAAIAAAAGAAoACQABAAAAAAAFAAsACQABAAIAAAAFAAoACQABAAAAAAAEAAsACQAAAAIAAAAEAAoACQAAAAAAAAABAAsACQACAAIAAAABAAoACQACAAAAAAAAAAsACQABAAIAAAAAAAoACQABAAAAAAD//wsACQABAAIAAAD//woACQAFAAIAAAD+/wsACQAAAAIAAAD+/woACQAAAAEAAAD//wkACQACAAEAAAD//wgACQACAAEAAAD//wcACQACAAEAAAD//wYACQACAAEAAAD//wUACQACAAEAAAD//wQACQACAAEAAAD//wMACQACAAEAAAD//wIACQACAAEAAAD//wEACQACAAEAAAD//wAACQACAAEAAAD/////CQACAAEAAAD+/wkACQAAAAEAAAD+/wgACQAAAAEAAAD+/wcACQAAAAEAAAD+/wYACQAAAAEAAAD+/wUACQAAAAEAAAD+/wQACQAAAAEAAAD+/wMACQAAAAEAAAD+/wIACQAAAAEAAAD+/wEACQAAAAEAAAD+/wAACQAAAAEAAAD+////CQAAAAEAAAAYAAMACQACAAIAAAAYAAIACQACAAAAAAAYAAgACQACAAAAAAAYAAkACQACAAEAAAAYAAsACQACAAIAAAAYAAoACQACAAEAAAA=")
 
-[node name="Potion" parent="Props" index="0" instance=ExtResource("2_8mcj0")]
-position = Vector2(284, 70)
-
-[node name="Potion2" parent="Props" index="1" instance=ExtResource("2_8mcj0")]
-position = Vector2(111, 126)
-recover_hp = 2
-
-[node name="Chest" parent="Props" index="2" instance=ExtResource("5_x1hn0")]
+[node name="Chest" parent="Props" index="0" instance=ExtResource("5_x1hn0")]
 position = Vector2(360, 129)
+contents = Array[ExtResource("7_ls7gq")]([ExtResource("4_qx1j4")])
 
-[node name="Spikes" parent="Props" index="3" instance=ExtResource("4_avl7y")]
+[node name="Chest2" parent="Props" index="1" instance=ExtResource("5_x1hn0")]
+position = Vector2(424, 32)
+region_rect = Rect2(0, 114, 210, 38)
+contents = Array[ExtResource("7_ls7gq")]([ExtResource("4_qx1j4")])
+
+[node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
 
-[node name="Lever" parent="Props" index="4" instance=ExtResource("6_gowkh")]
+[node name="Lever" parent="Props" index="3" instance=ExtResource("6_gowkh")]
 position = Vector2(672, 80)
 
 [node name="Interactable" parent="Props/Lever" index="3"]
-item = ""
+has_item = ""
 
-[node name="Gate_Side" parent="Props" index="5" instance=ExtResource("6_5b3ge")]
+[node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
 position = Vector2(720, 208)
+
+[node name="Potion" parent="Props" index="5" instance=ExtResource("2_8mcj0")]
+position = Vector2(160, 112)
+region_rect = Rect2(0, 144, 108, 36)
+contents = Array[ExtResource("7_ls7gq")]([ExtResource("8_6qcnt")])
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(152, 224)
@@ -86,6 +93,7 @@ position = Vector2(360, 288)
 collision_layer = 8
 monitoring = false
 script = ExtResource("6_16m3t")
+action_trigger = "interact"
 on_interaction = NodePath("StateMachine/player_path")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/PlayerPath" index="0"]

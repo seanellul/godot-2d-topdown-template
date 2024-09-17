@@ -10,7 +10,7 @@ class_name Interactable
 	Const.DIRECTION.UP
 ) var direction ##The direction the character must face to trigger the interaction.
 @export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
-@export var item := "" ##Check if the item is present in the player's inventory.
+@export var has_item := "" ##Check if the item is present in the player's inventory.
 @export_group("Settings")
 @export var one_shot := true ##If true, it can be interacted only once. Useful for chests or pickable items.
 @export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
@@ -68,7 +68,7 @@ func _can_interact() -> bool: # Check constraints
 		var entity_dir = Const.DIR_BIT[entity.facing.floor()]
 		can_interact = direction == null or direction > 0 and direction & entity_dir != 0
 		if entity is PlayerEntity:
-			can_interact = item.is_empty() or entity.is_item_in_inventory(item) >= 0
+			can_interact = has_item.is_empty() or entity.is_item_in_inventory(has_item) >= 0
 	return can_interact and !interacting and action_pressed and is_processing()
 
 func _do_interaction():

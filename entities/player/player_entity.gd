@@ -27,16 +27,18 @@ func is_item_in_inventory(item_name: String) -> int: ##Get the index of the item
 	var item_index := -1
 	for i in inventory.size():
 		var item = inventory[i]
-		if item.resource_name == item_name:
+		if item.name == item_name:
 			item_index = i
 	return item_index
 
 func add_item_to_inventory(item: DataItem):
-	var item_index = is_item_in_inventory(item.resource_name)
+	var item_index = is_item_in_inventory(item.name)
 	if item_index >= 0:
 		inventory[item_index].quantity += item.quantity
+		print("%s updated in %s's inventory! q: %s" %[item.name, self.name, inventory[item_index].quantity])
 	else:
 		inventory.append(item)
+		print("%s added to %s's inventory! q: %s" %[item.name, self.name, item.quantity])
 
 func reset():
 	is_charging = false
