@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
-[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_5wwg2"]
+[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_5wwg2"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_46s3h"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_t1lh4"]
-[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="3_tv8d6"]
+[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://entities/static/chest.tscn" id="3_tv8d6"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
 [ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_glfvo"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_qmq1u"]

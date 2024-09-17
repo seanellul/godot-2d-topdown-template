@@ -1,20 +1,21 @@
-[gd_scene load_steps=21 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=22 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
-[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_8mcj0"]
+[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
-[ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
+[ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://entities/static/spikes.tscn" id="4_avl7y"]
 [ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_qx1j4"]
-[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
-[ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side.tscn" id="6_5b3ge"]
+[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://entities/static/chest.tscn" id="5_x1hn0"]
+[ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://entities/static/gate_side.tscn" id="6_5b3ge"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
-[ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/lever.tscn" id="6_gowkh"]
+[ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://entities/static/lever.tscn" id="6_gowkh"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
 [ext_resource type="Resource" uid="uid://cpyqrspyr8pq3" path="res://items/potion.tres" id="8_6qcnt"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" path="res://scripts/states/state_entity.gd" id="9_5gqp7"]
 [ext_resource type="Script" path="res://scripts/states/base_state.gd" id="9_o85tp"]
+[ext_resource type="PackedScene" uid="uid://dymx12daw3oyr" path="res://entities/static/gate_front.tscn" id="10_r4ee1"]
 
 [sub_resource type="Resource" id="Resource_s81bk"]
 script = ExtResource("3_myhjs")
@@ -69,11 +70,16 @@ position = Vector2(672, 80)
 [node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
 y_sort_enabled = false
 position = Vector2(720, 208)
+script = null
 
 [node name="Potion" parent="Props" index="5" instance=ExtResource("2_8mcj0")]
 position = Vector2(160, 112)
 region_rect = Rect2(0, 144, 108, 36)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_op2ue")])
+
+[node name="Gate_Front" parent="Props" index="6" instance=ExtResource("10_r4ee1")]
+position = Vector2(96, 24)
+item_required = "key"
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(96, 72)

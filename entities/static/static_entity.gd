@@ -2,7 +2,7 @@ extends Node2D
 class_name StaticEntity
 
 @export var item_required: String ##The item required in player's inventory to get the contents.
-@export var contents: Array[ContentItem]
+@export var contents: Array[ContentItem] ##The contents to find interacting with this entity.
 
 @onready var interactable: Interactable = get_node("Interactable")
 

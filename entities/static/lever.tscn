@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cfx0yov61ftcj"]
 
-[ext_resource type="Script" path="res://scenes/props/switch_controller.gd" id="1_bd8vj"]
-[ext_resource type="Texture2D" uid="uid://b3v3fyoyhec5j" path="res://scenes/props/lever.png" id="1_vcbng"]
+[ext_resource type="Script" path="res://entities/static/switch_controller.gd" id="1_bd8vj"]
+[ext_resource type="Texture2D" uid="uid://b3v3fyoyhec5j" path="res://entities/static/lever.png" id="1_vcbng"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_alkne"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_vmr3i"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_jit2w"]

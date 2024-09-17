@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://qsqg6qm4ts7x"]
 
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="1_al7ul"]
-[ext_resource type="Script" path="res://scenes/props/static_entity.gd" id="1_u7slb"]
-[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://scenes/props/chest.png" id="2_mny2i"]
+[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_u7slb"]
+[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://entities/static/chest.png" id="2_mny2i"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_qxnsf"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="5_pbvis"]
 [ext_resource type="Script" path="res://scripts/states/state_tween.gd" id="5_xynyc"]

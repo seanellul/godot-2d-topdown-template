@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dymx12daw3oyr"]
+[gd_scene load_steps=12 format=3 uid="uid://dymx12daw3oyr"]
 
-[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_5cyoo"]
+[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://entities/static/blocks.png" id="1_5cyoo"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_4jk5e"]
+[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="2_usx66"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_h0g83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
@@ -143,6 +144,7 @@ hframes = 4
 frame = 3
 region_enabled = true
 region_rect = Rect2(0, 0, 192, 48)
+script = ExtResource("2_usx66")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 2)
