@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=21 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_8mcj0"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_2cetp"]
+[ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
 [ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_qx1j4"]
 [ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="5_x1hn0"]
@@ -10,11 +11,25 @@
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/lever.tscn" id="6_gowkh"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
-[ext_resource type="Script" path="res://items/data_item.gd" id="7_ls7gq"]
 [ext_resource type="Resource" uid="uid://cpyqrspyr8pq3" path="res://items/potion.tres" id="8_6qcnt"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" path="res://scripts/states/state_entity.gd" id="9_5gqp7"]
 [ext_resource type="Script" path="res://scripts/states/base_state.gd" id="9_o85tp"]
+
+[sub_resource type="Resource" id="Resource_s81bk"]
+script = ExtResource("3_myhjs")
+item = ExtResource("4_qx1j4")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_qmq7a"]
+script = ExtResource("3_myhjs")
+item = ExtResource("4_qx1j4")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_op2ue"]
+script = ExtResource("3_myhjs")
+item = ExtResource("8_6qcnt")
+quantity = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4e7qi"]
 size = Vector2(64, 64)
@@ -38,15 +53,16 @@ tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAE
 
 [node name="Chest" parent="Props" index="0" instance=ExtResource("5_x1hn0")]
 position = Vector2(360, 129)
-contents = Array[ExtResource("7_ls7gq")]([ExtResource("4_qx1j4")])
+contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_s81bk")])
 
 [node name="Chest2" parent="Props" index="1" instance=ExtResource("5_x1hn0")]
 position = Vector2(424, 32)
 region_rect = Rect2(0, 114, 210, 38)
-contents = Array[ExtResource("7_ls7gq")]([ExtResource("4_qx1j4")])
+contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_qmq7a")])
 
 [node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
+contents = Array[ExtResource("3_myhjs")]([])
 
 [node name="Lever" parent="Props" index="3" instance=ExtResource("6_gowkh")]
 position = Vector2(672, 80)
@@ -60,7 +76,7 @@ position = Vector2(720, 208)
 [node name="Potion" parent="Props" index="5" instance=ExtResource("2_8mcj0")]
 position = Vector2(160, 112)
 region_rect = Rect2(0, 144, 108, 36)
-contents = Array[ExtResource("7_ls7gq")]([ExtResource("8_6qcnt")])
+contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_op2ue")])
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(152, 224)

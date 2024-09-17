@@ -77,6 +77,8 @@ func _do_interaction():
 		on_interaction.enable({
 			"entity": entity
 		})
+	if not has_item.is_empty() and entity and entity is PlayerEntity:
+		entity.remove_item_from_inventory(has_item, 1)
 
 func _reset_interaction():
 	await get_tree().create_timer(reset_delay).timeout

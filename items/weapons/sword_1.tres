@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="DataWeapon" load_steps=2 format=3 uid="uid://dghubnld0jtgg"]
+[gd_resource type="Resource" script_class="InventoryWeapon" load_steps=2 format=3 uid="uid://dghubnld0jtgg"]
 
-[ext_resource type="Script" path="res://items/weapons/data_weapon.gd" id="1_rrrva"]
+[ext_resource type="Script" path="res://items/weapons/inventory_weapon.gd" id="1_jlqm5"]
 
 [resource]
-script = ExtResource("1_rrrva")
+script = ExtResource("1_jlqm5")
 power = 1
 speed = 0.5
-quantity = 0
+name = "sword"
+change_hp = 0

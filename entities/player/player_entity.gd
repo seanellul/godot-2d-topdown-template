@@ -7,7 +7,7 @@ class_name PlayerEntity
 @export var on_transfer_start: BaseState ##State to enable when player starts transfering.
 @export var on_transfer_end: BaseState ##State to enable when player ends transfering.
 
-var inventory: Array[DataItem] = []
+var inventory: Array[InventoryItem] = []
 
 func _ready():
 	super._ready()
@@ -31,14 +31,26 @@ func is_item_in_inventory(item_name: String) -> int: ##Get the index of the item
 			item_index = i
 	return item_index
 
-func add_item_to_inventory(item: DataItem):
+func add_item_to_inventory(item: DataItem, quantity: int):
 	var item_index = is_item_in_inventory(item.name)
 	if item_index >= 0:
-		inventory[item_index].quantity += item.quantity
+		inventory[item_index].quantity += quantity
 		print("%s updated in %s's inventory! q: %s" %[item.name, self.name, inventory[item_index].quantity])
 	else:
-		inventory.append(item)
-		print("%s added to %s's inventory! q: %s" %[item.name, self.name, item.quantity])
+		var _item = InventoryItem.new()
+		_item.create(item, quantity)
+		inventory.append(_item)
+		print("%s added to %s's inventory! q: %s" %[item.name, self.name, quantity])
+
+func remove_item_from_inventory(item_name: String, quantity: int):
+	var item_index = is_item_in_inventory(item_name)
+	if item_index >= 0:
+		inventory[item_index].quantity -= quantity
+		if inventory[item_index].quantity > 0:
+			print("%s updated in %s's inventory! q: %s" %[item_name, self.name, inventory[item_index].quantity])
+		else:
+			inventory.remove_at(item_index)
+			print("%s removed from %s's inventory! q: 0" %[item_name, self.name])
 
 func reset():
 	is_charging = false

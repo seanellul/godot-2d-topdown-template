@@ -2,7 +2,7 @@ extends Node2D
 class_name StaticEntity
 
 @export var item_required: String ##The item required in player's inventory to get the contents.
-@export var contents: Array[DataItem]
+@export var contents: Array[ContentItem]
 
 @onready var interactable: Interactable = get_node("Interactable")
 
@@ -21,10 +21,10 @@ func get_content():
 	if contents.size() == 0 or not entity:
 		return
 	for content in contents:
-		if content.storable:
-			entity.add_item_to_inventory(content)
+		if content.quantity > 0:
+			entity.add_item_to_inventory(content.item, content.quantity)
 		else:
-			consume_content(content)
+			consume_content(content.item)
 
 func consume_content(content: DataItem):
 	var hp = content.change_hp
