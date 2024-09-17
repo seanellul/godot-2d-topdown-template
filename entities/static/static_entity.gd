@@ -2,17 +2,38 @@ extends Node2D
 class_name StaticEntity
 
 @export var item_required: String ##The item required in player's inventory to get the contents.
-@export var contents: Array[ContentItem] ##The contents to find interacting with this entity.
+@export var one_shot := false
+@export_category("Events")
+@export_group("Contents")
+@export var contents: Array[ContentItem] ##A list of contents to get.
+@export var get_on_interaction := false ##Gets the contents on interaction. Alternatively you can call get_content manually.
+@export_group("States")
+@export var states: Array[BaseState]
+@export var start_state_index := 0
+@export var switch_on_interaction := false ##Switches the states on interaction. Alternatively you can call switch_states manually.
+@export_subgroup("Update")
+@export var sync_switch: StaticEntity ##Switch the states of another entity when this entity switches states (eg: useful for controlling doors opening with a lever).
+var switch := false: ##For debugging purposes.
+	set(value):
+		switch_states()
 
-@onready var interactable: Interactable = get_node("Interactable")
+@onready var interactable: Interactable = get_node_or_null("Interactable")
 
 var entity: PlayerEntity
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if interactable:
-		interactable.interacted.connect(_set_entity)
+		interactable.interacted.connect(_handle_interaction)
 		interactable.has_item = item_required
+		interactable.one_shot = one_shot
+
+func _handle_interaction(_entity):
+	_set_entity(_entity)
+	if get_on_interaction:
+		get_content()
+	if switch_on_interaction:
+		switch_states()
 
 func _set_entity(_entity):
 	entity = _entity
@@ -32,6 +53,21 @@ func consume_content(content: DataItem):
 		entity.recover_hp(hp, self.name)
 	elif hp < 0:
 		entity.reduce_hp(-hp, self.name)
+
+func switch_states():
+	if sync_switch:
+		sync_switch.switch_states()
+	if states.size() == 0:
+		return
+	var next_state
+	start_state_index += 1
+	if start_state_index < states.size():
+		next_state = states[start_state_index]
+	else:
+		next_state = states[0]
+		start_state_index = 0
+	if next_state:
+		next_state.enable()
 
 func disable():
 	visible = false

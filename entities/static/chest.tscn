@@ -173,6 +173,7 @@ hframes = 5
 region_enabled = true
 region_rect = Rect2(0, 0, 210, 38)
 script = ExtResource("1_u7slb")
+one_shot = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4

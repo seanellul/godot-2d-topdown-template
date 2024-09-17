@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cfx0yov61ftcj"]
+[gd_scene load_steps=14 format=3 uid="uid://cfx0yov61ftcj"]
 
-[ext_resource type="Script" path="res://entities/static/switch_controller.gd" id="1_bd8vj"]
+[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_ef5kp"]
 [ext_resource type="Texture2D" uid="uid://b3v3fyoyhec5j" path="res://entities/static/lever.png" id="1_vcbng"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_alkne"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_vmr3i"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_jit2w"]
-[ext_resource type="Script" path="res://scripts/states/state_switch.gd" id="6_mfwom"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfiyu"]
 size = Vector2(34, 22)
@@ -132,8 +131,9 @@ _data = {
 [node name="Lever" type="StaticBody2D" node_paths=PackedStringArray("states") groups=["save"]]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_bd8vj")
+script = ExtResource("1_ef5kp")
 states = [NodePath("StateMachine/off"), NodePath("StateMachine/on")]
+switch_on_interaction = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
@@ -182,9 +182,6 @@ script = ExtResource("4_jit2w")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "idle_off"
 
-[node name="enable_states" type="Node" parent="StateMachine/idle_off"]
-script = ExtResource("6_mfwom")
-
 [node name="on" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_jit2w")
 animation_player = NodePath("../../AnimationPlayer")
@@ -194,9 +191,6 @@ animation = "on"
 script = ExtResource("4_jit2w")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "idle_on"
-
-[node name="enable_states" type="Node" parent="StateMachine/idle_on"]
-script = ExtResource("6_mfwom")
 
 [node name="off" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_jit2w")

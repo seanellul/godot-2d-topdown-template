@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=23 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_8mcj0"]
@@ -26,6 +26,9 @@ quantity = 1
 script = ExtResource("3_myhjs")
 item = ExtResource("4_qx1j4")
 quantity = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_na1cc"]
+radius = 32.0
 
 [sub_resource type="Resource" id="Resource_op2ue"]
 script = ExtResource("3_myhjs")
@@ -64,22 +67,34 @@ contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_qmq7a")])
 [node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
 
-[node name="Lever" parent="Props" index="3" instance=ExtResource("6_gowkh")]
+[node name="Lever" parent="Props" index="3" node_paths=PackedStringArray("sync_switch") instance=ExtResource("6_gowkh")]
 position = Vector2(672, 80)
+sync_switch = NodePath("../Gate_Side")
 
 [node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
 y_sort_enabled = false
 position = Vector2(720, 208)
-script = null
 
-[node name="Potion" parent="Props" index="5" instance=ExtResource("2_8mcj0")]
+[node name="Gate_Front" parent="Props" index="5" instance=ExtResource("10_r4ee1")]
+position = Vector2(96, 24)
+item_required = "key"
+one_shot = true
+switch_on_interaction = true
+
+[node name="Interactable" type="Area2D" parent="Props/Gate_Front" index="3"]
+collision_layer = 8
+monitoring = false
+script = ExtResource("6_16m3t")
+direction = 8
+action_trigger = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Gate_Front/Interactable" index="0"]
+shape = SubResource("CircleShape2D_na1cc")
+
+[node name="Potion" parent="Props" index="6" instance=ExtResource("2_8mcj0")]
 position = Vector2(160, 112)
 region_rect = Rect2(0, 144, 108, 36)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_op2ue")])
-
-[node name="Gate_Front" parent="Props" index="6" instance=ExtResource("10_r4ee1")]
-position = Vector2(96, 24)
-item_required = "key"
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(96, 72)
@@ -134,6 +149,3 @@ script = ExtResource("9_5gqp7")
 
 [node name="Path2D" type="Path2D" parent="Events/PlayerPath" index="2"]
 curve = SubResource("Curve2D_uycfk")
-
-[editable path="Props/Lever"]
-[editable path="Props/Gate_Side"]

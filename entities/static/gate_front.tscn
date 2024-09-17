@@ -136,7 +136,7 @@ _data = {
 "on": SubResource("Animation_muw3c")
 }
 
-[node name="Gate_Front" type="Sprite2D" groups=["save"]]
+[node name="Gate_Front" type="Sprite2D" node_paths=PackedStringArray("states") groups=["save"]]
 y_sort_enabled = true
 texture = ExtResource("1_5cyoo")
 offset = Vector2(0, -13)
@@ -145,6 +145,7 @@ frame = 3
 region_enabled = true
 region_rect = Rect2(0, 0, 192, 48)
 script = ExtResource("2_usx66")
+states = [NodePath("StateMachine/on"), NodePath("StateMachine/off")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 2)
