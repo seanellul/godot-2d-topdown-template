@@ -1,14 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://sqsfj8mr85j8"]
+[gd_scene load_steps=2 format=3 uid="uid://sqsfj8mr85j8"]
 
 [ext_resource type="PackedScene" uid="uid://dymx12daw3oyr" path="res://scenes/props/gate_front.tscn" id="1_j13c4"]
-[ext_resource type="Texture2D" uid="uid://dt566ndyos577" path="res://scenes/props/gate_side.tres" id="2_7qisa"]
 
 [node name="Gate_Side" instance=ExtResource("1_j13c4")]
+region_rect = Rect2(0, 48, 192, 48)
 
-[node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(0, 16)
+[node name="StaticBody2D" parent="." index="0"]
+position = Vector2(-2, -12)
 rotation = 1.5708
-
-[node name="Sprite2D" parent="." index="1"]
-position = Vector2(0, 16)
-texture = ExtResource("2_7qisa")

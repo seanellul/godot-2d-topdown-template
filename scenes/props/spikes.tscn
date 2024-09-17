@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dpbc6iw62na4q"]
 
-[ext_resource type="Texture2D" uid="uid://b0vygdtwb6oyk" path="res://scenes/props/spikes.png" id="1_gdf5q"]
+[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://scenes/props/static_entity.gd" id="1_q6b6s"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_b2v87"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_18kok"]
@@ -41,7 +41,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_npgvj"]
 resource_name = "down"
-length = 0.133337
+length = 0.100003
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -49,10 +49,10 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0), Vector2i(0, 0)]
+"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -177,9 +177,11 @@ _data = {
 
 [node name="Spikes" type="Sprite2D"]
 y_sort_enabled = true
-texture = ExtResource("1_gdf5q")
+texture = ExtResource("1_2ngps")
 offset = Vector2(0, 14)
 hframes = 4
+region_enabled = true
+region_rect = Rect2(0, 96, 192, 48)
 script = ExtResource("1_q6b6s")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
