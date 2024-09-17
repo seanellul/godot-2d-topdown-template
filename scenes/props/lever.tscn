@@ -141,7 +141,7 @@ top_level = true
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_nfiyu")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="BaseSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("1_vcbng")
 hframes = 2
@@ -150,7 +150,7 @@ vframes = 2
 [node name="Handle" type="Marker2D" parent="."]
 rotation = -0.610865
 
-[node name="Sprite2D" type="Sprite2D" parent="Handle"]
+[node name="HandleSprite" type="Sprite2D" parent="Handle"]
 position = Vector2(0, -10)
 texture = ExtResource("1_vcbng")
 hframes = 2
@@ -184,7 +184,7 @@ script = ExtResource("4_jit2w")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "idle_off"
 
-[node name="StateSwitch" type="Node" parent="StateMachine/idle_off"]
+[node name="enable_states" type="Node" parent="StateMachine/idle_off"]
 script = ExtResource("6_mfwom")
 
 [node name="on" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
@@ -197,7 +197,7 @@ script = ExtResource("4_jit2w")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "idle_on"
 
-[node name="StateSwitch" type="Node" parent="StateMachine/idle_on"]
+[node name="enable_states" type="Node" parent="StateMachine/idle_on"]
 script = ExtResource("6_mfwom")
 
 [node name="off" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]

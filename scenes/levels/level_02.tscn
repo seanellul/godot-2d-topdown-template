@@ -1,12 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=12 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://scenes/props/item.tscn" id="2_5wwg2"]
 [ext_resource type="PackedScene" uid="uid://do56ba7tgcldg" path="res://scenes/props/item_animated.tscn" id="2_seafh"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_t1lh4"]
-[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://scenes/props/chest.tscn" id="3_tv8d6"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
-[ext_resource type="Texture2D" uid="uid://frqoc38lqhdd" path="res://scenes/props/chest_wood.tres" id="4_p2var"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" path="res://scripts/states/state_wander.gd" id="6_rdt3e"]
@@ -37,16 +35,7 @@ tile_map_data = PackedByteArray("AAAeAP7/CQAGAAYAAAAeAP3/CQABAAYAAAAdAP7/CQABAAc
 position = Vector2(192, 112)
 recover_hp = 1
 
-[node name="Chest" parent="Props" index="1" instance=ExtResource("3_tv8d6")]
-position = Vector2(464, 32)
-
-[node name="Interactable" parent="Props/Chest" index="1"]
-item = "key"
-
-[node name="Sprite2D" parent="Props/Chest" index="2"]
-texture = ExtResource("4_p2var")
-
-[node name="Key" parent="Props" index="2" instance=ExtResource("2_5wwg2")]
+[node name="Key" parent="Props" index="1" instance=ExtResource("2_5wwg2")]
 position = Vector2(752, 52)
 
 [node name="P1" parent="Entities" index="0"]
@@ -107,8 +96,6 @@ direction = 2
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
 
-[editable path="Props/Chest"]
-[editable path="Props/Key"]
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_Est"]
 [editable path="Transfers/Transfer_West"]

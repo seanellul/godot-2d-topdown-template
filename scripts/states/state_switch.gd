@@ -1,8 +1,8 @@
 extends BaseState
 class_name StateSwitch
 
-@export var state_to_enable: BaseState = null
+@export var states_to_enable: Array[BaseState] = []
 
 func enter():
-	if state_to_enable:
-		state_to_enable.enable()
+	for state in states_to_enable:
+		state.enable()

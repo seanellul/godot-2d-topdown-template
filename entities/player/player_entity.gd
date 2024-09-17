@@ -23,12 +23,20 @@ func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
 	flash(damage_flash_power)
 
-func is_item_in_inventory(item_name: String) -> bool:
-	var found_item := false
-	for item: DataItem in inventory:
+func is_item_in_inventory(item_name: String) -> int: ##Get the index of the item in inventory, -1 if not found.
+	var item_index := -1
+	for i in inventory.size():
+		var item = inventory[i]
 		if item.resource_name == item_name:
-			found_item = true
-	return found_item
+			item_index = i
+	return item_index
+
+func add_item_to_inventory(item: DataItem):
+	var item_index = is_item_in_inventory(item.resource_name)
+	if item_index >= 0:
+		inventory[item_index].quantity += item.quantity
+	else:
+		inventory.append(item)
 
 func reset():
 	is_charging = false

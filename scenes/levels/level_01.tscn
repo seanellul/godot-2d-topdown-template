@@ -52,12 +52,6 @@ position = Vector2(672, 80)
 [node name="Interactable" parent="Props/Lever" index="3"]
 item = ""
 
-[node name="StateSwitch" parent="Props/Lever/StateMachine/idle_off" index="0" node_paths=PackedStringArray("state_to_enable")]
-state_to_enable = NodePath("../../../../Gate_Side/StateMachine/on")
-
-[node name="StateSwitch" parent="Props/Lever/StateMachine/idle_on" index="0" node_paths=PackedStringArray("state_to_enable")]
-state_to_enable = NodePath("../../../../Gate_Side/StateMachine/off")
-
 [node name="Gate_Side" parent="Props" index="5" instance=ExtResource("6_5b3ge")]
 position = Vector2(720, 208)
 
