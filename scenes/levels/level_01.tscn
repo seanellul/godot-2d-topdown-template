@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=25 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_8mcj0"]
@@ -22,10 +22,16 @@ script = ExtResource("3_myhjs")
 item = ExtResource("4_qx1j4")
 quantity = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hytaf"]
+radius = 24.0
+
 [sub_resource type="Resource" id="Resource_qmq7a"]
 script = ExtResource("3_myhjs")
 item = ExtResource("4_qx1j4")
 quantity = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctfky"]
+radius = 31.1448
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_na1cc"]
 radius = 32.0
@@ -59,10 +65,33 @@ tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAE
 position = Vector2(360, 129)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_s81bk")])
 
+[node name="Interactable" type="Area2D" parent="Props/Chest" index="3"]
+collision_layer = 8
+monitoring = false
+script = ExtResource("6_16m3t")
+direction = 8
+action_trigger = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chest/Interactable" index="0"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_hytaf")
+
 [node name="Chest2" parent="Props" index="1" instance=ExtResource("5_x1hn0")]
 position = Vector2(424, 32)
 region_rect = Rect2(0, 114, 210, 38)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_qmq7a")])
+
+[node name="Interactable" type="Area2D" parent="Props/Chest2" index="3"]
+collision_layer = 8
+monitoring = false
+script = ExtResource("6_16m3t")
+direction = 8
+action_trigger = "interact"
+has_item = "key"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chest2/Interactable" index="0"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_hytaf")
 
 [node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
@@ -71,14 +100,24 @@ position = Vector2(536, 160)
 position = Vector2(672, 80)
 sync_switch = NodePath("../Gate_Side")
 
+[node name="Interactable" type="Area2D" parent="Props/Lever" index="5"]
+collision_layer = 8
+monitoring = false
+script = ExtResource("6_16m3t")
+action_trigger = "interact"
+one_shot = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Lever/Interactable" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_ctfky")
+debug_color = Color(0.478792, 0.587903, 0, 0.42)
+
 [node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
 y_sort_enabled = false
 position = Vector2(720, 208)
 
 [node name="Gate_Front" parent="Props" index="5" instance=ExtResource("10_r4ee1")]
 position = Vector2(96, 24)
-item_required = "key"
-one_shot = true
 switch_on_interaction = true
 
 [node name="Interactable" type="Area2D" parent="Props/Gate_Front" index="3"]
@@ -87,6 +126,7 @@ monitoring = false
 script = ExtResource("6_16m3t")
 direction = 8
 action_trigger = "interact"
+has_item = "key"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Gate_Front/Interactable" index="0"]
 shape = SubResource("CircleShape2D_na1cc")
@@ -116,13 +156,12 @@ level_key = "LEVEL_2"
 destination_path = "Transfers/Transfer_West"
 direction = 4
 
-[node name="PlayerPath" type="Area2D" parent="Events" index="0" node_paths=PackedStringArray("on_interaction")]
+[node name="PlayerPath" type="Area2D" parent="Events" index="0"]
 position = Vector2(360, 288)
 collision_layer = 8
 monitoring = false
 script = ExtResource("6_16m3t")
 action_trigger = "interact"
-on_interaction = NodePath("StateMachine/player_path")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/PlayerPath" index="0"]
 shape = SubResource("RectangleShape2D_4e7qi")

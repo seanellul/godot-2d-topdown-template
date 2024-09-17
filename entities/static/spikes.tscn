@@ -1,10 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpbc6iw62na4q"]
+[gd_scene load_steps=16 format=3 uid="uid://dpbc6iw62na4q"]
 
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://entities/static/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_q6b6s"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_b2v87"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_18kok"]
+[ext_resource type="Script" path="res://items/content_item.gd" id="3_s42s2"]
+[ext_resource type="Resource" uid="uid://cvh325i7w1lhf" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_op40x"]
+
+[sub_resource type="Resource" id="Resource_2t4s2"]
+script = ExtResource("3_s42s2")
+item = ExtResource("4_fgbx5")
+quantity = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oeede"]
 size = Vector2(42, 42)
@@ -175,7 +182,7 @@ _data = {
 "up": SubResource("Animation_mq7wd")
 }
 
-[node name="Spikes" type="Sprite2D"]
+[node name="Spikes" type="Sprite2D" node_paths=PackedStringArray("states")]
 y_sort_enabled = true
 texture = ExtResource("1_2ngps")
 offset = Vector2(0, 14)
@@ -183,6 +190,10 @@ hframes = 4
 region_enabled = true
 region_rect = Rect2(0, 96, 192, 48)
 script = ExtResource("1_q6b6s")
+contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_2t4s2")])
+get_on_interaction = true
+states = [NodePath("StateMachine/up")]
+switch_on_interaction = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -8)
@@ -194,14 +205,13 @@ position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_oeede")
 disabled = true
 
-[node name="Interactable" type="Area2D" parent="." node_paths=PackedStringArray("on_interaction")]
+[node name="Interactable" type="Area2D" parent="."]
 position = Vector2(0, 16)
 collision_layer = 8
 monitoring = false
 script = ExtResource("2_b2v87")
 action_trigger = "run"
 one_shot = false
-on_interaction = NodePath("../StateMachine/up")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
 shape = SubResource("RectangleShape2D_g4cjj")

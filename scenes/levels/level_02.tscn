@@ -51,7 +51,6 @@ contents = Array[ExtResource("3_46s3h")]([SubResource("Resource_x0mcm")])
 [node name="Chest" parent="Props" index="1" instance=ExtResource("3_tv8d6")]
 position = Vector2(224, 32)
 region_rect = Rect2(0, 114, 210, 38)
-item_required = "key"
 contents = Array[ExtResource("3_46s3h")]([SubResource("Resource_iwour")])
 
 [node name="P1" parent="Entities" index="0"]

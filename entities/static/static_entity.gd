@@ -1,14 +1,11 @@
 extends Node2D
 class_name StaticEntity
 
-@export var item_required: String ##The item required in player's inventory to get the contents.
-@export var one_shot := false
-@export_category("Events")
 @export_group("Contents")
 @export var contents: Array[ContentItem] ##A list of contents to get.
 @export var get_on_interaction := false ##Gets the contents on interaction. Alternatively you can call get_content manually.
-@export_group("States")
-@export var states: Array[BaseState]
+@export_group("Switch")
+@export var states: Array[BaseState] ##The states to switch.
 @export var start_state_index := 0
 @export var switch_on_interaction := false ##Switches the states on interaction. Alternatively you can call switch_states manually.
 @export_subgroup("Update")
@@ -25,8 +22,6 @@ var entity: PlayerEntity
 func _ready() -> void:
 	if interactable:
 		interactable.interacted.connect(_handle_interaction)
-		interactable.has_item = item_required
-		interactable.one_shot = one_shot
 
 func _handle_interaction(_entity):
 	_set_entity(_entity)
