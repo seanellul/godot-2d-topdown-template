@@ -49,6 +49,7 @@ func consume_content(content: DataItem):
 		entity.recover_hp(hp, self.name)
 	elif hp < 0:
 		entity.reduce_hp(-hp, self.name)
+		entity.hurt()
 
 func switch_states():
 	for rs in remote_switch:

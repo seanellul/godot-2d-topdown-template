@@ -1,6 +1,6 @@
 extends StateEntity
 ##Makes an entity knockback.
-class_name StateHurt
+class_name StateKnockback
 
 @export var knockback_force := 200.0
 @export var knockback_duration := 0.1

@@ -21,7 +21,7 @@ func _process(delta):
 
 func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
-	flash(damage_flash_power)
+	flash(damage_flash_power) #TODO: move to a state
 
 func is_item_in_inventory(item_name: String) -> int: ##Get the index of the item in inventory, -1 if not found.
 	var item_index := -1
