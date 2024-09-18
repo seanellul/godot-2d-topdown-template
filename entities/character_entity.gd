@@ -9,6 +9,7 @@ class_name CharacterEntity
 @export var max_speed = 300.0
 @export var friction = 2000.0
 @export var blocks_detector: RayCast2D
+@export var fall_detector: ShapeCast2D
 @export var running_particles: GPUParticles2D = null
 @export_group("Health")
 @export var max_hp := 20
@@ -22,6 +23,7 @@ class_name CharacterEntity
 @export var on_attack: BaseState ##State to enable when this entity attacks.
 @export var on_hit: BaseState ##State to enable when this entity damages another entity.
 @export var on_hurt: BaseState ##State to enable when this entity takes damage.
+@export var on_fall: BaseState ##State to enable when this entity falls.
 @export var on_recovery: BaseState ##State to enable when this entity recovers.
 @export var on_death: BaseState ##State to enable when this entity dies.
 @export var on_screen_entered: BaseState ##State to enable when this entity is visible on screen.
@@ -71,6 +73,11 @@ var is_blocked := false:
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
 var is_fleeing := false
+var is_falling := false:
+	set(value):
+		is_falling = value
+		if is_falling and on_fall:
+			on_fall.enable()
 
 signal hp_changed(value)
 signal damaged(hp)
@@ -88,6 +95,8 @@ func _process(_delta):
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO
 	is_running = is_moving and speed > max_speed
+	if not is_falling:
+		is_falling = fall_detector.is_colliding() and not is_jumping
 	move_and_slide()
 
 func _init_health_bar():

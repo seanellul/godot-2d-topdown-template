@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dyfyo3gh4e2la"]
+[gd_scene load_steps=16 format=3 uid="uid://dyfyo3gh4e2la"]
 
 [ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
-[ext_resource type="Texture2D" uid="uid://pf5qhikid84j" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
-[ext_resource type="Texture2D" uid="uid://b8p4m6e7n0ket" path="res://entities/shadow.png" id="2_xhiia"]
+[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
+[ext_resource type="Texture2D" uid="uid://b6peokk0rkltn" path="res://entities/shadow.png" id="2_xhiia"]
 [ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="4_hhyyf"]
 [ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="5_gfoxn"]
 [ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="6_3jrrx"]
@@ -13,15 +13,18 @@
 [ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="9_ihjft"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://ks1203fyuyfg" path="res://entities/animations/char_anim_states.tres" id="10_esda3"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
+size = Vector2(20, 16)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_26lqd"]
 shader = ExtResource("2_b5eyi")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/power = 0.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
-size = Vector2(20, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_geh4k"]
+radius = 3.0
 
-[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "collision_shape", "sync_rotation", "blocks_detector")]
+[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "collision_shape", "sync_rotation", "blocks_detector", "fall_detector")]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 7
@@ -31,6 +34,11 @@ animation_tree = NodePath("AnimationTree")
 collision_shape = NodePath("CollisionShape2D")
 sync_rotation = [NodePath("BlocksDetector")]
 blocks_detector = NodePath("BlocksDetector")
+fall_detector = NodePath("FallDetector")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_c7fes")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.235294)
@@ -47,13 +55,15 @@ vframes = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 120, 200)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_c7fes")
-
 [node name="BlocksDetector" type="RayCast2D" parent="."]
 modulate = Color(1, 0, 1, 1)
 target_position = Vector2(32, 0)
+
+[node name="FallDetector" type="ShapeCast2D" parent="."]
+modulate = Color(0.611765, 0.192157, 1, 0.517647)
+shape = SubResource("CircleShape2D_geh4k")
+target_position = Vector2(0, 0)
+collision_mask = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
