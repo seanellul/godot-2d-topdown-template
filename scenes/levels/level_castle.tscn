@@ -75,16 +75,17 @@ position = Vector2(586, 80)
 
 [node name="StateMachine" type="Node" parent="Entities/Enemy1" index="6" node_paths=PackedStringArray("current_state")]
 script = ExtResource("8_ij6yd")
-current_state = NodePath("flee")
+current_state = NodePath("follow")
 
 [node name="flee" type="Node" parent="Entities/Enemy1/StateMachine" index="0"]
 script = ExtResource("10_7uwgo")
 target_player_id = 1
 flee = true
 
-[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="1"]
+[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="1" node_paths=PackedStringArray("on_target_reached")]
 script = ExtResource("10_7uwgo")
 target_player_id = 1
+on_target_reached = NodePath("../flee")
 
 [node name="Transfer_Door" parent="Transfers" index="0" instance=ExtResource("7_skwgl")]
 position = Vector2(384, -43)

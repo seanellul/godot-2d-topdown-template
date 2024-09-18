@@ -127,11 +127,11 @@ func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 	var target_velocity = Vector2(0, 0)
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	var new_friction = friction
+	moving_direction *= 1 if not is_fleeing else -1
 	if moving_direction:
 		facing = moving_direction
 		speed = max_speed * speed_increment
 		new_friction = friction * friction_increment
-		moving_direction *= 1 if not is_fleeing else -1
 		target_velocity = moving_direction * speed
 	velocity = velocity.move_toward(target_velocity, new_friction * delta)
 
