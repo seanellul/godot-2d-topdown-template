@@ -147,19 +147,16 @@ position = Vector2(560, 35)
 position = Vector2(568, 96)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
-z_index = -1
 position = Vector2(96, -32)
 destination_path = "Transfers/Transfer_South"
 direction = 8
 
 [node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("3_2cetp")]
-z_index = -1
 position = Vector2(96, 400)
 destination_path = "Transfers/Transfer_North"
 direction = 1
 
 [node name="Transfer_Est" parent="Transfers" index="2" instance=ExtResource("3_2cetp")]
-z_index = -1
 position = Vector2(752, 224)
 rotation = 1.57079
 level_key = "LEVEL_2"

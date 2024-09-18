@@ -9,7 +9,8 @@ const MENU = {
 const LEVEL = {
 	GAME_START = "res://scenes/game.tscn",
 	LEVEL_1 = "res://scenes/levels/level_01.tscn",
-	LEVEL_2 = "res://scenes/levels/level_02.tscn"
+	LEVEL_2 = "res://scenes/levels/level_02.tscn",
+	LEVEL_CASTLE = "res://scenes/levels/level_castle.tscn",
 }
 
 const TRANSITION = {

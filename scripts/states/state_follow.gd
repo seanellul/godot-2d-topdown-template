@@ -2,6 +2,7 @@ extends StateEntity
 ##Makes an entity follow a target.
 class_name StateFollow
 
+@export_category("Target")
 @export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
@@ -14,6 +15,12 @@ class_name StateFollow
 			print("%s is following: %s" %[entity_name, target])
 @export var distance_threshold: = 21.0
 @export var on_target_reached: BaseState
+@export_category("Settings")
+@export var flee := false: ##If true, entity will flee away from the target instead of following it.
+	set(value):
+		flee = value
+		if entity:
+			entity.is_fleeing = value
 @export var speed_multiplier: = 1.0
 @export var friction_multiplier: = 1.0
 
@@ -24,10 +31,12 @@ signal target_reached(target)
 func enter():
 	super.enter()
 	target_reached.connect(_on_target_reached)
+	entity.is_fleeing = flee
 	_init_target()
 
 func exit():
 	target_reached.disconnect(_on_target_reached)
+	entity.is_fleeing = false
 
 func update(_delta):
 	_check_target_reached()
@@ -40,8 +49,6 @@ func _follow():
 		entity.move_towards(target.global_position, speed_multiplier, friction_multiplier)
 
 func _init_target():
-	# if not current:
-		# return
 	_reset_target_reached()
 	if target_player_id > 0:
 		target = Globals.get_player(target_player_id)

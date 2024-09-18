@@ -53,10 +53,10 @@ var speed := 0.0
 @export_group("Actions")
 var is_moving: bool
 var is_running: bool
-@export var is_jumping: bool: #exported because used in animation "jump"
+var is_jumping: bool:
 	set(value):
 		is_jumping = value
-@export var is_attacking: bool: #exported because used in animation "attack"
+var is_attacking: bool:
 	set(value):
 		is_attacking = value
 		if value == true:
@@ -70,6 +70,7 @@ var is_hurting := false
 var is_blocked := false:
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
+var is_fleeing := false
 
 signal hp_changed(value)
 signal damaged(hp)
@@ -130,6 +131,7 @@ func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 		facing = moving_direction
 		speed = max_speed * speed_increment
 		new_friction = friction * friction_increment
+		moving_direction *= 1 if not is_fleeing else -1
 		target_velocity = moving_direction * speed
 	velocity = velocity.move_toward(target_velocity, new_friction * delta)
 
