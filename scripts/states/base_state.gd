@@ -8,9 +8,6 @@ class_name BaseState
 @export_group("Await")
 @export var time_range := Vector2.ZERO ##If greather than 0, await N seconds before completing the action. N = random time range between min (x) and max (y).
 @export var on_timeout: BaseState ##State to enable after timer runs out.
-@export_category("Params")
-@export var enter_params: Dictionary
-@export var exit_params: Dictionary
 
 var state_machine: StateMachine
 var current := false ##Check if the state is currently enabled.
@@ -44,14 +41,10 @@ func disable():
 	state_disabled.emit(self)
 
 func enter():
-	for key in enter_params:
-		var param = get_node_and_resource(key)
-		_set_value(param[0], param[2], enter_params[key])
+	pass
 
 func exit():
-	for key in exit_params:
-		var param = get_node_and_resource(key)
-		_set_value(param[0], param[2], enter_params[key])
+	pass
 
 func update(_delta: float):
 	pass
@@ -61,11 +54,6 @@ func physics_update(_delta: float):
 
 func complete():
 	state_completed.emit()
-
-func _set_value(node: Node, property: String, value: Variant) -> void:
-	var property_path = property.split(":")
-	print_debug("Set: ", property_path[1], value)
-	node.set(property_path[1], str_to_var(value))
 
 class TimedState:
 	var timer: Timer

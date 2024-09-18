@@ -68,15 +68,14 @@ on_timeout = NodePath("../move")
 script = ExtResource("8_50xo4")
 knockback_force = 500.0
 knockback_duration = 0.2
+on_enter = {
+"is_hurting": true
+}
+on_exit = {
+"is_hurting": false
+}
 time_range = Vector2(0.5, 0.5)
 on_timeout = NodePath("../move")
-enter_params = {
-"../../:is_hurting": "true"
-}
-exit_params = {
-"../../:is_falling": "true",
-"../../:is_hurting": "false"
-}
 
 [node name="animation" type="Node" parent="StateMachine/hurt" index="0" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("9_p7spi")
