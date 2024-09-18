@@ -12,7 +12,10 @@ class_name StateFollow
 		target = value
 		_reset_target_reached()
 		if is_node_ready():
-			print("%s is following: %s" %[entity_name, target])
+			if not flee:
+				print("%s is following: %s" %[entity_name, target])
+			else:
+				print("%s is fleeing from: %s" %[entity_name, target])
 @export var distance_threshold: = 21.0
 @export var on_target_reached: BaseState
 @export_category("Settings")
