@@ -124,7 +124,7 @@ _data = {
 "on": SubResource("Animation_txne3")
 }
 
-[node name="Lever" type="Node2D" node_paths=PackedStringArray("states")]
+[node name="Switch" type="Node2D" node_paths=PackedStringArray("states")]
 script = ExtResource("1_ef5kp")
 states = [NodePath("StateMachine/off"), NodePath("StateMachine/on")]
 switch_on_interaction = true
