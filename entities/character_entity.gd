@@ -14,6 +14,7 @@ class_name CharacterEntity
 @export_group("Health")
 @export var max_hp := 20
 @export var immortal := false
+@export var immortal_while_is_hurting := true
 @export var health_bar: PackedScene ## It needs the canvas_layer.
 @export var damage_flash_power = 0.3
 @export_group("Attack")
@@ -51,6 +52,7 @@ var facing := Vector2.DOWN:
 		for n in sync_rotation:
 			n.rotation = facing.angle()
 var speed := 0.0
+var start_jump_position := Vector2.ZERO
 
 @export_group("Actions")
 var is_moving: bool
@@ -68,7 +70,11 @@ var is_attacking: bool:
 		elif attack_cooldown_timer:
 			attack_cooldown_timer.start(attack_speed)
 var is_charging := false
-var is_hurting := false
+var is_hurting := false:
+	set(value):
+		is_hurting = value
+		if immortal_while_is_hurting:
+			immortal = is_hurting
 var is_blocked := false:
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
@@ -150,6 +156,7 @@ func move_towards(_position, speed_increment = 1.0, friction_increment = 1.0):
 
 func jump():
 	if not is_jumping:
+		start_jump_position = global_position
 		is_jumping = true
 		collision_mask ^= 1 << 2
 

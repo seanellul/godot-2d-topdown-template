@@ -15,3 +15,4 @@ one_shot = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
 shape = SubResource("RectangleShape2D_khsv3")
+debug_color = Color(0.627194, 0.393301, 0.907692, 0.42)
