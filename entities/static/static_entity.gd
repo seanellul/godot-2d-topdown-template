@@ -9,7 +9,8 @@ class_name StaticEntity
 @export var start_state_index := 0
 @export var switch_on_interaction := false ##Switches the states on interaction. Alternatively you can call switch_states manually.
 @export_subgroup("Update")
-@export var sync_switch: StaticEntity ##Switch the states of another entity when this entity switches states (eg: useful for controlling doors opening with a lever).
+@export var remote_switch: Array[StaticEntity] ##Switch the states of other entities when this entity switches states (eg: useful for controlling doors opening with a lever).
+
 var switch := false: ##For debugging purposes.
 	set(value):
 		switch_states()
@@ -50,8 +51,8 @@ func consume_content(content: DataItem):
 		entity.reduce_hp(-hp, self.name)
 
 func switch_states():
-	if sync_switch:
-		sync_switch.switch_states()
+	for rs in remote_switch:
+		rs.switch_states()
 	if states.size() == 0:
 		return
 	var next_state

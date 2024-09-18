@@ -98,9 +98,9 @@ shape = SubResource("CircleShape2D_hytaf")
 [node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
 
-[node name="Lever" parent="Props" index="3" node_paths=PackedStringArray("sync_switch") instance=ExtResource("6_gowkh")]
+[node name="Lever" parent="Props" index="3" node_paths=PackedStringArray("remote_switch") instance=ExtResource("6_gowkh")]
 position = Vector2(672, 80)
-sync_switch = NodePath("../Gate_Side")
+remote_switch = [NodePath("../Gate_Side")]
 
 [node name="Interactable" type="Area2D" parent="Props/Lever" index="5"]
 z_index = -1
