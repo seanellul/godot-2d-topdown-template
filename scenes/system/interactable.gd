@@ -21,15 +21,11 @@ var action_pressed = true
 
 signal interacted(entity: CharacterEntity)
 
-func _enter_tree() -> void:
+func _init() -> void:
 	monitoring = false
 	monitorable = true
 	collision_layer = 1 << 3 # set layer to layer "item"
 	z_index = -1
-	var coll = CollisionShape2D.new()
-	coll.debug_color = Color.YELLOW
-	add_child(coll)
-	coll.owner = get_tree().edited_scene_root
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
