@@ -162,10 +162,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21v20"]
 _data = {
-"RESET": SubResource("Animation_3660x"),
-"down": SubResource("Animation_npgvj"),
-"idle": SubResource("Animation_rgdri"),
-"up": SubResource("Animation_mq7wd")
+&"up": SubResource("Animation_mq7wd"),
+&"RESET": SubResource("Animation_3660x"),
+&"down": SubResource("Animation_npgvj"),
+&"idle": SubResource("Animation_rgdri")
 }
 
 [node name="Spikes" type="Sprite2D" node_paths=PackedStringArray("states")]
@@ -206,7 +206,7 @@ debug_color = Color(0.478431, 0.588235, 0, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_21v20")
+&"": SubResource("AnimationLibrary_21v20")
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]

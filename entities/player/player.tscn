@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://db4e7jrgweeab"]
+[gd_scene load_steps=24 format=3 uid="uid://db4e7jrgweeab"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" uid="uid://dayieakdoxw36" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
@@ -14,6 +14,13 @@
 [ext_resource type="Script" path="res://scripts/states/state_gameover.gd" id="11_rnd5j"]
 [ext_resource type="Script" path="res://scripts/states/state_fall.gd" id="12_2ttjo"]
 [ext_resource type="Script" path="res://scripts/states/state_impulse.gd" id="12_m3ydn"]
+[ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="15_55uo2"]
+[ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="16_18ijt"]
+[ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="17_7cmjv"]
+[ext_resource type="AnimationLibrary" uid="uid://baydqwuyhl514" path="res://entities/animations/char-idle.res" id="18_544qf"]
+[ext_resource type="AnimationLibrary" uid="uid://h0p3l5ccisyb" path="res://entities/animations/char-jump.res" id="19_3ga56"]
+[ext_resource type="AnimationLibrary" uid="uid://bbf4lu0d5n0bx" path="res://entities/animations/char-run.res" id="20_mgq23"]
+[ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="21_c67le"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
@@ -110,3 +117,14 @@ on_enter = {
 script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
+
+[node name="AnimationPlayer" parent="." index="8"]
+libraries = {
+&"": ExtResource("15_55uo2"),
+&"char-hurt": ExtResource("17_7cmjv"),
+&"char-jump": ExtResource("19_3ga56"),
+&"char-run": ExtResource("20_mgq23"),
+&"char-walk": ExtResource("21_c67le"),
+&"char-attack": ExtResource("16_18ijt"),
+&"char-idle": ExtResource("18_544qf")
+}
