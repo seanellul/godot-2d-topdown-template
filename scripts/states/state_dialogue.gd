@@ -8,3 +8,5 @@ class_name StateDialogue
 func enter():
 	if dialogue:
 		DialogueManager.show_dialogue_balloon(dialogue, title)
+		await DialogueManager.dialogue_ended
+		complete()

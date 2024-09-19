@@ -1,4 +1,5 @@
 extends BaseState
+## DEPRECATED - CURRENTLY NOT IN USE.
 class_name StateSetNodes
 
 @export var nodes_to_disable: Array[Node]

@@ -74,3 +74,4 @@ func _on_target_reached(_target):
 	if entity and on_target_reached:
 		entity.stop()
 		on_target_reached.enable()
+		complete()

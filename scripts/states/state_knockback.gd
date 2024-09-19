@@ -9,6 +9,7 @@ func enter():
   super.enter()
   entity.knockback(knockback_force)
   await get_tree().create_timer(knockback_duration).timeout
+  complete()
   entity.stop()
   entity.reset()
 
