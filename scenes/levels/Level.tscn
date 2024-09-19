@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://8u5h1ar8jt2f"]
+[gd_scene load_steps=6 format=3 uid="uid://8u5h1ar8jt2f"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_cq0rv"]
 [ext_resource type="PackedScene" uid="uid://b8ms04atei243" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
+[ext_resource type="Shader" path="res://shaders/water.gdshader" id="4_ud3dr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6olnu"]
+shader = ExtResource("4_ud3dr")
+shader_parameter/WATER_COL = Color(0.176471, 0.635294, 0.85098, 1)
+shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
+shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
+shader_parameter/alpha = 1.0
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/offset = Vector2(0, 0)
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("entities") groups=["level"]]
 y_sort_enabled = true
@@ -19,6 +30,10 @@ z_index = -1
 position = Vector2(-104, 12)
 tile_set = ExtResource("3_r7s3x")
 
+[node name="water" type="TileMapLayer" parent="Layers"]
+material = SubResource("ShaderMaterial_6olnu")
+tile_set = ExtResource("3_r7s3x")
+
 [node name="terrain2" type="TileMapLayer" parent="Layers"]
 tile_set = ExtResource("3_r7s3x")
 
@@ -27,7 +42,6 @@ tile_set = ExtResource("3_r7s3x")
 
 [node name="top" type="TileMapLayer" parent="Layers"]
 z_index = 10
-y_sort_enabled = true
 tile_set = ExtResource("3_r7s3x")
 y_sort_origin = 10
 

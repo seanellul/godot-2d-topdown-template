@@ -14,13 +14,13 @@
 [ext_resource type="Script" path="res://scripts/states/state_gameover.gd" id="11_rnd5j"]
 [ext_resource type="Script" path="res://scripts/states/state_fall.gd" id="12_2ttjo"]
 [ext_resource type="Script" path="res://scripts/states/state_impulse.gd" id="12_m3ydn"]
-[ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="15_55uo2"]
-[ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="16_18ijt"]
-[ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="17_7cmjv"]
-[ext_resource type="AnimationLibrary" uid="uid://baydqwuyhl514" path="res://entities/animations/char-idle.res" id="18_544qf"]
-[ext_resource type="AnimationLibrary" uid="uid://h0p3l5ccisyb" path="res://entities/animations/char-jump.res" id="19_3ga56"]
-[ext_resource type="AnimationLibrary" uid="uid://bbf4lu0d5n0bx" path="res://entities/animations/char-run.res" id="20_mgq23"]
-[ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="21_c67le"]
+[ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="15_dnkva"]
+[ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="16_ua5wa"]
+[ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="17_2a6nx"]
+[ext_resource type="AnimationLibrary" uid="uid://baydqwuyhl514" path="res://entities/animations/char-idle.res" id="18_tbvb5"]
+[ext_resource type="AnimationLibrary" uid="uid://h0p3l5ccisyb" path="res://entities/animations/char-jump.res" id="19_tp858"]
+[ext_resource type="AnimationLibrary" uid="uid://bbf4lu0d5n0bx" path="res://entities/animations/char-run.res" id="20_cmful"]
+[ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="21_n11ms"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
@@ -120,11 +120,11 @@ animation = "hurt"
 
 [node name="AnimationPlayer" parent="." index="8"]
 libraries = {
-&"": ExtResource("15_55uo2"),
-&"char-hurt": ExtResource("17_7cmjv"),
-&"char-jump": ExtResource("19_3ga56"),
-&"char-run": ExtResource("20_mgq23"),
-&"char-walk": ExtResource("21_c67le"),
-&"char-attack": ExtResource("16_18ijt"),
-&"char-idle": ExtResource("18_544qf")
+&"": ExtResource("15_dnkva"),
+&"char-jump": ExtResource("19_tp858"),
+&"char-run": ExtResource("20_cmful"),
+&"char-walk": ExtResource("21_n11ms"),
+&"char-hurt": ExtResource("17_2a6nx"),
+&"char-attack": ExtResource("16_ua5wa"),
+&"char-idle": ExtResource("18_tbvb5")
 }

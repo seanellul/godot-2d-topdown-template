@@ -162,10 +162,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21v20"]
 _data = {
-&"up": SubResource("Animation_mq7wd"),
-&"RESET": SubResource("Animation_3660x"),
 &"down": SubResource("Animation_npgvj"),
-&"idle": SubResource("Animation_rgdri")
+&"idle": SubResource("Animation_rgdri"),
+&"up": SubResource("Animation_mq7wd"),
+&"RESET": SubResource("Animation_3660x")
 }
 
 [node name="Spikes" type="Sprite2D" node_paths=PackedStringArray("states")]
