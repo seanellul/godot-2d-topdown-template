@@ -4,8 +4,8 @@ class_name StateEntity
 
 @export var disable_entity_state_machine := false ##Disables/enables the StateMachine of the entity linked to this state.
 @export_category("Properties")
-@export var on_enter: Dictionary ##Set some properties to the entity on entering state.
-@export var on_exit: Dictionary ##Set some properties to the entity on exiting state.
+@export var on_enter: Dictionary[String, Variant] ##Set some properties to the entity on entering state.
+@export var on_exit: Dictionary[String, Variant] ##Set some properties to the entity on exiting state.
 
 var entity: CharacterEntity ##The entity to apply this state. If left empty and this state is child of a CharacterEntity, that entity will be taken.
 var entity_name := ""

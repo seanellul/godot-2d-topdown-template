@@ -9,6 +9,7 @@ class_name StateMachine
 
 @onready var n_of_states = get_child_count()
 
+var initialized := false
 var previous_state: BaseState = null
 var states: Array[BaseState]
 var params = {}
@@ -21,10 +22,12 @@ func _ready():
 
 func _init_states():
 	for state in get_children(true):
+		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
 		state.state_changed.connect(_on_state_changed)
 		state.state_disabled.connect(_on_state_disabled)
 		state.state_completed.connect(_on_state_completed)
+		initialized = true
 
 func _get_states():
 	if !current_state or current_state and !current_state.active:
@@ -41,16 +44,15 @@ func _on_state_changed(new_state):
 	_exit_states()
 	if current_state:
 		previous_state = current_state
-		previous_state.current = false
+		previous_state.process_mode = PROCESS_MODE_DISABLED
 	current_state = new_state
-	current_state.current = true
+	current_state.process_mode = PROCESS_MODE_INHERIT
 	_get_states()
 	_enter_states()
 
-func _on_state_disabled(state):
+func _on_state_disabled(_state):
 	_exit_states()
 	states = []
-	state.current = false
 	current_state = null
 
 func _on_state_completed():
@@ -74,13 +76,13 @@ func _exit_states():
 		state.exit()
 
 func _update_states(delta):
-	if disabled:
+	if disabled or not initialized:
 		return
 	for state in states:
 		state.update(delta)
 
 func _physics_update_states(delta):
-	if disabled:
+	if disabled or not initialized:
 		return
 	for state in states:
 		state.physics_update(delta)
@@ -97,13 +99,15 @@ func receive_data(data: DataState):
 		var state_node: BaseState = get_child(data.state_index)
 		state_node.enable(params)
 
-func enable_next_state():
-	var current_state_index = current_state.get_index()
-	var next_index = current_state_index + 1
+func enable_next_state(_params = null):
+	var next_index = 0
+	if current_state:
+		var current_state_index = current_state.get_index()
+		next_index = current_state_index + 1
 	if next_index < n_of_states:
 		var next_state: BaseState = get_child(next_index)
 		if next_state:
-			next_state.enable(params)
+			next_state.enable(_params)
 	elif sequence and current_state:
 		current_state.disable()
 

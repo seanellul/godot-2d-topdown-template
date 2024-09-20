@@ -10,7 +10,6 @@ class_name BaseState
 @export var on_timeout: BaseState ##State to enable after timer runs out.
 
 var state_machine: StateMachine
-var current := false ##Check if the state is currently enabled.
 var timer: TimedState
 
 signal state_changed(new_state)
@@ -24,9 +23,9 @@ func _enter_tree():
 		timer = TimedState.new()
 		timer.create(self, time_range)
 
-func enable(_params = null): ##Enables this state.
-	if _params:
-		state_machine.params = _params
+func enable(params = null): ##Enables this state.
+	if params:
+		state_machine.params = params
 	state_changed.emit(self)
 	if not await_completion and not timer:
 		complete()
@@ -38,6 +37,7 @@ func enable(_params = null): ##Enables this state.
 		complete()
 
 func disable():
+	process_mode = Node.PROCESS_MODE_DISABLED
 	state_disabled.emit(self)
 
 func enter():

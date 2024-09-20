@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=27 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_8mcj0"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/states/base_state.gd" id="9_o85tp"]
 [ext_resource type="PackedScene" uid="uid://dymx12daw3oyr" path="res://entities/static/gate_front_up.tscn" id="10_r4ee1"]
 [ext_resource type="PackedScene" uid="uid://5788n4wk6fp1" path="res://entities/static/gate_front_down.tscn" id="12_70ge1"]
+[ext_resource type="Script" path="res://scenes/system/event_controller.gd" id="14_yw5ce"]
 
 [sub_resource type="Resource" id="Resource_s81bk"]
 script = ExtResource("3_myhjs")
@@ -166,7 +167,10 @@ level_key = "LEVEL_2"
 destination_path = "Transfers/Transfer_West"
 direction = 4
 
-[node name="PlayerPath" type="Area2D" parent="Events" index="0"]
+[node name="Event_01" type="Node" parent="Events" index="0"]
+script = ExtResource("14_yw5ce")
+
+[node name="Interactable" type="Area2D" parent="Events/Event_01" index="0"]
 z_index = -1
 position = Vector2(360, 288)
 collision_layer = 8
@@ -174,14 +178,14 @@ monitoring = false
 script = ExtResource("6_16m3t")
 action_trigger = "interact"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/PlayerPath" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Event_01/Interactable" index="0"]
 shape = SubResource("RectangleShape2D_4e7qi")
 
-[node name="StateMachine" type="Node" parent="Events/PlayerPath" index="1"]
+[node name="StateMachine" type="Node" parent="Events/Event_01" index="1"]
 script = ExtResource("7_e6yb8")
 sequence = true
 
-[node name="player_path" type="Node" parent="Events/PlayerPath/StateMachine" index="0" node_paths=PackedStringArray("path")]
+[node name="player_path" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("path")]
 script = ExtResource("8_285dh")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
@@ -189,13 +193,13 @@ friction_multiplier = 4.0
 disable_entity_state_machine = true
 await_completion = true
 
-[node name="wait" type="Node" parent="Events/PlayerPath/StateMachine" index="1"]
+[node name="wait" type="Node" parent="Events/Event_01/StateMachine" index="1"]
 script = ExtResource("9_o85tp")
-active = false
 time_range = Vector2(1, 1)
 
-[node name="enable_entity" type="Node" parent="Events/PlayerPath/StateMachine" index="2"]
+[node name="enable_entity" type="Node" parent="Events/Event_01/StateMachine" index="2"]
 script = ExtResource("9_5gqp7")
 
-[node name="Path2D" type="Path2D" parent="Events/PlayerPath" index="2"]
+[node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
+position = Vector2(360, 288)
 curve = SubResource("Curve2D_uycfk")

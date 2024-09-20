@@ -19,7 +19,6 @@ var switch := false: ##For debugging purposes.
 
 var entity: PlayerEntity
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if interactable:
 		interactable.interacted.connect(_handle_interaction)
