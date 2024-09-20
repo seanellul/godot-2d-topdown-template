@@ -139,11 +139,11 @@ func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 	if is_attacking or is_charging:
 		return
 	var delta = get_process_delta_time()
-	var target_velocity = Vector2(0, 0)
+	var target_velocity = Vector2.ZERO
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	var new_friction = friction
 	moving_direction *= 1 if not is_fleeing else -1
-	if moving_direction:
+	if moving_direction != Vector2.ZERO:
 		facing = moving_direction
 		speed = max_speed * speed_increment
 		new_friction = friction * friction_increment
@@ -205,18 +205,21 @@ func hurt(): ##IMPORTANT: should be called always after reduce_hp.
 	if on_hurt:
 		on_hurt.enable()
 
-func knockback(force:= 0.0):
-	velocity += -facing * force
+func add_impulse(force:= 0.0):
+	velocity += facing * force
 
 func return_to_safe_position():
 	if safe_position != Vector2.ZERO:
 		global_position = safe_position
 
-func reset():
+func reset_values(): ##Useful to reset some entity values to an initial state.
 	pass
 
-func stop():
-	velocity = Vector2.ZERO
+func stop(smoothly := false): ##Stops the entity, setting its velocity to 0.
+	if smoothly:
+		move(Vector2.ZERO)
+	else:
+		velocity = Vector2.ZERO
 
 func disable_entity(value: bool, delay = 0.0):
 	await get_tree().create_timer(delay).timeout

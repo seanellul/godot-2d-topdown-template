@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://db4e7jrgweeab"]
+[gd_scene load_steps=23 format=3 uid="uid://db4e7jrgweeab"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" uid="uid://dayieakdoxw36" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/states/state_input_listener.gd" id="4_b1v48"]
 [ext_resource type="Script" path="res://entities/player/interaction_handler.gd" id="5_ksqkr"]
 [ext_resource type="PackedScene" uid="uid://cmdq8met1qt2s" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
-[ext_resource type="Script" path="res://scripts/states/state_knockback.gd" id="8_50xo4"]
 [ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="8_bp05k"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="9_p7spi"]
 [ext_resource type="Script" path="res://scripts/states/state_gameover.gd" id="11_rnd5j"]
@@ -74,9 +73,9 @@ time_range = Vector2(0.2, 0.2)
 on_timeout = NodePath("../move")
 
 [node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_timeout")]
-script = ExtResource("8_50xo4")
-knockback_force = 500.0
-knockback_duration = 0.2
+script = ExtResource("12_m3ydn")
+impulse_force = -500.0
+impulse_duration = 0.2
 on_enter = {
 "is_hurting": true
 }

@@ -53,7 +53,7 @@ func remove_item_from_inventory(item_name: String, quantity: int):
 			inventory.remove_at(item_index)
 			print("%s removed from %s's inventory! q: 0" %[item_name, self.name])
 
-func reset():
+func reset_values():
 	is_charging = false
 	is_attacking = false
 
