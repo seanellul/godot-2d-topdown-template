@@ -69,6 +69,12 @@ script = ExtResource("4_b1v48")
 
 [node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("12_m3ydn")
+on_enter = {
+"is_attacking": true
+}
+on_exit = {
+"Enter vais_attackinglue...": false
+}
 time_range = Vector2(0.2, 0.2)
 on_timeout = NodePath("../move")
 
@@ -94,6 +100,7 @@ animation = "hurt"
 script = ExtResource("12_2ttjo")
 damage = 2
 on_enter = {
+"is_falling": true,
 "visible": false
 }
 on_exit = {

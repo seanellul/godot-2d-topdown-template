@@ -52,23 +52,14 @@ var facing := Vector2.DOWN:
 		for n in sync_rotation:
 			n.rotation = facing.angle()
 var speed := 0.0
+var flee := false
 var safe_position := Vector2.ZERO
 
 @export_group("Actions")
 var is_moving: bool
 var is_running: bool
-var is_jumping: bool:
-	set(value):
-		is_jumping = value
-var is_attacking: bool:
-	set(value):
-		is_attacking = value
-		if value == true:
-			attack_cooldown_timer.stop()
-			if on_attack:
-				on_attack.enable()
-		elif attack_cooldown_timer:
-			attack_cooldown_timer.start(attack_speed)
+var is_jumping: bool
+var is_attacking: bool
 var is_charging := false
 var is_hurting := false:
 	set(value):
@@ -78,12 +69,7 @@ var is_hurting := false:
 var is_blocked := false:
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
-var is_fleeing := false
-var is_falling := false:
-	set(value):
-		is_falling = value
-		if is_falling and on_fall:
-			on_fall.enable()
+var is_falling := false
 
 signal hp_changed(value)
 signal damaged(hp)
@@ -101,8 +87,7 @@ func _process(_delta):
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO
 	is_running = is_moving and speed > max_speed
-	if not is_falling:
-		is_falling = fall_detector.is_colliding() and not is_jumping
+	check_falling()
 	move_and_slide()
 
 func _init_health_bar():
@@ -142,7 +127,7 @@ func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 	var target_velocity = Vector2.ZERO
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	var new_friction = friction
-	moving_direction *= 1 if not is_fleeing else -1
+	moving_direction *= 1 if not flee else -1
 	if moving_direction != Vector2.ZERO:
 		facing = moving_direction
 		speed = max_speed * speed_increment
@@ -168,10 +153,13 @@ func attack():
 	if is_attacking or is_jumping or attack_cooldown_timer.time_left > 0:
 		return
 	else:
-		is_attacking = true
+		attack_cooldown_timer.stop()
+		if on_attack:
+			on_attack.enable()
 
 func end_attack():
-	is_attacking = false
+	if attack_cooldown_timer:
+			attack_cooldown_timer.start(attack_speed)
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 	var nodes_to_flash: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
@@ -200,6 +188,10 @@ func recover_hp(value := 0, from = ""):
 		hp = max_hp
 	if on_recovery:
 		on_recovery.enable()
+
+func check_falling():
+	if not is_falling and not is_jumping and fall_detector.is_colliding() and on_fall:
+		on_fall.enable()
 
 func hurt(): ##IMPORTANT: should be called always after reduce_hp.
 	if on_hurt:

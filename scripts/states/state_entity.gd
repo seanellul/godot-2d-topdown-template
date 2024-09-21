@@ -2,8 +2,8 @@ extends BaseState
 ##Base class for all entity states.
 class_name StateEntity
 
-@export var disable_entity_state_machine := false ##Disables/enables the StateMachine of the entity linked to this state.
-@export_category("Properties")
+@export var disable_entity_state_machine := false ##Disables/enables the StateMachine of the entity linked to this state. Useful if this state is controlling an entity that has attached its own StateMachine.
+@export_category("Set Properties")
 @export var on_enter: Dictionary[String, Variant] ##Set some properties to the entity on entering state.
 @export var on_exit: Dictionary[String, Variant] ##Set some properties to the entity on exiting state.
 

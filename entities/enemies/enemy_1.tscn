@@ -8,5 +8,5 @@ max_speed = 100.0
 friction = 1500.0
 max_hp = 10
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("2_yaoeo")
