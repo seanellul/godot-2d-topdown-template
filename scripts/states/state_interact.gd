@@ -18,7 +18,7 @@ class_name StateInteraction
 @export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 
 var entity: CharacterEntity
-var interacting := false
+static var interacting := false
 
 func enter():
 	if area:

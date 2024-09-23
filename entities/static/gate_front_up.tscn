@@ -1,69 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dymx12daw3oyr"]
+[gd_scene load_steps=11 format=3 uid="uid://dymx12daw3oyr"]
 
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://entities/static/blocks.png" id="1_5cyoo"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_4jk5e"]
-[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="2_usx66"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_h0g83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
 size = Vector2(48, 10)
-
-[sub_resource type="Animation" id="Animation_u6bpn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_2uv2s"]
-resource_name = "down"
-length = 0.06667
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/idle_down")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(2, 0), Vector2i(1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_3vpsv"]
 resource_name = "idle_down"
@@ -151,16 +93,73 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6wxc"]
-_data = {
-"RESET": SubResource("Animation_u6bpn"),
-"down": SubResource("Animation_2uv2s"),
-"idle_down": SubResource("Animation_3vpsv"),
-"idle_up": SubResource("Animation_oct5m"),
-"up": SubResource("Animation_muw3c")
+[sub_resource type="Animation" id="Animation_u6bpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 0)]
 }
 
-[node name="Gate_Front" type="Sprite2D" node_paths=PackedStringArray("states")]
+[sub_resource type="Animation" id="Animation_2uv2s"]
+resource_name = "down"
+length = 0.06667
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/idle_down")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"enable"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(2, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6wxc"]
+_data = {
+&"up": SubResource("Animation_muw3c"),
+&"RESET": SubResource("Animation_u6bpn"),
+&"down": SubResource("Animation_2uv2s"),
+&"idle_up": SubResource("Animation_oct5m"),
+&"idle_down": SubResource("Animation_3vpsv")
+}
+
+[node name="Gate_Front" type="Sprite2D"]
 y_sort_enabled = true
 texture = ExtResource("1_5cyoo")
 offset = Vector2(0, -13)
@@ -168,8 +167,6 @@ hframes = 4
 frame = 3
 region_enabled = true
 region_rect = Rect2(0, 0, 192, 48)
-script = ExtResource("2_usx66")
-states = [NodePath("StateMachine/up"), NodePath("StateMachine/down")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 2)
@@ -182,7 +179,7 @@ shape = SubResource("RectangleShape2D_pt5lc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_w6wxc")
+&"": SubResource("AnimationLibrary_w6wxc")
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state") groups=["save"]]

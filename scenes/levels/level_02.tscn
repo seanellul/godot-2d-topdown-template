@@ -1,28 +1,14 @@
-[gd_scene load_steps=17 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=11 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_5wwg2"]
-[ext_resource type="Script" path="res://items/content_item.gd" id="3_46s3h"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_t1lh4"]
-[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://entities/static/chest_OLD.tscn" id="3_tv8d6"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
-[ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_glfvo"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" path="res://scripts/states/state_wander.gd" id="6_rdt3e"]
-[ext_resource type="Resource" uid="uid://dghubnld0jtgg" path="res://items/weapons/sword_1.tres" id="6_ywhth"]
 [ext_resource type="Script" path="res://scripts/states/state_follow.gd" id="7_n4gru"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_po55j"]
-
-[sub_resource type="Resource" id="Resource_x0mcm"]
-script = ExtResource("3_46s3h")
-item = ExtResource("4_glfvo")
-quantity = 2
-
-[sub_resource type="Resource" id="Resource_iwour"]
-script = ExtResource("3_46s3h")
-item = ExtResource("6_ywhth")
-quantity = 1
 
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
 _data = {
@@ -46,12 +32,6 @@ tile_map_data = PackedByteArray("AAAeAP7/CQAGAAYAAAAeAP3/CQABAAYAAAAdAP7/CQABAAc
 
 [node name="Key" parent="Props" index="0" instance=ExtResource("2_5wwg2")]
 position = Vector2(192, 176)
-contents = Array[ExtResource("3_46s3h")]([SubResource("Resource_x0mcm")])
-
-[node name="Chest" parent="Props" index="1" instance=ExtResource("3_tv8d6")]
-position = Vector2(224, 32)
-region_rect = Rect2(0, 114, 210, 38)
-contents = Array[ExtResource("3_46s3h")]([SubResource("Resource_iwour")])
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(224, 352)

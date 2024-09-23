@@ -14,36 +14,6 @@ size = Vector2(42, 42)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4cjj"]
 size = Vector2(32, 32)
 
-[sub_resource type="Animation" id="Animation_npgvj"]
-resource_name = "down"
-length = 0.100003
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/idle")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_rgdri"]
 resource_name = "idle"
 length = 0.0333367
@@ -127,12 +97,42 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_npgvj"]
+resource_name = "down"
+length = 0.100003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/idle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"enable"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21v20"]
 _data = {
-&"idle": SubResource("Animation_rgdri"),
 &"up": SubResource("Animation_mq7wd"),
 &"RESET": SubResource("Animation_3660x"),
-&"down": SubResource("Animation_npgvj")
+&"down": SubResource("Animation_npgvj"),
+&"idle": SubResource("Animation_rgdri")
 }
 
 [sub_resource type="Resource" id="Resource_01c67"]
@@ -182,12 +182,7 @@ script = ExtResource("6_5lcsm")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../up")
 action_trigger = "run"
-has_item = null
 one_shot = false
-reset_delay = null
-active = null
-await_completion = null
-time_range = null
 
 [node name="animation_idle" type="Node" parent="StateMachine/idle" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")

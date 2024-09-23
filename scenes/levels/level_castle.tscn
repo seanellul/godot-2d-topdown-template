@@ -1,11 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://vvbcy3c5dej4"]
+[gd_scene load_steps=11 format=4 uid="uid://vvbcy3c5dej4"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_giuiu"]
 [ext_resource type="PackedScene" uid="uid://cfb8430tqc358" path="res://entities/static/door.tscn" id="2_ruot3"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="3_x788k"]
-[ext_resource type="PackedScene" uid="uid://qsqg6qm4ts7x" path="res://entities/static/chest_OLD.tscn" id="4_vn8lb"]
-[ext_resource type="Script" path="res://items/content_item.gd" id="5_tityn"]
-[ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="6_ycemu"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="7_jtrhe"]
 [ext_resource type="PackedScene" uid="uid://dw4xkxqhvmyvg" path="res://entities/static/chest.tscn" id="7_ob3gd"]
 [ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="7_skwgl"]
@@ -15,14 +12,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yogbw"]
 size = Vector2(96, 26)
-
-[sub_resource type="Resource" id="Resource_stwvv"]
-script = ExtResource("5_tityn")
-item = ExtResource("6_ycemu")
-quantity = 1
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_a23tl"]
-radius = 22.6274
 
 [node name="Level_Castle" instance=ExtResource("1_giuiu")]
 
@@ -56,23 +45,7 @@ position = Vector2(0, 44)
 shape = SubResource("RectangleShape2D_yogbw")
 debug_color = Color(0.568058, 0.556857, 1.92523e-07, 0.42)
 
-[node name="Chest" parent="Props" index="1" instance=ExtResource("4_vn8lb")]
-position = Vector2(272, 32)
-contents = Array[ExtResource("5_tityn")]([SubResource("Resource_stwvv")])
-
-[node name="Interactable" type="Area2D" parent="Props/Chest" index="3"]
-z_index = -1
-collision_layer = 8
-monitoring = false
-script = ExtResource("3_x788k")
-direction = 8
-action_trigger = "interact"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chest/Interactable" index="0"]
-position = Vector2(0, 16)
-shape = SubResource("CircleShape2D_a23tl")
-
-[node name="Chest2" parent="Props" index="2" instance=ExtResource("7_ob3gd")]
+[node name="Chest" parent="Props" index="1" instance=ExtResource("7_ob3gd")]
 position = Vector2(172, 79)
 
 [node name="P1" parent="Entities" index="0"]
