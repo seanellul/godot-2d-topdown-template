@@ -10,8 +10,8 @@ class_name StateEntity
 var entity: CharacterEntity ##The entity to apply this state. If left empty and this state is child of a CharacterEntity, that entity will be taken.
 var entity_name := ""
 
-func enter() -> void:
-	super.enter()
+func enter(_params = null) -> void:
+	super.enter(_params)
 	if not entity:
 		entity = _try_to_get_entity(self)
 	if entity:

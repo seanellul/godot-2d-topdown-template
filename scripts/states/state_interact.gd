@@ -20,12 +20,12 @@ class_name StateInteraction
 var entity: CharacterEntity
 var interacting := false
 
-func enter():
+func enter(params = null):
 	if area:
 		area.area_entered.connect(_set_entity)
 		area.area_exited.connect(_reset_entity)
-	if state_machine.params.has("entity"):
-		entity = state_machine.params["entity"] 
+	if params.has("entity"):
+		entity = params["entity"]
 
 func exit():
 	if area:

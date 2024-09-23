@@ -36,7 +36,7 @@ func disable():
 	if state_machine:
 		state_machine.disable_state(self)
 
-func enter():
+func enter(_params = null):
 	pass
 
 func exit():

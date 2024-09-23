@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=29 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_8mcj0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://entities/static/gate_side_up.tscn" id="6_5b3ge"]
 [ext_resource type="Script" path="res://scenes/system/interactable.gd" id="6_16m3t"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://entities/static/switch.tscn" id="6_gowkh"]
+[ext_resource type="PackedScene" uid="uid://dw4xkxqhvmyvg" path="res://entities/static/chest.tscn" id="6_kdswq"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
 [ext_resource type="Resource" uid="uid://cpyqrspyr8pq3" path="res://items/potion.tres" id="8_6qcnt"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
@@ -20,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bpx2tjwjwcoci" path="res://entities/static/switch_v2.tscn" id="13_64f3m"]
 [ext_resource type="Script" path="res://scenes/system/event_controller.gd" id="14_yw5ce"]
 
-[sub_resource type="Resource" id="Resource_s81bk"]
+[sub_resource type="Resource" id="Resource_qmq7a"]
 script = ExtResource("3_myhjs")
 item = ExtResource("4_qx1j4")
 quantity = 1
@@ -28,7 +29,7 @@ quantity = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_hytaf"]
 radius = 24.0
 
-[sub_resource type="Resource" id="Resource_qmq7a"]
+[sub_resource type="Resource" id="Resource_kcxdj"]
 script = ExtResource("3_myhjs")
 item = ExtResource("4_qx1j4")
 quantity = 1
@@ -67,23 +68,7 @@ tile_map_data = PackedByteArray("AAAAAAAACAAAAAIAAAABAAAACAACAAIAAAABAP//CAACAAA
 [node name="top" parent="Layers" index="4"]
 tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAEAAAAWAP3/CQABAAAAAAAVAP7/CQABAAIAAAAVAP3/CQABAAAAAAAUAP7/CQABAAIAAAAUAP3/CQABAAAAAAATAP7/CQABAAIAAAATAP3/CQABAAAAAAASAP7/CQABAAIAAAASAP3/CQABAAAAAAARAP7/CQABAAIAAAARAP3/CQABAAAAAAAQAP7/CQABAAIAAAAQAP3/CQABAAAAAAAPAP7/CQABAAIAAAAPAP3/CQABAAAAAAAOAP7/CQABAAIAAAAOAP3/CQABAAAAAAANAP7/CQABAAIAAAANAP3/CQABAAAAAAAMAP7/CQABAAIAAAAMAP3/CQABAAAAAAALAP7/CQABAAIAAAALAP3/CQABAAAAAAAKAP7/CQABAAIAAAAKAP3/CQABAAAAAAAJAP7/CQABAAIAAAAJAP3/CQABAAAAAAAIAP7/CQABAAIAAAAIAP3/CQABAAAAAAAHAP7/CQABAAIAAAAHAP3/CQABAAAAAAAGAP7/CQABAAIAAAAGAP3/CQABAAAAAAAFAP7/CQABAAIAAAAFAP3/CQABAAAAAAAEAP7/CQAAAAIAAAAEAP3/CQAAAAAAAAABAP7/CQACAAIAAAABAP3/CQACAAAAAAAAAP7/CQABAAIAAAAAAP3/CQABAAAAAAD///7/CQAFAAEAAAD///3/CQABAAAAAAD+//7/CQAAAAEAAAD+//3/CQAAAAAAAAAXAAsACQABAAIAAAAXAAoACQABAAEAAAAXAAkACQABAAEAAAAXAAgACQABAAAAAAAXAAMACQABAAIAAAAXAAIACQAFAAIAAAAXAAEACQACAAEAAAAXAAAACQACAAEAAAAXAP//CQACAAEAAAAWAAsACQABAAIAAAAWAAoACQAGAAIAAAAWAAkACQAAAAEAAAAWAAgACQAAAAAAAAAWAAMACQAAAAIAAAAWAAIACQAAAAEAAAAWAAEACQAAAAEAAAAWAAAACQAAAAEAAAAWAP//CQAAAAEAAAAVAAsACQABAAIAAAAVAAoACQABAAAAAAAUAAsACQABAAIAAAAUAAoACQABAAAAAAATAAsACQABAAIAAAATAAoACQABAAAAAAASAAsACQABAAIAAAASAAoACQABAAAAAAARAAsACQABAAIAAAARAAoACQABAAAAAAAQAAsACQABAAIAAAAQAAoACQABAAAAAAAPAAsACQABAAIAAAAPAAoACQABAAAAAAAOAAsACQABAAIAAAAOAAoACQABAAAAAAANAAsACQABAAIAAAANAAoACQABAAAAAAAMAAsACQABAAIAAAAMAAoACQABAAAAAAALAAsACQABAAIAAAALAAoACQABAAAAAAAKAAsACQABAAIAAAAKAAoACQABAAAAAAAJAAsACQABAAIAAAAJAAoACQABAAAAAAAIAAsACQABAAIAAAAIAAoACQABAAAAAAAHAAsACQABAAIAAAAHAAoACQABAAAAAAAGAAsACQABAAIAAAAGAAoACQABAAAAAAAFAAsACQABAAIAAAAFAAoACQABAAAAAAAEAAsACQAAAAIAAAAEAAoACQAAAAAAAAABAAsACQACAAIAAAABAAoACQACAAAAAAAAAAsACQABAAIAAAAAAAoACQABAAAAAAD//wsACQABAAIAAAD//woACQAFAAIAAAD+/wsACQAAAAIAAAD+/woACQAAAAEAAAD//wkACQACAAEAAAD//wgACQACAAEAAAD//wcACQACAAEAAAD//wYACQACAAEAAAD//wUACQACAAEAAAD//wQACQACAAEAAAD//wMACQACAAEAAAD//wIACQACAAEAAAD//wEACQACAAEAAAD//wAACQACAAEAAAD/////CQACAAEAAAD+/wkACQAAAAEAAAD+/wgACQAAAAEAAAD+/wcACQAAAAEAAAD+/wYACQAAAAEAAAD+/wUACQAAAAEAAAD+/wQACQAAAAEAAAD+/wMACQAAAAEAAAD+/wIACQAAAAEAAAD+/wEACQAAAAEAAAD+/wAACQAAAAEAAAD+////CQAAAAEAAAAYAAMACQACAAIAAAAYAAIACQACAAAAAAAYAAgACQACAAAAAAAYAAkACQACAAEAAAAYAAsACQACAAIAAAAYAAoACQACAAEAAAA=")
 
-[node name="Chest" parent="Props" index="0" instance=ExtResource("5_x1hn0")]
-position = Vector2(360, 129)
-contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_s81bk")])
-
-[node name="Interactable" type="Area2D" parent="Props/Chest" index="3"]
-z_index = -1
-collision_layer = 8
-monitoring = false
-script = ExtResource("6_16m3t")
-direction = 8
-action_trigger = "interact"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chest/Interactable" index="0"]
-position = Vector2(0, 16)
-shape = SubResource("CircleShape2D_hytaf")
-
-[node name="Chest2" parent="Props" index="1" instance=ExtResource("5_x1hn0")]
+[node name="Chest2" parent="Props" index="0" instance=ExtResource("5_x1hn0")]
 position = Vector2(424, 32)
 region_rect = Rect2(0, 114, 210, 38)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_qmq7a")])
@@ -100,6 +85,12 @@ has_item = "key"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chest2/Interactable" index="0"]
 position = Vector2(0, 16)
 shape = SubResource("CircleShape2D_hytaf")
+
+[node name="Chest3" parent="Props" index="1" instance=ExtResource("6_kdswq")]
+position = Vector2(417, 133)
+
+[node name="get_content" parent="Props/Chest3/StateMachine" index="2"]
+contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_kcxdj")])
 
 [node name="Spikes" parent="Props" index="2" instance=ExtResource("4_avl7y")]
 position = Vector2(536, 160)
@@ -205,3 +196,5 @@ script = ExtResource("9_5gqp7")
 [node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
 position = Vector2(360, 288)
 curve = SubResource("Curve2D_uycfk")
+
+[editable path="Props/Chest3"]

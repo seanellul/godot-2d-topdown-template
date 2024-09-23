@@ -6,7 +6,7 @@ class_name StateTween
 @export var parallel := true
 @export var loops := 1
 
-func enter():
+func enter(_params = null):
 	if not object:
 		return
 	for t in tweens:

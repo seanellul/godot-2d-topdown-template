@@ -1,10 +1,14 @@
-extends StateEntity
+extends BaseState
 ##Consumes or adds contents to player's inventory.
 class_name StateContents
 
 @export var contents: Array[ContentItem] ##A list of contents to get.
 
-func enter():
+var entity: CharacterEntity
+
+func enter(params = null):
+	if params.has("entity"):
+		entity = params["entity"]
 	get_contents()
 
 func get_contents():

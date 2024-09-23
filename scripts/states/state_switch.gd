@@ -8,7 +8,7 @@ var switch := false: ##For debugging purposes.
 	set(value):
 		switch_states()
 
-func enter():
+func enter(_params = null):
 	switch_states()
 
 func switch_states():
