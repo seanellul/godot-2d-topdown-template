@@ -20,12 +20,13 @@ class_name StateInteraction
 var entity: CharacterEntity
 var interacting := false
 
-func enter(params = null):
+func enter(_params = null):
 	if area:
 		area.area_entered.connect(_set_entity)
 		area.area_exited.connect(_reset_entity)
-	if params.has("entity"):
-		entity = params["entity"]
+		var areas: Array[Area2D] = area.get_overlapping_areas()
+		for a in areas:
+			_set_entity(a)
 
 func exit():
 	if area:
@@ -37,8 +38,7 @@ func _set_entity(_area):
 	var parent = _area.get_parent()
 	if parent is CharacterEntity:
 		entity = parent
-		if action_trigger.is_empty():
-			_try_to_interact()
+		_try_to_interact()
 
 func _reset_entity(_area):
 	entity = null
@@ -55,6 +55,8 @@ func _try_to_interact():
 
 func _can_interact() -> bool:
 	if not entity or interacting:
+		return false
+	if not action_trigger.is_empty() and not Input.is_action_pressed(action_trigger):
 		return false
 	# Check if entity is facing the correct direction
 	var entity_dir = Const.DIR_BIT[entity.facing.floor()]

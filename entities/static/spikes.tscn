@@ -1,50 +1,18 @@
 [gd_scene load_steps=16 format=3 uid="uid://dpbc6iw62na4q"]
 
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://entities/static/blocks.png" id="1_2ngps"]
-[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_q6b6s"]
-[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_b2v87"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_18kok"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_s42s2"]
 [ext_resource type="Resource" uid="uid://cvh325i7w1lhf" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_op40x"]
-
-[sub_resource type="Resource" id="Resource_2t4s2"]
-script = ExtResource("3_s42s2")
-item = ExtResource("4_fgbx5")
-quantity = 0
+[ext_resource type="Script" path="res://scripts/states/state_content.gd" id="5_epmu4"]
+[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="6_5lcsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oeede"]
 size = Vector2(42, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4cjj"]
 size = Vector2(32, 32)
-
-[sub_resource type="Animation" id="Animation_3660x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_npgvj"]
 resource_name = "down"
@@ -94,28 +62,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("StaticBody2D:process_mode")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Interactable")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"enable"
-}]
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_mq7wd"]
@@ -136,50 +90,63 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("StaticBody2D:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3660x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D:process_mode")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Interactable")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"disable"
-}]
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21v20"]
 _data = {
-&"down": SubResource("Animation_npgvj"),
 &"idle": SubResource("Animation_rgdri"),
 &"up": SubResource("Animation_mq7wd"),
-&"RESET": SubResource("Animation_3660x")
+&"RESET": SubResource("Animation_3660x"),
+&"down": SubResource("Animation_npgvj")
 }
 
-[node name="Spikes" type="Sprite2D" node_paths=PackedStringArray("states")]
+[sub_resource type="Resource" id="Resource_01c67"]
+script = ExtResource("3_s42s2")
+item = ExtResource("4_fgbx5")
+quantity = 0
+
+[node name="Spikes" type="Sprite2D"]
 y_sort_enabled = true
 texture = ExtResource("1_2ngps")
 offset = Vector2(0, 14)
 hframes = 4
 region_enabled = true
 region_rect = Rect2(0, 96, 192, 48)
-script = ExtResource("1_q6b6s")
-contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_2t4s2")])
-get_on_interaction = true
-states = [NodePath("StateMachine/up")]
-switch_on_interaction = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -8)
@@ -189,18 +156,14 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_oeede")
-disabled = true
 
-[node name="Interactable" type="Area2D" parent="."]
-z_index = -1
+[node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, 16)
-collision_layer = 8
-monitoring = false
-script = ExtResource("2_b2v87")
-action_trigger = "run"
-one_shot = false
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_g4cjj")
 debug_color = Color(0.478431, 0.588235, 0, 0.419608)
 
@@ -208,22 +171,34 @@ debug_color = Color(0.478431, 0.588235, 0, 0.419608)
 libraries = {
 &"": SubResource("AnimationLibrary_21v20")
 }
+autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_18kok")
 current_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("6_5lcsm")
+area = NodePath("../../InteractionArea")
+on_interaction = NodePath("../up")
+action_trigger = "run"
+one_shot = false
+
+[node name="animation_idle" type="Node" parent="StateMachine/idle" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle"
 
-[node name="up" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_timeout")]
-script = ExtResource("4_op40x")
-animation_player = NodePath("../../AnimationPlayer")
-animation = "up"
+[node name="up" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("5_epmu4")
+contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_01c67")])
 time_range = Vector2(1.5, 1.5)
 on_timeout = NodePath("../down")
+
+[node name="animation_up" type="Node" parent="StateMachine/up" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_op40x")
+animation_player = NodePath("../../../AnimationPlayer")
+animation = "up"
 
 [node name="down" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")

@@ -57,6 +57,7 @@ tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAE
 
 [node name="Chest" parent="Props" index="0" instance=ExtResource("6_kdswq")]
 position = Vector2(417, 133)
+script = null
 
 [node name="get_content" parent="Props/Chest/StateMachine" index="2"]
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_kcxdj")])
@@ -70,15 +71,13 @@ contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_1ysgd")])
 
 [node name="Switch" parent="Props" index="2" instance=ExtResource("13_64f3m")]
 position = Vector2(670, 89)
+script = null
 
-[node name="Spikes" parent="Props" index="3" instance=ExtResource("4_avl7y")]
-position = Vector2(536, 160)
-
-[node name="Gate_Side" parent="Props" index="4" instance=ExtResource("6_5b3ge")]
+[node name="Gate_Side" parent="Props" index="3" instance=ExtResource("6_5b3ge")]
 y_sort_enabled = false
 position = Vector2(720, 208)
 
-[node name="Gate_Front" parent="Props" index="5" instance=ExtResource("10_r4ee1")]
+[node name="Gate_Front" parent="Props" index="4" instance=ExtResource("10_r4ee1")]
 position = Vector2(96, 24)
 switch_on_interaction = true
 
@@ -94,8 +93,11 @@ has_item = "key"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Gate_Front/Interactable" index="0"]
 shape = SubResource("CircleShape2D_na1cc")
 
-[node name="Gate_Front2" parent="Props" index="6" instance=ExtResource("12_70ge1")]
+[node name="Gate_Front2" parent="Props" index="5" instance=ExtResource("12_70ge1")]
 position = Vector2(560, 35)
+
+[node name="Spikes" parent="Props" index="6" instance=ExtResource("4_avl7y")]
+position = Vector2(540, 200)
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(568, 96)
