@@ -21,7 +21,8 @@ func _ready():
 	_enter_states()
 
 func _init_states():
-	for state in get_children(true):
+	var children = get_children(true).filter(func(node): return node is BaseState)
+	for state in children:
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
 		state.state_changed.connect(_on_state_changed)

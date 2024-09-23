@@ -1,29 +1,18 @@
-[gd_scene load_steps=17 format=3 uid="uid://qsqg6qm4ts7x"]
+[gd_scene load_steps=19 format=3 uid="uid://dw4xkxqhvmyvg"]
 
-[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_u7slb"]
-[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://entities/static/chest.png" id="2_mny2i"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_qxnsf"]
-[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="5_pbvis"]
-[ext_resource type="Script" path="res://scripts/states/state_tween.gd" id="5_xynyc"]
-[ext_resource type="Script" path="res://scripts/tween_data.gd" id="6_lw4hd"]
+[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://entities/static/chest.png" id="1_dsvcm"]
+[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="2_03iw2"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_nxdwj"]
+[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_g8q06"]
+[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="4_s6gor"]
+[ext_resource type="Script" path="res://scripts/states/state_tween.gd" id="5_n5pex"]
+[ext_resource type="Script" path="res://scripts/tween_data.gd" id="6_hm5le"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
 size = Vector2(40, 26)
 
-[sub_resource type="Animation" id="Animation_cqrp8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_02vx6"]
+radius = 32.0
 
 [sub_resource type="Animation" id="Animation_atw4n"]
 resource_name = "idle"
@@ -39,6 +28,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r5a30"]
+resource_name = "opened"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(4, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_jcv77"]
@@ -59,7 +64,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -67,27 +72,26 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"enable_next_state"
+"method": &"get_content"
 }]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("StateMachine/opened")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0.166667),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"get_content"
+"args": [null],
+"method": &"enable"
 }]
 }
 
-[sub_resource type="Animation" id="Animation_r5a30"]
-resource_name = "opened"
-length = 0.0333367
+[sub_resource type="Animation" id="Animation_cqrp8"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -98,7 +102,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(4, 0)]
+"values": [Vector2i(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jt1pw"]
@@ -114,7 +118,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.507042, 1), 0.0, 0.0, 0, 0, Ve
 point_count = 4
 
 [sub_resource type="Resource" id="Resource_tf1rf"]
-script = ExtResource("6_lw4hd")
+script = ExtResource("6_hm5le")
 curve = SubResource("Curve_l0liu")
 duration = 0.2
 delay = 0.1
@@ -127,7 +131,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35, 0.3), 0.0, 0.0, 0, 0, Vect
 point_count = 4
 
 [sub_resource type="Resource" id="Resource_nicjx"]
-script = ExtResource("6_lw4hd")
+script = ExtResource("6_hm5le")
 curve = SubResource("Curve_jy2bj")
 duration = 0.1
 delay = 0.0
@@ -136,11 +140,11 @@ end_value = "Vector2(10,0)"
 
 [node name="Chest" type="Sprite2D" node_paths=PackedStringArray("states")]
 y_sort_enabled = true
-texture = ExtResource("2_mny2i")
+texture = ExtResource("1_dsvcm")
 hframes = 5
 region_enabled = true
 region_rect = Rect2(0, 0, 210, 38)
-script = ExtResource("1_u7slb")
+script = ExtResource("2_03iw2")
 states = [NodePath("StateMachine/open")]
 switch_on_interaction = true
 
@@ -152,31 +156,45 @@ collision_mask = 0
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_niryh")
 
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+z_index = -1
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_02vx6")
+debug_color = Color(0.506096, 0.5793, 0, 0.42)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_jt1pw")
 }
+autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state") groups=["save"]]
-script = ExtResource("3_qxnsf")
+script = ExtResource("3_nxdwj")
 current_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("5_pbvis")
-animation_player = NodePath("../../AnimationPlayer")
-animation = "idle"
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("4_s6gor")
+area = NodePath("../../InteractionArea")
+on_interaction = NodePath("../open")
+direction = 8
+action_trigger = "interact"
 
 [node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("5_pbvis")
+script = ExtResource("4_g8q06")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
 
 [node name="tween" type="Node" parent="StateMachine/open" node_paths=PackedStringArray("object")]
-script = ExtResource("5_xynyc")
+script = ExtResource("5_n5pex")
 object = NodePath("../../..")
-tweens = Array[ExtResource("6_lw4hd")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
+tweens = Array[ExtResource("6_hm5le")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("5_pbvis")
+script = ExtResource("4_g8q06")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"
