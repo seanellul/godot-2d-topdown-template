@@ -10,7 +10,7 @@ class_name StateAnimation
 var saved_position: float
 var animation_state: AnimationNodeStateMachinePlayback
 
-func enter(_params = null):
+func enter():
 	if animation_player and not animation.is_empty():
 		animation_player.play(animation)
 		await animation_player.animation_finished

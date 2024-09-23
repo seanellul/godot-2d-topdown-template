@@ -5,7 +5,7 @@ class_name StateSetNodes
 @export var nodes_to_disable: Array[Node]
 @export var nodes_to_enable: Array[Node]
 
-func enter(_params = null):
+func enter():
 	for node in nodes_to_disable:
 		node.process_mode = Node.PROCESS_MODE_DISABLED
 	for node in nodes_to_enable:

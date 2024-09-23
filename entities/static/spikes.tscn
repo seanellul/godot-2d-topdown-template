@@ -182,16 +182,27 @@ script = ExtResource("6_5lcsm")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../up")
 action_trigger = "run"
+has_item = null
 one_shot = false
+reset_delay = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="animation_idle" type="Node" parent="StateMachine/idle" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="up" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("5_epmu4")
 contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_01c67")])
+active = null
+await_completion = null
 time_range = Vector2(1.5, 1.5)
 on_timeout = NodePath("../down")
 
@@ -199,8 +210,16 @@ on_timeout = NodePath("../down")
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "up"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="down" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "down"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null

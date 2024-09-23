@@ -26,8 +26,8 @@ class_name StatePath
 
 var target_position := Vector2.ZERO
 
-func enter(_params = null):
-	super.enter(_params)
+func enter():
+	super.enter()
 	_set_target_position()
 
 func update(_delta: float):

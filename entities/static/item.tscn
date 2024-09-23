@@ -122,12 +122,27 @@ current_state = NodePath("idle")
 script = ExtResource("4_i4duu")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../pick")
+action_trigger = null
+has_item = null
+one_shot = null
+reset_delay = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="pick" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("5_xv808")
+contents = null
+active = null
+await_completion = null
+time_range = null
 on_timeout = NodePath("../picked")
 
 [node name="picked" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("5_d4kg4")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "picked"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null

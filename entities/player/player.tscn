@@ -87,6 +87,10 @@ on_timeout = NodePath("../move")
 script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("12_2ttjo")
@@ -115,3 +119,7 @@ on_enter = Dictionary[String, Variant]({
 script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null

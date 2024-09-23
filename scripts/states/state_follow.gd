@@ -31,8 +31,8 @@ var is_target_reached := false
 
 signal target_reached(target)
 
-func enter(_params = null):
-	super.enter(_params)
+func enter():
+	super.enter()
 	target_reached.connect(_on_target_reached)
 	entity.flee = flee
 	_init_target()

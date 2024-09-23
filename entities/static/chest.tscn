@@ -166,21 +166,44 @@ area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../open")
 direction = 8
 action_trigger = "interact"
+has_item = null
+one_shot = null
+reset_delay = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_g8q06")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="tween" type="Node" parent="StateMachine/open" node_paths=PackedStringArray("object")]
 script = ExtResource("5_n5pex")
 object = NodePath("../../..")
 tweens = Array[ExtResource("6_hm5le")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
+parallel = null
+loops = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="get_content" type="Node" parent="StateMachine"]
 script = ExtResource("8_p7s3l")
+contents = null
+active = null
+await_completion = null
+time_range = null
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_g8q06")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"
+sync_animations = null
+active = null
+await_completion = null
+time_range = null

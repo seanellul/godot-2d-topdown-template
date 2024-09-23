@@ -5,7 +5,7 @@ class_name StateMaterial
 @export var sprite: Sprite2D = null
 @export var material: Material = null
 
-func enter(_params = null):
+func enter():
 	if sprite:
 		sprite.material = material
 

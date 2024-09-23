@@ -70,7 +70,7 @@ func _physics_process(delta):
 func _enter_states():
 	for state in states:
 		print("%s entered state: %s" % [get_parent().name, state.name])
-		state.enter(params)
+		state.enter()
 
 func _exit_states():
 	for state in states:

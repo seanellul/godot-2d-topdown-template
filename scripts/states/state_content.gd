@@ -6,9 +6,9 @@ class_name StateContents
 
 var entity: CharacterEntity
 
-func enter(params = null):
-	if params.has("entity"):
-		entity = params["entity"]
+func enter():
+	if state_machine.params.has("entity"):
+		entity = state_machine.params["entity"]
 	get_contents()
 
 func get_contents():

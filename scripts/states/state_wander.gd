@@ -9,8 +9,8 @@ class_name StateWander
 var wander_time: float
 var direction = Vector2.ZERO
 
-func enter(_params = null):
-	super.enter(_params)
+func enter():
+	super.enter()
 	_wander()
 
 func update(delta: float):

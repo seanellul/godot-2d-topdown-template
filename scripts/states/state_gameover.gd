@@ -2,6 +2,6 @@ extends StateEntity
 ##Disables an entity.
 class_name StateGameOver
 
-func enter(_params = null):
-  super.enter(_params)
+func enter():
+  super.enter()
   entity.disable_entity(true, 0.5)

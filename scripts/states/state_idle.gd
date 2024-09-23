@@ -2,7 +2,7 @@ extends StateEntity
 ##Stops an entity.
 class_name StateIdle
 
-func enter(_params = null):
+func enter():
 	idle()
 
 func idle():
