@@ -76,6 +76,7 @@ func _do_interaction():
 			"entity": entity
 		})
 	_check_inventory_item()
+	complete()
 
 func _check_inventory_item():
 	if not has_item.is_empty() and entity.has_method("remove_item_from_inventory"):

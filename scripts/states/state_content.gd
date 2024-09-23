@@ -19,3 +19,4 @@ func get_contents():
 			entity.add_item_to_inventory(content.item, content.quantity)
 		else:
 			entity.consume_item(content.item)
+	complete()

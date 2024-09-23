@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://m68w6dpmito0"]
+[gd_scene load_steps=11 format=3 uid="uid://m68w6dpmito0"]
 
-[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="1_moawm"]
-[ext_resource type="Script" path="res://scenes/system/interactable.gd" id="2_qbpvf"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_g7kv4"]
 [ext_resource type="Texture2D" uid="uid://b4m17oa1l8f77" path="res://entities/static/objs1.png" id="3_qb7gm"]
+[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="4_i4duu"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="5_d4kg4"]
+[ext_resource type="Script" path="res://scripts/states/state_content.gd" id="5_xv808"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uq30"]
-radius = 21.0238
+radius = 12.0
 
 [sub_resource type="Animation" id="Animation_oojgl"]
 length = 0.001
@@ -22,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_qhne3"]
@@ -41,91 +53,79 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_i6awh"]
-resource_name = "pick"
-length = 0.0333367
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"enable_next_state"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_eura6"]
 resource_name = "picked"
 length = 0.0333367
-tracks/0/type = "method"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"disable"
+"args": [false],
+"method": &"set_process"
 }]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tjjem"]
 _data = {
-"RESET": SubResource("Animation_oojgl"),
-"idle": SubResource("Animation_qhne3"),
-"pick": SubResource("Animation_i6awh"),
-"picked": SubResource("Animation_eura6")
+&"picked": SubResource("Animation_eura6"),
+&"idle": SubResource("Animation_qhne3"),
+&"RESET": SubResource("Animation_oojgl")
 }
 
-[node name="Item" type="Sprite2D" node_paths=PackedStringArray("states")]
+[node name="Item" type="Sprite2D"]
 texture = ExtResource("3_qb7gm")
 hframes = 3
 region_enabled = true
 region_rect = Rect2(0, 0, 108, 36)
-script = ExtResource("1_moawm")
-get_on_interaction = true
-states = [NodePath("StateMachine/pick")]
-switch_on_interaction = true
 
-[node name="Interactable" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
 z_index = -1
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-script = ExtResource("2_qbpvf")
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_5uq30")
 debug_color = Color(0.478431, 0.588235, 0, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 deterministic = true
 libraries = {
-"": SubResource("AnimationLibrary_tjjem")
+&"": SubResource("AnimationLibrary_tjjem")
 }
+autoplay = "idle"
 speed_scale = 0.15
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state") groups=["save"]]
 script = ExtResource("3_g7kv4")
 current_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("5_d4kg4")
-animation_player = NodePath("../../AnimationPlayer")
-animation = "idle"
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("4_i4duu")
+area = NodePath("../../InteractionArea")
+on_interaction = NodePath("../pick")
 
-[node name="pick" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("5_d4kg4")
-animation_player = NodePath("../../AnimationPlayer")
-animation = "pick"
+[node name="pick" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("5_xv808")
+on_timeout = NodePath("../picked")
 
 [node name="picked" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("5_d4kg4")

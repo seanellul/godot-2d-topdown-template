@@ -15,22 +15,18 @@ var timer: TimedState
 func _enter_tree():
 	if !active:
 		process_mode = PROCESS_MODE_DISABLED
-	elif time_range > Vector2.ZERO:
-		timer = TimedState.new()
-		timer.create(self, time_range)
+	timer = TimedState.new()
+	timer.create(self, time_range)
 
 func enable(params = null): ##Enables this state.
 	if params:
 		state_machine.params = params
 	state_machine.enable_state(self)
-	if not await_completion and not timer:
-		complete()
-	if timer:
-		timer.start()
-		await timer.timeout
-		if on_timeout:
-			on_timeout.enable(state_machine.params)
-		complete()
+	timer.start()
+	await timer.timeout
+	if on_timeout:
+		on_timeout.enable(state_machine.params)
+	complete()
 
 func disable():
 	if state_machine:
@@ -67,7 +63,7 @@ class TimedState:
 	
 	func start():
 			timer.stop()
-			timer.wait_time = randf_range(t_range.x, t_range.y)
+			timer.wait_time = randf_range(t_range.x, t_range.y) if t_range > Vector2.ZERO else 0.01
 			timer.start()
 			await timer.timeout
 			timeout.emit()
