@@ -12,3 +12,5 @@ data_*/
 addons/Todo_Manager/todo.cfg
 *.csproj
 *.sln
+
+.vscode/
