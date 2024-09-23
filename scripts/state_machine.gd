@@ -14,6 +14,8 @@ var previous_state: BaseState = null
 var states: Array[BaseState]
 var params = {}
 
+signal state_changed(old_state, new_state)
+
 func _ready():
 	await owner.ready
 	_init_states()
@@ -25,9 +27,6 @@ func _init_states():
 	for state in children:
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
-		state.state_changed.connect(_on_state_changed)
-		state.state_disabled.connect(_on_state_disabled)
-		state.state_completed.connect(_on_state_completed)
 		initialized = true
 
 func _get_states():
@@ -39,7 +38,7 @@ func _get_states():
 		if child is BaseState and child.active:
 			states.append(child)
 
-func _on_state_changed(new_state):
+func enable_state(new_state: BaseState):
 	if new_state == current_state:
 		return
 	_exit_states()
@@ -48,15 +47,17 @@ func _on_state_changed(new_state):
 		previous_state.process_mode = PROCESS_MODE_DISABLED
 	current_state = new_state
 	current_state.process_mode = PROCESS_MODE_INHERIT
+	state_changed.emit(previous_state, current_state)
 	_get_states()
 	_enter_states()
 
-func _on_state_disabled(_state):
+func disable_state(state: BaseState):
+	state.process_mode = Node.PROCESS_MODE_DISABLED
 	_exit_states()
 	states = []
 	current_state = null
 
-func _on_state_completed():
+func complete_current_state():
 	if sequence:
 		enable_next_state()
 
@@ -88,17 +89,17 @@ func _physics_update_states(delta):
 	for state in states:
 		state.physics_update(delta)
 
+func receive_data(data: DataState):
+	if data:
+		var state_node: BaseState = get_child(data.state_index)
+		state_node.enable(params)
+
 func enable_state_by_name(state_name: String):
 	var state_node: BaseState =  get_node_or_null(state_name)
 	if state_node:
 		state_node.enable(params)
 	else:
 		push_warning("Can't find state with name: %s." %[state_name])
-
-func receive_data(data: DataState):
-	if data:
-		var state_node: BaseState = get_child(data.state_index)
-		state_node.enable(params)
 
 func enable_next_state(_params = null):
 	var next_index = 0

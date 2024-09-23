@@ -24,11 +24,14 @@ func enter():
 	if area:
 		area.area_entered.connect(_set_entity)
 		area.area_exited.connect(_reset_entity)
+	if state_machine.params.has("entity"):
+		entity = state_machine.params["entity"] 
 
 func exit():
 	if area:
 		area.area_entered.disconnect(_set_entity)
 		area.area_exited.disconnect(_reset_entity)
+	entity = null
 
 func _set_entity(_area):
 	var parent = _area.get_parent()

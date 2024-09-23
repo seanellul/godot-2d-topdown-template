@@ -12,10 +12,6 @@ class_name BaseState
 var state_machine: StateMachine
 var timer: TimedState
 
-signal state_changed(new_state)
-signal state_disabled(state)
-signal state_completed
-
 func _enter_tree():
 	if !active:
 		process_mode = PROCESS_MODE_DISABLED
@@ -26,7 +22,7 @@ func _enter_tree():
 func enable(params = null): ##Enables this state.
 	if params:
 		state_machine.params = params
-	state_changed.emit(self)
+	state_machine.enable_state(self)
 	if not await_completion and not timer:
 		complete()
 	if timer:
@@ -37,8 +33,8 @@ func enable(params = null): ##Enables this state.
 		complete()
 
 func disable():
-	process_mode = Node.PROCESS_MODE_DISABLED
-	state_disabled.emit(self)
+	if state_machine:
+		state_machine.disable_state(self)
 
 func enter():
 	pass
@@ -53,7 +49,8 @@ func physics_update(_delta: float):
 	pass
 
 func complete():
-	state_completed.emit()
+	if state_machine:
+		state_machine.complete_current_state()
 
 class TimedState:
 	var timer: Timer

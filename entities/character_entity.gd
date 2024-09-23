@@ -204,6 +204,14 @@ func return_to_safe_position():
 	if safe_position != Vector2.ZERO:
 		global_position = safe_position
 
+func consume_item(item: DataItem):
+	var item_hp = item.change_hp
+	if item_hp > 0:
+		recover_hp(item_hp, self.name)
+	elif item_hp < 0:
+		reduce_hp(-item_hp, self.name)
+		hurt()
+
 func reset_values(): ##Useful to reset some entity values to an initial state.
 	pass
 

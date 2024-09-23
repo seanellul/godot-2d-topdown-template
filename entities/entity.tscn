@@ -57,6 +57,7 @@ region_rect = Rect2(0, 0, 120, 200)
 
 [node name="BlocksDetector" type="RayCast2D" parent="."]
 modulate = Color(1, 0, 1, 1)
+rotation = 1.5708
 target_position = Vector2(32, 0)
 collision_mask = 5
 
@@ -69,12 +70,12 @@ collision_mask = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": ExtResource("4_hhyyf"),
-&"char-jump": ExtResource("7_ktamm"),
 &"char-run": ExtResource("8_xdo4a"),
-&"char-walk": ExtResource("9_ihjft"),
+&"char-idle": ExtResource("6_bqfdd"),
 &"char-hurt": ExtResource("6_3jrrx"),
+&"char-walk": ExtResource("9_ihjft"),
 &"char-attack": ExtResource("5_gfoxn"),
-&"char-idle": ExtResource("6_bqfdd")
+&"char-jump": ExtResource("7_ktamm")
 }
 autoplay = "char-idle/down"
 

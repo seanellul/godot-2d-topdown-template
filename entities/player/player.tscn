@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://db4e7jrgweeab"]
+[gd_scene load_steps=15 format=3 uid="uid://db4e7jrgweeab"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" uid="uid://dayieakdoxw36" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
@@ -12,13 +12,6 @@
 [ext_resource type="Script" path="res://scripts/states/state_gameover.gd" id="11_rnd5j"]
 [ext_resource type="Script" path="res://scripts/states/state_fall.gd" id="12_2ttjo"]
 [ext_resource type="Script" path="res://scripts/states/state_impulse.gd" id="12_m3ydn"]
-[ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="15_dnkva"]
-[ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="16_ua5wa"]
-[ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="17_2a6nx"]
-[ext_resource type="AnimationLibrary" uid="uid://baydqwuyhl514" path="res://entities/animations/char-idle.res" id="18_tbvb5"]
-[ext_resource type="AnimationLibrary" uid="uid://h0p3l5ccisyb" path="res://entities/animations/char-jump.res" id="19_tp858"]
-[ext_resource type="AnimationLibrary" uid="uid://bbf4lu0d5n0bx" path="res://entities/animations/char-run.res" id="20_cmful"]
-[ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="21_n11ms"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
@@ -45,13 +38,13 @@ on_death = NodePath("StateMachine/death")
 [node name="SmokeParticles" parent="." index="0" instance=ExtResource("6_dxaj8")]
 position = Vector2(-1, 11)
 
-[node name="InteractionHandler" type="Area2D" parent="." index="3"]
+[node name="InteractionTrigger" type="Area2D" parent="." index="3"]
 position = Vector2(0, -5)
 collision_layer = 8
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionTrigger" index="0"]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_1npff")
 debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
@@ -68,12 +61,12 @@ script = ExtResource("4_b1v48")
 
 [node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("12_m3ydn")
-on_enter = {
+on_enter = Dictionary[String, Variant]({
 "is_attacking": true
-}
-on_exit = {
+})
+on_exit = Dictionary[String, Variant]({
 "Enter vais_attackinglue...": false
-}
+})
 time_range = Vector2(0.2, 0.2)
 on_timeout = NodePath("../move")
 
@@ -81,12 +74,12 @@ on_timeout = NodePath("../move")
 script = ExtResource("12_m3ydn")
 impulse_force = -500.0
 impulse_duration = 0.2
-on_enter = {
+on_enter = Dictionary[String, Variant]({
 "is_hurting": true
-}
-on_exit = {
+})
+on_exit = Dictionary[String, Variant]({
 "is_hurting": false
-}
+})
 time_range = Vector2(0.5, 0.5)
 on_timeout = NodePath("../move")
 
@@ -98,14 +91,14 @@ animation = "hurt"
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("12_2ttjo")
 damage = 2
-on_enter = {
+on_enter = Dictionary[String, Variant]({
 "is_falling": true,
 "visible": false
-}
-on_exit = {
+})
+on_exit = Dictionary[String, Variant]({
 "is_falling": false,
 "visible": true
-}
+})
 time_range = Vector2(0.2, 0.2)
 on_timeout = NodePath("../move")
 
@@ -114,22 +107,11 @@ script = ExtResource("8_bp05k")
 
 [node name="death" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("11_rnd5j")
-on_enter = {
+on_enter = Dictionary[String, Variant]({
 "is_hurting": true
-}
+})
 
 [node name="hurt_animation" type="Node" parent="StateMachine/death" index="0" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
-
-[node name="AnimationPlayer" parent="." index="8"]
-libraries = {
-&"": ExtResource("15_dnkva"),
-&"char-jump": ExtResource("19_tp858"),
-&"char-run": ExtResource("20_cmful"),
-&"char-walk": ExtResource("21_n11ms"),
-&"char-hurt": ExtResource("17_2a6nx"),
-&"char-attack": ExtResource("16_ua5wa"),
-&"char-idle": ExtResource("18_tbvb5")
-}
