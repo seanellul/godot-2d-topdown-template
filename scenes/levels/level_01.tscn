@@ -207,39 +207,34 @@ tile_map_data = PackedByteArray("AAAAAAAACAAAAAIAAAABAAAACAACAAIAAAABAP//CAACAAA
 tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAEAAAAWAP3/CQABAAAAAAAVAP7/CQABAAIAAAAVAP3/CQABAAAAAAAUAP7/CQABAAIAAAAUAP3/CQABAAAAAAATAP7/CQABAAIAAAATAP3/CQABAAAAAAASAP7/CQABAAIAAAASAP3/CQABAAAAAAARAP7/CQABAAIAAAARAP3/CQABAAAAAAAQAP7/CQABAAIAAAAQAP3/CQABAAAAAAAPAP7/CQABAAIAAAAPAP3/CQABAAAAAAAOAP7/CQABAAIAAAAOAP3/CQABAAAAAAANAP7/CQABAAIAAAANAP3/CQABAAAAAAAMAP7/CQABAAIAAAAMAP3/CQABAAAAAAALAP7/CQABAAIAAAALAP3/CQABAAAAAAAKAP7/CQABAAIAAAAKAP3/CQABAAAAAAAJAP7/CQABAAIAAAAJAP3/CQABAAAAAAAIAP7/CQABAAIAAAAIAP3/CQABAAAAAAAHAP7/CQABAAIAAAAHAP3/CQABAAAAAAAGAP7/CQABAAIAAAAGAP3/CQABAAAAAAAFAP7/CQABAAIAAAAFAP3/CQABAAAAAAAEAP7/CQAAAAIAAAAEAP3/CQAAAAAAAAABAP7/CQACAAIAAAABAP3/CQACAAAAAAAAAP7/CQABAAIAAAAAAP3/CQABAAAAAAD///7/CQAFAAEAAAD///3/CQABAAAAAAD+//7/CQAAAAEAAAD+//3/CQAAAAAAAAAXAAsACQABAAIAAAAXAAoACQABAAEAAAAXAAkACQABAAEAAAAXAAgACQABAAAAAAAXAAMACQABAAIAAAAXAAIACQAFAAIAAAAXAAEACQACAAEAAAAXAAAACQACAAEAAAAXAP//CQACAAEAAAAWAAsACQABAAIAAAAWAAoACQAGAAIAAAAWAAkACQAAAAEAAAAWAAgACQAAAAAAAAAWAAMACQAAAAIAAAAWAAIACQAAAAEAAAAWAAEACQAAAAEAAAAWAAAACQAAAAEAAAAWAP//CQAAAAEAAAAVAAsACQABAAIAAAAVAAoACQABAAAAAAAUAAsACQABAAIAAAAUAAoACQABAAAAAAATAAsACQABAAIAAAATAAoACQABAAAAAAASAAsACQABAAIAAAASAAoACQABAAAAAAARAAsACQABAAIAAAARAAoACQABAAAAAAAQAAsACQABAAIAAAAQAAoACQABAAAAAAAPAAsACQABAAIAAAAPAAoACQABAAAAAAAOAAsACQABAAIAAAAOAAoACQABAAAAAAANAAsACQABAAIAAAANAAoACQABAAAAAAAMAAsACQABAAIAAAAMAAoACQABAAAAAAALAAsACQABAAIAAAALAAoACQABAAAAAAAKAAsACQABAAIAAAAKAAoACQABAAAAAAAJAAsACQABAAIAAAAJAAoACQABAAAAAAAIAAsACQABAAIAAAAIAAoACQABAAAAAAAHAAsACQABAAIAAAAHAAoACQABAAAAAAAGAAsACQABAAIAAAAGAAoACQABAAAAAAAFAAsACQABAAIAAAAFAAoACQABAAAAAAAEAAsACQAAAAIAAAAEAAoACQAAAAAAAAABAAsACQACAAIAAAABAAoACQACAAAAAAAAAAsACQABAAIAAAAAAAoACQABAAAAAAD//wsACQABAAIAAAD//woACQAFAAIAAAD+/wsACQAAAAIAAAD+/woACQAAAAEAAAD//wkACQACAAEAAAD//wgACQACAAEAAAD//wcACQACAAEAAAD//wYACQACAAEAAAD//wUACQACAAEAAAD//wQACQACAAEAAAD//wMACQACAAEAAAD//wIACQACAAEAAAD//wEACQACAAEAAAD//wAACQACAAEAAAD/////CQACAAEAAAD+/wkACQAAAAEAAAD+/wgACQAAAAEAAAD+/wcACQAAAAEAAAD+/wYACQAAAAEAAAD+/wUACQAAAAEAAAD+/wQACQAAAAEAAAD+/wMACQAAAAEAAAD+/wIACQAAAAEAAAD+/wEACQAAAAEAAAD+/wAACQAAAAEAAAD+////CQAAAAEAAAAYAAMACQACAAIAAAAYAAIACQACAAAAAAAYAAgACQACAAAAAAAYAAkACQACAAEAAAAYAAsACQACAAIAAAAYAAoACQACAAEAAAA=")
 
 [node name="Chest" parent="Props" index="0" instance=ExtResource("6_kdswq")]
-position = Vector2(417, 133)
+position = Vector2(420, 40)
 
 [node name="idle" parent="Props/Chest/StateMachine" index="0"]
 has_item = ""
 one_shot = true
 reset_delay = 0.5
 active = true
-await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="open" parent="Props/Chest/StateMachine" index="1"]
 sync_animations = false
 active = true
-await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="tween" parent="Props/Chest/StateMachine/open" index="0"]
 parallel = true
 loops = 1
 active = true
-await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="get_content" parent="Props/Chest/StateMachine" index="2"]
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_kcxdj")])
 active = true
-await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="opened" parent="Props/Chest/StateMachine" index="3"]
 sync_animations = false
 active = true
-await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="Potion" parent="Props" index="1" instance=ExtResource("5_1ytof")]
@@ -341,7 +336,7 @@ change_states = Dictionary[String, String]({
 })
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(418, 186)
+position = Vector2(301, 294)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
 position = Vector2(96, -32)
@@ -377,9 +372,10 @@ script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 sequence = true
 
-[node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("area")]
+[node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("area", "on_interaction")]
 script = ExtResource("16_nsalp")
 area = NodePath("../../EventStartArea")
+on_interaction = NodePath("../player_path")
 action_trigger = "interact"
 one_shot = false
 
@@ -389,18 +385,16 @@ path = NodePath("../../Path2D")
 distance_threshold = 3.0
 friction_multiplier = 4.0
 disable_entity_state_machine = true
-await_completion = true
 
 [node name="wait" type="Node" parent="Events/Event_01/StateMachine" index="2"]
 script = ExtResource("9_o85tp")
-await_completion = true
 time_range = Vector2(1, 1)
 
 [node name="enable_entity" type="Node" parent="Events/Event_01/StateMachine" index="3"]
 script = ExtResource("9_5gqp7")
 
 [node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
-position = Vector2(360, 288)
+position = Vector2(261, 267)
 curve = SubResource("Curve2D_uycfk")
 
 [editable path="Props/Chest"]

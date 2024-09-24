@@ -77,8 +77,6 @@ func _do_interaction():
 		})
 	if !one_shot:
 		_reset_interaction()
-	else:
-		complete()
 
 func _check_inventory_item():
 	if not has_item.is_empty() and entity.has_method("remove_item_from_inventory"):
@@ -87,4 +85,3 @@ func _check_inventory_item():
 func _reset_interaction():
 	await get_tree().create_timer(reset_delay).timeout
 	state_machine.interacting = false
-	complete()
