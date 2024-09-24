@@ -50,7 +50,6 @@ func physics_update(_delta: float):
 	pass
 
 func complete():
-	print_debug(get_path())
 	if await_completion:
 		completed.emit()
 

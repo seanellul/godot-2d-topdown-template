@@ -70,15 +70,15 @@ func _can_interact() -> bool:
 func _do_interaction():
 	state_machine.interacting = true
 	print(entity.name, " interacted with ", get_path())
-	if !one_shot:
-		_reset_interaction()
-	else:
-		complete()
+	_check_inventory_item()
 	if on_interaction:
 		on_interaction.enable({
 			"entity": entity
 		})
-	_check_inventory_item()
+	if !one_shot:
+		_reset_interaction()
+	else:
+		complete()
 
 func _check_inventory_item():
 	if not has_item.is_empty() and entity.has_method("remove_item_from_inventory"):

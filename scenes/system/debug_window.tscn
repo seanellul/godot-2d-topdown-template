@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://tnmhm6k0reud"]
 
-[ext_resource type="Script" path="res://scenes/system/debugger.gd" id="1_tmk7y"]
+[ext_resource type="Script" path="res://scenes/system/debug_window.gd" id="1_05m0w"]
 
-[node name="Debugger" type="CanvasLayer" node_paths=PackedStringArray("anim_label", "info_label")]
-script = ExtResource("1_tmk7y")
+[node name="DebugWindow" type="CanvasLayer" node_paths=PackedStringArray("anim_label", "info_label")]
+script = ExtResource("1_05m0w")
 anim_label = NodePath("Panel/VBoxContainer/AnimLabel")
 info_label = NodePath("Panel/VBoxContainer/InfoLabel")
 

@@ -286,7 +286,7 @@ libraries = {
 
 [node name="StateMachine" type="Node" parent="Props/Gate_Front" index="2" node_paths=PackedStringArray("current_state") groups=["save"]]
 script = ExtResource("7_e6yb8")
-current_state = NodePath("interact/idle_up")
+current_state = NodePath("interact")
 
 [node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("area", "on_interaction")]
 script = ExtResource("16_nsalp")
@@ -341,7 +341,7 @@ change_states = Dictionary[String, String]({
 })
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(568, 96)
+position = Vector2(418, 186)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
 position = Vector2(96, -32)
