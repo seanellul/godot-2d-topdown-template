@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://5788n4wk6fp1" path="res://entities/static/gate_front_down.tscn" id="12_70ge1"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://entities/static/switch.tscn" id="13_64f3m"]
-[ext_resource type="Script" path="res://scenes/system/event_controller.gd" id="14_yw5ce"]
+[ext_resource type="Script" path="res://scenes/system/transfer.gd" id="16_8lxbq"]
 [ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="16_nsalp"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
 
@@ -316,20 +316,32 @@ change_states = Dictionary[String, String]({
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(421, 95)
 
-[node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
+[node name="Transfer_North" parent="Transfers" index="0" groups=["transfer"] instance=ExtResource("16_vcg7b")]
+position = Vector2(96, -36)
 
-[node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("16_vcg7b")]
+[node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
+direction = 8
+
+[node name="transfer" parent="Transfers/Transfer_North/StateMachine" index="1"]
+destination_path = "Transfers/Transfer_South"
+destination_name = "Transfer_South"
+
+[node name="Transfer_South" parent="Transfers" index="1" groups=["transfer"] instance=ExtResource("16_vcg7b")]
 position = Vector2(96, 405)
+script = ExtResource("16_8lxbq")
 
 [node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
 direction = 1
 
 [node name="transfer" parent="Transfers/Transfer_South/StateMachine" index="1"]
 destination_path = "Transfers/Transfer_North"
+destination_name = "Transfer_North"
 
-[node name="Transfer_East" parent="Transfers" index="2" instance=ExtResource("16_vcg7b")]
+[node name="Transfer_East" parent="Transfers" index="2" groups=["transfer"] instance=ExtResource("16_vcg7b")]
 position = Vector2(752, 224)
 rotation = 1.5708
+script = ExtResource("16_8lxbq")
+facing = 1
 
 [node name="interact" parent="Transfers/Transfer_East/StateMachine" index="0"]
 direction = 4
@@ -337,10 +349,9 @@ direction = 4
 [node name="transfer" parent="Transfers/Transfer_East/StateMachine" index="1"]
 level_key = "LEVEL_2"
 destination_path = "Transfers/Transfer_West"
-facing = 1
+destination_name = "Transfer_West"
 
 [node name="Event_01" type="Node" parent="Events" index="0"]
-script = ExtResource("14_yw5ce")
 
 [node name="EventStartArea" type="Area2D" parent="Events/Event_01" index="0"]
 position = Vector2(360, 288)

@@ -48,5 +48,6 @@ const GROUP = {
 	ENEMY = "enemy",
 	SAVE = "save",
 	FLASH = "flash",
-	LEVEL = "level"
+	LEVEL = "level",
+	TRANSFER = "transfer",
 }

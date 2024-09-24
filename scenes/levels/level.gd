@@ -5,7 +5,7 @@ class_name Level
 
 var players: Array[PlayerEntity]
 var player_facing: Vector2
-var destination_path: String
+var destination_name: String
 var player_res = preload("res://entities/player/player.tscn")
 
 @onready var n_of_players = GameManager.gm.n_of_players if GameManager.gm else 1
@@ -34,20 +34,19 @@ func _init_players():
 
 func get_data():
 	return {
-		"destination_path": destination_path, 
+		"destination_name": destination_name, 
 		"player_facing": players[0].facing
 	}
 
 func receive_data(data):
-	destination_path = data.destination_path
+	destination_name = data.destination_name
 	player_facing = data.player_facing
 
 func _init_scene():
-	var destination = get_node_or_null(destination_path)
+	var destination = get_node_or_null("Transfers/%s" %[destination_name])
 	for player: PlayerEntity in players:
-		if destination:
+		if destination and not destination_name.is_empty():
 			if destination is Transfer:
-				destination.disable()
 				destination.set_player_facing(player, player_facing, destination.facing)
 			player.position = destination.position
 		elif DataManager.game_data and DataManager.game_data.player_data:

@@ -45,6 +45,7 @@ import/blender/enabled=false
 player=""
 save=""
 level=""
+transfer=""
 
 [importer_defaults]
 
