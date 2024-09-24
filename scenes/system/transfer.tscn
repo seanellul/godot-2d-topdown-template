@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b31ie7ym22i4i"]
+
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="1_ckvr1"]
+[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="2_uf0jl"]
+[ext_resource type="Script" path="res://scripts/states/state_transfer.gd" id="3_wob4u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0vkm"]
+size = Vector2(64, 32)
+
+[node name="Transfer_01" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_w0vkm")
+debug_color = Color(0.627919, 0.414983, 0.851185, 0.42)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("1_ckvr1")
+current_state = NodePath("interact")
+
+[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("2_uf0jl")
+area = NodePath("../../Area2D")
+on_interaction = NodePath("../transfer")
+one_shot = false
+
+[node name="transfer" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+script = ExtResource("3_wob4u")
+on_timeout = NodePath("../interact")

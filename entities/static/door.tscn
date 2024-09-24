@@ -1,15 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfb8430tqc358"]
+[gd_scene load_steps=13 format=3 uid="uid://cfb8430tqc358"]
 
 [ext_resource type="Texture2D" uid="uid://cfk0ybg4iyeka" path="res://entities/static/door.png" id="1_fpb0w"]
-[ext_resource type="Script" path="res://entities/static/static_entity.gd" id="2_1dgmf"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_g14a1"]
+[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="4_uhkct"]
 [ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_ul0u6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wjin"]
 size = Vector2(98, 92)
 
-[sub_resource type="Animation" id="Animation_3vra1"]
-length = 0.001
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qaex"]
+size = Vector2(96, 26)
+
+[sub_resource type="Animation" id="Animation_2lh8i"]
+resource_name = "opened"
+length = 0.0333367
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,7 +24,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 0)]
+"values": [Vector2i(3, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -32,7 +36,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_q3673"]
@@ -54,6 +58,36 @@ tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("StateMachine/closed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"enable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tfboc"]
+resource_name = "open"
+length = 0.100003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(2, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/opened")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -93,39 +127,8 @@ tracks/1/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_tfboc"]
-resource_name = "open"
-length = 0.100003
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(1, 0), Vector2i(2, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/opened")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_2lh8i"]
-resource_name = "opened"
-length = 0.0333367
+[sub_resource type="Animation" id="Animation_3vra1"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -136,7 +139,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(3, 0)]
+"values": [Vector2i(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,25 +151,21 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_230oi"]
 _data = {
-&"opened": SubResource("Animation_2lh8i"),
 &"close": SubResource("Animation_q3673"),
 &"open": SubResource("Animation_tfboc"),
 &"closed": SubResource("Animation_ffssr"),
-&"RESET": SubResource("Animation_3vra1")
+&"RESET": SubResource("Animation_3vra1"),
+&"opened": SubResource("Animation_2lh8i")
 }
 
-[node name="Door" type="Sprite2D" node_paths=PackedStringArray("states")]
+[node name="Door" type="Sprite2D"]
 texture = ExtResource("1_fpb0w")
 hframes = 4
-script = ExtResource("2_1dgmf")
-states = [NodePath("StateMachine/open"), NodePath("StateMachine/close")]
-start_state_index = 1
-switch_on_interaction = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -50)
@@ -176,6 +175,18 @@ collision_mask = 0
 z_index = -1
 position = Vector2(0, 45)
 shape = SubResource("RectangleShape2D_0wjin")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+z_index = 1
+position = Vector2(0, 44)
+shape = SubResource("RectangleShape2D_2qaex")
+debug_color = Color(0.568058, 0.556857, 1.92523e-07, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -187,9 +198,16 @@ speed_scale = 0.3
 script = ExtResource("3_g14a1")
 current_state = NodePath("closed")
 
-[node name="closed" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="closed" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("4_uhkct")
+area = NodePath("../../InteractionArea")
+on_interaction = NodePath("../open")
+direction = 8
+action_trigger = "interact"
+
+[node name="animation_closed" type="Node" parent="StateMachine/closed" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_ul0u6")
-animation_player = NodePath("../../AnimationPlayer")
+animation_player = NodePath("../../../AnimationPlayer")
 animation = "closed"
 
 [node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]

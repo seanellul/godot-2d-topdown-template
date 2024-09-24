@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="2_5wwg2"]
-[ext_resource type="PackedScene" uid="uid://i8k8wxpo4hpv" path="res://scenes/levels/transfer.tscn" id="3_t1lh4"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" path="res://scripts/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" path="res://scripts/states/state_wander.gd" id="6_rdt3e"]
 [ext_resource type="Script" path="res://scripts/states/state_follow.gd" id="7_n4gru"]
 [ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_po55j"]
+[ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="10_kibes"]
 
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
 _data = {
@@ -61,27 +61,19 @@ script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 loop = true
 
-[node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_t1lh4")]
-position = Vector2(96, 0)
-destination_path = "Transfers/Transfer_Est"
-facing = 0
-direction = 8
-
-[node name="Transfer_Est" parent="Transfers" index="1" instance=ExtResource("3_t1lh4")]
-position = Vector2(992, 192)
-rotation = 1.5708
-level_key = "LEVEL_1"
-destination_path = "Transfers/Transfer_North"
-facing = 1
-direction = 4
-
-[node name="Transfer_West" parent="Transfers" index="2" instance=ExtResource("3_t1lh4")]
+[node name="Transfer_West" parent="Transfers" index="0" instance=ExtResource("10_kibes")]
 position = Vector2(-32, 224)
 rotation = 1.5708
-level_key = "LEVEL_1"
-destination_path = "Transfers/Transfer_Est"
-facing = 2
+
+[node name="interact" parent="Transfers/Transfer_West/StateMachine" index="0"]
 direction = 2
+
+[node name="transfer" parent="Transfers/Transfer_West/StateMachine" index="1"]
+level_key = "LEVEL_1"
+destination_path = "Transfers/Transfer_East"
+facing = 2
 
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
+
+[editable path="Transfers/Transfer_West"]
