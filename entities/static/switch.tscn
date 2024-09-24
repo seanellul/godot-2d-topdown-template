@@ -189,7 +189,6 @@ animation = "idle_off"
 script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "on"
-await_completion = true
 
 [node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
 script = ExtResource("4_t1oes")
@@ -207,4 +206,3 @@ animation = "idle_on"
 script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "off"
-await_completion = true

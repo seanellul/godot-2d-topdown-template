@@ -14,38 +14,6 @@ size = Vector2(40, 26)
 [sub_resource type="CircleShape2D" id="CircleShape2D_02vx6"]
 radius = 32.0
 
-[sub_resource type="Animation" id="Animation_r5a30"]
-resource_name = "opened"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(4, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_atw4n"]
-resource_name = "idle"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_jcv77"]
 resource_name = "open"
 length = 0.16667
@@ -89,6 +57,38 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_atw4n"]
+resource_name = "idle"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r5a30"]
+resource_name = "opened"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(4, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jt1pw"]
@@ -171,33 +171,17 @@ action_trigger = "interact"
 script = ExtResource("4_g8q06")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
-sync_animations = null
-active = null
-await_completion = null
-time_range = null
 
 [node name="tween" type="Node" parent="StateMachine/open" node_paths=PackedStringArray("object")]
 script = ExtResource("5_n5pex")
 object = NodePath("../../..")
 tweens = Array[ExtResource("6_hm5le")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
-parallel = null
-loops = null
-active = null
-await_completion = null
-time_range = null
 
-[node name="get_content" type="Node" parent="StateMachine"]
+[node name="get_content" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("8_p7s3l")
-contents = null
-active = null
-await_completion = null
-time_range = null
+on_timeout = NodePath("../opened")
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_g8q06")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"
-sync_animations = null
-active = null
-await_completion = null
-time_range = null

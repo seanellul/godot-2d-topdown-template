@@ -13,6 +13,7 @@ var initialized := false
 var previous_state: BaseState = null
 var states: Array[BaseState]
 var params = {}
+var interacting := false ##Used to sync interactions between different interact states.
 
 signal state_changed(old_state, new_state)
 
@@ -27,6 +28,7 @@ func _init_states():
 	for state in children:
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
+		state.completed.connect(complete_current_state)
 		initialized = true
 
 func _get_states():
@@ -38,14 +40,16 @@ func _get_states():
 		if child is BaseState and child.active:
 			states.append(child)
 
-func enable_state(new_state: BaseState):
-	if new_state == current_state:
+func enable_state(state: BaseState):
+	if state == current_state:
 		return
 	_exit_states()
 	if current_state:
+		if current_state.await_completion:
+			await current_state.completed
 		previous_state = current_state
 		previous_state.process_mode = PROCESS_MODE_DISABLED
-	current_state = new_state
+	current_state = state
 	current_state.process_mode = PROCESS_MODE_INHERIT
 	state_changed.emit(previous_state, current_state)
 	_get_states()

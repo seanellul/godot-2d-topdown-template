@@ -122,6 +122,7 @@ current_state = NodePath("idle")
 script = ExtResource("4_i4duu")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../pick")
+await_completion = true
 
 [node name="pick" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
 script = ExtResource("5_xv808")

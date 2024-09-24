@@ -18,21 +18,20 @@ class_name StateInteraction
 @export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 
 var entity: CharacterEntity
-static var interacting := false
 
-func enter():
+func _ready() -> void:
 	if area:
 		area.area_entered.connect(_set_entity)
 		area.area_exited.connect(_reset_entity)
+
+func enter():
+	if area:
 		var areas: Array[Area2D] = area.get_overlapping_areas()
 		for a in areas:
 			_set_entity(a)
 
 func exit():
-	if area:
-		area.area_entered.disconnect(_set_entity)
-		area.area_exited.disconnect(_reset_entity)
-	entity = null
+	_reset_entity(null)
 
 func _set_entity(_area):
 	var parent = _area.get_parent()
@@ -54,7 +53,7 @@ func _try_to_interact():
 		_do_interaction()
 
 func _can_interact() -> bool:
-	if not entity or interacting:
+	if not entity or state_machine.interacting:
 		return false
 	if not action_trigger.is_empty() and not Input.is_action_pressed(action_trigger):
 		return false
@@ -69,16 +68,17 @@ func _can_interact() -> bool:
 	return true
 
 func _do_interaction():
-	interacting = true
+	state_machine.interacting = true
 	print(entity.name, " interacted with ", get_path())
 	if !one_shot:
 		_reset_interaction()
+	else:
+		complete()
 	if on_interaction:
 		on_interaction.enable({
 			"entity": entity
 		})
 	_check_inventory_item()
-	complete()
 
 func _check_inventory_item():
 	if not has_item.is_empty() and entity.has_method("remove_item_from_inventory"):
@@ -86,4 +86,5 @@ func _check_inventory_item():
 
 func _reset_interaction():
 	await get_tree().create_timer(reset_delay).timeout
-	interacting = false
+	state_machine.interacting = false
+	complete()

@@ -12,21 +12,26 @@ class_name BaseState
 var state_machine: StateMachine
 var timer: TimedState
 
+signal completed
+
 func _enter_tree():
 	if !active:
 		process_mode = PROCESS_MODE_DISABLED
-	timer = TimedState.new()
-	timer.create(self, time_range)
+	if time_range > Vector2.ZERO:
+		timer = TimedState.new()
+		timer.create(self, time_range)
 
 func enable(params = null): ##Enables this state.
 	if params:
 		state_machine.params = params
 	state_machine.enable_state(self)
-	timer.start()
-	await timer.timeout
+	if timer:
+		timer.start()
+		await timer.timeout
 	if on_timeout:
 		on_timeout.enable(state_machine.params)
-	complete()
+	if not await_completion:
+		completed.emit()
 
 func disable():
 	if state_machine:
@@ -45,8 +50,9 @@ func physics_update(_delta: float):
 	pass
 
 func complete():
-	if state_machine:
-		state_machine.complete_current_state()
+	print_debug(get_path())
+	if await_completion:
+		completed.emit()
 
 class TimedState:
 	var timer: Timer
@@ -62,8 +68,8 @@ class TimedState:
 			t_range = time_range
 	
 	func start():
-			timer.stop()
-			timer.wait_time = randf_range(t_range.x, t_range.y) if t_range > Vector2.ZERO else 0.01
-			timer.start()
-			await timer.timeout
-			timeout.emit()
+		timer.stop()
+		timer.wait_time = randf_range(t_range.x, t_range.y)
+		timer.start()
+		await timer.timeout
+		timeout.emit()
