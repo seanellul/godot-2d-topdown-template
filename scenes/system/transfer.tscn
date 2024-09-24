@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://b31ie7ym22i4i"]
 
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="1_ckvr1"]
-[ext_resource type="Script" path="res://scenes/system/transfer.gd" id="1_fp3m2"]
+[ext_resource type="Script" path="res://scenes/system/destination.gd" id="1_fp3m2"]
 [ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="2_uf0jl"]
 [ext_resource type="Script" path="res://scripts/states/state_transfer.gd" id="3_wob4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0vkm"]
 size = Vector2(64, 32)
 
-[node name="Transfer_01" type="Node2D" groups=["transfer"]]
+[node name="Transfer_01" type="Node2D" groups=["destination"]]
 script = ExtResource("1_fp3m2")
 
 [node name="Area2D" type="Area2D" parent="."]

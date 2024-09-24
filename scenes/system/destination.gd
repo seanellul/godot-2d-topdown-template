@@ -1,5 +1,5 @@
 extends Node2D
-class_name Transfer
+class_name Destination
 
 @export_enum(
 	Const.DIRECTION.DOWN,

@@ -49,5 +49,5 @@ const GROUP = {
 	SAVE = "save",
 	FLASH = "flash",
 	LEVEL = "level",
-	TRANSFER = "transfer",
+	DESTINATION = "destination",
 }

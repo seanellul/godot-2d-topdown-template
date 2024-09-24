@@ -56,3 +56,9 @@ func get_player(id: int):
 		return get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
 	else:
 		return null
+
+func get_destination(destination_name: String):
+	var transfers: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.DESTINATION)
+	var found = transfers.filter(func(t): return t.name == destination_name)
+	var destination = found[0] if found.size() > 0 else null
+	return destination

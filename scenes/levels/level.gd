@@ -43,10 +43,10 @@ func receive_data(data):
 	player_facing = data.player_facing
 
 func _init_scene():
-	var destination = get_node_or_null("Transfers/%s" %[destination_name])
+	var destination = Globals.get_destination(destination_name)
 	for player: PlayerEntity in players:
-		if destination and not destination_name.is_empty():
-			if destination is Transfer:
+		if destination:
+			if destination is Destination:
 				destination.set_player_facing(player, player_facing, destination.facing)
 			player.position = destination.position
 		elif DataManager.game_data and DataManager.game_data.player_data:

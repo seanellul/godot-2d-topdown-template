@@ -2,7 +2,7 @@ extends BaseState
 ##Transfers an entity to a different level or position.
 class_name StateTransfer
 
-@export_category("Transfer settings")
+@export_category("Destination settings")
 @export var level_key: String  = "" ##Leave empty to transfer inside the same level.
 @export var destination_path: String = ""
 @export var destination_name: String = ""
@@ -44,12 +44,10 @@ func _transfer_to_position(entity):
 	print_debug(owner.get_parent().name)
 	print_debug(state_machine.owner)
 	print_debug(state_machine.get_parent())
-	var transfers: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.TRANSFER)
-	var found = transfers.filter(func(t): return t.name == destination_name)
-	var destination = found[0] if found.size() > 0 else null
+	var destination = Globals.get_destination(destination_name)
 	if destination:
 		set_player_position(entity, destination)
-		if destination is Transfer:
+		if destination is Destination:
 			destination.set_player_facing(entity, entity.facing, destination.facing)
 	else:
 		push_warning("%s: destination %s not found!" %[get_path(), destination])
