@@ -1,3 +1,4 @@
+@icon("../icons/StateTransfer.svg")
 extends BaseState
 ##Transfers an entity to a different level or position.
 class_name StateTransfer

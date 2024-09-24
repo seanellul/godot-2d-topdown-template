@@ -1,3 +1,4 @@
+@icon("../icons/StatePath.svg")
 extends StateEntity
 ##Makes an entity follow a path defined in a Path2D node.
 class_name StatePath

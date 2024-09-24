@@ -1,3 +1,4 @@
+@icon("../icons/StateInteraction.svg")
 extends BaseState
 ##Handle entity interactions.
 class_name StateInteraction
