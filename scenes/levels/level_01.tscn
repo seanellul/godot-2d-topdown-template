@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=30 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
@@ -7,17 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://bqi15hafblfrs" path="res://entities/static/potion.tscn" id="5_1ytof"]
 [ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://entities/static/gate_side_up.tscn" id="6_5b3ge"]
 [ext_resource type="PackedScene" uid="uid://dw4xkxqhvmyvg" path="res://entities/static/chest.tscn" id="6_kdswq"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="7_e6yb8"]
-[ext_resource type="Script" path="res://scripts/states/state_path.gd" id="8_285dh"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="7_e6yb8"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" path="res://entities/static/change_state_listener.gd" id="8_dt570"]
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://entities/static/blocks.png" id="9_3pscl"]
-[ext_resource type="Script" path="res://scripts/states/state_entity.gd" id="9_5gqp7"]
-[ext_resource type="Script" path="res://scripts/states/base_state.gd" id="9_o85tp"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_entity.gd" id="9_5gqp7"]
+[ext_resource type="Script" path="res://addons/state_machine/states/base_state.gd" id="9_o85tp"]
 [ext_resource type="PackedScene" uid="uid://5788n4wk6fp1" path="res://entities/static/gate_front_down.tscn" id="12_70ge1"]
-[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="12_kio72"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://entities/static/switch.tscn" id="13_64f3m"]
-[ext_resource type="Script" path="res://scenes/system/destination.gd" id="16_8lxbq"]
-[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="16_nsalp"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_interact.gd" id="16_nsalp"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
 
 [sub_resource type="Resource" id="Resource_kcxdj"]
@@ -316,7 +315,7 @@ change_states = Dictionary[String, String]({
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(421, 95)
 
-[node name="Transfer_North" parent="Transfers" index="0" groups=["destination"] instance=ExtResource("16_vcg7b")]
+[node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)
 
 [node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
@@ -326,9 +325,8 @@ direction = 8
 destination_path = "Transfers/Transfer_South"
 destination_name = "Transfer_South"
 
-[node name="Transfer_South" parent="Transfers" index="1" groups=["destination"] instance=ExtResource("16_vcg7b")]
+[node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, 405)
-script = ExtResource("16_8lxbq")
 
 [node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
 direction = 1
@@ -337,10 +335,9 @@ direction = 1
 destination_path = "Transfers/Transfer_North"
 destination_name = "Transfer_North"
 
-[node name="Transfer_East" parent="Transfers" index="2" groups=["destination"] instance=ExtResource("16_vcg7b")]
+[node name="Transfer_East" parent="Transfers" index="2" instance=ExtResource("16_vcg7b")]
 position = Vector2(752, 224)
 rotation = 1.5708
-script = ExtResource("16_8lxbq")
 facing = 1
 
 [node name="interact" parent="Transfers/Transfer_East/StateMachine" index="0"]

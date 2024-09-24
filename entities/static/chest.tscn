@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://dw4xkxqhvmyvg"]
 
 [ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://entities/static/chest.png" id="1_dsvcm"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_nxdwj"]
-[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_g8q06"]
-[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="4_s6gor"]
-[ext_resource type="Script" path="res://scripts/states/state_tween.gd" id="5_n5pex"]
-[ext_resource type="Script" path="res://scripts/tween_data.gd" id="6_hm5le"]
-[ext_resource type="Script" path="res://scripts/states/state_content.gd" id="8_p7s3l"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="2_cxsuu"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_interact.gd" id="3_xbw31"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_tween.gd" id="4_8p6ij"]
+[ext_resource type="Script" path="res://addons/state_machine/tween_data.gd" id="5_0n50a"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_animation.gd" id="6_v7cmp"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_content.gd" id="7_gpoi8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
 size = Vector2(40, 26)
@@ -93,10 +93,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jt1pw"]
 _data = {
+&"opened": SubResource("Animation_r5a30"),
 &"open": SubResource("Animation_jcv77"),
 &"RESET": SubResource("Animation_cqrp8"),
-&"idle": SubResource("Animation_atw4n"),
-&"opened": SubResource("Animation_r5a30")
+&"idle": SubResource("Animation_atw4n")
 }
 
 [sub_resource type="Curve" id="Curve_l0liu"]
@@ -104,7 +104,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.507042, 1), 0.0, 0.0, 0, 0, Ve
 point_count = 4
 
 [sub_resource type="Resource" id="Resource_tf1rf"]
-script = ExtResource("6_hm5le")
+script = ExtResource("5_0n50a")
 curve = SubResource("Curve_l0liu")
 duration = 0.2
 delay = 0.1
@@ -117,7 +117,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35, 0.3), 0.0, 0.0, 0, 0, Vect
 point_count = 4
 
 [sub_resource type="Resource" id="Resource_nicjx"]
-script = ExtResource("6_hm5le")
+script = ExtResource("5_0n50a")
 curve = SubResource("Curve_jy2bj")
 duration = 0.1
 delay = 0.0
@@ -157,32 +157,32 @@ libraries = {
 autoplay = "idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state") groups=["save"]]
-script = ExtResource("3_nxdwj")
+script = ExtResource("2_cxsuu")
 current_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
-script = ExtResource("4_s6gor")
+script = ExtResource("3_xbw31")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../open")
 direction = 8
 action_trigger = "interact"
 
 [node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("5_n5pex")
+script = ExtResource("4_8p6ij")
 object = NodePath("../..")
-tweens = Array[ExtResource("6_hm5le")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
+tweens = Array[ExtResource("5_0n50a")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
 await_completion = true
 
 [node name="animation_open" type="Node" parent="StateMachine/open" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_g8q06")
+script = ExtResource("6_v7cmp")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "open"
 
 [node name="get_content" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
-script = ExtResource("8_p7s3l")
+script = ExtResource("7_gpoi8")
 on_timeout = NodePath("../opened")
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_g8q06")
+script = ExtResource("6_v7cmp")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"

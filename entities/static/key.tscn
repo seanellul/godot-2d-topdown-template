@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq1wtpcebv5j2"]
+
+[ext_resource type="PackedScene" uid="uid://m68w6dpmito0" path="res://entities/static/item.tscn" id="1_4sv3i"]
+[ext_resource type="Script" path="res://items/content_item.gd" id="2_vwm3d"]
+[ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="3_wdymx"]
+
+[sub_resource type="Resource" id="Resource_wggxa"]
+script = ExtResource("2_vwm3d")
+item = ExtResource("3_wdymx")
+quantity = 1
+
+[node name="Key" instance=ExtResource("1_4sv3i")]
+
+[node name="idle" parent="StateMachine" index="0"]
+await_completion = false
+
+[node name="pick" parent="StateMachine" index="1"]
+contents = Array[ExtResource("2_vwm3d")]([SubResource("Resource_wggxa")])

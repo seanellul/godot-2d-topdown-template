@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://cfb8430tqc358"]
 
 [ext_resource type="Texture2D" uid="uid://cfk0ybg4iyeka" path="res://entities/static/door.png" id="1_fpb0w"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_g14a1"]
-[ext_resource type="Script" path="res://scripts/states/state_interact.gd" id="4_uhkct"]
-[ext_resource type="Script" path="res://scripts/states/state_animation.gd" id="4_ul0u6"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="2_a78jy"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_interact.gd" id="3_gxend"]
+[ext_resource type="Script" path="res://addons/state_machine/states/state_animation.gd" id="4_eh4fy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wjin"]
 size = Vector2(98, 92)
@@ -156,11 +156,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_230oi"]
 _data = {
+&"opened": SubResource("Animation_2lh8i"),
 &"close": SubResource("Animation_q3673"),
 &"open": SubResource("Animation_tfboc"),
 &"closed": SubResource("Animation_ffssr"),
-&"RESET": SubResource("Animation_3vra1"),
-&"opened": SubResource("Animation_2lh8i")
+&"RESET": SubResource("Animation_3vra1")
 }
 
 [node name="Door" type="Sprite2D"]
@@ -195,32 +195,32 @@ libraries = {
 speed_scale = 0.3
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
-script = ExtResource("3_g14a1")
+script = ExtResource("2_a78jy")
 current_state = NodePath("closed")
 
 [node name="closed" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
-script = ExtResource("4_uhkct")
+script = ExtResource("3_gxend")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../open")
 direction = 8
 action_trigger = "interact"
 
 [node name="animation_closed" type="Node" parent="StateMachine/closed" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_ul0u6")
+script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "closed"
 
 [node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_ul0u6")
+script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_ul0u6")
+script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"
 
 [node name="close" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_ul0u6")
+script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "close"
