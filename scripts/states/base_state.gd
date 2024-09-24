@@ -32,6 +32,8 @@ func enable(params = null): ##Enables this state.
 		complete()
 	if on_timeout:
 		on_timeout.enable(state_machine.params)
+	if not await_completion and not timer:
+		complete()
 
 func disable():
 	if state_machine:

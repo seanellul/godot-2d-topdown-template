@@ -390,13 +390,16 @@ path = NodePath("../../Path2D")
 distance_threshold = 3.0
 friction_multiplier = 4.0
 disable_entity_state_machine = true
+await_completion = true
 
 [node name="wait" type="Node" parent="Events/Event_01/StateMachine" index="2"]
 script = ExtResource("9_o85tp")
+await_completion = true
 time_range = Vector2(1, 1)
 
 [node name="enable_entity" type="Node" parent="Events/Event_01/StateMachine" index="3"]
 script = ExtResource("9_5gqp7")
+await_completion = true
 
 [node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
 position = Vector2(261, 267)
