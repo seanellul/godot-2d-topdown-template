@@ -1,3 +1,4 @@
+@icon("../icons/Listener.svg")
 extends Node2D
 class_name ChangeStateListener
 

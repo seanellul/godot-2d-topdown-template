@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b31ie7ym22i4i"]
 
 [ext_resource type="Script" path="res://scenes/system/destination.gd" id="1_fp3m2"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="2_1i106"]
+[ext_resource type="Script" path="res://addons/state_machine/scripts/state_machine.gd" id="2_1i106"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_interact.gd" id="3_byffi"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_transfer.gd" id="4_eehld"]
 

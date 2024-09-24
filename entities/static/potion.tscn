@@ -12,8 +12,5 @@ quantity = 0
 [node name="Potion" instance=ExtResource("1_ncb1c")]
 region_rect = Rect2(0, 144, 108, 36)
 
-[node name="idle" parent="StateMachine" index="0"]
-await_completion = false
-
 [node name="pick" parent="StateMachine" index="1"]
 contents = Array[ExtResource("2_1qntx")]([SubResource("Resource_iikxk")])

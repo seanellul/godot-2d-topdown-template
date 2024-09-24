@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://m68w6dpmito0"]
 
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="3_g7kv4"]
+[ext_resource type="Script" path="res://addons/state_machine/scripts/state_machine.gd" id="3_g7kv4"]
 [ext_resource type="Texture2D" uid="uid://b4m17oa1l8f77" path="res://entities/static/objs1.png" id="3_qb7gm"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_interact.gd" id="4_i4duu"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_animation.gd" id="5_d4kg4"]
@@ -86,8 +86,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tjjem"]
 _data = {
 &"RESET": SubResource("Animation_oojgl"),
-&"picked": SubResource("Animation_eura6"),
-&"idle": SubResource("Animation_qhne3")
+&"idle": SubResource("Animation_qhne3"),
+&"picked": SubResource("Animation_eura6")
 }
 
 [node name="Item" type="Sprite2D"]

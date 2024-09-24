@@ -1,10 +1,10 @@
 [gd_scene load_steps=19 format=3 uid="uid://dw4xkxqhvmyvg"]
 
 [ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://entities/static/chest.png" id="1_dsvcm"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="2_cxsuu"]
+[ext_resource type="Script" path="res://addons/state_machine/scripts/state_machine.gd" id="2_cxsuu"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_interact.gd" id="3_xbw31"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_tween.gd" id="4_8p6ij"]
-[ext_resource type="Script" path="res://addons/state_machine/tween_data.gd" id="5_0n50a"]
+[ext_resource type="Script" path="res://addons/state_machine/scripts/tween_data.gd" id="5_0n50a"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_animation.gd" id="6_v7cmp"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_content.gd" id="7_gpoi8"]
 

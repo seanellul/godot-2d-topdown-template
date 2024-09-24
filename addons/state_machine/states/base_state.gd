@@ -1,3 +1,4 @@
+@icon("../icons/BaseState.svg")
 extends Node
 ##Base class for all states.
 class_name BaseState

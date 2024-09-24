@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://entities/static/key.tscn" id="2_vfs10"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy_1.tscn" id="3_vnork"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="4_qmq1u"]
+[ext_resource type="Script" path="res://addons/state_machine/scripts/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_wander.gd" id="6_rdt3e"]
 [ext_resource type="Script" path="res://addons/state_machine/states/state_follow.gd" id="7_n4gru"]

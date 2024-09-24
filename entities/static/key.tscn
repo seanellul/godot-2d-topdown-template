@@ -11,8 +11,5 @@ quantity = 1
 
 [node name="Key" instance=ExtResource("1_4sv3i")]
 
-[node name="idle" parent="StateMachine" index="0"]
-await_completion = false
-
 [node name="pick" parent="StateMachine" index="1"]
 contents = Array[ExtResource("2_vwm3d")]([SubResource("Resource_wggxa")])
