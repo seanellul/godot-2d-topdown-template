@@ -3,6 +3,8 @@ extends Node
 class_name BaseState
 
 @export var active := true ##Set to false to avoid processing this state.
+@export_category("Advance")
+@export var await_completion := false ##If the StateMachine sequence is true, await the completion of the state before proceeding to the next one.
 @export_group("Advance")
 @export var time_range := Vector2.ZERO ##If greather than 0, await N seconds before completing the action. N = random time range between min (x) and max (y).
 @export var on_timeout: BaseState ##State to enable after timer runs out.
@@ -16,6 +18,7 @@ func _enter_tree():
 	if !active:
 		process_mode = PROCESS_MODE_DISABLED
 	if time_range > Vector2.ZERO:
+		await_completion = false #Await for timer timeout instead.
 		timer = TimedState.new()
 		timer.create(self, time_range)
 

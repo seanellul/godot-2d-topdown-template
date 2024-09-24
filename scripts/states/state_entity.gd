@@ -38,5 +38,6 @@ func _try_to_get_entity(node):
 func _config_entity():
 	if entity.state_machine:
 		entity.state_machine.disabled = disable_entity_state_machine
+		entity.set_process_unhandled_input(not disable_entity_state_machine)
 	for prop in on_enter:
 		entity.set(prop, on_enter[prop])

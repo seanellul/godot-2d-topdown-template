@@ -45,7 +45,7 @@ func _reset_entity(_area):
 func update(_delta):
 	if not entity or action_trigger.is_empty():
 		return
-	if Input.is_action_just_pressed(action_trigger):
+	if entity.is_processing_unhandled_input() and Input.is_action_just_pressed(action_trigger):
 		_try_to_interact()
 
 func _try_to_interact():

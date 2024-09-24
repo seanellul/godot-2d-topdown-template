@@ -214,27 +214,32 @@ has_item = ""
 one_shot = true
 reset_delay = 0.5
 active = true
+await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="open" parent="Props/Chest/StateMachine" index="1"]
 sync_animations = false
 active = true
+await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="tween" parent="Props/Chest/StateMachine/open" index="0"]
 parallel = true
 loops = 1
 active = true
+await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="get_content" parent="Props/Chest/StateMachine" index="2"]
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_kcxdj")])
 active = true
+await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="opened" parent="Props/Chest/StateMachine" index="3"]
 sync_animations = false
 active = true
+await_completion = false
 time_range = Vector2(0, 0)
 
 [node name="Potion" parent="Props" index="1" instance=ExtResource("5_1ytof")]
@@ -336,7 +341,7 @@ change_states = Dictionary[String, String]({
 })
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(301, 294)
+position = Vector2(421, 95)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("3_2cetp")]
 position = Vector2(96, -32)

@@ -45,6 +45,8 @@ func enable_state(state: BaseState):
 		return
 	_exit_states()
 	if current_state:
+		if current_state.await_completion and not sequence:
+			await current_state.completed
 		previous_state = current_state
 		previous_state.process_mode = PROCESS_MODE_DISABLED
 	current_state = state
