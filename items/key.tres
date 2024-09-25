@@ -8,3 +8,4 @@ resource_name = "key"
 script = ExtResource("1_rb7uh")
 icon = ExtResource("1_ue3wi")
 change_hp = 0
+hide_from_inventory = false

@@ -172,11 +172,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6wxc"]
 _data = {
+&"idle_up": SubResource("Animation_oct5m"),
+&"idle_down": SubResource("Animation_3vpsv"),
 &"up": SubResource("Animation_muw3c"),
 &"RESET": SubResource("Animation_u6bpn"),
-&"down": SubResource("Animation_2uv2s"),
-&"idle_up": SubResource("Animation_oct5m"),
-&"idle_down": SubResource("Animation_3vpsv")
+&"down": SubResource("Animation_2uv2s")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aijao"]
@@ -264,9 +264,8 @@ current_state = NodePath("interact")
 script = ExtResource("16_nsalp")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../down")
-direction = 8
 action_trigger = "interact"
-has_item = "key"
+direction = 8
 one_shot = false
 
 [node name="idle_up" type="Node" parent="Props/Gate_Front/StateMachine/interact" index="0" node_paths=PackedStringArray("animation_player")]
@@ -322,7 +321,6 @@ position = Vector2(96, -36)
 direction = 8
 
 [node name="transfer" parent="Transfers/Transfer_North/StateMachine" index="1"]
-destination_path = "Transfers/Transfer_South"
 destination_name = "Transfer_South"
 
 [node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("16_vcg7b")]
@@ -332,7 +330,6 @@ position = Vector2(96, 405)
 direction = 1
 
 [node name="transfer" parent="Transfers/Transfer_South/StateMachine" index="1"]
-destination_path = "Transfers/Transfer_North"
 destination_name = "Transfer_North"
 
 [node name="Transfer_East" parent="Transfers" index="2" instance=ExtResource("16_vcg7b")]
@@ -344,9 +341,8 @@ facing = 1
 direction = 4
 
 [node name="transfer" parent="Transfers/Transfer_East/StateMachine" index="1"]
-level_key = "LEVEL_2"
-destination_path = "Transfers/Transfer_West"
-destination_name = "Transfer_West"
+level_key = "LEVEL_CASTLE"
+destination_name = "Destination_01"
 
 [node name="Event_01" type="Node" parent="Events" index="0"]
 

@@ -5,9 +5,10 @@ class_name BaseState
 
 @export var active := true ##Set to false to avoid processing this state.
 @export_category("Advance")
-@export var await_completion := false ##If the StateMachine sequence is true, await the completion of the state before proceeding to the next one.
-@export_group("Advance")
+@export_group("Await Timer")
 @export var time_range := Vector2.ZERO ##If greather than 0, await N seconds before completing the action. N = random time range between min (x) and max (y).
+@export_group("")
+@export var await_completion := false ##If the StateMachine sequence is true, await the completion of the state before proceeding to the next one.
 @export var on_timeout: BaseState ##State to enable after timer runs out.
 
 var state_machine: StateMachine

@@ -71,7 +71,6 @@ direction = 2
 
 [node name="transfer" parent="Transfers/Transfer_West/StateMachine" index="1"]
 level_key = "LEVEL_1"
-destination_path = "Transfers/Transfer_East"
 destination_name = "Transfer_East"
 
 [node name="Path2D" type="Path2D" parent="." index="5"]

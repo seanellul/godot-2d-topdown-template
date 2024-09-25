@@ -1,20 +1,25 @@
-@icon("../icons/StateInteraction.svg")
+@icon("../icons/StateInteract.svg")
 extends BaseState
 ##Handle entity interactions.
-class_name StateInteraction
+class_name StateInteract
 
 @export var area: Area2D ##Interaction will trigger only if entity is inside the area.
 @export var on_interaction: BaseState ##The state to enable on interaction.
-@export_group("Constraints")
+@export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
+@export_category("Requirements")
+@export_group("Direction")
 @export_flags(
 	Const.DIRECTION.DOWN, 
 	Const.DIRECTION.LEFT, 
 	Const.DIRECTION.RIGHT, 
 	Const.DIRECTION.UP
 ) var direction ##The direction the character must face to trigger the interaction.
-@export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
-@export var has_item := "" ##Check if the item is present in the player's inventory.
-@export_group("Settings")
+@export var on_direction_wrong: BaseState ##State to enable when interacting with the wrong direction.
+@export_group("Items")
+@export var has_items: Array[ContentItem] ##Check if the items are present in the player's inventory.
+@export var on_items_missing: BaseState ##State to enable when items are missing.
+@export var remove_items := true ##Remove the required items after interaction.
+@export_category("Settings")
 @export var one_shot := true ##If true, it can be interacted only once. Useful for chests or pickable items.
 @export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 
@@ -58,14 +63,19 @@ func _can_interact() -> bool:
 		return false
 	if not action_trigger.is_empty() and not Input.is_action_pressed(action_trigger):
 		return false
-	# Check if entity is facing the correct direction
+	# Check if entity is facing the right direction
 	var entity_dir = Const.DIR_BIT[entity.facing.floor()]
 	if direction and direction > 0 and (direction & entity_dir) == 0:
+		if on_direction_wrong:
+			on_direction_wrong.enable()
 		return false
-	# If entity is a player, check inventory for the required item
-	if entity is PlayerEntity and has_item and not has_item.is_empty():
-		if entity.is_item_in_inventory(has_item) < 0:
-			return false
+	# If entity is player, checks inventory for the required items
+	if entity is PlayerEntity and has_items.size() > 0:
+		for content: ContentItem in has_items:
+			if entity.is_item_in_inventory(content.item.resource_name, content.quantity) < 0:
+				if on_items_missing:
+					on_items_missing.enable()
+				return false
 	return true
 
 func _do_interaction():
@@ -80,8 +90,9 @@ func _do_interaction():
 		_reset_interaction()
 
 func _check_inventory_item():
-	if not has_item.is_empty() and entity.has_method("remove_item_from_inventory"):
-		entity.remove_item_from_inventory(has_item, 1)
+	if not has_items.size() > 0 and remove_items and entity.has_method("remove_item_from_inventory"):
+		for content: ContentItem in has_items:
+			entity.remove_item_from_inventory(content.item.resource_name, content.quantity)
 
 func _reset_interaction():
 	await get_tree().create_timer(reset_delay).timeout

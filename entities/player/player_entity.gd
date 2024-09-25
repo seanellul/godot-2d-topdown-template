@@ -23,11 +23,11 @@ func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
 	flash(damage_flash_power) #TODO: move to a state
 
-func is_item_in_inventory(item_name: String) -> int: ##Get the index of the item in inventory, -1 if not found.
+func is_item_in_inventory(item_name: String, quantity := 1) -> int: ##Get the index of the item in inventory, -1 if not found.
 	var item_index := -1
 	for i in inventory.size():
 		var content: ContentItem = inventory[i]
-		if content.item.resource_name == item_name:
+		if content.item.resource_name == item_name and content.quantity >= quantity:
 			item_index = i
 	return item_index
 

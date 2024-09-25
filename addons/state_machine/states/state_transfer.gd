@@ -5,8 +5,7 @@ class_name StateTransfer
 
 @export_category("Destination settings")
 @export var level_key: String  = "" ##Leave empty to transfer inside the same level.
-@export var destination_path: String = ""
-@export var destination_name: String = ""
+@export var destination_name: String = "" ##The name of the destnation. NOTE: destination must be in the "destination" group.
 
 func _ready() -> void:
 	SceneManager.load_start.connect(func(_loading_screen): Globals.transfer_start.emit())

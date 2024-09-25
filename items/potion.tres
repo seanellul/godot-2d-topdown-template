@@ -8,3 +8,4 @@ resource_name = "potion"
 script = ExtResource("1_ej3gy")
 icon = ExtResource("1_x2q68")
 change_hp = 2
+hide_from_inventory = false
