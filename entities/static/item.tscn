@@ -123,9 +123,9 @@ script = ExtResource("4_i4duu")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../pick")
 
-[node name="pick" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+[node name="pick" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("5_xv808")
-on_timeout = NodePath("../picked")
+on_completion = NodePath("../picked")
 
 [node name="picked" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("5_d4kg4")

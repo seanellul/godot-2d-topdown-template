@@ -59,7 +59,7 @@ current_state = NodePath("move")
 [node name="move" type="Node" parent="StateMachine" index="0"]
 script = ExtResource("4_b1v48")
 
-[node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_timeout")]
+[node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
 on_enter = Dictionary[String, Variant]({
 "is_attacking": true
@@ -68,9 +68,9 @@ on_exit = Dictionary[String, Variant]({
 "Enter vais_attackinglue...": false
 })
 time_range = Vector2(0.2, 0.2)
-on_timeout = NodePath("../move")
+on_completion = NodePath("../move")
 
-[node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_timeout")]
+[node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
 impulse_force = -500.0
 impulse_duration = 0.2
@@ -81,14 +81,14 @@ on_exit = Dictionary[String, Variant]({
 "is_hurting": false
 })
 time_range = Vector2(0.5, 0.5)
-on_timeout = NodePath("../move")
+on_completion = NodePath("../move")
 
 [node name="hurt_animation" type="Node" parent="StateMachine/knockback" index="0" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_timeout")]
+[node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_2ttjo")
 damage = 2
 on_enter = Dictionary[String, Variant]({
@@ -100,7 +100,7 @@ on_exit = Dictionary[String, Variant]({
 "visible": true
 })
 time_range = Vector2(0.2, 0.2)
-on_timeout = NodePath("../move")
+on_completion = NodePath("../move")
 
 [node name="auto" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("8_bp05k")

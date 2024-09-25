@@ -189,11 +189,11 @@ script = ExtResource("4_op40x")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle"
 
-[node name="up" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+[node name="up" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("5_epmu4")
 contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_01c67")])
 time_range = Vector2(1.5, 1.5)
-on_timeout = NodePath("../down")
+on_completion = NodePath("../down")
 
 [node name="animation_up" type="Node" parent="StateMachine/up" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")

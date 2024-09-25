@@ -30,6 +30,6 @@ area = NodePath("../../Area2D")
 on_interaction = NodePath("../transfer")
 one_shot = false
 
-[node name="transfer" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+[node name="transfer" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("4_eehld")
-on_timeout = NodePath("../interact")
+on_completion = NodePath("../interact")

@@ -49,11 +49,11 @@ has_items = Array[ExtResource("3_i3l7c")]([SubResource("Resource_o8ck3")])
 on_items_missing = NodePath("../message_missing_item")
 remove_items = false
 
-[node name="message_missing_item" type="Node" parent="Props/Door/StateMachine" index="4" node_paths=PackedStringArray("on_timeout")]
+[node name="message_missing_item" type="Node" parent="Props/Door/StateMachine" index="4" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("6_csega")
 message = "Missing key!"
 await_completion = true
-on_timeout = NodePath("../closed")
+on_completion = NodePath("../closed")
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(272, 80)

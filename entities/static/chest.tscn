@@ -178,9 +178,9 @@ script = ExtResource("6_v7cmp")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "open"
 
-[node name="get_content" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_timeout")]
+[node name="get_content" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("7_gpoi8")
-on_timeout = NodePath("../opened")
+on_completion = NodePath("../opened")
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("6_v7cmp")

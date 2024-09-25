@@ -6,10 +6,10 @@ class_name BaseState
 @export var active := true ##Set to false to avoid processing this state.
 @export_category("Advance")
 @export_group("Await Timer")
-@export var time_range := Vector2.ZERO ##If greather than 0, await N seconds before completing the action. N = random time range between min (x) and max (y).
+@export var time_range := Vector2.ZERO ##If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
 @export_group("")
-@export var await_completion := false ##If the StateMachine sequence is true, await the completion of the state before proceeding to the next one.
-@export var on_timeout: BaseState ##State to enable after timer runs out.
+@export var await_completion := false ##Await the completion of this state before enabling the on_completion state.
+@export var on_completion: BaseState ##State to enable after state completion or on timer timeout.
 
 var state_machine: StateMachine
 var timer: TimedState
@@ -32,8 +32,8 @@ func enable(params = null): ##Enables this state.
 		timer.start()
 		await timer.timeout
 		complete()
-	if on_timeout:
-		on_timeout.enable(state_machine.params)
+	if on_completion:
+		on_completion.enable(state_machine.params)
 	if not await_completion and not timer:
 		complete()
 
