@@ -2,7 +2,7 @@ extends BaseState
 ##Prints a debug message to the terminal.
 class_name StateDebug
 
-@export var message := ""
+@export_multiline var message := ""
 
 func enter():
 	print_debug(message)

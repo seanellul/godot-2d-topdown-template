@@ -34,7 +34,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/state_machine/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://scripts/state_machine/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
 
 [filesystem]
 
