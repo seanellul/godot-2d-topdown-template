@@ -121,9 +121,9 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ch07o"]
 _data = {
 &"RESET": SubResource("Animation_4k428"),
-&"idle_on": SubResource("Animation_uv0fv"),
-&"idle_off": SubResource("Animation_fljrb"),
 &"on": SubResource("Animation_txne3"),
+&"idle_off": SubResource("Animation_fljrb"),
+&"idle_on": SubResource("Animation_uv0fv"),
 &"off": SubResource("Animation_3htn3")
 }
 

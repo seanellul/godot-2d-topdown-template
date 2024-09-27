@@ -16,6 +16,8 @@ signal transfer_start
 signal transfer_complete
 @warning_ignore("unused_signal")
 signal player_added_to_scene(player: PlayerEntity)
+@warning_ignore("unused_signal")
+signal state_machine_initialized(state_machine: StateMachine)
 
 func _ready():
 	user_prefs = UserPrefs.load_or_create()

@@ -30,7 +30,8 @@ func _init_states():
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
 		state.completed.connect(complete_current_state)
-		initialized = true
+	initialized = true
+	Globals.state_machine_initialized.emit(self)
 
 func _get_states():
 	if !current_state or current_state and !current_state.active:
