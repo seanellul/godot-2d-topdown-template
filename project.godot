@@ -23,6 +23,10 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataManager="*res://scripts/autoloads/DataManager.gd"
 Debugger="*res://scripts/autoloads/debugger.gd"
 
+[dialogue_manager]
+
+general/balloon_path="res://dialogues/balloons/dialogue_balloon.tscn"
+
 [display]
 
 window/size/viewport_width=640
