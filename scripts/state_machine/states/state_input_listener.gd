@@ -7,7 +7,8 @@ class_name StateInputListener
 var input_dir: Vector2
 
 func physics_update(_delta):
-	_handle_inputs()
+	if entity and entity.input_enabled:
+		_handle_inputs()
 
 func _handle_inputs():
 	input_dir = Input.get_vector("left", "right", "up", "down")

@@ -87,13 +87,15 @@ func _update_states(delta):
 	if disabled or not initialized:
 		return
 	for state in states:
-		state.update(delta)
+		if state.active:
+			state.update(delta)
 
 func _physics_update_states(delta):
 	if disabled or not initialized:
 		return
 	for state in states:
-		state.physics_update(delta)
+		if state.active:
+			state.physics_update(delta)
 
 func receive_data(data: DataState):
 	if data:

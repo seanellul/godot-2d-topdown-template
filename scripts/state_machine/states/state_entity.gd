@@ -3,7 +3,7 @@ extends BaseState
 ##Base class for all entity states.
 class_name StateEntity
 
-@export var disable_entity_state_machine := false ##Disables/enables the StateMachine of the entity linked to this state. Useful if this state is controlling an entity that has attached its own StateMachine.
+@export var disable_entity_input := false ##Disables/enables the StateMachine of the entity linked to this state. Useful if this state is controlling an entity that has attached its own StateMachine.
 @export_category("Set Properties")
 @export var on_enter: Dictionary[String, Variant] ##Set some properties to the entity on entering state.
 @export var on_exit: Dictionary[String, Variant] ##Set some properties to the entity on exiting state.
@@ -37,8 +37,7 @@ func _try_to_get_entity(node):
 		return null
 		
 func _config_entity():
-	if entity.state_machine:
-		entity.state_machine.disabled = disable_entity_state_machine
-		entity.set_process_unhandled_input(not disable_entity_state_machine)
+	if entity is PlayerEntity:
+		entity.input_enabled = not disable_entity_input
 	for prop in on_enter:
 		entity.set(prop, on_enter[prop])

@@ -372,7 +372,7 @@ script = ExtResource("8_285dh")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
 friction_multiplier = 4.0
-disable_entity_state_machine = true
+disable_entity_input = true
 await_completion = true
 
 [node name="wait" type="Node" parent="Events/Event_01/StateMachine" index="2"]
