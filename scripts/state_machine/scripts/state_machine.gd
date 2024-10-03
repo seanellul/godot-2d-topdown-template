@@ -45,12 +45,12 @@ func _get_states():
 func enable_state(state: BaseState):
 	if state == current_state:
 		return
-	_exit_states()
 	if current_state:
 		if current_state.await_completion and not sequence:
 			await current_state.completed
 		previous_state = current_state
 		previous_state.process_mode = PROCESS_MODE_DISABLED
+	_exit_states()
 	current_state = state
 	current_state.process_mode = PROCESS_MODE_INHERIT
 	state_changed.emit(previous_state, current_state)

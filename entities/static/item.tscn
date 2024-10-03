@@ -85,9 +85,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tjjem"]
 _data = {
-&"RESET": SubResource("Animation_oojgl"),
 &"idle": SubResource("Animation_qhne3"),
-&"picked": SubResource("Animation_eura6")
+&"picked": SubResource("Animation_eura6"),
+&"RESET": SubResource("Animation_oojgl")
 }
 
 [node name="Item" type="Sprite2D"]
