@@ -24,20 +24,31 @@ class_name StateInteract
 @export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 
 var entity: CharacterEntity
+var interaction_timer: Timer
 
 func _ready() -> void:
 	if area:
 		area.area_entered.connect(_set_entity)
 		area.area_exited.connect(_reset_entity)
+	if not interaction_timer:
+		_init_timer()
 
 func enter():
 	if area:
 		var areas: Array[Area2D] = area.get_overlapping_areas()
 		for a in areas:
 			_set_entity(a)
+	await owner.ready
+	_reset_interaction()
 
 func exit():
 	_reset_entity(null)
+
+func _init_timer():
+	interaction_timer = Timer.new()
+	interaction_timer.one_shot = true
+	interaction_timer.wait_time = reset_delay
+	add_child(interaction_timer)
 
 func _set_entity(_area):
 	var parent = _area.get_parent()
@@ -95,5 +106,8 @@ func _check_inventory_item():
 			entity.remove_item_from_inventory(content.item.resource_name, content.quantity)
 
 func _reset_interaction():
-	await get_tree().create_timer(reset_delay).timeout
+	state_machine.interacting = true
+	interaction_timer.start()
+	await interaction_timer.timeout
+	interaction_timer.stop()
 	state_machine.interacting = false

@@ -11,7 +11,11 @@ class_name BaseState
 @export var await_completion := false ##Await the completion of this state before enabling the on_completion state.
 @export var on_completion: BaseState ##State to enable after state completion or on timer timeout.
 
-var state_machine: StateMachine
+var state_machine: StateMachine:
+	set(value):
+		state_machine = value
+		for state in get_children(true).filter(func(node): return node is BaseState):
+			state.state_machine = value
 var timer: TimedState
 
 signal completed
