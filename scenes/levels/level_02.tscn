@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=18 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://entities/static/key.tscn" id="2_vfs10"]
@@ -8,7 +8,16 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
+[ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="9_jsvhf"]
+[ext_resource type="Texture2D" uid="uid://c6o7lhiq368dj" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="10_kibes"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
+[ext_resource type="Resource" uid="uid://4ov1i7xrocfo" path="res://dialogues/start.dialogue" id="12_bfrr5"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mmrjf"]
+radius = 27.2947
 
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
 _data = {
@@ -34,7 +43,7 @@ tile_map_data = PackedByteArray("AAAeAP7/CQAGAAYAAAAeAP3/CQABAAYAAAAdAP7/CQABAAc
 position = Vector2(283, 109)
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(287, 170)
+position = Vector2(212, 85)
 
 [node name="Enemy1" parent="Entities" index="1" instance=ExtResource("3_vnork")]
 position = Vector2(576, 192)
@@ -61,6 +70,48 @@ script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 loop = true
 
+[node name="NPC" parent="Entities" index="2" instance=ExtResource("9_jsvhf")]
+position = Vector2(211, 37)
+
+[node name="Sprite2D" parent="Entities/NPC" index="2"]
+texture = ExtResource("10_beipp")
+
+[node name="StateMachine" type="Node" parent="Entities/NPC" index="7" node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_qmq1u")
+current_state = NodePath("interact")
+
+[node name="interact" type="Node" parent="Entities/NPC/StateMachine" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("11_7s6t0")
+area = NodePath("../../InteractionArea")
+on_interaction = NodePath("../start_dialogue")
+action_trigger = "interact"
+one_shot = false
+
+[node name="start_dialogue" type="Node" parent="Entities/NPC/StateMachine" index="1" node_paths=PackedStringArray("on_completion")]
+script = ExtResource("11_i08cu")
+dialogue = ExtResource("12_bfrr5")
+title = "forest_citizen_talk"
+await_completion = true
+on_completion = NodePath("../interact")
+
+[node name="set_entity" type="Node" parent="Entities/NPC/StateMachine/start_dialogue" index="0"]
+script = ExtResource("14_dumvw")
+param_key = "entity"
+on_enter = Dictionary[String, Variant]({
+"input_enabled": false
+})
+on_exit = Dictionary[String, Variant]({
+"input_enabled": true
+})
+
+[node name="InteractionArea" type="Area2D" parent="Entities/NPC" index="8"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/NPC/InteractionArea" index="0"]
+shape = SubResource("CircleShape2D_mmrjf")
+
 [node name="Transfer_West" parent="Transfers" index="0" instance=ExtResource("10_kibes")]
 position = Vector2(-32, 224)
 rotation = 1.5708
@@ -76,4 +127,5 @@ destination_name = "Transfer_East"
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
 
+[editable path="Entities/NPC"]
 [editable path="Transfers/Transfer_West"]
