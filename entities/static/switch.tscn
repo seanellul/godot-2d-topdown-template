@@ -26,36 +26,6 @@ tracks/0/keys = {
 "values": [-0.610865]
 }
 
-[sub_resource type="Animation" id="Animation_txne3"]
-resource_name = "on"
-length = 0.26667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Handle:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.610865, 0.610865]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/idle_on")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.266667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_fljrb"]
 resource_name = "idle_off"
 length = 0.0333367
@@ -70,6 +40,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-0.610865]
+}
+
+[sub_resource type="Animation" id="Animation_txne3"]
+resource_name = "on"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.610865, 0.610865]
 }
 
 [sub_resource type="Animation" id="Animation_uv0fv"]
@@ -103,26 +89,12 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.610865, -0.610865]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/idle_off")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.266667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ch07o"]
 _data = {
-&"on": SubResource("Animation_txne3"),
-&"idle_off": SubResource("Animation_fljrb"),
 &"idle_on": SubResource("Animation_uv0fv"),
+&"idle_off": SubResource("Animation_fljrb"),
+&"on": SubResource("Animation_txne3"),
 &"off": SubResource("Animation_3htn3"),
 &"RESET": SubResource("Animation_4k428")
 }
@@ -185,10 +157,12 @@ script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle_off"
 
-[node name="on" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="on" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "on"
+await_completion = true
+on_completion = NodePath("../idle_on")
 
 [node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
 script = ExtResource("4_t1oes")
@@ -202,7 +176,9 @@ script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle_on"
 
-[node name="off" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="off" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "off"
+await_completion = true
+on_completion = NodePath("../idle_off")

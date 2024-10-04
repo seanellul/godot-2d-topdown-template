@@ -27,92 +27,6 @@ quantity = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
 size = Vector2(48, 10)
 
-[sub_resource type="Animation" id="Animation_2uv2s"]
-resource_name = "down"
-length = 0.06667
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/idle_down")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(2, 0), Vector2i(1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_oct5m"]
-resource_name = "idle_up"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_3vpsv"]
-resource_name = "idle_down"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_muw3c"]
 resource_name = "up"
 length = 0.06667
@@ -170,13 +84,99 @@ tracks/1/keys = {
 "values": [Vector2i(3, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_2uv2s"]
+resource_name = "down"
+length = 0.06667
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/idle_down")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"enable"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(2, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3vpsv"]
+resource_name = "idle_down"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_oct5m"]
+resource_name = "idle_up"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6wxc"]
 _data = {
+&"idle_up": SubResource("Animation_oct5m"),
+&"idle_down": SubResource("Animation_3vpsv"),
 &"up": SubResource("Animation_muw3c"),
 &"RESET": SubResource("Animation_u6bpn"),
-&"down": SubResource("Animation_2uv2s"),
-&"idle_up": SubResource("Animation_oct5m"),
-&"idle_down": SubResource("Animation_3vpsv")
+&"down": SubResource("Animation_2uv2s")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aijao"]
@@ -207,9 +207,6 @@ tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAE
 
 [node name="Chest" parent="Props" index="0" instance=ExtResource("6_kdswq")]
 position = Vector2(420, 40)
-
-[node name="open" parent="Props/Chest/StateMachine" index="1"]
-await_completion = false
 
 [node name="get_content" parent="Props/Chest/StateMachine" index="2"]
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_kcxdj")])
@@ -312,7 +309,7 @@ change_states = Dictionary[String, String]({
 })
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(421, 95)
+position = Vector2(670, 144)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)

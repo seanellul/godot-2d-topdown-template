@@ -26,20 +26,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(2, 0), Vector2i(1, 0)]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/closed")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_tfboc"]
 resource_name = "open"
@@ -55,20 +41,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(1, 0), Vector2i(2, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/opened")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"enable"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_ffssr"]
@@ -202,25 +174,29 @@ current_state = NodePath("closed")
 script = ExtResource("3_gxend")
 area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../open")
-direction = 8
 action_trigger = "interact"
+direction = 8
 
 [node name="animation_closed" type="Node" parent="StateMachine/closed" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "closed"
 
-[node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
+await_completion = true
+on_completion = NodePath("../opened")
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"
 
-[node name="close" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="close" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "close"
+await_completion = true
+on_completion = NodePath("../closed")

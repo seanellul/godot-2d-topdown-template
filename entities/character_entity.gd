@@ -207,9 +207,9 @@ func return_to_safe_position():
 func consume_item(item: DataItem):
 	var item_hp = item.change_hp
 	if item_hp > 0:
-		recover_hp(item_hp, self.name)
+		recover_hp(item_hp, item.resource_name)
 	elif item_hp < 0:
-		reduce_hp(-item_hp, self.name)
+		reduce_hp(-item_hp, item.resource_name)
 		hurt()
 
 func reset_values(): ##Useful to reset some entity values to an initial state.

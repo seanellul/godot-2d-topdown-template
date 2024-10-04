@@ -62,12 +62,6 @@ script = ExtResource("4_b1v48")
 
 [node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
-on_enter = Dictionary[String, Variant]({
-"is_attacking": true
-})
-on_exit = Dictionary[String, Variant]({
-"is_attacking": false
-})
 time_range = Vector2(0.2, 0.2)
 on_completion = NodePath("../move")
 
@@ -85,12 +79,6 @@ on_exit = Dictionary[String, Variant]({
 script = ExtResource("12_m3ydn")
 impulse_force = -500.0
 impulse_duration = 0.2
-on_enter = Dictionary[String, Variant]({
-"is_hurting": true
-})
-on_exit = Dictionary[String, Variant]({
-"is_hurting": false
-})
 time_range = Vector2(0.5, 0.5)
 on_completion = NodePath("../move")
 
@@ -112,14 +100,6 @@ on_exit = Dictionary[String, Variant]({
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_2ttjo")
 damage = 2
-on_enter = Dictionary[String, Variant]({
-"is_falling": true,
-"visible": false
-})
-on_exit = Dictionary[String, Variant]({
-"is_falling": false,
-"visible": true
-})
 time_range = Vector2(0.2, 0.2)
 on_completion = NodePath("../move")
 
@@ -140,9 +120,6 @@ script = ExtResource("8_bp05k")
 
 [node name="death" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("11_rnd5j")
-on_enter = Dictionary[String, Variant]({
-"is_hurting": true
-})
 
 [node name="hurt_animation" type="Node" parent="StateMachine/death" index="0" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("9_p7spi")

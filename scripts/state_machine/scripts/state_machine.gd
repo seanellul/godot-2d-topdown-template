@@ -14,7 +14,6 @@ var initialized := false
 var previous_state: BaseState = null
 var states: Array[BaseState]
 var params = {}
-var interacting := false ##Used to sync interactions between different interact states.
 
 signal state_changed(old_state, new_state)
 
@@ -74,14 +73,18 @@ func _physics_process(delta):
 	_physics_update_states(delta)
 
 func _enter_states():
+	var debug = "%s entered states:" %[get_parent().name]
 	for state in states:
-		print("%s entered state: %s" % [get_parent().name, state.name])
+		debug += " [%s]" %[state.name]
 		state.enter()
+	print(debug)
 
 func _exit_states():
+	var debug = "%s exited states:" %[get_parent().name]
 	for state in states:
-		print("%s exited state: %s" % [get_parent().name, state.name])
+		debug += " [%s]" %[state.name]
 		state.exit()
+	# print(debug) #Uncomment to debug exiting states
 
 func _update_states(delta):
 	if disabled or not initialized:

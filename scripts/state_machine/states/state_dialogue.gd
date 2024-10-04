@@ -1,3 +1,4 @@
+@icon("../icons/StateDialogue.svg")
 extends BaseState
 ##Starts a dialogue from DialogueManager.
 class_name StateDialogue
