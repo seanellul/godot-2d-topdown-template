@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db4e7jrgweeab"]
+[gd_scene load_steps=16 format=3 uid="uid://db4e7jrgweeab"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" uid="uid://dayieakdoxw36" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
 [ext_resource type="PackedScene" uid="uid://cmdq8met1qt2s" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_gameover.gd" id="11_rnd5j"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_fall.gd" id="12_2ttjo"]
@@ -65,10 +66,20 @@ on_enter = Dictionary[String, Variant]({
 "is_attacking": true
 })
 on_exit = Dictionary[String, Variant]({
-"Enter vais_attackinglue...": false
+"is_attacking": false
 })
 time_range = Vector2(0.2, 0.2)
 on_completion = NodePath("../move")
+
+[node name="set_params" type="Node" parent="StateMachine/attack" index="0"]
+script = ExtResource("9_fvq3l")
+param_key = "entity"
+on_enter = Dictionary[String, Variant]({
+"is_attacking": true
+})
+on_exit = Dictionary[String, Variant]({
+"is_attacking": false
+})
 
 [node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
@@ -88,6 +99,16 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
+[node name="set_params" type="Node" parent="StateMachine/knockback" index="1"]
+script = ExtResource("9_fvq3l")
+param_key = "entity"
+on_enter = Dictionary[String, Variant]({
+"is_hurting": true
+})
+on_exit = Dictionary[String, Variant]({
+"is_hurting": false
+})
+
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_2ttjo")
 damage = 2
@@ -102,6 +123,18 @@ on_exit = Dictionary[String, Variant]({
 time_range = Vector2(0.2, 0.2)
 on_completion = NodePath("../move")
 
+[node name="set_params" type="Node" parent="StateMachine/fall" index="0"]
+script = ExtResource("9_fvq3l")
+param_key = "entity"
+on_enter = Dictionary[String, Variant]({
+"is_falling": true,
+"visible": false
+})
+on_exit = Dictionary[String, Variant]({
+"is_falling": false,
+"visible": true
+})
+
 [node name="auto" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("8_bp05k")
 
@@ -115,3 +148,10 @@ on_enter = Dictionary[String, Variant]({
 script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
+
+[node name="set_params" type="Node" parent="StateMachine/death" index="1"]
+script = ExtResource("9_fvq3l")
+param_key = "entity"
+on_enter = Dictionary[String, Variant]({
+"is_hurting": true
+})
