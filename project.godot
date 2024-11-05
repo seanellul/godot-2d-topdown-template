@@ -22,6 +22,8 @@ SceneManager="*res://scripts/autoloads/SceneManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DataManager="*res://scripts/autoloads/DataManager.gd"
 Debugger="*res://scripts/autoloads/debugger.gd"
+RuntimeDebugTools="*res://addons/runtime_debug_tools/scenes/remote_inspector.tscn"
+EmbedGameAutoload="*res://addons/fabimakesgames.embed_game/embed_game_autoload.gd"
 
 [dialogue_manager]
 
@@ -38,7 +40,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://scripts/state_machine/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/fabimakesgames.embed_game/plugin.cfg", "res://addons/runtime_debug_tools/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
 
 [filesystem]
 
