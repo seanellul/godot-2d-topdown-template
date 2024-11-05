@@ -47,6 +47,7 @@ position = Vector2(212, 85)
 
 [node name="Enemy1" parent="Entities" index="1" instance=ExtResource("3_vnork")]
 position = Vector2(576, 192)
+wall_min_slide_angle = 0.261799
 
 [node name="StateMachine" type="Node" parent="Entities/Enemy1" index="6" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_qmq1u")

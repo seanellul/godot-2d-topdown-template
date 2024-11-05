@@ -29,6 +29,7 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_g6455")
 animation_tree = NodePath("AnimationTree")
 collision_shape = NodePath("CollisionShape2D")
@@ -70,12 +71,12 @@ collision_mask = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": ExtResource("4_hhyyf"),
-&"char-run": ExtResource("8_xdo4a"),
 &"char-jump": ExtResource("7_ktamm"),
-&"char-walk": ExtResource("9_ihjft"),
-&"char-attack": ExtResource("5_gfoxn"),
 &"char-idle": ExtResource("6_bqfdd"),
-&"char-hurt": ExtResource("6_3jrrx")
+&"char-attack": ExtResource("5_gfoxn"),
+&"char-run": ExtResource("8_xdo4a"),
+&"char-hurt": ExtResource("6_3jrrx"),
+&"char-walk": ExtResource("9_ihjft")
 }
 autoplay = "char-idle/down"
 
