@@ -1,6 +1,6 @@
-@icon("../icons/BaseState.svg")
+@icon("../icons/StateNavigation.svg")
 extends StateEntity
-##Base class for all states.
+##Makes an entity follow a target using navigation. Requires a NavigationAgent2D.
 class_name StateNavigation
 
 @export var navigation_agent: NavigationAgent2D
