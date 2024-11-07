@@ -17,6 +17,7 @@
 size = Vector2(20, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_26lqd"]
+resource_local_to_scene = true
 shader = ExtResource("2_b5eyi")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/power = 0.0
@@ -24,7 +25,7 @@ shader_parameter/power = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_geh4k"]
 radius = 3.0
 
-[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "collision_shape", "sync_rotation", "blocks_detector", "fall_detector")]
+[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "sync_rotation", "blocks_detector", "fall_detector")]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 7
@@ -32,7 +33,6 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_g6455")
 animation_tree = NodePath("AnimationTree")
-collision_shape = NodePath("CollisionShape2D")
 sync_rotation = [NodePath("BlocksDetector")]
 blocks_detector = NodePath("BlocksDetector")
 fall_detector = NodePath("FallDetector")
@@ -71,12 +71,12 @@ collision_mask = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": ExtResource("4_hhyyf"),
+&"char-walk": ExtResource("9_ihjft"),
 &"char-jump": ExtResource("7_ktamm"),
-&"char-idle": ExtResource("6_bqfdd"),
-&"char-attack": ExtResource("5_gfoxn"),
-&"char-run": ExtResource("8_xdo4a"),
 &"char-hurt": ExtResource("6_3jrrx"),
-&"char-walk": ExtResource("9_ihjft")
+&"char-run": ExtResource("8_xdo4a"),
+&"char-idle": ExtResource("6_bqfdd"),
+&"char-attack": ExtResource("5_gfoxn")
 }
 autoplay = "char-idle/down"
 

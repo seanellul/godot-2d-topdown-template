@@ -3,7 +3,6 @@ class_name CharacterEntity
 
 @export_group("Settings")
 @export var animation_tree: AnimationTree
-@export var collision_shape: CollisionShape2D
 @export var sync_rotation: Array[Node2D] ##A list of nodes to sync rotation based on the entity facing direction.
 @export_group("Movement")
 @export var max_speed = 300.0
@@ -162,7 +161,7 @@ func end_attack():
 			attack_cooldown_timer.start(attack_speed)
 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
-	var nodes_to_flash: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.FLASH)
+	var nodes_to_flash: Array[Node] = get_children(true).filter(func(n: Node): return n.is_in_group(Const.GROUP.FLASH))
 	for n: Sprite2D in nodes_to_flash:
 		n.material.set_shader_parameter("power", power)
 		if color != Color.TRANSPARENT:
