@@ -23,7 +23,7 @@ class_name StateFollow
 	set(value):
 		flee = value
 		if entity:
-			entity.flee = value
+			entity.invert_moving_direction = value
 @export var speed_multiplier: = 1.0
 @export var friction_multiplier: = 1.0
 
@@ -34,13 +34,13 @@ signal target_reached(target)
 func enter():
 	super.enter()
 	target_reached.connect(_on_target_reached)
-	entity.flee = flee
+	entity.invert_moving_direction = flee
 	_init_target()
 
 func exit():
 	super.exit()
 	target_reached.disconnect(_on_target_reached)
-	entity.flee = false
+	entity.invert_moving_direction = false
 
 func update(_delta):
 	_check_target_reached()

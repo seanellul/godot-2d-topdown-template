@@ -1,12 +1,12 @@
 extends CharacterEntity
 class_name PlayerEntity
 
-@export var player_id: int = 1 ##Add players incrementing this value to create more players.
-@export var equipped = 0
 @export_group("States")
 @export var on_transfer_start: BaseState ##State to enable when player starts transfering.
 @export var on_transfer_end: BaseState ##State to enable when player ends transfering.
 
+var player_id: int = 1
+var equipped = 0
 var inventory: Array[ContentItem] = []
 
 func _ready():

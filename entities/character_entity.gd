@@ -24,8 +24,8 @@ class_name CharacterEntity
 @export var on_hit: BaseState ##State to enable when this entity damages another entity.
 @export var on_hurt: BaseState ##State to enable when this entity takes damage.
 @export var on_fall: BaseState ##State to enable when this entity falls.
-@export var on_recovery: BaseState ##State to enable when this entity recovers.
-@export var on_death: BaseState ##State to enable when this entity dies.
+@export var on_recovery: BaseState ##State to enable when this entity recovers hp.
+@export var on_death: BaseState ##State to enable when this entity dies (hp == 0).
 @export var on_screen_entered: BaseState ##State to enable when this entity is visible on screen.
 @export var on_screen_exited: BaseState ##State to enable when this entity is outside the visible screen.
 
@@ -43,7 +43,7 @@ class_name CharacterEntity
 @onready var input_enabled: bool = self is PlayerEntity
 
 var hp_bar: Node
-var screen_notifier: VisibleOnScreenNotifier3D
+var screen_notifier: VisibleOnScreenNotifier2D
 var attack_cooldown_timer: Timer
 var facing := Vector2.DOWN:
 	set(value):
@@ -51,7 +51,7 @@ var facing := Vector2.DOWN:
 		for n in sync_rotation:
 			n.rotation = facing.angle()
 var speed := 0.0
-var flee := false
+var invert_moving_direction := false
 var safe_position := Vector2.ZERO
 
 @export_group("Actions")
@@ -86,7 +86,7 @@ func _process(_delta):
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO
 	is_running = is_moving and speed > max_speed
-	check_falling()
+	_check_falling()
 	move_and_slide()
 
 func _init_health_bar():
@@ -97,7 +97,7 @@ func _init_health_bar():
 
 func _init_screen_notifier():
 	if on_screen_entered or on_screen_exited:
-		screen_notifier = VisibleOnScreenNotifier3D.new()
+		screen_notifier = VisibleOnScreenNotifier2D.new()
 		if on_screen_entered:
 			screen_notifier.screen_entered.connect(func(): on_screen_entered.enable())
 		if on_screen_exited:
@@ -113,6 +113,10 @@ func _update_animation():
 	var current_anim = animation_tree.get("parameters/playback").get_current_node()
 	if current_anim:
 		animation_tree.set("parameters/%s/BlendSpace2D/blend_position" % current_anim, Vector2(facing.x, facing.y))
+
+func _check_falling():
+	if not is_falling and not is_jumping and fall_detector.is_colliding() and on_fall:
+		on_fall.enable()
 
 func receive_data(data: DataEntity, _soft = false):
 	if data:
@@ -130,7 +134,7 @@ func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 	var target_velocity = Vector2.ZERO
 	var moving_direction := Vector2(direction.x, direction.y).normalized()
 	var new_friction = friction
-	moving_direction *= 1 if not flee else -1
+	moving_direction *= 1 if not invert_moving_direction else -1
 	if moving_direction != Vector2.ZERO:
 		facing = moving_direction
 		speed = max_speed * speed_increment
@@ -187,10 +191,6 @@ func recover_hp(value := 0, from = ""):
 		hp = max_hp
 	if on_recovery:
 		on_recovery.enable()
-
-func check_falling():
-	if not is_falling and not is_jumping and fall_detector.is_colliding() and on_fall:
-		on_fall.enable()
 
 func hurt(): ##IMPORTANT: should be called always after reduce_hp.
 	if on_hurt:
