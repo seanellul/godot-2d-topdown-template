@@ -18,13 +18,11 @@ func reset_game_data():
 func load_game_data():
 	game_data = SaveFileManager.load_save_file()
 
-func _save_level_data(_loading_screen):
-	#Used to save nodes state data of the level before removing the level
+func _save_level_data(_loading_screen): ##Used to save nodes state data of the level before removing the level.
 	_save_nodes_data()
 	_save_player_data(true)
 
-func _load_level_data(_loaded_scene, _loading_screen):
-	#Used to load nodes state data of the level when entering the level
+func _load_level_data(_loaded_scene, _loading_screen): ##Used to load nodes state data of the level when entering the level.
 	await get_tree().create_timer(0.01).timeout
 	_load_nodes_data()
 	_load_player_data(true)

@@ -33,7 +33,7 @@ func is_item_in_inventory(item_name: String, quantity := 1) -> int: ##Get the in
 			item_index = i
 	return item_index
 
-func add_item_to_inventory(item: DataItem, quantity: int):
+func add_item_to_inventory(item: DataItem, quantity: int): ##Adds an item to the inventory.
 	var item_index = is_item_in_inventory(item.resource_name)
 	if item_index >= 0:
 		inventory[item_index].quantity += quantity
@@ -45,7 +45,7 @@ func add_item_to_inventory(item: DataItem, quantity: int):
 		inventory.append(content)
 		print("%s added to %s's inventory! q: %s" %[item.resource_name, self.name, quantity])
 
-func remove_item_from_inventory(item_name: String, quantity: int):
+func remove_item_from_inventory(item_name: String, quantity: int): ##Removes an item from the inventory, if the item already exists in inventory.
 	var item_index = is_item_in_inventory(item_name)
 	if item_index >= 0:
 		inventory[item_index].quantity -= quantity
@@ -59,7 +59,7 @@ func reset_values():
 	is_charging = false
 	is_attacking = false
 
-func get_data(soft):
+func get_data(soft): ##Used to save player data to a save file. soft is used to avoid saving some data when moving to another level.
 	var data = DataPlayer.new()
 	if not soft:
 		data.position = position
@@ -71,7 +71,7 @@ func get_data(soft):
 	data.equipped = 0
 	return data
 
-func receive_data(data, soft = false):
+func receive_data(data, soft = false): ##Used to load player data (from a save file or when moving to another level). soft is used to avoid loading some data when moving to another level.
 	if data:
 		if not soft:
 			global_position = data.position
