@@ -1,13 +1,16 @@
 extends Node2D
 class_name Destination
 
+##Force the player to face this direction upon arriving to this destination. [br]
+##Leave empty to keep the same facing direction.
 @export_enum(
 	Const.DIRECTION.DOWN,
 	Const.DIRECTION.LEFT,
 	Const.DIRECTION.RIGHT,
 	Const.DIRECTION.UP
-) var facing ##Force player to face this direction upon arriving to this destination. Leave empty to keep the same facing direction.
+) var facing
 
+##Used to set the facing direction.
 func set_player_facing(player, player_facing, facing_dir):
 	var _facing = player_facing
 	if facing_dir != null:

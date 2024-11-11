@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dayieakdoxw36"]
 
-[ext_resource type="Script" path="res://scenes/hud/player_hud.gd" id="1_uxal8"]
+[ext_resource type="Script" path="res://scenes/hud/entity_hp_bar.gd" id="1_uxal8"]
 [ext_resource type="Texture2D" uid="uid://5100sv1llvn5" path="res://scenes/hud/heart-empty.png" id="1_ypjl8"]
 [ext_resource type="Texture2D" uid="uid://c1vdf4w3iebh1" path="res://scenes/hud/heart.png" id="2_qqi80"]
 
-[node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("tex_under", "tex_progress")]
+[node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("texture_under", "texture_progress")]
 script = ExtResource("1_uxal8")
-tex_under = NodePath("BarUnder")
-tex_progress = NodePath("BarProgress")
+texture_under = NodePath("BarUnder")
+texture_progress = NodePath("BarProgress")
 
 [node name="BarUnder" type="TextureRect" parent="."]
 layout_direction = 2

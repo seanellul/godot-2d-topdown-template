@@ -1,9 +1,9 @@
 extends Node2D
 class_name GameManager
 
-@export var n_of_players := 1
+@export var n_of_players := 1 ##The number of players the game should handle.
 
-@onready var world: Node2D = $World
+@onready var world: Node2D = $World #The parent node where levels will be instantiated.
 @onready var debug_level: Node2D = get_tree().get_first_node_in_group(Const.GROUP.LEVEL)
 
 static var gm: GameManager = self

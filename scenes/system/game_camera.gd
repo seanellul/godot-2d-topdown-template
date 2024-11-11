@@ -17,18 +17,18 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	_follow_target()
 
+##internal - If player is moving between levels, camera will be enabled on transfer complete.
 func _enable_camera():
 	position_smoothing_enabled = true
 
-func _disable_camera():
-	process_mode = PROCESS_MODE_DISABLED
-
+##internal - Linked to the global signal player_added_to_scene, it will be called when a new player is added to the level.
 func _try_to_set_player_target(_player: PlayerEntity):
 	if not target and target_player_id > 0:
 		var player: PlayerEntity = _player if _player.player_id == target_player_id else null
 		if player:
 			target = player
 		
+##internal - The method responsible for managing target following.
 func _follow_target():
 	if target and is_instance_valid(target):
 		global_position = round(target.position)

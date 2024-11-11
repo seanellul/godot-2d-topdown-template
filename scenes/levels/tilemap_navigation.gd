@@ -1,8 +1,9 @@
 extends TileMapLayer
 ##To be added to the TileMapLayer that uses the Navigation Layer.
+##This script removes from the navigation region the tiles with id == obstacle_tile_id found in the TileMapLayer set in obstacle_tilemap.
 
-@export var obstacle_tilemap: TileMapLayer
-@export var obstacle_tile_id: int
+@export var obstacle_tilemap: TileMapLayer ##The TileMapLayer that has the obstacles.
+@export var obstacle_tile_id: int ##The tile id of the obstacles. Tile id can be found in the TileSet tab when setting up the Tile Sources. 
 
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	if coords in obstacle_tilemap.get_used_cells_by_id(obstacle_tile_id):

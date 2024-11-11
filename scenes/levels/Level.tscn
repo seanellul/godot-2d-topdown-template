@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://8u5h1ar8jt2f"]
+[gd_scene load_steps=8 format=3 uid="uid://8u5h1ar8jt2f"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_cq0rv"]
 [ext_resource type="PackedScene" uid="uid://b8ms04atei243" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
+[ext_resource type="PackedScene" uid="uid://db4e7jrgweeab" path="res://entities/player/player.tscn" id="2_ystmk"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
 [ext_resource type="Script" path="res://scenes/levels/tilemap_navigation.gd" id="4_6158f"]
 [ext_resource type="Shader" path="res://shaders/water.gdshader" id="4_ud3dr"]
@@ -16,10 +17,10 @@ shader_parameter/distortion_speed = 2.0
 shader_parameter/tile = Vector2(5, 5)
 shader_parameter/offset = Vector2(0, 0)
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("entities") groups=["level"]]
+[node name="Level" type="Node2D" groups=["level"]]
 y_sort_enabled = true
 script = ExtResource("1_cq0rv")
-entities = NodePath("Entities")
+player_scene = ExtResource("2_ystmk")
 
 [node name="GameCamera2D" parent="." instance=ExtResource("2_d25mt")]
 position = Vector2(0, 0)

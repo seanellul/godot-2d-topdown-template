@@ -25,7 +25,8 @@ func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
 	flash(damage_flash_power)
 
-func is_item_in_inventory(item_name: String, quantity := 1) -> int: ##Get the index of the item in inventory, -1 if not found.
+##Get the index of the item in inventory, -1 if not found.
+func is_item_in_inventory(item_name: String, quantity := 1) -> int:
 	var item_index := -1
 	for i in inventory.size():
 		var content: ContentItem = inventory[i]
@@ -33,7 +34,8 @@ func is_item_in_inventory(item_name: String, quantity := 1) -> int: ##Get the in
 			item_index = i
 	return item_index
 
-func add_item_to_inventory(item: DataItem, quantity: int): ##Adds an item to the inventory.
+##Adds an item to the inventory.
+func add_item_to_inventory(item: DataItem, quantity: int):
 	var item_index = is_item_in_inventory(item.resource_name)
 	if item_index >= 0:
 		inventory[item_index].quantity += quantity
@@ -45,7 +47,8 @@ func add_item_to_inventory(item: DataItem, quantity: int): ##Adds an item to the
 		inventory.append(content)
 		print("%s added to %s's inventory! q: %s" %[item.resource_name, self.name, quantity])
 
-func remove_item_from_inventory(item_name: String, quantity: int): ##Removes an item from the inventory, if the item already exists in inventory.
+##Removes an item from the inventory, if the item already exists in inventory.
+func remove_item_from_inventory(item_name: String, quantity: int):
 	var item_index = is_item_in_inventory(item_name)
 	if item_index >= 0:
 		inventory[item_index].quantity -= quantity
@@ -59,7 +62,9 @@ func reset_values():
 	is_charging = false
 	is_attacking = false
 
-func get_data(soft): ##Used to save player data to a save file. soft is used to avoid saving some data when moving to another level.
+##Used to save player data to a save file. [br]
+##soft is used to avoid saving some data when moving to another level.
+func get_data(soft):
 	var data = DataPlayer.new()
 	if not soft:
 		data.position = position
@@ -71,7 +76,9 @@ func get_data(soft): ##Used to save player data to a save file. soft is used to 
 	data.equipped = 0
 	return data
 
-func receive_data(data, soft = false): ##Used to load player data (from a save file or when moving to another level). soft is used to avoid loading some data when moving to another level.
+##Used to load player data (from a save file or when moving to another level). [br]
+##soft is used to avoid loading some data when moving to another level.
+func receive_data(data, soft = false):
 	if data:
 		if not soft:
 			global_position = data.position
