@@ -8,7 +8,7 @@ class_name StateNavigation
 @export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
-		_init_target()
+		call_deferred("_init_target")
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
@@ -22,7 +22,7 @@ var is_target_reached := false
 func enter():
 	super.enter()
 	navigation_agent.target_reached.connect(_on_target_reached)
-	_init_target()
+	call_deferred("_init_target")
 	call_deferred("_update_target")
 
 func _update_target():
@@ -42,6 +42,7 @@ func _follow():
 		entity.move_towards(next_path_position)
 
 func _init_target():
+	await get_tree().physics_frame
 	_reset_target_reached()
 	if target_player_id > 0:
 		target = Globals.get_player(target_player_id)

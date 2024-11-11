@@ -26,13 +26,14 @@ func transfer(entity):
 		_transfer_to_position(entity)
 
 func _transfer_to_level(entity):
-	if GameManager.gm:
-		GameManager.gm.current_level.destination_name = destination_name
-		GameManager.gm.current_level.player_facing = entity.facing
+	var current_level = Globals.get_current_level()
+	if current_level:
+		current_level.destination_name = destination_name
+		current_level.player_facing = entity.facing
 		SceneManager.swap_scenes(
 			Const.LEVEL[level_key],
-			GameManager.gm.world,
-			GameManager.gm.current_level,
+			current_level.get_parent(),
+			current_level,
 			Const.TRANSITION.FADE_TO_BLACK
 		)
 	else:

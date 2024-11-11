@@ -69,7 +69,7 @@ func get_data(soft):
 	if not soft:
 		data.position = position
 		data.facing = facing
-		data.level = GameManager.gm.current_level.scene_file_path
+		data.level = Globals.get_current_level().scene_file_path
 	data.hp = hp
 	data.max_hp = max_hp
 	data.inventory = inventory

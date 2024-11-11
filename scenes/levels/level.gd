@@ -1,19 +1,14 @@
 extends Node2D
 class_name Level
 
-@export var player_scene: PackedScene ##Used to instantiate N players, based on n_of_players defined in GameManager.
+@export var player_scene: PackedScene ##Used to instantiate N players, based on n_of_players defined in Globals.
 
 var players: Array[PlayerEntity] ##All the players instantiated in the level.
 var player_facing: Vector2 ##Used when moving between levels to save the player facing direction.
 var destination_name: String ##Used when moving between levels to get the right destination position for the player in the loaded level.
 
-@onready var n_of_players = GameManager.gm.n_of_players if GameManager.gm else 1
+@onready var n_of_players = Globals.n_of_players
 @onready var entities_parent: Node2D = $Entities
-
-func _enter_tree() -> void:
-	if GameManager.gm:
-		print("Current level is: ", self.name)
-		GameManager.gm.current_level = self
 
 func _ready() -> void:
 	_init_players()

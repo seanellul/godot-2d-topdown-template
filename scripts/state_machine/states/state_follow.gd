@@ -6,7 +6,7 @@ class_name StateFollow
 @export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
-		_init_target()
+		call_deferred("_init_target")
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
@@ -35,7 +35,7 @@ func enter():
 	super.enter()
 	target_reached.connect(_on_target_reached)
 	entity.invert_moving_direction = flee
-	_init_target()
+	call_deferred("_init_target")
 
 func exit():
 	super.exit()
@@ -49,10 +49,11 @@ func physics_update(_delta):
 	_follow()
 
 func _follow():
-	if target and entity:
+	if is_instance_valid(target) and entity:
 		entity.move_towards(target.global_position, speed_multiplier, friction_multiplier)
 
 func _init_target():
+	await get_tree().physics_frame
 	_reset_target_reached()
 	if target_player_id > 0:
 		target = Globals.get_player(target_player_id)
@@ -60,7 +61,7 @@ func _init_target():
 		target = target
 
 func _check_target_reached():
-	if !is_target_reached and target:
+	if !is_target_reached and is_instance_valid(target):
 		var distance = entity.global_position.distance_to(target.position)
 		is_target_reached = distance < distance_threshold
 		if is_target_reached:

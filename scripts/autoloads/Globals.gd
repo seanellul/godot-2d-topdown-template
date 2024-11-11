@@ -3,9 +3,10 @@ extends Node
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 
-var user_prefs:UserPrefs
+var n_of_players := 1 ##The number of players the game should handle.
+var user_prefs: UserPrefs
 
-var settings_menu_scene:PackedScene = preload("res://scenes/menus/settings_menu.tscn")
+var settings_menu_scene: PackedScene = preload("res://scenes/menus/settings_menu.tscn")
 var settings_menu = null
 
 @warning_ignore("unused_signal")
@@ -52,15 +53,17 @@ func open_settings_menu():
 		push_warning('settings menu already exists in this scene')
 
 func get_player(id: int):
-	if GameManager.gm and GameManager.gm.current_level and GameManager.gm.current_level.players.size() > 0:
-		return GameManager.gm.current_level.players[id - 1]
-	elif is_inside_tree():
-		return get_tree().get_first_node_in_group(Const.GROUP.PLAYER)
-	else:
-		return null
+	var players: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
+	var found = players.filter(func(t): return t.player_id == id)
+	var player = found[0] if found.size() > 0 else null
+	return player
 
 func get_destination(destination_name: String):
 	var transfers: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.DESTINATION)
 	var found = transfers.filter(func(t): return t.name == destination_name)
 	var destination = found[0] if found.size() > 0 else null
 	return destination
+
+func get_current_level():
+	var level = get_tree().get_first_node_in_group(Const.GROUP.LEVEL)
+	return level
