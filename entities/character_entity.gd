@@ -84,6 +84,8 @@ func _ready():
 
 func _process(_delta):
 	_update_animation()
+	if running_particles:
+		running_particles.emitting = is_running && not is_jumping
 
 func _physics_process(_delta):
 	is_moving = velocity != Vector2.ZERO

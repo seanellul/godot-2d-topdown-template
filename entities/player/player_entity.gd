@@ -16,11 +16,6 @@ func _ready():
 	Globals.transfer_start.connect(func(): on_transfer_start.enable())
 	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
 
-func _process(delta):
-	super._process(delta)
-	if running_particles:
-		running_particles.emitting = is_running && not is_jumping
-
 func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
 	flash(damage_flash_power)

@@ -71,12 +71,12 @@ collision_mask = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": ExtResource("4_hhyyf"),
-&"char-walk": ExtResource("9_ihjft"),
-&"char-jump": ExtResource("7_ktamm"),
+&"char-attack": ExtResource("5_gfoxn"),
 &"char-hurt": ExtResource("6_3jrrx"),
-&"char-run": ExtResource("8_xdo4a"),
 &"char-idle": ExtResource("6_bqfdd"),
-&"char-attack": ExtResource("5_gfoxn")
+&"char-jump": ExtResource("7_ktamm"),
+&"char-run": ExtResource("8_xdo4a"),
+&"char-walk": ExtResource("9_ihjft")
 }
 autoplay = "char-idle/down"
 
