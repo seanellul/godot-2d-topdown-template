@@ -41,10 +41,6 @@ func _transfer_to_level(entity):
 
 func _transfer_to_position(entity):
 	Globals.transfer_start.emit()
-	print_debug(owner.owner.name)
-	print_debug(owner.get_parent().name)
-	print_debug(state_machine.owner)
-	print_debug(state_machine.get_parent())
 	var destination = Globals.get_destination(destination_name)
 	if destination:
 		set_player_position(entity, destination)
