@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cfb8430tqc358"]
 
-[ext_resource type="Texture2D" uid="uid://cfk0ybg4iyeka" path="res://entities/static/door.png" id="1_fpb0w"]
+[ext_resource type="Texture2D" uid="uid://cfk0ybg4iyeka" path="res://scenes/props/door.png" id="1_fpb0w"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_a78jy"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_gxend"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_eh4fy"]

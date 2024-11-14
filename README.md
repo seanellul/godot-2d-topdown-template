@@ -1,13 +1,19 @@
 # Entities
-Sono definite entità tutti i personaggi del gioco, dai personaggi principali, ai nemici, agli npc. Il nodo base delle entità è entity.tscn, che ha allegato lo script character_entity.gd (CharacterEntity). La classe CharacterEntity eredita da CharacterBody2D. CharacterEntity viene usata per controllare tutto dell'entità: azioni (movimento, salto, attacco), animazioni, stati ed energia.
-Ci sono nodi che ereditano dal nodo entity.tscn, per una gestione più specifca e questi sono:
-- player.tscn, che ha allegato lo script player_entity.gd (PlayerEntity), che eredita da CharacterEntity
-- enemy.tscn
-Di seguito esploriamo l'organizzazione di CharacterEntity e come viene gestita, per poi andare nello specifico della classe PlayerEntity.
+
+All characters in the game, including main characters, enemies, and NPCs, are defined as entities.
+The base node for entities is `entity.tscn`, which has the script `character_entity.gd` (CharacterEntity) attached.
+The CharacterEntity class inherits from CharacterBody2D and is used to control everything about the entity, including actions (movement, jumping, attack), animations, states, and energy.
+There are nodes that inherit from the `entity.tscn` node for more specific handling, such as:
+
+- `player.tscn`, with the attached script `player_entity.gd` (PlayerEntity), which inherits from CharacterEntity
+- `enemy.tscn`
+  Below, we explore the structure of CharacterEntity and its management, then move on to specifics of the PlayerEntity class.
 
 ## entity.tscn
-Il nodo entity.tscn è strutturato nel seguente modo:
-- Entity (character_entity.gd)
+
+The `entity.tscn` node is structured as follows:
+
+- Entity (`character_entity.gd`)
   - CollisionShape2D
   - Shadow
   - Sprite2D
@@ -17,47 +23,100 @@ Il nodo entity.tscn è strutturato nel seguente modo:
   - AnimationTree
 
 ### Entity
-CharacterEntity < CharacterBody2D
-Tutte le proprietà e i metodi dello script character_entity.gd sono commentati. Puoi controllare i commenti per capire al meglio le funzionalità dello script associato.
+
+CharacterEntity < CharacterBody2D <br>
+All properties and methods in the `character_entity.gd` script have comments.
+You can check the comments to better understand the functionality of the script.
 
 ### CollisionShape2D
-CollisionShape2D utilizzato dal CharacterBody2D. Fornisce un collider all'entità. è impostato sul livello 2 (character) e scansiona tutti i collider presenti nei livelli 1 (block), 2 (character), 3 (body).
+
+CollisionShape2D used by CharacterBody2D. It provides a collider for the entity, set to level 2 (character), and scans all colliders on levels 1 (block), 2 (character), and 3 (body).
 
 ### Shadow
-Sprite2D che rappresenta un'ombra sotto l'entità.
+
+Sprite2D that represents a shadow beneath the entity.
 
 ### Sprite2D
-Sprite2D principale che rappresenta l'entità.
+
+The main Sprite2D representing the entity.
 
 ### BlocksDetector
-RayCast2D per identificare quando l'entità si trova davanti un elemento bloccante, come un muro o un oggetto. Scansiona i livelli 1 (block) e 3 (body). La rotazione è sincronizzata con la direzione in cui è rivolta l'entità, perché questo nodo è aggiunto all'array sync_rotation del CharacterEntity.
+
+RayCast2D to identify when the entity is facing a blocking element, such as a wall or object. It scans levels 1 (block) and 3 (body). The rotation is synchronized with the direction the entity is facing, as this node is added to the `sync_rotation` array of CharacterEntity.
 
 ### FallDetector
-ShapeCast2D per identificare quando l'entità si trova in una posizione non sicura. è definita una posizione sicura una posizione in cui l'entità può muoversi liberamente. è utile per individuare ad esempio burroni e "far cadere" l'entità quando si trova sopra di essi. Scansiona il livello 3 (body). Quando collide, scatena lo stato on_fall del CharacterEntity.
+
+ShapeCast2D to identify when the entity is in an unsafe position. A safe position is one where the entity can move freely. This is useful for identifying cliffs and making the entity “fall” when over them. It scans level 3 (body) and triggers the `on_fall` state of CharacterEntity when it collides.
 
 ### AnimationPlayer
-AnimationPlayer principale che gestisce tutte le animazioni dell'entità. Le animazioni sono suddivise in librerie, dove ogni libreria rappresenta una specifica animazione (es: idle, jump, attack) che contiene 4 animazioni, una per ogni direzione (down, left, right, up).
-Per maggiori informazioni sul funzionamento delle animazioni, vedi il paragrafo Animazioni.
+
+The main AnimationPlayer that manages all entity animations. Animations are divided into libraries, where each library represents a specific animation (e.g., idle, jump, attack) containing 4 animations, one for each direction (down, left, right, up). For more information on animations, see the Animations section.
 
 ### AnimationTree
-AnimationTree principale che gestisce le diverse animazioni dell'entità. Le animazioni sono controllate da una state machine ed ogni animazione è controllata dall'azione attuale dell'entità (vedi il gruppo "Actions" del CharacterEntity). Per maggiori informazioni sul funzionamento delle animazioni, vedi il paragrafo Animazioni.
+
+The main AnimationTree that manages the entity's various animations. Animations are controlled by a state machine, with each animation linked to the entity's current action (see the "Actions" group of CharacterEntity). For more information on animations, see the Animations section.
 
 ## player.tscn
-Il nodo player.tscn eredita da entity.tscn. Qui esploriamo i nodi che non sono già presenti nel nodo principale:
-- Player (player_entity.gd)
+
+The `player.tscn` node inherits from `entity.tscn`. Here, we explore nodes that are not already present in the parent node:
+
+- Player (`player_entity.gd`)
   - SmokeParticles
   - InteractionTrigger
-  - StateMachine (state_machine.gd)
+  - StateMachine (`state_machine.gd`)
 
 ### Player
-PlayerEntity < CharacterEntity
-Tutte le proprietà e i metodi dello script player_entity.gd sono commentati. Puoi controllare i commenti per capire al meglio le funzionalità dello script associato.
+
+PlayerEntity < CharacterEntity <br>
+All properties and methods in the `player_entity.gd` script have comments. You can check the comments to better understand the functionality of the script.
 
 ### SmokeParticles
-GPUParticles2D la cui emissione viene attivata quando l'entità sta correndo (vedi running_particles del CharacterEntity).
+
+GPUParticles2D whose emission is activated when the entity is running (see `running_particles` in CharacterEntity).
 
 ### InteractionTrigger
-Area2D che delimita l'area che permette all'entità di interagire con gli elementi interattivi. Le interazioni possono essere azionate dallo stato StateInteract. Per maggiori informazioni sugli stati, vedi il paragrafo State Machine.
+
+Area2D defining the area that allows the entity to interact with interactive elements. Interactions can be triggered by the StateInteract state. For more information on states, see the State Machine section.
 
 ### StateMachine
-StateMachine che controlla tutti i possibili stati di questa entità. Per maggiori informazioni, vedi il paragrafo State Machine.
+
+StateMachine that controls all possible states of this entity. For more information, see the State Machine section.
+
+# Levels
+
+A level is a game area where playable characters, NPCs, any enemies, and props are present. The base node for levels is `Level.tscn`, which has attached the script `level.gd`. The Level node can be used as a starting node for creating new levels. It already has a structure of nodes within it, making it fully functional. Exploring the present nodes, we find:
+
+- GameCamera2D
+- Layers
+- Props
+- Entities
+- Transfers
+- Events
+
+## GameCamera2D
+
+The main GameCamera2D of the level. It has the script `game_camera.gd` attached, useful to define a camera's target to follow:
+
+- `target_player_id`: You can set a value corresponding to the `player_id` of the player to follow (see PlayerEntity). Setting a value greater than 0 will search within the level for the player with the corresponding player_id. Setting the value to 0 will not search for any player, and only the `target` field will be checked.
+- `target`: If you want the camera to follow any node (that is not a player), you can assign the node to follow in this field.
+
+## Layers
+
+This is the parent node that hosts all the TileMapLayer nodes of the level. TileMapLayer nodes are used to draw a level using tiles.
+Regarding the tileset, to facilitate the definition of Terrain Sets, the TileBitTools plugin has been added. For information on how TileBitTools works, refer to its [repository](https://github.com/dandeliondino/tile_bit_tools).
+
+## Props
+
+You can use this node as a parent to keep the props you add to the level organized. Props can be interactive elements or simple non-interactive decorations within the level.
+
+## Entities
+
+You can use this node as a parent to keep the entities you add to the level organized. Entities are the game’s characters. For more information on entities, see the Entities section.
+
+## Transfers
+
+You can use this node as a parent to keep the transfers you add to the level organized. A Transfer allows the player to move from one level to another. For more information on transfers, see the Transfers section.
+
+## Events
+
+You can use this node as a parent to keep the events you add to the level organized. Events are state machines that trigger a sequence of states, useful for creating cutscenes or automated character movements. For more information on events, see the State Machine section.
