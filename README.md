@@ -82,6 +82,10 @@ Area2D defining the area that allows the entity to interact with interactive ele
 
 StateMachine that controls all possible states of this entity. For more information, see the State Machine section.
 
+## Animations
+
+---
+
 # Levels
 
 A level is a game area where playable characters, NPCs, any enemies, and props are present. The base node for levels is `Level.tscn`, which has attached the script `level.gd`. The Level node can be used as a starting node for creating new levels. It already has a structure of nodes within it, making it fully functional. Exploring the present nodes, we find:
@@ -112,6 +116,13 @@ You can use this node as a parent to keep the props you add to the level organiz
 ## Entities
 
 You can use this node as a parent to keep the entities you add to the level organized. Entities are the game’s characters. For more information on entities, see the Entities section.
+Here you can add Marker2D nodes to indicate the spawn position of each player. The `level.gd` script will handle instantiating a player at the Marker2D position. It’s necessary to name the Marker2D nodes based on the `player_id` to associate with the player, as follows:
+
+- P1: instantiates a player with player_id 1
+- P2: instantiates a player with player_id 2
+- P3: instantiates a player with player_id 3
+- P4: instantiates a player with player_id 4
+  and so on.
 
 ## Transfers
 

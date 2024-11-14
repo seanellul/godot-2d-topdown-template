@@ -1,14 +1,14 @@
 extends Camera2D
 
-@export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
+@export var target_player_id := 0: ## If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
 		target = null
-@export var target: Node2D = null: ##The node to follow.
+@export var target: Node2D = null: ## The node to follow.
 	set(value):
 		target = value
 		if is_node_ready():
-			print("%s target set to: %s" %[name, target])
+			print("%s target set to: %s" % [name, target])
 
 func _ready() -> void:
 	Globals.player_added_to_scene.connect(_try_to_set_player_target)

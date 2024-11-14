@@ -4,12 +4,12 @@ class_name PlayerEntity
 ##The Player node is used as a base to create the main players.
 
 @export_group("States")
-@export var on_transfer_start: BaseState ##State to enable when player starts transfering.
-@export var on_transfer_end: BaseState ##State to enable when player ends transfering.
+@export var on_transfer_start: BaseState ## State to enable when player starts transfering.
+@export var on_transfer_end: BaseState ## State to enable when player ends transfering.
 
-var player_id: int = 1 ##A unique id that is assigned to the player on creation. Player 1 will have player_id = 1 and each additional player will have an incremental id, 2, 3, 4, and so on.
-var equipped = 0 ##The id of the weapon equipped by the player.
-var inventory: Array[ContentItem] = [] ##The items this player has in its inventory.
+var player_id: int = 1 ## A unique id that is assigned to the player on creation. Player 1 will have player_id = 1 and each additional player will have an incremental id, 2, 3, 4, and so on.
+var equipped = 0 ## The id of the weapon equipped by the player.
+var inventory: Array[ContentItem] = [] ## The items this player has in its inventory.
 
 func _ready():
 	super._ready()
@@ -34,13 +34,13 @@ func add_item_to_inventory(item: DataItem, quantity: int):
 	var item_index = is_item_in_inventory(item.resource_name)
 	if item_index >= 0:
 		inventory[item_index].quantity += quantity
-		print("%s updated in %s's inventory! q: %s" %[item.resource_name, self.name, inventory[item_index].quantity])
+		print("%s updated in %s's inventory! q: %s" % [item.resource_name, self.name, inventory[item_index].quantity])
 	else:
 		var content = ContentItem.new()
 		content.item = item
 		content.quantity = quantity
 		inventory.append(content)
-		print("%s added to %s's inventory! q: %s" %[item.resource_name, self.name, quantity])
+		print("%s added to %s's inventory! q: %s" % [item.resource_name, self.name, quantity])
 
 ##Removes an item from the inventory, if the item already exists in inventory.
 func remove_item_from_inventory(item_name: String, quantity: int):
@@ -48,10 +48,10 @@ func remove_item_from_inventory(item_name: String, quantity: int):
 	if item_index >= 0:
 		inventory[item_index].quantity -= quantity
 		if inventory[item_index].quantity > 0:
-			print("%s updated in %s's inventory! q: %s" %[item_name, self.name, inventory[item_index].quantity])
+			print("%s updated in %s's inventory! q: %s" % [item_name, self.name, inventory[item_index].quantity])
 		else:
 			inventory.remove_at(item_index)
-			print("%s removed from %s's inventory! q: 0" %[item_name, self.name])
+			print("%s removed from %s's inventory! q: 0" % [item_name, self.name])
 
 func reset_values():
 	is_charging = false
