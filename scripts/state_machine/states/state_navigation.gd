@@ -12,16 +12,11 @@ class_name StateNavigation
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
-		_reset_target_reached()
 		if is_node_ready():
 				print("%s is following: %s" %[entity_name, target])
-@export var on_target_reached: BaseState
-
-var is_target_reached := false
 
 func enter():
 	super.enter()
-	navigation_agent.target_reached.connect(_on_target_reached)
 	call_deferred("_init_target")
 	call_deferred("_update_target")
 
@@ -43,23 +38,7 @@ func _follow():
 
 func _init_target():
 	await get_tree().physics_frame
-	_reset_target_reached()
 	if target_player_id > 0:
 		target = Globals.get_player(target_player_id)
 	elif target:
 		target = target
-
-func _on_target_reached():
-	if is_target_reached:
-		return
-	is_target_reached = true
-	if entity:
-		entity.stop()
-	if on_target_reached:
-		on_target_reached.enable()
-	complete()
-
-func _reset_target_reached():
-	if is_inside_tree():
-		await get_tree().create_timer(0.5).timeout
-	is_target_reached = false

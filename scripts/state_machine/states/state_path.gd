@@ -18,7 +18,6 @@ class_name StatePath
 				new_id = 0
 			else:
 				entity.stop()
-			complete()
 		elif new_id < 0:
 			new_id = path_curve.point_count - 1
 		current_point_id = new_id

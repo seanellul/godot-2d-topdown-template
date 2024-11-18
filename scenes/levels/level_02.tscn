@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=80 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://scenes/props/key.tscn" id="2_vfs10"]
@@ -17,6 +17,15 @@
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="12_4dr30"]
 [ext_resource type="Resource" uid="uid://4ov1i7xrocfo" path="res://dialogues/start.dialogue" id="12_bfrr5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4dr30"]
+radius = 72.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dscar"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01hg1"]
+radius = 96.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4dr30"]
 resource_local_to_scene = true
@@ -557,16 +566,61 @@ script = ExtResource("5_4l2eg")
 script = ExtResource("6_rdt3e")
 wander_time_range = Vector2(1, 2)
 
-[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2" node_paths=PackedStringArray("on_target_reached")]
+[node name="start_idle" type="Node" parent="Entities/Enemy1/StateMachine/wander" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("11_7s6t0")
+area = NodePath("../../../BlockDetectionArea")
+on_interaction = NodePath("../../idle")
+one_shot = false
+metadata/_custom_type_script = ExtResource("11_7s6t0")
+
+[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2"]
 script = ExtResource("7_n4gru")
 target_player_id = 1
-on_target_reached = NodePath("../wander")
 speed_multiplier = 1.25
+
+[node name="start_wander" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("11_7s6t0")
+area = NodePath("../../../TargetReachedArea")
+on_interaction = NodePath("../../wander")
+one_shot = false
+metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
 script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 loop = true
+
+[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+script = ExtResource("11_7s6t0")
+area = NodePath("../../../TargetDetectionArea")
+on_interaction = NodePath("../../follow")
+one_shot = false
+metadata/_custom_type_script = ExtResource("11_7s6t0")
+
+[node name="TargetDetectionArea" type="Area2D" parent="Entities/Enemy1" index="8"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/TargetDetectionArea" index="0"]
+shape = SubResource("CircleShape2D_4dr30")
+debug_color = Color(0.609895, 0.539121, 0, 0.42)
+
+[node name="TargetReachedArea" type="Area2D" parent="Entities/Enemy1" index="9"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/TargetReachedArea" index="0"]
+shape = SubResource("CircleShape2D_dscar")
+debug_color = Color(0.980569, 0.127869, 0.129904, 0.42)
+
+[node name="BlockDetectionArea" type="Area2D" parent="Entities/Enemy1" index="10"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/BlockDetectionArea" index="0"]
+shape = SubResource("CircleShape2D_01hg1")
 
 [node name="NPC" parent="Entities" index="2" instance=ExtResource("9_jsvhf")]
 position = Vector2(211, 37)

@@ -77,6 +77,7 @@ func _enter_states():
 	for state in states:
 		debug += " [%s]" %[state.name]
 		state.enter()
+		state.running = true
 	print(debug)
 
 func _exit_states():
@@ -84,6 +85,7 @@ func _exit_states():
 	for state in states:
 		debug += " [%s]" %[state.name]
 		state.exit()
+		state.running = false
 	# print(debug) #Uncomment to debug exiting states
 
 func _update_states(delta):

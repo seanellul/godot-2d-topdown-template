@@ -14,13 +14,18 @@ func enter() -> void:
 		entity_name = entity.name
 		state_machine.params.set("entity", entity)
 
+func exit():
+	complete()
+	if entity:
+		entity.stop()
+
 func _try_to_get_entity(node):
-	if state_machine.params.has("entity"):
-		return state_machine.params["entity"]
 	var parent = node.get_parent()
 	if parent is CharacterEntity:
 		return parent
 	elif parent:
 		return _try_to_get_entity(parent)
+	elif state_machine.params.has("entity"):
+		return state_machine.params["entity"]
 	else:
 		return null

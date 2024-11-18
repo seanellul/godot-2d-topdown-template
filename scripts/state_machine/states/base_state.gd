@@ -3,14 +3,15 @@ extends Node
 ##Base class for all states.
 class_name BaseState
 
-@export var active := true ##Set to false to avoid processing this state.
+@export var active := true ## Set to false to avoid processing this state.
 @export_category("Advance")
 @export_group("Await Timer")
-@export var time_range := Vector2.ZERO ##If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
+@export var time_range := Vector2.ZERO ## If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
 @export_group("")
-@export var await_completion := false ##Await the completion of this state before enabling the on_completion state.
-@export var on_completion: BaseState ##State to enable after state completion or on timer timeout.
+@export var await_completion := false ## Await the completion of this state before enabling the on_completion state.
+@export var on_completion: BaseState ## State to enable after state completion or on timer timeout.
 
+var running := false ## True if the state is currently running.
 var state_machine: StateMachine:
 	set(value):
 		state_machine = value
@@ -24,11 +25,11 @@ func _enter_tree():
 	if !active:
 		process_mode = PROCESS_MODE_DISABLED
 	if time_range > Vector2.ZERO:
-		await_completion = false #Await for timer timeout instead.
+		await_completion = false # Await for timer timeout instead.
 		timer = TimedState.new()
 		timer.create(self, time_range)
 
-func enable(params = null): ##Enables this state.
+func enable(params = null): ## Enables this state.
 	if params:
 		state_machine.params = params
 	state_machine.enable_state(self)
@@ -58,7 +59,7 @@ func physics_update(_delta: float):
 	pass
 
 func complete():
-	print_debug("State %s completed" %[name])
+	print_debug("State %s completed" % [name])
 	completed.emit()
 
 class TimedState:

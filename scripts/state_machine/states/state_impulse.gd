@@ -11,8 +11,3 @@ func enter():
   await get_tree().create_timer(impulse_duration).timeout
   entity.stop(true)
   entity.reset_values()
-  complete()
-
-func exit():
-  super.exit()
-  entity.stop()
