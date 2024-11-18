@@ -3,25 +3,26 @@ extends BaseState
 ##Handle entity interactions.
 class_name StateInteract
 
-@export var area: Area2D ##Interaction will trigger only if entity is inside the area.
-@export var on_interaction: BaseState ##The state to enable on interaction.
-@export var action_trigger := "" ##The input action that will trigger the interaction. Leave empty to trigger on area entered.
+@export var area: Area2D ## Interaction will trigger only if entity is inside the area.
+@export var on_interaction: BaseState ## The state to enable on interaction.
+@export var on_leaving: BaseState ## The state to enable on exiting the area.
+@export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_category("Requirements")
 @export_group("Direction")
 @export_flags(
-	Const.DIRECTION.DOWN, 
-	Const.DIRECTION.LEFT, 
-	Const.DIRECTION.RIGHT, 
+	Const.DIRECTION.DOWN,
+	Const.DIRECTION.LEFT,
+	Const.DIRECTION.RIGHT,
 	Const.DIRECTION.UP
-) var direction ##The direction the character must face to trigger the interaction.
-@export var on_direction_wrong: BaseState ##State to enable when interacting with the wrong direction.
+) var direction ## The direction the character must face to trigger the interaction.
+@export var on_direction_wrong: BaseState ## State to enable when interacting with the wrong direction.
 @export_group("Items")
-@export var has_items: Array[ContentItem] ##Check if the items are present in the player's inventory.
-@export var on_items_missing: BaseState ##State to enable when items are missing.
-@export var remove_items := true ##Remove the required items after interaction.
+@export var has_items: Array[ContentItem] ## Check if the items are present in the player's inventory.
+@export var on_items_missing: BaseState ## State to enable when items are missing.
+@export var remove_items := true ## Remove the required items after interaction.
 @export_category("Settings")
-@export var one_shot := true ##If true, it can be interacted only once. Useful for chests or pickable items.
-@export var reset_delay := 0.5 ##Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
+@export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
+@export var reset_delay := 0.5 ## Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
 
 var entity: CharacterEntity
 var interacting := false
@@ -48,6 +49,8 @@ func _set_entity(_area):
 		_try_to_interact()
 
 func _reset_entity(_area):
+	if active and not interacting:
+		_do_leaving()
 	entity = null
 
 func update(_delta):
@@ -88,6 +91,13 @@ func _do_interaction():
 		on_interaction.enable({
 			"entity": entity
 		})
+	if !one_shot:
+		_reset_interaction()
+
+func _do_leaving():
+	interacting = true
+	if on_leaving:
+		on_leaving.enable()
 	if !one_shot:
 		_reset_interaction()
 

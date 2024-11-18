@@ -15,7 +15,6 @@ func enter() -> void:
 		state_machine.params.set("entity", entity)
 
 func exit():
-	complete()
 	if entity:
 		entity.stop()
 

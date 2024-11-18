@@ -25,7 +25,7 @@ radius = 72.0
 radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_01hg1"]
-radius = 96.0
+radius = 180.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4dr30"]
 resource_local_to_scene = true
@@ -568,9 +568,8 @@ wander_time_range = Vector2(1, 2)
 
 [node name="start_idle" type="Node" parent="Entities/Enemy1/StateMachine/wander" index="0" node_paths=PackedStringArray("area", "on_interaction")]
 script = ExtResource("11_7s6t0")
-area = NodePath("../../../BlockDetectionArea")
+area = NodePath("../../../FollowDetectionArea")
 on_interaction = NodePath("../../idle")
-one_shot = false
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2"]
@@ -582,7 +581,12 @@ speed_multiplier = 1.25
 script = ExtResource("11_7s6t0")
 area = NodePath("../../../TargetReachedArea")
 on_interaction = NodePath("../../wander")
-one_shot = false
+metadata/_custom_type_script = ExtResource("11_7s6t0")
+
+[node name="start_path" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="1" node_paths=PackedStringArray("area", "on_leaving")]
+script = ExtResource("11_7s6t0")
+area = NodePath("../../../FollowDetectionArea")
+on_leaving = NodePath("../../path")
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
@@ -594,7 +598,6 @@ loop = true
 script = ExtResource("11_7s6t0")
 area = NodePath("../../../TargetDetectionArea")
 on_interaction = NodePath("../../follow")
-one_shot = false
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="TargetDetectionArea" type="Area2D" parent="Entities/Enemy1" index="8"]
@@ -615,11 +618,12 @@ monitorable = false
 shape = SubResource("CircleShape2D_dscar")
 debug_color = Color(0.980569, 0.127869, 0.129904, 0.42)
 
-[node name="BlockDetectionArea" type="Area2D" parent="Entities/Enemy1" index="10"]
+[node name="FollowDetectionArea" type="Area2D" parent="Entities/Enemy1" index="10"]
 collision_layer = 0
+collision_mask = 8
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/BlockDetectionArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/FollowDetectionArea" index="0"]
 shape = SubResource("CircleShape2D_01hg1")
 
 [node name="NPC" parent="Entities" index="2" instance=ExtResource("9_jsvhf")]
