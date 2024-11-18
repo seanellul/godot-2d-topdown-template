@@ -11,25 +11,8 @@ size = Vector2(32, 18)
 [sub_resource type="CircleShape2D" id="CircleShape2D_og05g"]
 radius = 32.0
 
-[sub_resource type="Animation" id="Animation_uv0fv"]
-resource_name = "idle_on"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Handle:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.610865]
-}
-
-[sub_resource type="Animation" id="Animation_fljrb"]
-resource_name = "idle_off"
-length = 0.0333367
+[sub_resource type="Animation" id="Animation_4k428"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -75,8 +58,25 @@ tracks/0/keys = {
 "values": [0.610865, -0.610865]
 }
 
-[sub_resource type="Animation" id="Animation_4k428"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_uv0fv"]
+resource_name = "idle_on"
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.610865]
+}
+
+[sub_resource type="Animation" id="Animation_fljrb"]
+resource_name = "idle_off"
+length = 0.0333367
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -93,10 +93,10 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ch07o"]
 _data = {
 &"RESET": SubResource("Animation_4k428"),
-&"on": SubResource("Animation_txne3"),
-&"off": SubResource("Animation_3htn3"),
+&"idle_off": SubResource("Animation_fljrb"),
 &"idle_on": SubResource("Animation_uv0fv"),
-&"idle_off": SubResource("Animation_fljrb")
+&"off": SubResource("Animation_3htn3"),
+&"on": SubResource("Animation_txne3")
 }
 
 [node name="Switch" type="Node2D"]
@@ -105,7 +105,6 @@ _data = {
 position = Vector2(0, -8)
 texture = ExtResource("2_jt7g7")
 hframes = 2
-vframes = 2
 
 [node name="Handle" type="Marker2D" parent="."]
 rotation = -0.610865
@@ -114,7 +113,6 @@ rotation = -0.610865
 position = Vector2(0, -10)
 texture = ExtResource("2_jt7g7")
 hframes = 2
-vframes = 2
 frame = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
