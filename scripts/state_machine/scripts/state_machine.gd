@@ -33,12 +33,12 @@ func _init_states():
 	Globals.state_machine_initialized.emit(self)
 
 func _get_states():
-	if !current_state or current_state and !current_state.active:
+	if !current_state or current_state and current_state.disabled:
 		return
 	states = []
 	states.append(current_state)
 	for child in current_state.get_children():
-		if child is BaseState and child.active:
+		if child is BaseState and not child.disabled:
 			states.append(child)
 
 func enable_state(state: BaseState):
@@ -77,7 +77,7 @@ func _enter_states():
 	for state in states:
 		debug += " [%s]" %[state.name]
 		state.enter()
-		state.running = true
+		state.active = !disabled
 	print(debug)
 
 func _exit_states():
@@ -85,7 +85,7 @@ func _exit_states():
 	for state in states:
 		debug += " [%s]" %[state.name]
 		state.exit()
-		state.running = false
+		state.active = false
 	# print(debug) #Uncomment to debug exiting states
 
 func _update_states(delta):

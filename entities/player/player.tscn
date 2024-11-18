@@ -144,29 +144,29 @@ region = Rect2(280, 50, 40, 50)
 atlas = ExtResource("6_afbqv")
 region = Rect2(320, 50, 40, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p4mmg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgowa"]
 atlas = ExtResource("6_afbqv")
-region = Rect2(240, 100, 40, 50)
+region = Rect2(320, 100, 40, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k4n24"]
 atlas = ExtResource("6_afbqv")
 region = Rect2(280, 100, 40, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bgowa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4mmg"]
 atlas = ExtResource("6_afbqv")
-region = Rect2(320, 100, 40, 50)
+region = Rect2(240, 100, 40, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lt6c7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_88iry"]
 atlas = ExtResource("6_afbqv")
-region = Rect2(240, 150, 40, 50)
+region = Rect2(320, 150, 40, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pixvk"]
 atlas = ExtResource("6_afbqv")
 region = Rect2(280, 150, 40, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_88iry"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt6c7"]
 atlas = ExtResource("6_afbqv")
-region = Rect2(320, 150, 40, 50)
+region = Rect2(240, 150, 40, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrbe6"]
 atlas = ExtResource("6_afbqv")
@@ -381,13 +381,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p4mmg")
+"texture": SubResource("AtlasTexture_bgowa")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4n24")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bgowa")
+"texture": SubResource("AtlasTexture_p4mmg")
 }],
 "loop": true,
 "name": &"run-right",
@@ -395,13 +395,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lt6c7")
+"texture": SubResource("AtlasTexture_88iry")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pixvk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_88iry")
+"texture": SubResource("AtlasTexture_lt6c7")
 }],
 "loop": true,
 "name": &"run-up",

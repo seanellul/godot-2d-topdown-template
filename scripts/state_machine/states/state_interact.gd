@@ -61,7 +61,7 @@ func _try_to_interact():
 		_do_interaction()
 
 func _can_interact() -> bool:
-	if not is_instance_valid(entity) or interacting or not running:
+	if not is_instance_valid(entity) or interacting or not active:
 		return false
 	if not action_trigger.is_empty() and not Input.is_action_pressed(action_trigger):
 		return false

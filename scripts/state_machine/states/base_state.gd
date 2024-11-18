@@ -3,7 +3,7 @@ extends Node
 ##Base class for all states.
 class_name BaseState
 
-@export var active := true ## Set to false to avoid processing this state.
+@export var disabled := false ## Set to true to avoid processing this state.
 @export_category("Advance")
 @export_group("Await Timer")
 @export var time_range := Vector2.ZERO ## If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
@@ -11,7 +11,7 @@ class_name BaseState
 @export var await_completion := false ## Await the completion of this state before enabling the on_completion state.
 @export var on_completion: BaseState ## State to enable after state completion or on timer timeout.
 
-var running := false ## True if the state is currently running.
+var active := false ## True if the state is currently active.
 var state_machine: StateMachine:
 	set(value):
 		state_machine = value
@@ -22,7 +22,7 @@ var timer: TimedState
 signal completed
 
 func _enter_tree():
-	if !active:
+	if disabled:
 		process_mode = PROCESS_MODE_DISABLED
 	if time_range > Vector2.ZERO:
 		await_completion = false # Await for timer timeout instead.
