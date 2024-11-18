@@ -80,6 +80,7 @@ func _ready():
 	_init_health_bar()
 	_init_screen_notifier()
 	_init_attack_cooldown_timer()
+	animation_tree.active = true
 	hit.connect(func(): if on_hit: on_hit.enable())
 
 func _process(_delta):
@@ -180,7 +181,7 @@ func end_attack():
 ##Applies a flash to all children Sprite2D nodes found in group "flash" of the entity. 
 func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 	var nodes_to_flash: Array[Node] = get_children(true).filter(func(n: Node): return n.is_in_group(Const.GROUP.FLASH))
-	for n: Sprite2D in nodes_to_flash:
+	for n in nodes_to_flash:
 		n.material.set_shader_parameter("power", power)
 		if color != Color.TRANSPARENT:
 			n.material.set_shader_parameter("flash_color", color)

@@ -16,7 +16,7 @@ The `entity.tscn` node is structured as follows:
 - Entity (`character_entity.gd`)
   - CollisionShape2D
   - Shadow
-  - Sprite2D
+  - AnimatedSprite2D
   - BlocksDetector
   - FallDetector
   - AnimationPlayer
@@ -36,9 +36,9 @@ CollisionShape2D used by CharacterBody2D. It provides a collider for the entity,
 
 Sprite2D that represents a shadow beneath the entity.
 
-### Sprite2D
+### AnimatedSprite2D
 
-The main Sprite2D representing the entity.
+The main AnimatedSprite2D representing the entity.
 
 ### BlocksDetector
 
