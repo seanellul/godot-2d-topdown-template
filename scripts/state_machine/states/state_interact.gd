@@ -4,6 +4,7 @@ extends BaseState
 class_name StateInteract
 
 @export var area: Area2D ## Interaction will trigger only if entity is inside the area.
+@export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside the area.
 @export var on_interaction: BaseState ## The state to enable on interaction.
 @export var on_leaving: BaseState ## The state to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
@@ -23,14 +24,21 @@ class_name StateInteract
 @export_category("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
 @export var reset_delay := 0.5 ## Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
+@export_flags("Area:4", "Body:8", "Area and Body:12") var check = 4
 
 var entity: CharacterEntity
 var interacting := false
 
 func _ready() -> void:
+	if interaction_area:
+		area = interaction_area.area
 	if area:
-		area.area_entered.connect(_set_entity)
-		area.area_exited.connect(_reset_entity)
+		if check == 4 or check == 12:
+				area.area_entered.connect(_set_entity)
+				area.area_exited.connect(_reset_entity)
+		if check == 8 or check == 12:
+				area.body_entered.connect(_set_entity)
+				area.body_exited.connect(_reset_entity)
 
 func enter():
 	_reset_interaction()

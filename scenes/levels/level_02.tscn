@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=82 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://scenes/props/key.tscn" id="2_vfs10"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="9_jsvhf"]
 [ext_resource type="Texture2D" uid="uid://c6o7lhiq368dj" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
+[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="10_dscar"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="10_kibes"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="10_q6ljp"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
@@ -26,6 +27,9 @@ radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_01hg1"]
 radius = 180.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v5pqk"]
+radius = 72.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4dr30"]
 resource_local_to_scene = true
@@ -594,13 +598,16 @@ script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 loop = true
 
-[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("area", "area_xd", "on_interaction")]
 script = ExtResource("11_7s6t0")
 area = NodePath("../../../TargetDetectionArea")
+area_xd = NodePath("../../../InteractionArea2D")
 on_interaction = NodePath("../../follow")
+check = 12
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="TargetDetectionArea" type="Area2D" parent="Entities/Enemy1" index="8"]
+visible = false
 collision_layer = 0
 collision_mask = 8
 monitorable = false
@@ -625,6 +632,14 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/FollowDetectionArea" index="0"]
 shape = SubResource("CircleShape2D_01hg1")
+
+[node name="InteractionArea2D" type="CollisionShape2D" parent="Entities/Enemy1" index="11"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_v5pqk")
+debug_color = Color(0.878997, 0.00037542, 0.825857, 0.42)
+script = ExtResource("10_dscar")
+mask = 8
+metadata/_custom_type_script = ExtResource("10_dscar")
 
 [node name="NPC" parent="Entities" index="2" instance=ExtResource("9_jsvhf")]
 position = Vector2(211, 37)
