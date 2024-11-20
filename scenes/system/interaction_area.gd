@@ -19,6 +19,7 @@ func _ready() -> void:
 
 	await get_tree().physics_frame
 	
-	self.reparent(area, false)
+	self.reparent(area)
+	self.transform = Transform2D.IDENTITY
 	parent.add_child(area)
 	self.name = "CollisionShape2D"
