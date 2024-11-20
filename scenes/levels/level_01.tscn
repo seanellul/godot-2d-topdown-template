@@ -308,7 +308,7 @@ animation_player = NodePath("../../AnimationPlayer")
 animation = "up"
 
 [node name="Spikes" parent="Props" index="4" instance=ExtResource("4_avl7y")]
-position = Vector2(540, 200)
+position = Vector2(448, 160)
 
 [node name="Gate_Front3" parent="Props" index="5" instance=ExtResource("12_70ge1")]
 position = Vector2(561, 66)
@@ -326,7 +326,7 @@ position = Vector2(448, 35)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(464, 208)
+position = Vector2(472, 246)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)
@@ -387,12 +387,13 @@ on_interaction = NodePath("../player_path")
 action_trigger = "interact"
 one_shot = false
 
-[node name="player_path" type="Node" parent="Events/Event_01/StateMachine" index="1" node_paths=PackedStringArray("path")]
+[node name="player_path" type="Node" parent="Events/Event_01/StateMachine" index="1" node_paths=PackedStringArray("path", "on_completion")]
 script = ExtResource("8_285dh")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
 friction_multiplier = 4.0
 await_completion = true
+on_completion = NodePath("../wait")
 
 [node name="disable_player" type="Node" parent="Events/Event_01/StateMachine/player_path" index="0"]
 script = ExtResource("17_pb8k3")
@@ -401,10 +402,11 @@ on_enter = Dictionary[String, Variant]({
 "input_enabled": false
 })
 
-[node name="wait" type="Node" parent="Events/Event_01/StateMachine" index="2"]
+[node name="wait" type="Node" parent="Events/Event_01/StateMachine" index="2" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("9_o85tp")
 time_range = Vector2(1, 1)
 await_completion = true
+on_completion = NodePath("../enable_player")
 
 [node name="enable_player" type="Node" parent="Events/Event_01/StateMachine" index="3"]
 script = ExtResource("17_pb8k3")

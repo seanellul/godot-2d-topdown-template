@@ -4,10 +4,10 @@ extends StateEntity
 class_name StatePath
 
 @export var path: Path2D
-@export var loop := false ##If true, after reaching the last point entity will go back to the first one and repeat the path.
-@export var distance_threshold: = 2.0
-@export var speed_multiplier: = 1.0
-@export var friction_multiplier: = 1.0
+@export var loop := false ## If true, after reaching the last point entity will go back to the first one and repeat the path.
+@export var distance_threshold := 2.0
+@export var speed_multiplier := 1.0
+@export var friction_multiplier := 1.0
 
 @onready var path_curve = path.curve
 @onready var current_point_id: int = 0:
@@ -18,6 +18,7 @@ class_name StatePath
 				new_id = 0
 			else:
 				entity.stop()
+			complete()
 		elif new_id < 0:
 			new_id = path_curve.point_count - 1
 		current_point_id = new_id
