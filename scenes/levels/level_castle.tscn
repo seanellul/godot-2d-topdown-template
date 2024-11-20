@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://vvbcy3c5dej4"]
+[gd_scene load_steps=12 format=4 uid="uid://vvbcy3c5dej4"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_giuiu"]
 [ext_resource type="PackedScene" uid="uid://cfb8430tqc358" path="res://scenes/props/door.tscn" id="2_ruot3"]
@@ -10,11 +10,6 @@
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="8_ij6yd"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="10_7uwgo"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_wander.gd" id="10_ng8um"]
-
-[sub_resource type="Resource" id="Resource_f5qum"]
-script = ExtResource("3_i3l7c")
-item = ExtResource("4_slxg8")
-quantity = 2
 
 [sub_resource type="Resource" id="Resource_o8ck3"]
 script = ExtResource("3_i3l7c")
@@ -37,9 +32,6 @@ tile_map_data = PackedByteArray("AAAKAP3/CQAMAAMAAAAJAP7/CQANAAIAAAAJAP3/CQAQAAA
 
 [node name="Chest" parent="Props" index="0" instance=ExtResource("7_ob3gd")]
 position = Vector2(172, 79)
-
-[node name="get_content" parent="Props/Chest/StateMachine" index="2"]
-contents = Array[ExtResource("3_i3l7c")]([SubResource("Resource_f5qum")])
 
 [node name="Door" parent="Props" index="1" instance=ExtResource("2_ruot3")]
 position = Vector2(384, -5)
@@ -71,16 +63,16 @@ script = ExtResource("10_7uwgo")
 target_player_id = 1
 flee = true
 
-[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="1" node_paths=PackedStringArray("on_target_reached")]
+[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="1"]
 script = ExtResource("10_7uwgo")
 target_player_id = 1
-on_target_reached = NodePath("../flee")
 
 [node name="wander" type="Node" parent="Entities/Enemy1/StateMachine" index="2"]
 script = ExtResource("10_ng8um")
 wander_time_range = Vector2(1, 2)
 
 [node name="Destination_01" type="Marker2D" parent="Transfers" index="0" groups=["destination"]]
+position = Vector2(32, 256)
 
 [node name="Events" parent="." index="5"]
 position = Vector2(172, 148)

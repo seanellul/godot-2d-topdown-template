@@ -45,7 +45,7 @@ func _init_scene():
 	var destination = Globals.get_destination(destination_name)
 	for player: PlayerEntity in players:
 		if destination:
-			if destination is Destination:
+			if destination is Transfer:
 				destination.set_player_facing(player, player_facing, destination.facing)
 			player.position = destination.position
 		elif DataManager.game_data and DataManager.game_data.player_data:

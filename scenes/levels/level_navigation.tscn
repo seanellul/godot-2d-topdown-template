@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://di8w8pflxt5c4"]
+[gd_scene load_steps=11 format=4 uid="uid://di8w8pflxt5c4"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
@@ -12,10 +12,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x5hhv"]
 radius = 32.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_101ja"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
 
 [node name="Level_navigation" instance=ExtResource("1_spbgx")]
 
@@ -125,16 +121,6 @@ script = ExtResource("5_3wcfp")
 [node name="Transfer_West" parent="Transfers" index="0" instance=ExtResource("7_6ttik")]
 position = Vector2(16, 256)
 rotation = 1.5708
-facing = 2
-
-[node name="InteractionArea2D" parent="Transfers/Transfer_West" index="0"]
-shape = SubResource("RectangleShape2D_101ja")
-
-[node name="interact" parent="Transfers/Transfer_West/StateMachine" index="0"]
-direction = 4
-
-[node name="transfer" parent="Transfers/Transfer_West/StateMachine" index="1"]
-level_key = "LEVEL_CASTLE"
+level_path = "res://scenes/levels/level_castle.tscn"
 destination_name = "Destination_01"
-
-[editable path="Transfers/Transfer_West"]
+facing = 2

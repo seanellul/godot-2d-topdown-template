@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=33 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
@@ -191,18 +191,6 @@ item = ExtResource("4_qx1j4")
 quantity = 1
 metadata/_custom_type_script = ExtResource("3_myhjs")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu1m7"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrcmr"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_svp4f"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cywot"]
 size = Vector2(48, 64)
 
@@ -326,46 +314,22 @@ position = Vector2(448, 35)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(472, 246)
+position = Vector2(672, 144)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)
-
-[node name="InteractionArea2D" parent="Transfers/Transfer_North" index="0"]
-shape = SubResource("RectangleShape2D_iu1m7")
-
-[node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
-direction = 8
-
-[node name="transfer" parent="Transfers/Transfer_North/StateMachine" index="1"]
 destination_name = "Transfer_South"
 
 [node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, 405)
-
-[node name="InteractionArea2D" parent="Transfers/Transfer_South" index="0"]
-shape = SubResource("RectangleShape2D_vrcmr")
-
-[node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
-direction = 1
-
-[node name="transfer" parent="Transfers/Transfer_South/StateMachine" index="1"]
 destination_name = "Transfer_North"
 
 [node name="Transfer_East" parent="Transfers" index="2" instance=ExtResource("16_vcg7b")]
 position = Vector2(752, 224)
 rotation = 1.5708
-facing = 1
-
-[node name="InteractionArea2D" parent="Transfers/Transfer_East" index="0"]
-shape = SubResource("RectangleShape2D_svp4f")
-
-[node name="interact" parent="Transfers/Transfer_East/StateMachine" index="0"]
-direction = 4
-
-[node name="transfer" parent="Transfers/Transfer_East/StateMachine" index="1"]
-level_key = "LEVEL_NAV"
+level_path = "res://scenes/levels/level_navigation.tscn"
 destination_name = "Transfer_West"
+facing = 1
 
 [node name="Event_01" type="Node" parent="Events" index="0"]
 
@@ -419,7 +383,3 @@ on_enter = Dictionary[String, Variant]({
 "input_enabled": true
 })
 await_completion = true
-
-[editable path="Transfers/Transfer_North"]
-[editable path="Transfers/Transfer_South"]
-[editable path="Transfers/Transfer_East"]

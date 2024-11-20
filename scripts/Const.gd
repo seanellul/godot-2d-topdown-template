@@ -9,9 +9,6 @@ const MENU = {
 const LEVEL = {
 	GAME_START = "res://scenes/game.tscn",
 	LEVEL_1 = "res://scenes/levels/level_01.tscn",
-	LEVEL_2 = "res://scenes/levels/level_02.tscn",
-	LEVEL_CASTLE = "res://scenes/levels/level_castle.tscn",
-	LEVEL_NAV = "res://scenes/levels/level_navigation.tscn",
 }
 
 const TRANSITION = {
@@ -36,12 +33,12 @@ const DIR_VECTOR = {
 }
 
 const DIR_BIT = {
-	Vector2(0, 1): 1 << 0, #down
-	Vector2(-1, 0): 1 << 1, #left
-	Vector2(1, 0): 1 << 2, #right
-	Vector2(0, -1): 1 << 3, #up
-	Vector2(-1, -1): 1 << 4, #up left
-	Vector2(0, 0): 1 << 7, #down right
+	Vector2(0, 1): 1 << 0, # down
+	Vector2(-1, 0): 1 << 1, # left
+	Vector2(1, 0): 1 << 2, # right
+	Vector2(0, -1): 1 << 3, # up
+	Vector2(-1, -1): 1 << 4, # up left
+	Vector2(0, 0): 1 << 7, # down right
 }
 
 const GROUP = {
