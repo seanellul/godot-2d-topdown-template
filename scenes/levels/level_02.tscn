@@ -1,8 +1,10 @@
-[gd_scene load_steps=81 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=85 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://scenes/props/key.tscn" id="2_vfs10"]
+[ext_resource type="Script" path="res://items/content_item.gd" id="3_v5pqk"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="3_vnork"]
+[ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_m2te4"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
@@ -18,6 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="12_4dr30"]
 [ext_resource type="Resource" uid="uid://4ov1i7xrocfo" path="res://dialogues/start.dialogue" id="12_bfrr5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
+
+[sub_resource type="Resource" id="Resource_kxbgd"]
+script = ExtResource("3_v5pqk")
+item = ExtResource("4_m2te4")
+quantity = 1
+metadata/_custom_type_script = ExtResource("3_v5pqk")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v5pqk"]
 radius = 78.0
@@ -526,6 +534,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mmrjf"]
 radius = 27.2947
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dscar"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
+
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 416, 144, 0, 0, 0, 0, 752, 128, 0, 0, 0, 0, 592, 320, 0, 0, 0, 0, 416, 144)
@@ -548,6 +560,7 @@ tile_map_data = PackedByteArray("AAArAPv/CQAYAAEAAAArAPr/CQAYAAEAAAArAPn/CQAYAAE
 
 [node name="Key" parent="Props" index="0" instance=ExtResource("2_vfs10")]
 position = Vector2(283, 109)
+contents = Array[ExtResource("3_v5pqk")]([SubResource("Resource_kxbgd")])
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(212, 85)
@@ -674,6 +687,9 @@ shape = SubResource("CircleShape2D_mmrjf")
 position = Vector2(-48, 224)
 rotation = 1.5708
 facing = 2
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_West" index="0"]
+shape = SubResource("RectangleShape2D_dscar")
 
 [node name="interact" parent="Transfers/Transfer_West/StateMachine" index="0"]
 direction = 2

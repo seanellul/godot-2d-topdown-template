@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://di8w8pflxt5c4"]
+[gd_scene load_steps=12 format=4 uid="uid://di8w8pflxt5c4"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
@@ -8,9 +8,14 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_101ja"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="6_wl5yp"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="7_6ttik"]
+[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="7_f107o"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f107o"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x5hhv"]
 radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_101ja"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
 
 [node name="Level_navigation" instance=ExtResource("1_spbgx")]
 
@@ -47,11 +52,10 @@ debug_path_custom_color = Color(1, 0, 0, 1)
 script = ExtResource("3_t4uv3")
 current_state = NodePath("follow")
 
-[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="0" node_paths=PackedStringArray("navigation_agent", "on_target_reached")]
+[node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="0" node_paths=PackedStringArray("navigation_agent")]
 script = ExtResource("4_seybd")
 navigation_agent = NodePath("../../NavigationAgent2D")
 target_player_id = 1
-on_target_reached = NodePath("../idle")
 
 [node name="idle" type="Node" parent="Entities/Enemy1/StateMachine" index="1"]
 script = ExtResource("5_3wcfp")
@@ -68,7 +72,13 @@ debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
-[node name="StateMachine" type="Node" parent="Entities/Enemy2" index="8" node_paths=PackedStringArray("current_state")]
+[node name="DetectPlayerArea" type="CollisionShape2D" parent="Entities/Enemy2" index="8"]
+shape = SubResource("CircleShape2D_x5hhv")
+debug_color = Color(0.629361, 0.523748, 0.232421, 0.42)
+script = ExtResource("7_f107o")
+metadata/_custom_type_script = ExtResource("7_f107o")
+
+[node name="StateMachine" type="Node" parent="Entities/Enemy2" index="9" node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_t4uv3")
 current_state = NodePath("follow")
 
@@ -77,24 +87,15 @@ script = ExtResource("4_seybd")
 navigation_agent = NodePath("../../NavigationAgent2D")
 target_player_id = 1
 
-[node name="StateInteract" type="Node" parent="Entities/Enemy2/StateMachine/follow" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="StateInteract" type="Node" parent="Entities/Enemy2/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("6_101ja")
-area = NodePath("../../../Area2D")
+interaction_area = NodePath("../../../DetectPlayerArea")
 on_interaction = NodePath("../../idle")
 one_shot = false
 metadata/_custom_type_script = ExtResource("6_101ja")
 
 [node name="idle" type="Node" parent="Entities/Enemy2/StateMachine" index="1"]
 script = ExtResource("5_3wcfp")
-
-[node name="Area2D" type="Area2D" parent="Entities/Enemy2" index="9"]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy2/Area2D" index="0"]
-shape = SubResource("CircleShape2D_f107o")
-debug_color = Color(0.556083, 0.561532, 1.92523e-07, 0.42)
 
 [node name="Enemy3" parent="Entities" index="3" instance=ExtResource("2_68cva")]
 position = Vector2(112, 16)
@@ -112,10 +113,9 @@ debug_path_custom_color = Color(1, 0, 0, 1)
 script = ExtResource("3_t4uv3")
 current_state = NodePath("follow")
 
-[node name="follow" type="Node" parent="Entities/Enemy3/StateMachine" index="0" node_paths=PackedStringArray("on_target_reached")]
+[node name="follow" type="Node" parent="Entities/Enemy3/StateMachine" index="0"]
 script = ExtResource("6_wl5yp")
 target_player_id = 1
-on_target_reached = NodePath("../idle")
 speed_multiplier = 0.0
 friction_multiplier = 0.0
 
@@ -126,6 +126,9 @@ script = ExtResource("5_3wcfp")
 position = Vector2(16, 256)
 rotation = 1.5708
 facing = 2
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_West" index="0"]
+shape = SubResource("RectangleShape2D_101ja")
 
 [node name="interact" parent="Transfers/Transfer_West/StateMachine" index="0"]
 direction = 4

@@ -1,47 +1,26 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpbc6iw62na4q"]
+[gd_scene load_steps=18 format=3 uid="uid://dpbc6iw62na4q"]
 
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_pkjqp"]
+[ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_sb0cb"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_18kok"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_s42s2"]
 [ext_resource type="Resource" uid="uid://cvh325i7w1lhf" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_content.gd" id="5_epmu4"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
+
+[sub_resource type="Resource" id="Resource_c4pye"]
+script = ExtResource("3_s42s2")
+item = ExtResource("4_fgbx5")
+quantity = 0
+metadata/_custom_type_script = ExtResource("3_s42s2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oeede"]
 size = Vector2(42, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb0cb"]
 size = Vector2(32, 32)
-
-[sub_resource type="Animation" id="Animation_mq7wd"]
-resource_name = "up"
-length = 0.100003
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D:process_mode")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_3660x"]
 length = 0.001
@@ -114,6 +93,34 @@ tracks/1/keys = {
 "values": [4]
 }
 
+[sub_resource type="Animation" id="Animation_mq7wd"]
+resource_name = "up"
+length = 0.100003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21v20"]
 _data = {
 &"RESET": SubResource("Animation_3660x"),
@@ -122,11 +129,6 @@ _data = {
 &"up": SubResource("Animation_mq7wd")
 }
 
-[sub_resource type="Resource" id="Resource_01c67"]
-script = ExtResource("3_s42s2")
-item = ExtResource("4_fgbx5")
-quantity = 0
-
 [node name="Spikes" type="Sprite2D"]
 y_sort_enabled = true
 texture = ExtResource("1_2ngps")
@@ -134,6 +136,8 @@ offset = Vector2(0, 14)
 hframes = 4
 region_enabled = true
 region_rect = Rect2(0, 96, 192, 48)
+script = ExtResource("2_sb0cb")
+contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_c4pye")])
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -8)
@@ -164,7 +168,7 @@ current_state = NodePath("idle")
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("6_5lcsm")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = NodePath("../up")
+on_interaction = NodePath("../take_damage")
 action_trigger = "run"
 one_shot = false
 
@@ -173,13 +177,16 @@ script = ExtResource("4_op40x")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle"
 
-[node name="up" type="Node" parent="StateMachine" node_paths=PackedStringArray("on_completion")]
-script = ExtResource("5_epmu4")
-contents = Array[ExtResource("3_s42s2")]([SubResource("Resource_01c67")])
-time_range = Vector2(1.5, 1.5)
+[node name="take_damage" type="Node" parent="StateMachine" node_paths=PackedStringArray("node", "on_completion")]
+script = ExtResource("9_c4pye")
+node = NodePath("../..")
+method_name = "get_contents"
+await_signal_to_complete = "contents_got"
+await_completion = true
 on_completion = NodePath("../down")
+metadata/_custom_type_script = ExtResource("9_c4pye")
 
-[node name="animation_up" type="Node" parent="StateMachine/up" node_paths=PackedStringArray("animation_player")]
+[node name="animation_up" type="Node" parent="StateMachine/take_damage" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "up"

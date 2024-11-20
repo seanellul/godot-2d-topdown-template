@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_transfer.gd" id="4_eehld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh1eg"]
+resource_local_to_scene = true
 size = Vector2(64, 32)
 
 [node name="Transfer_01" type="Node2D" groups=["destination"]]

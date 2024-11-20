@@ -6,7 +6,7 @@ class_name StateFollow
 @export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
-		call_deferred("_init_target")
+		_init_target.call_deferred()
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
@@ -27,7 +27,7 @@ class_name StateFollow
 func enter():
 	super.enter()
 	entity.invert_moving_direction = flee
-	call_deferred("_init_target")
+	_init_target.call_deferred()
 
 func exit():
 	super.exit()

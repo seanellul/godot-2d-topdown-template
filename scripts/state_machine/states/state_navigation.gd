@@ -8,7 +8,7 @@ class_name StateNavigation
 @export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
-		call_deferred("_init_target")
+		_init_target.call_deferred()
 @export var target: Node2D = null: ##The node to follow.
 	set(value):
 		target = value
@@ -17,8 +17,8 @@ class_name StateNavigation
 
 func enter():
 	super.enter()
-	call_deferred("_init_target")
-	call_deferred("_update_target")
+	_init_target.call_deferred()
+	_update_target.call_deferred()
 
 func _update_target():
 	await get_tree().physics_frame

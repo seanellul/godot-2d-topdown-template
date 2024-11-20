@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=36 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/spikes.tscn" id="4_avl7y"]
+[ext_resource type="Resource" uid="uid://cpyqrspyr8pq3" path="res://items/potion.tres" id="4_cywot"]
 [ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_qx1j4"]
 [ext_resource type="PackedScene" uid="uid://bqi15hafblfrs" path="res://scenes/props/potion.tscn" id="5_1ytof"]
 [ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side_up.tscn" id="6_5b3ge"]
@@ -20,13 +21,17 @@
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="17_pb8k3"]
 
-[sub_resource type="Resource" id="Resource_kcxdj"]
+[sub_resource type="Resource" id="Resource_vrcmr"]
 script = ExtResource("3_myhjs")
-item = ExtResource("4_qx1j4")
-quantity = 1
+item = ExtResource("4_cywot")
+quantity = 0
+metadata/_custom_type_script = ExtResource("3_myhjs")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
 size = Vector2(48, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iu1m7"]
+radius = 32.0
 
 [sub_resource type="Animation" id="Animation_u6bpn"]
 length = 0.001
@@ -180,8 +185,23 @@ _data = {
 &"up": SubResource("Animation_muw3c")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_aijao"]
-radius = 32.0
+[sub_resource type="Resource" id="Resource_iu1m7"]
+script = ExtResource("3_myhjs")
+item = ExtResource("4_qx1j4")
+quantity = 1
+metadata/_custom_type_script = ExtResource("3_myhjs")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu1m7"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrcmr"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svp4f"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cywot"]
 size = Vector2(48, 64)
@@ -206,19 +226,14 @@ tile_map_data = PackedByteArray("AAAAAAAACAAAAAIAAAABAAAACAACAAIAAAABAP//CAACAAA
 [node name="top" parent="Layers" index="4"]
 tile_map_data = PackedByteArray("AAAXAP7/CQACAAEAAAAXAP3/CQACAAAAAAAWAP7/CQAGAAEAAAAWAP3/CQABAAAAAAAVAP7/CQABAAIAAAAVAP3/CQABAAAAAAAUAP7/CQABAAIAAAAUAP3/CQABAAAAAAATAP7/CQABAAIAAAATAP3/CQABAAAAAAASAP7/CQABAAIAAAASAP3/CQABAAAAAAARAP7/CQABAAIAAAARAP3/CQABAAAAAAAQAP7/CQABAAIAAAAQAP3/CQABAAAAAAAPAP7/CQABAAIAAAAPAP3/CQABAAAAAAAOAP7/CQABAAIAAAAOAP3/CQABAAAAAAANAP7/CQABAAIAAAANAP3/CQABAAAAAAAMAP7/CQABAAIAAAAMAP3/CQABAAAAAAALAP7/CQABAAIAAAALAP3/CQABAAAAAAAKAP7/CQABAAIAAAAKAP3/CQABAAAAAAAJAP7/CQABAAIAAAAJAP3/CQABAAAAAAAIAP7/CQABAAIAAAAIAP3/CQABAAAAAAAHAP7/CQABAAIAAAAHAP3/CQABAAAAAAAGAP7/CQABAAIAAAAGAP3/CQABAAAAAAAFAP7/CQABAAIAAAAFAP3/CQABAAAAAAAEAP7/CQAAAAIAAAAEAP3/CQAAAAAAAAABAP7/CQACAAIAAAABAP3/CQACAAAAAAAAAP7/CQABAAIAAAAAAP3/CQABAAAAAAD///7/CQAFAAEAAAD///3/CQABAAAAAAD+//7/CQAAAAEAAAD+//3/CQAAAAAAAAAXAAsACQABAAIAAAAXAAoACQABAAEAAAAXAAkACQABAAEAAAAXAAgACQABAAAAAAAXAAMACQABAAIAAAAXAAIACQAFAAIAAAAXAAEACQACAAEAAAAXAAAACQACAAEAAAAXAP//CQACAAEAAAAWAAsACQABAAIAAAAWAAoACQAGAAIAAAAWAAkACQAAAAEAAAAWAAgACQAAAAAAAAAWAAMACQAAAAIAAAAWAAIACQAAAAEAAAAWAAEACQAAAAEAAAAWAAAACQAAAAEAAAAWAP//CQAAAAEAAAAVAAsACQABAAIAAAAVAAoACQABAAAAAAAUAAsACQABAAIAAAAUAAoACQABAAAAAAATAAsACQABAAIAAAATAAoACQABAAAAAAASAAsACQABAAIAAAASAAoACQABAAAAAAARAAsACQABAAIAAAARAAoACQABAAAAAAAQAAsACQABAAIAAAAQAAoACQABAAAAAAAPAAsACQABAAIAAAAPAAoACQABAAAAAAAOAAsACQABAAIAAAAOAAoACQABAAAAAAANAAsACQABAAIAAAANAAoACQABAAAAAAAMAAsACQABAAIAAAAMAAoACQABAAAAAAALAAsACQABAAIAAAALAAoACQABAAAAAAAKAAsACQABAAIAAAAKAAoACQABAAAAAAAJAAsACQABAAIAAAAJAAoACQABAAAAAAAIAAsACQABAAIAAAAIAAoACQABAAAAAAAHAAsACQABAAIAAAAHAAoACQABAAAAAAAGAAsACQABAAIAAAAGAAoACQABAAAAAAAFAAsACQABAAIAAAAFAAoACQABAAAAAAAEAAsACQAAAAIAAAAEAAoACQAAAAAAAAABAAsACQACAAIAAAABAAoACQACAAAAAAAAAAsACQABAAIAAAAAAAoACQABAAAAAAD//wsACQABAAIAAAD//woACQAFAAIAAAD+/wsACQAAAAIAAAD+/woACQAAAAEAAAD//wkACQACAAEAAAD//wgACQACAAEAAAD//wcACQACAAEAAAD//wYACQACAAEAAAD//wUACQACAAEAAAD//wQACQACAAEAAAD//wMACQACAAEAAAD//wIACQACAAEAAAD//wEACQACAAEAAAD//wAACQACAAEAAAD/////CQACAAEAAAD+/wkACQAAAAEAAAD+/wgACQAAAAEAAAD+/wcACQAAAAEAAAD+/wYACQAAAAEAAAD+/wUACQAAAAEAAAD+/wQACQAAAAEAAAD+/wMACQAAAAEAAAD+/wIACQAAAAEAAAD+/wEACQAAAAEAAAD+/wAACQAAAAEAAAD+////CQAAAAEAAAAYAAMACQACAAIAAAAYAAIACQACAAAAAAAYAAgACQACAAAAAAAYAAkACQACAAEAAAAYAAsACQACAAIAAAAYAAoACQACAAEAAAA=")
 
-[node name="Chest" parent="Props" index="0" instance=ExtResource("6_kdswq")]
-position = Vector2(420, 40)
-
-[node name="get_content" parent="Props/Chest/StateMachine" index="2"]
-contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_kcxdj")])
-
-[node name="Potion" parent="Props" index="1" instance=ExtResource("5_1ytof")]
+[node name="Potion" parent="Props" index="0" instance=ExtResource("5_1ytof")]
 position = Vector2(274, 126)
+contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_vrcmr")])
 
-[node name="Lever" parent="Props" index="2" instance=ExtResource("13_64f3m")]
+[node name="Lever" parent="Props" index="1" instance=ExtResource("13_64f3m")]
 position = Vector2(670, 89)
 
-[node name="Gate_Side" parent="Props" index="3" instance=ExtResource("6_5b3ge")]
+[node name="Gate_Side" parent="Props" index="2" instance=ExtResource("6_5b3ge")]
 y_sort_enabled = false
 position = Vector2(720, 208)
 
@@ -230,7 +245,7 @@ change_states = Dictionary[String, String]({
 "on": "down"
 })
 
-[node name="Gate_Front" type="Sprite2D" parent="Props" index="4"]
+[node name="Gate_Front" type="Sprite2D" parent="Props" index="3"]
 y_sort_enabled = true
 position = Vector2(96, 24)
 texture = ExtResource("9_3pscl")
@@ -249,17 +264,24 @@ z_index = -1
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_pt5lc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Gate_Front" index="1"]
+[node name="InteractionArea2D" type="CollisionShape2D" parent="Props/Gate_Front" index="1"]
+shape = SubResource("CircleShape2D_iu1m7")
+debug_color = Color(0.629073, 0.525479, 0.199973, 0.42)
+script = ExtResource("16_iu1m7")
+metadata/_custom_type_script = ExtResource("16_iu1m7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Gate_Front" index="2"]
 libraries = {
 &"": SubResource("AnimationLibrary_w6wxc")
 }
 
-[node name="StateMachine" type="Node" parent="Props/Gate_Front" index="2" node_paths=PackedStringArray("current_state") groups=["save"]]
+[node name="StateMachine" type="Node" parent="Props/Gate_Front" index="3" node_paths=PackedStringArray("current_state") groups=["save"]]
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("on_interaction")]
+[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("16_nsalp")
+interaction_area = NodePath("../../InteractionArea2D")
 on_interaction = NodePath("../down")
 action_trigger = "interact"
 direction = 8
@@ -285,19 +307,10 @@ script = ExtResource("12_kio72")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "up"
 
-[node name="InteractionArea" type="Area2D" parent="Props/Gate_Front" index="3"]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Gate_Front/InteractionArea" index="0"]
-shape = SubResource("CircleShape2D_aijao")
-debug_color = Color(0.587579, 0.548861, 3.85046e-07, 0.42)
-
-[node name="Spikes" parent="Props" index="5" instance=ExtResource("4_avl7y")]
+[node name="Spikes" parent="Props" index="4" instance=ExtResource("4_avl7y")]
 position = Vector2(540, 200)
 
-[node name="Gate_Front3" parent="Props" index="6" instance=ExtResource("12_70ge1")]
+[node name="Gate_Front3" parent="Props" index="5" instance=ExtResource("12_70ge1")]
 position = Vector2(561, 66)
 
 [node name="ChangeStateListener" type="Node2D" parent="Props/Gate_Front3" index="3" node_paths=PackedStringArray("listen_to")]
@@ -308,11 +321,18 @@ change_states = Dictionary[String, String]({
 "on": "up"
 })
 
+[node name="Chest" parent="Props" index="6" instance=ExtResource("6_kdswq")]
+position = Vector2(448, 35)
+contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
+
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(670, 144)
+position = Vector2(464, 208)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_North" index="0"]
+shape = SubResource("RectangleShape2D_iu1m7")
 
 [node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
 direction = 8
@@ -322,6 +342,9 @@ destination_name = "Transfer_South"
 
 [node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, 405)
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_South" index="0"]
+shape = SubResource("RectangleShape2D_vrcmr")
 
 [node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
 direction = 1
@@ -333,6 +356,9 @@ destination_name = "Transfer_North"
 position = Vector2(752, 224)
 rotation = 1.5708
 facing = 1
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_East" index="0"]
+shape = SubResource("RectangleShape2D_svp4f")
 
 [node name="interact" parent="Transfers/Transfer_East/StateMachine" index="0"]
 direction = 4
@@ -392,7 +418,6 @@ await_completion = true
 position = Vector2(261, 267)
 curve = SubResource("Curve2D_uycfk")
 
-[editable path="Props/Chest"]
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_South"]
 [editable path="Transfers/Transfer_East"]
