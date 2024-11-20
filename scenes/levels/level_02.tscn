@@ -605,7 +605,6 @@ script = ExtResource("11_7s6t0")
 interaction_area = NodePath("../../../FollowingArea")
 on_leaving = NodePath("../../path")
 one_shot = false
-disabled = true
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]

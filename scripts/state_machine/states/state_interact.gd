@@ -34,11 +34,11 @@ func _ready() -> void:
 		area = interaction_area.area
 	if area:
 		if check == 4 or check == 12:
-				area.area_entered.connect(_set_entity)
-				area.area_exited.connect(_reset_entity)
+				area.area_entered.connect(func(_area): _set_entity(_area.get_parent()))
+				area.area_exited.connect(func(_area): _reset_entity())
 		if check == 8 or check == 12:
-				area.body_entered.connect(_set_entity)
-				area.body_exited.connect(_reset_entity)
+				area.body_entered.connect(func(_body): _set_entity(_body))
+				area.body_exited.connect(func(_body): _reset_entity())
 
 func enter():
 	_reset_interaction()
@@ -48,15 +48,14 @@ func enter():
 			_set_entity(a)
 
 func exit():
-	_reset_entity(null)
+	_reset_entity()
 
-func _set_entity(_area):
-	var parent = _area.get_parent()
-	if parent is CharacterEntity:
-		entity = parent
+func _set_entity(node):
+	if node is CharacterEntity:
+		entity = node
 		_try_to_interact()
 
-func _reset_entity(_area):
+func _reset_entity():
 	if active and not interacting:
 		_do_leaving()
 	entity = null
