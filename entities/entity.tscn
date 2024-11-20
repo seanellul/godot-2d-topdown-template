@@ -14,7 +14,7 @@
 [ext_resource type="AnimationNodeStateMachine" uid="uid://ks1203fyuyfg" path="res://entities/animations/char_anim_states.tres" id="10_esda3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
-size = Vector2(20, 16)
+size = Vector2(20, 18)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mrbe6"]
 resource_local_to_scene = true
@@ -478,7 +478,7 @@ blocks_detector = NodePath("BlocksDetector")
 fall_detector = NodePath("FallDetector")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_c7fes")
 
 [node name="Shadow" type="Sprite2D" parent="."]

@@ -3,8 +3,7 @@ extends BaseState
 ##Handle entity interactions.
 class_name StateInteract
 
-@export var area: Area2D ## Interaction will trigger only if entity is inside the area.
-@export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside the area.
+@export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside this area.
 @export var on_interaction: BaseState ## The state to enable on interaction.
 @export var on_leaving: BaseState ## The state to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
@@ -28,6 +27,7 @@ class_name StateInteract
 
 var entity: CharacterEntity
 var interacting := false
+var area: Area2D
 
 func _ready() -> void:
 	if interaction_area:

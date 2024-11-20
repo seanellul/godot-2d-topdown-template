@@ -1,32 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://b31ie7ym22i4i"]
+[gd_scene load_steps=7 format=3 uid="uid://b31ie7ym22i4i"]
 
 [ext_resource type="Script" path="res://scenes/system/destination.gd" id="1_fp3m2"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_1i106"]
+[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_5c8bo"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_byffi"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_transfer.gd" id="4_eehld"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0vkm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh1eg"]
 size = Vector2(64, 32)
 
 [node name="Transfer_01" type="Node2D" groups=["destination"]]
 script = ExtResource("1_fp3m2")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_w0vkm")
-debug_color = Color(0.627919, 0.414983, 0.851185, 0.42)
+[node name="InteractionArea2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hh1eg")
+debug_color = Color(0.582159, 0.451963, 0.822019, 0.42)
+script = ExtResource("2_5c8bo")
+metadata/_custom_type_script = ExtResource("2_5c8bo")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_1i106")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("3_byffi")
-area = NodePath("../../Area2D")
+interaction_area = NodePath("../../InteractionArea2D")
 on_interaction = NodePath("../transfer")
 one_shot = false
 

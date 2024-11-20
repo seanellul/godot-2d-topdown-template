@@ -2,7 +2,7 @@ extends CollisionShape2D
 ## Utility node to easily create an Area2D with a CollisionShape2D ready for StateInteract.
 class_name InteractionArea2D
 
-@export_flags_2d_physics var mask
+@export_flags_2d_physics var mask = 8
 
 var area: Area2D
 
@@ -16,7 +16,7 @@ func _ready() -> void:
 	area.collision_layer = 0
 	area.collision_mask = mask
 	area.monitorable = false
-	
+
 	await get_tree().physics_frame
 	
 	self.reparent(area)

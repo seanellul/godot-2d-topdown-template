@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=31 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://5788n4wk6fp1" path="res://scenes/props/gate_front_down.tscn" id="12_70ge1"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/switch.tscn" id="13_64f3m"]
+[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="16_iu1m7"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="16_nsalp"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="17_pb8k3"]
@@ -182,8 +183,8 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_aijao"]
 radius = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e7qi"]
-size = Vector2(64, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cywot"]
+size = Vector2(48, 64)
 
 [sub_resource type="Curve2D" id="Curve2D_uycfk"]
 _data = {
@@ -257,9 +258,8 @@ libraries = {
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("on_interaction")]
 script = ExtResource("16_nsalp")
-area = NodePath("../../InteractionArea")
 on_interaction = NodePath("../down")
 action_trigger = "interact"
 direction = 8
@@ -343,23 +343,20 @@ destination_name = "Transfer_West"
 
 [node name="Event_01" type="Node" parent="Events" index="0"]
 
-[node name="EventStartArea" type="Area2D" parent="Events/Event_01" index="0"]
+[node name="InteractionArea2D" type="CollisionShape2D" parent="Events/Event_01" index="0"]
 position = Vector2(360, 288)
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Event_01/EventStartArea" index="0"]
-shape = SubResource("RectangleShape2D_4e7qi")
+shape = SubResource("RectangleShape2D_cywot")
+script = ExtResource("16_iu1m7")
+metadata/_custom_type_script = ExtResource("16_iu1m7")
 
 [node name="StateMachine" type="Node" parent="Events/Event_01" index="1" node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 sequence = true
 
-[node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("16_nsalp")
-area = NodePath("../../EventStartArea")
+interaction_area = NodePath("../../InteractionArea2D")
 on_interaction = NodePath("../player_path")
 action_trigger = "interact"
 one_shot = false

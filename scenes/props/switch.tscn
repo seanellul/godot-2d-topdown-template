@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://cfx0yov61ftcj"]
+[gd_scene load_steps=14 format=3 uid="uid://cfx0yov61ftcj"]
 
+[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_67g6h"]
 [ext_resource type="Texture2D" uid="uid://b3v3fyoyhec5j" path="res://scenes/props/lever.png" id="2_jt7g7"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_05j5n"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_k6m0m"]
@@ -8,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlfxg"]
 size = Vector2(32, 18)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_og05g"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_y5wia"]
 radius = 32.0
 
 [sub_resource type="Animation" id="Animation_4k428"]
@@ -26,9 +27,9 @@ tracks/0/keys = {
 "values": [-0.610865]
 }
 
-[sub_resource type="Animation" id="Animation_txne3"]
-resource_name = "on"
-length = 0.26667
+[sub_resource type="Animation" id="Animation_fljrb"]
+resource_name = "idle_off"
+length = 0.0333367
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -36,26 +37,10 @@ tracks/0/path = NodePath("Handle:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.610865, 0.610865]
-}
-
-[sub_resource type="Animation" id="Animation_3htn3"]
-resource_name = "off"
-length = 0.26667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Handle:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.610865, -0.610865]
+"values": [-0.610865]
 }
 
 [sub_resource type="Animation" id="Animation_uv0fv"]
@@ -74,9 +59,9 @@ tracks/0/keys = {
 "values": [0.610865]
 }
 
-[sub_resource type="Animation" id="Animation_fljrb"]
-resource_name = "idle_off"
-length = 0.0333367
+[sub_resource type="Animation" id="Animation_3htn3"]
+resource_name = "off"
+length = 0.26667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,10 +69,26 @@ tracks/0/path = NodePath("Handle:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-0.610865]
+"values": [0.610865, -0.610865]
+}
+
+[sub_resource type="Animation" id="Animation_txne3"]
+resource_name = "on"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.610865, 0.610865]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ch07o"]
@@ -123,16 +124,12 @@ collision_mask = 0
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_dlfxg")
 
-[node name="InteractionArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+[node name="InteractionArea2D" type="CollisionShape2D" parent="StaticBody2D"]
 z_index = -1
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_og05g")
-debug_color = Color(0.506096, 0.5793, 0, 0.42)
+shape = SubResource("CircleShape2D_y5wia")
+debug_color = Color(0.634013, 0.524733, 0.158317, 0.42)
+script = ExtResource("2_67g6h")
+metadata/_custom_type_script = ExtResource("2_67g6h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -143,9 +140,9 @@ libraries = {
 script = ExtResource("3_05j5n")
 current_state = NodePath("idle_off")
 
-[node name="idle_off" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="idle_off" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("4_t1oes")
-area = NodePath("../../InteractionArea")
+interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
 on_interaction = NodePath("../on")
 action_trigger = "interact"
 one_shot = false
@@ -162,9 +159,9 @@ animation = "on"
 await_completion = true
 on_completion = NodePath("../idle_on")
 
-[node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("area", "on_interaction")]
+[node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("4_t1oes")
-area = NodePath("../../InteractionArea")
+interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
 on_interaction = NodePath("../off")
 action_trigger = "interact"
 one_shot = false
