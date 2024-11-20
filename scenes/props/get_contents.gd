@@ -1,4 +1,5 @@
 extends Node2D
+##Consumes or adds contents to player's inventory.
 
 @export var contents: Array[ContentItem] ## A list of contents to get.
 

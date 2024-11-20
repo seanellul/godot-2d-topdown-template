@@ -1,5 +1,6 @@
 @icon("res://icons/Transfer.svg")
 extends Node2D
+##Transfers an entity to a different level or position.
 class_name Transfer
 
 @export_category("Destination settings")
