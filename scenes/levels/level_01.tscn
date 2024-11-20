@@ -375,7 +375,11 @@ shape = SubResource("RectangleShape2D_cywot")
 script = ExtResource("16_iu1m7")
 metadata/_custom_type_script = ExtResource("16_iu1m7")
 
-[node name="StateMachine" type="Node" parent="Events/Event_01" index="1" node_paths=PackedStringArray("current_state")]
+[node name="Path2D" type="Path2D" parent="Events/Event_01" index="1"]
+position = Vector2(261, 267)
+curve = SubResource("Curve2D_uycfk")
+
+[node name="StateMachine" type="Node" parent="Events/Event_01" index="2" node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 sequence = true
@@ -415,10 +419,6 @@ on_enter = Dictionary[String, Variant]({
 "input_enabled": true
 })
 await_completion = true
-
-[node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
-position = Vector2(261, 267)
-curve = SubResource("Curve2D_uycfk")
 
 [editable path="Transfers/Transfer_North"]
 [editable path="Transfers/Transfer_South"]

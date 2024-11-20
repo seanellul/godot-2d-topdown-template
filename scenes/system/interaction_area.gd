@@ -19,7 +19,6 @@ func _ready() -> void:
 
 	await get_tree().physics_frame
 	
-	self.reparent(area)
+	self.reparent(area, false)
 	parent.add_child(area)
-	self.position = Vector2.ZERO
 	self.name = "CollisionShape2D"
