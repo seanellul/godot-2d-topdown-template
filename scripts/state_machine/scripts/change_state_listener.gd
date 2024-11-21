@@ -1,8 +1,14 @@
 @icon("../icons/Listener.svg")
 extends Node2D
+##
 class_name ChangeStateListener
 
-@export var listen_to: Node2D ##The node should have a StateMachine in its children.
+## The listening node should have a StateMachine in its children.
+@export var listen_to: Node2D
+## Pairs of [b]listening state (key) - state to enable (value)[/b].[br]
+##The [i]listening states[/i] are the state's name from the StateMachine found in the listen_to node;[br]
+##The [i]states to enable[/i] are the state's name from the StateMachine found in this node.[br]
+##When a [i]listening state[/i] is enabled, the corresponding [i]state to enable[/i] will also be enabled.
 @export var change_states: Dictionary[String, String]
 
 var listening_state_machine: StateMachine

@@ -1,3 +1,24 @@
+# INTRO
+
+# Character Controller
+- 4 directions movement
+- run
+- jump
+- flash
+- health
+
+# Interaction
+# Inventory
+# Data Management (Save/Load)
+# States Management
+# Scenes Transition
+# Dialogue System
+# Tilemaps
+# Debugger
+
+
+# NODES AND CLASSES DEFINITIONS
+
 # Entities
 
 All characters in the game, including main characters, enemies, and NPCs, are defined as entities.

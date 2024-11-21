@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://db4e7jrgweeab"]
+[gd_scene load_steps=67 format=3 uid="uid://db4e7jrgweeab"]
 
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" uid="uid://dayieakdoxw36" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_gameover.gd" id="11_rnd5j"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_fall.gd" id="12_2ttjo"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
+[ext_resource type="PackedScene" uid="uid://b0ac6cpk1hwcy" path="res://scenes/menus/inventory.tscn" id="15_gx6sm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
 radius = 23.0
@@ -576,3 +577,6 @@ on_enter = Dictionary[String, Variant]({
 
 [node name="AnimationTree" parent="." index="9"]
 parameters/walk/BlendSpace2D/blend_position = Vector2(0.00376654, 0.992565)
+
+[node name="Inventory" parent="." index="10" node_paths=PackedStringArray("player") instance=ExtResource("15_gx6sm")]
+player = NodePath("..")

@@ -109,7 +109,7 @@ func _do_leaving():
 		_reset_interaction()
 
 func _check_inventory_item():
-	if not has_items.size() > 0 and remove_items and entity.has_method("remove_item_from_inventory"):
+	if has_items.size() > 0 and remove_items and entity.has_method("remove_item_from_inventory"):
 		for content: ContentItem in has_items:
 			entity.remove_item_from_inventory(content.item.resource_name, content.quantity)
 

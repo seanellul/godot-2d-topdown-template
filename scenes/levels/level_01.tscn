@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=34 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
@@ -185,6 +185,12 @@ _data = {
 &"up": SubResource("Animation_muw3c")
 }
 
+[sub_resource type="Resource" id="Resource_cywot"]
+script = ExtResource("3_myhjs")
+item = ExtResource("4_qx1j4")
+quantity = 1
+metadata/_custom_type_script = ExtResource("3_myhjs")
+
 [sub_resource type="Resource" id="Resource_iu1m7"]
 script = ExtResource("3_myhjs")
 item = ExtResource("4_qx1j4")
@@ -273,6 +279,7 @@ interaction_area = NodePath("../../InteractionArea2D")
 on_interaction = NodePath("../down")
 action_trigger = "interact"
 direction = 8
+has_items = Array[ExtResource("3_myhjs")]([SubResource("Resource_cywot")])
 one_shot = false
 
 [node name="idle_up" type="Node" parent="Props/Gate_Front/StateMachine/interact" index="0" node_paths=PackedStringArray("animation_player")]
