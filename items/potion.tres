@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DataItem" load_steps=3 format=3 uid="uid://cpyqrspyr8pq3"]
 
-[ext_resource type="Script" path="res://items/data_item.gd" id="1_ej3gy"]
+[ext_resource type="Script" uid="uid://dnijheehoxmxs" path="res://items/data_item.gd" id="1_ej3gy"]
 [ext_resource type="Texture2D" uid="uid://cvelw1vkjed73" path="res://items/potion_icon.tres" id="1_x2q68"]
 
 [resource]
