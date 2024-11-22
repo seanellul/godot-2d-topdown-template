@@ -23,7 +23,7 @@ class_name StateInteract
 @export_category("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
 @export var reset_delay := 0.5 ## Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
-@export_flags("Area:4", "Body:8", "Area and Body:12") var check = 4
+@export_flags("Area:4", "Body:8", "Area and Body:12") var check = 4 ## Determines which elements the interaction area should control: only other areas, only bodies, or both. 
 
 var entity: CharacterEntity
 var interacting := false
