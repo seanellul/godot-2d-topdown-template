@@ -23,7 +23,9 @@ script = ExtResource("1_cq0rv")
 player_scene = ExtResource("2_ystmk")
 
 [node name="GameCamera2D" parent="." instance=ExtResource("2_d25mt")]
-position = Vector2(0, 0)
+position = Vector2(320, 180)
+limit_left = 0
+limit_top = 0
 
 [node name="Layers" type="Node2D" parent="."]
 z_index = -1
