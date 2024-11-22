@@ -1,25 +1,25 @@
-[gd_scene load_steps=85 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=84 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://scenes/props/key.tscn" id="2_vfs10"]
-[ext_resource type="Script" path="res://items/content_item.gd" id="3_v5pqk"]
+[ext_resource type="Script" uid="uid://dcqe2ncf78h8m" path="res://items/content_item.gd" id="3_v5pqk"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="3_vnork"]
 [ext_resource type="Resource" uid="uid://dfjkg1pvqcid3" path="res://items/key.tres" id="4_m2te4"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="4_qmq1u"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
+[ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="4_qmq1u"]
+[ext_resource type="Script" uid="uid://buhmwgkrysh6v" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
+[ext_resource type="Script" uid="uid://bdjifaw2y2vhw" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
+[ext_resource type="Script" uid="uid://dlqi2tf206uhx" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
+[ext_resource type="Script" uid="uid://c838vta4pa6y1" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
 [ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="9_jsvhf"]
 [ext_resource type="Texture2D" uid="uid://c6o7lhiq368dj" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="10_dscar"]
+[ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="10_dscar"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="10_kibes"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="10_q6ljp"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
+[ext_resource type="Shader" uid="uid://dv8bant6qcjet" path="res://shaders/flash.gdshader" id="10_q6ljp"]
+[ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
+[ext_resource type="Script" uid="uid://bmv8sx1p1cgy3" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="12_4dr30"]
 [ext_resource type="Resource" uid="uid://4ov1i7xrocfo" path="res://dialogues/start.dialogue" id="12_bfrr5"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
+[ext_resource type="Script" uid="uid://bl6apqwd8xel3" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
 
 [sub_resource type="Resource" id="Resource_kxbgd"]
 script = ExtResource("3_v5pqk")
@@ -531,12 +531,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mmrjf"]
-radius = 27.2947
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dscar"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_m2te4"]
+radius = 28.0
 
 [sub_resource type="Curve2D" id="Curve2D_gjsqd"]
 _data = {
@@ -647,12 +643,18 @@ material = SubResource("ShaderMaterial_4dr30")
 sprite_frames = SubResource("SpriteFrames_dscar")
 autoplay = "idle-down"
 
-[node name="StateMachine" type="Node" parent="Entities/NPC" index="7" node_paths=PackedStringArray("current_state")]
+[node name="InteractionArea2D" type="CollisionShape2D" parent="Entities/NPC" index="7"]
+shape = SubResource("CircleShape2D_m2te4")
+script = ExtResource("10_dscar")
+metadata/_custom_type_script = ExtResource("10_dscar")
+
+[node name="StateMachine" type="Node" parent="Entities/NPC" index="8" node_paths=PackedStringArray("current_state")]
 script = ExtResource("4_qmq1u")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Entities/NPC/StateMachine" index="0" node_paths=PackedStringArray("on_interaction")]
+[node name="interact" type="Node" parent="Entities/NPC/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("11_7s6t0")
+interaction_area = NodePath("../../InteractionArea2D")
 on_interaction = NodePath("../start_dialogue")
 action_trigger = "interact"
 one_shot = false
@@ -674,14 +676,6 @@ on_exit = Dictionary[String, Variant]({
 "input_enabled": true
 })
 
-[node name="InteractionArea" type="Area2D" parent="Entities/NPC" index="8"]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/NPC/InteractionArea" index="0"]
-shape = SubResource("CircleShape2D_mmrjf")
-
 [node name="Transfer_West" parent="Transfers" index="0" instance=ExtResource("10_kibes")]
 position = Vector2(-48, 224)
 rotation = 1.5708
@@ -689,18 +683,7 @@ level_path = "res://scenes/levels/level_01.tscn"
 destination_name = "Transfer_East"
 facing = 2
 
-[node name="InteractionArea2D" parent="Transfers/Transfer_West" index="0"]
-shape = SubResource("RectangleShape2D_dscar")
-
-[node name="interact" parent="Transfers/Transfer_West/StateMachine" index="0"]
-direction = 2
-
-[node name="transfer" parent="Transfers/Transfer_West/StateMachine" index="1"]
-level_key = "LEVEL_1"
-destination_name = "Transfer_East"
-
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
 
 [editable path="Entities/NPC"]
-[editable path="Transfers/Transfer_West"]

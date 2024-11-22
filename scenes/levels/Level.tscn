@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://8u5h1ar8jt2f"]
 
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_cq0rv"]
+[ext_resource type="Script" uid="uid://cbrj2n68cqnrk" path="res://scenes/levels/level.gd" id="1_cq0rv"]
 [ext_resource type="PackedScene" uid="uid://b8ms04atei243" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="PackedScene" uid="uid://db4e7jrgweeab" path="res://entities/player/player.tscn" id="2_ystmk"]
 [ext_resource type="TileSet" uid="uid://cbdnrl8x6cswu" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
-[ext_resource type="Script" path="res://scenes/levels/tilemap_navigation.gd" id="4_6158f"]
-[ext_resource type="Shader" path="res://shaders/water.gdshader" id="4_ud3dr"]
+[ext_resource type="Script" uid="uid://b3flrs4jm3ar2" path="res://scenes/levels/tilemap_navigation.gd" id="4_6158f"]
+[ext_resource type="Shader" uid="uid://bj01dy2aakacl" path="res://shaders/water.gdshader" id="4_ud3dr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6olnu"]
 shader = ExtResource("4_ud3dr")

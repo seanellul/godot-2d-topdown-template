@@ -1,7 +1,7 @@
 [gd_scene load_steps=65 format=3 uid="uid://dyfyo3gh4e2la"]
 
-[ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
+[ext_resource type="Script" uid="uid://bkp662xf371ik" path="res://entities/character_entity.gd" id="1_g6455"]
+[ext_resource type="Shader" uid="uid://dv8bant6qcjet" path="res://shaders/flash.gdshader" id="2_b5eyi"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
 [ext_resource type="Texture2D" uid="uid://b6peokk0rkltn" path="res://entities/shadow.png" id="2_xhiia"]
 [ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="4_hhyyf"]
@@ -506,6 +506,7 @@ target_position = Vector2(0, 0)
 collision_mask = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 &"": ExtResource("4_hhyyf"),
 &"char-attack": ExtResource("5_gfoxn"),
@@ -519,6 +520,7 @@ autoplay = "char-idle/down"
 speed_scale = 0.15
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+process_mode = 3
 active = false
 deterministic = false
 tree_root = ExtResource("10_esda3")

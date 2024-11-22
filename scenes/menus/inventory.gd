@@ -10,10 +10,6 @@ var is_open := false
 func _ready() -> void:
 	visible = is_open
 
-# func _process(_delta: float) -> void:
-# 	if Input.is_action_just_pressed(action_trigger):
-# 		toggle_inventory()
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(action_trigger):
 		toggle_inventory()
