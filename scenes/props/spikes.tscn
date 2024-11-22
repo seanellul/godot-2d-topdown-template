@@ -168,7 +168,7 @@ current_state = NodePath("idle")
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("6_5lcsm")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = NodePath("../take_damage")
+on_interaction = [NodePath("../take_damage")]
 action_trigger = "run"
 one_shot = false
 

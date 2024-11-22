@@ -26,7 +26,7 @@ current_state = NodePath("interact")
 [node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("3_byffi")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = NodePath("../call_transfer")
+on_interaction = [NodePath("../call_transfer")]
 one_shot = false
 
 [node name="call_transfer" type="Node" parent="StateMachine" node_paths=PackedStringArray("node", "on_completion")]

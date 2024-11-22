@@ -86,7 +86,7 @@ target_player_id = 1
 [node name="StateInteract" type="Node" parent="Entities/Enemy2/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("6_101ja")
 interaction_area = NodePath("../../../DetectPlayerArea")
-on_interaction = NodePath("../../idle")
+on_interaction = [NodePath("../../idle")]
 one_shot = false
 metadata/_custom_type_script = ExtResource("6_101ja")
 

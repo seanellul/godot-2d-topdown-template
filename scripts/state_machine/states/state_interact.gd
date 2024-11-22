@@ -4,7 +4,7 @@ extends BaseState
 class_name StateInteract
 
 @export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside this area.
-@export var on_interaction: BaseState ## The state to enable on interaction.
+@export var on_interaction: Array[BaseState] ## The states to enable on interaction.
 @export var on_leaving: BaseState ## The state to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_category("Requirements")
@@ -94,8 +94,8 @@ func _do_interaction():
 	interacting = true
 	print(entity.name, " interacted with ", get_path())
 	_check_inventory_item()
-	if on_interaction:
-		on_interaction.enable({
+	for state in on_interaction:
+		state.enable({
 			"entity": entity
 		})
 	if !one_shot:

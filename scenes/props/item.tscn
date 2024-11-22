@@ -120,7 +120,7 @@ current_state = NodePath("idle")
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("4_i4duu")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = NodePath("../get_contents")
+on_interaction = [NodePath("../get_contents")]
 
 [node name="get_contents" type="Node" parent="StateMachine" node_paths=PackedStringArray("node", "on_completion")]
 script = ExtResource("7_5dcdc")
