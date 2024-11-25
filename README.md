@@ -1,4 +1,4 @@
-# INTRO
+# QUICKSTART
 
 In this section we will explore the main features that this template offers.
 In general, to learn more about a specific topic, you can check "Nodes and Classes definitions" below.
@@ -40,7 +40,7 @@ The project provides a data management system. It works in a very simple way: al
 ### "player" group
 
 - Player: Player data is handled differently by the save system and it is saved/loaded without the node needing to be in the "save" group (it must be in the "player" group, though). Players have a `player_entity.gd` script that contains the `get_data` and `receive_data` methods. `get_data` tells what data to save in the save file, while `receive_data` decides what to do with the incoming data from the save file (previously saved).
-The player's data saved is:
+  The player's data saved is:
 - position
 - facing direction
 - current level
@@ -55,13 +55,54 @@ You can also quickly load data by pressing the F2 key.
 
 ## States Management
 
+State management is controlled by the `StateMachine` node. The StateMachine node, as the name suggests, is used to manage different states. All states extends from the script `state.gd` and can be added as children of a StateMachine. Each child of a StateMachine represents a single state. Furthermore, a single state can have multiple states as children. All the child states of another state will be enabled (and disabled) together with the parent state.
+The state assigned to `current_state` of the StateMachine will be the first active state for that StateMachine. It is also possible to change the current state in various ways:
+
+- by setting a timer on the single state, which when timed out activates the state defined in `on_completion`
+- by waiting for the state to complete, before activating the state defined in `on_completion`. A state is "completed" when the `complete` method of `State` is called.
+
+Each state has the following flow:
+
+- enter: series of commands to call when the state is enabled
+- exit: series of commands to call when the state is disabled
+- update: equivalent of `_process`
+- physics_update: equivalent of `_physics_process`
+
+The states already available in the project are the following:
+
+- StateAnimation: allows you to start an animation defined in an `AnimationPlayer` or `AnimationTree`
+- StateCallable: allows you to call a method from another node
+- StateDebug: useful for debugging, allows you to print a message (with `print_debug`) in the terminal
+- StateDialogue: allows you to start a dialogue defined with the plugin DialogueManager*
+- StateInteract: allows you to manage interactions with something. You can assign the states to be activated "on_interaction"
+- StateMaterial: allows you to change the material of a Sprite2D node
+- StateParamsSetter: allows you to set a series of variables of a node on entering and on exiting a state
+- StateTween: allows you to define and call a tween on a node
+- StateEntity: is the base state from which all the states specific to the Entities extend. Explore the states that extend `StateEntity` to find out more.
+
+You can also create new states, extending the base script `state.gd` or `state_entity.gd`.
+
+### Event sequences
+
+In the StateMachine, by setting the `sequence` parameter to true, you can activate a series of states in sequence.
+If necessary, remember to set the `await_completion` parameter to true inside a state and define the next state to enable in `on_completion`.
+This setting is useful for creating cutscenes or managing a series of states automatically.
+
 ## Scenes Transition
+
+Transition between scenes is managed by `SceneManager.gd` from [baconandgames](https://github.com/baconandgames). For more information check out the [official repository](https://github.com/baconandgames/godot4-game-template).
 
 ## Dialogue System
 
+*Dialogues are managed by the plugin `DialogueManager` from [nathanhoad](https://github.com/nathanhoad). For more information check out the [official repository](https://github.com/nathanhoad/godot_dialogue_manager).
+
 ## Tilemaps
 
+To easily manage TileMap terrains, the plugin `TileBitTools` from [dandeliondino](https://github.com/dandeliondino) has been added to the project. To find out how to use it check out the [official repository](https://github.com/dandeliondino/tile_bit_tools).
+
 ## Debugger
+
+Debugging is managed by the Autoload `Debugger`. Check out its script to find out what offers and add your debugging methods.
 
 # NODES AND CLASSES DEFINITIONS
 

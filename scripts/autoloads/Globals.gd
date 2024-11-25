@@ -53,10 +53,14 @@ func open_settings_menu():
 		push_warning('settings menu already exists in this scene')
 
 func get_player(id: int):
-	var players: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
+	var players = get_players()
 	var found = players.filter(func(t): return t.player_id == id)
 	var player = found[0] if found.size() > 0 else null
 	return player
+
+func get_players():
+	var players: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.PLAYER)
+	return players
 
 func get_destination(destination_name: String):
 	var transfers: Array[Node] = get_tree().get_nodes_in_group(Const.GROUP.DESTINATION)
