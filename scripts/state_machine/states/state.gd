@@ -36,9 +36,8 @@ func enable(params = null): ## Enables this state.
 	if timer:
 		timer.start()
 		await timer.timeout
-		complete()
-	# if on_completion:
-	# 	on_completion.enable(state_machine.params)
+	if on_completion:
+		on_completion.enable(state_machine.params)
 	if not await_completion and not timer:
 		complete()
 
@@ -60,8 +59,6 @@ func physics_update(_delta: float):
 
 func complete():
 	print_debug("State %s completed" % [get_path()])
-	if on_completion:
-		on_completion.enable(state_machine.params)
 	completed.emit()
 
 class TimedState:

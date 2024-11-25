@@ -4,7 +4,10 @@ extends Node
 class_name StateMachine
 
 @export_category("Config")
-@export var current_state: State = null
+@export var current_state: State = null:
+	set(value):
+		current_state = value
+		current_state_name = current_state.name
 @export var sequence := false ##If true, treat this StateMachine as a sequence where all states will be executed one after the other.
 @export var disabled := false ##Determines if disable this StateMachine
 
@@ -14,6 +17,7 @@ var initialized := false
 var previous_state: State = null
 var states: Array[State]
 var params = {}
+var current_state_name
 
 signal state_changed(old_state, new_state)
 

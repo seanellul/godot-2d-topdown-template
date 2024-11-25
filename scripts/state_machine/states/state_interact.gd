@@ -45,7 +45,7 @@ func enter():
 	if area:
 		var areas: Array[Area2D] = area.get_overlapping_areas()
 		for a in areas:
-			_set_entity(a)
+			_set_entity(a.get_parent())
 
 func exit():
 	_reset_entity()

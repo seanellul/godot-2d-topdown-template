@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="9_3pscl"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state.gd" id="9_o85tp"]
 [ext_resource type="PackedScene" uid="uid://5788n4wk6fp1" path="res://scenes/props/gate_front_down.tscn" id="12_70ge1"]
-[ext_resource type="Script" uid="uid://brdukplakk1uu" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/switch.tscn" id="13_64f3m"]
 [ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="16_iu1m7"]
 [ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="16_nsalp"]
@@ -325,7 +325,7 @@ position = Vector2(448, 35)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(672, 144)
+position = Vector2(528, 180)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)

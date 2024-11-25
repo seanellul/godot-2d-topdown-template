@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_18kok"]
 [ext_resource type="Script" uid="uid://dcqe2ncf78h8m" path="res://items/content_item.gd" id="3_s42s2"]
 [ext_resource type="Resource" uid="uid://cvh325i7w1lhf" path="res://items/spike.tres" id="4_fgbx5"]
-[ext_resource type="Script" uid="uid://brdukplakk1uu" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
 [ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
 
@@ -168,7 +168,7 @@ current_state = NodePath("idle")
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("6_5lcsm")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../take_damage")]
+on_interaction = [NodePath("../animation_up")]
 action_trigger = "run"
 one_shot = false
 
@@ -177,18 +177,19 @@ script = ExtResource("4_op40x")
 animation_player = NodePath("../../../AnimationPlayer")
 animation = "idle"
 
-[node name="take_damage" type="Node" parent="StateMachine" node_paths=PackedStringArray("node", "on_completion")]
+[node name="animation_up" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
+script = ExtResource("4_op40x")
+animation_player = NodePath("../../AnimationPlayer")
+animation = "up"
+time_range = Vector2(1, 1)
+on_completion = NodePath("../down")
+
+[node name="take_damage" type="Node" parent="StateMachine/animation_up" node_paths=PackedStringArray("node")]
 script = ExtResource("9_c4pye")
-node = NodePath("../..")
+node = NodePath("../../..")
 method_name = "get_contents"
 await_signal_to_complete = "contents_got"
-on_completion = NodePath("../down")
 metadata/_custom_type_script = ExtResource("9_c4pye")
-
-[node name="animation_up" type="Node" parent="StateMachine/take_damage" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("4_op40x")
-animation_player = NodePath("../../../AnimationPlayer")
-animation = "up"
 
 [node name="down" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("4_op40x")
