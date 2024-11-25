@@ -73,7 +73,7 @@ The states already available in the project are the following:
 - StateAnimation: allows you to start an animation defined in an `AnimationPlayer` or `AnimationTree`
 - StateCallable: allows you to call a method from another node
 - StateDebug: useful for debugging, allows you to print a message (with `print_debug`) in the terminal
-- StateDialogue: allows you to start a dialogue defined with the plugin DialogueManager*
+- StateDialogue: allows you to start a dialogue defined with the plugin DialogueManager\*
 - StateInteract: allows you to manage interactions with something. You can assign the states to be activated "on_interaction"
 - StateMaterial: allows you to change the material of a Sprite2D node
 - StateParamsSetter: allows you to set a series of variables of a node on entering and on exiting a state
@@ -81,6 +81,11 @@ The states already available in the project are the following:
 - StateEntity: is the base state from which all the states specific to the Entities extend. Explore the states that extend `StateEntity` to find out more.
 
 You can also create new states, extending the base script `state.gd` or `state_entity.gd`.
+
+### Listening for state change
+
+The `ChangeStateListener` is a node that, assigned as children of a node with a StateMachine, allows you to listen for the change of state of the StateMachine of another node and, for each listening state, associate one to activate.
+Useful for managing, for example, a lever that opens a door: the door can listen for the states of the lever and open or close based on the on/off state of the lever.
 
 ### Event sequences
 
@@ -92,9 +97,13 @@ This setting is useful for creating cutscenes or managing a series of states aut
 
 Transition between scenes is managed by `SceneManager.gd` from [baconandgames](https://github.com/baconandgames). For more information check out the [official repository](https://github.com/baconandgames/godot4-game-template).
 
+## User Prefs
+
+User preferences (like music settings or language) are also managed by scripts from [baconandgames](https://github.com/baconandgames). For more information check out the [Godot 4 Game Template](https://github.com/baconandgames/godot4-game-template). In the project, you can access them through the `SettingsMenu`.
+
 ## Dialogue System
 
-*Dialogues are managed by the plugin `DialogueManager` from [nathanhoad](https://github.com/nathanhoad). For more information check out the [official repository](https://github.com/nathanhoad/godot_dialogue_manager).
+\*Dialogues are managed by the plugin `DialogueManager` from [nathanhoad](https://github.com/nathanhoad). For more information check out the [official repository](https://github.com/nathanhoad/godot_dialogue_manager).
 
 ## Tilemaps
 
@@ -103,6 +112,11 @@ To easily manage TileMap terrains, the plugin `TileBitTools` from [dandeliondino
 ## Debugger
 
 Debugging is managed by the Autoload `Debugger`. Check out its script to find out what offers and add your debugging methods.
+
+## Localization
+
+Localization is managed by the default localization system of Godot. The project offers 2 already configured languages: English (en) and Italian (it). Check out the `local` folder to find out all the translated strings.
+To manage the list of languages you can check the constant `LANGUAGES` in `Globals.gd` and remove or add new languages there. Then, you have to create a corresponding `.translation` file in the `local` folder and add (or remove) it in Project Settings -> Localization.
 
 # NODES AND CLASSES DEFINITIONS
 
@@ -190,10 +204,6 @@ Area2D defining the area that allows the entity to interact with interactive ele
 
 StateMachine that controls all possible states of this entity. For more information, see the State Machine section.
 
-#### Animations
-
----
-
 ## Levels
 
 A level is a game area where playable characters, NPCs, any enemies, and props are present. The base node for levels is `Level.tscn`, which has attached the script `level.gd`. The Level node can be used as a starting node for creating new levels. It already has a structure of nodes within it, making it fully functional. Exploring the present nodes, we find:
@@ -239,3 +249,40 @@ You can use this node as a parent to keep the transfers you add to the level org
 #### Events
 
 You can use this node as a parent to keep the events you add to the level organized. Events are state machines that trigger a sequence of states, useful for creating cutscenes or automated character movements. For more information on events, see the State Machine section.
+
+## Transfers
+
+A Transfer is a node that, upon interaction, allows a player to transport to another level.
+This node has simply been structured to perform the transport:
+
+- to a position in the same level
+- to a position in any other level
+
+Moving to another level is done by calling the `swap_scenes` method of the `SceneManager`.
+
+A Transfer is structured like this:
+
+- Transfer (`transfer.gd`)
+  - InteractionArea2D
+  - StateMachine
+    - interact
+    - call_transfer
+
+### Transfer
+
+Parent node that contains the script to perform the transport, with the following parameters:
+
+- `level_path`: the path of the level to transfer to. Leave empty if you only want to move within the same level
+- `destination_name`: the name of the node to use as a reference to set the destination position. This node should have assigned the "destination" group to work properly
+- `facing`: changes the facing direction of the player, forcing it to face the direction configured here. Useful if the starting Transfer is East, so the player is facing right when interacting with it, but the destination is North, so the player will need to face down upon arriving.
+
+### InteractionArea2D
+
+It's a utility script that generates an Area2D and assigns a CollisionShape2D node to it, already configured to respond correctly to interactions handled by the StateInteract state.
+
+### StateMachine
+
+The StateMachine associated with this node, which contains the following states:
+
+- interact (StateInteract): handles interaction with this Transfer. When the player enters the area defined by the InteractionArea2D, it enables the next state, namely:
+- call_transfer (StateCallable): when activated, calls the `transfer` method of `transfer.gd`, which performs the player transport.

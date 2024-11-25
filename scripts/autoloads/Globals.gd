@@ -3,7 +3,7 @@ extends Node
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 
-var n_of_players := 1 ##The number of players the game should handle.
+var n_of_players := 1 ## The number of players the game should handle.
 var user_prefs: UserPrefs
 
 var settings_menu_scene: PackedScene = preload("res://scenes/menus/settings_menu.tscn")
@@ -34,13 +34,13 @@ enum GLOBAL_STATE {
 	PAUSED
 }
 
-const LANGUAGES:Array = [
+const LANGUAGES: Array = [
 	"en",
 	"it"
 ]
 
 func get_selected_language() -> String:
-	var s:String = user_prefs.language
+	var s: String = user_prefs.language
 	if not s.is_empty():
 		return s
 	return LANGUAGES[0]
