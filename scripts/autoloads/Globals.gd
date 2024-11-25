@@ -27,23 +27,11 @@ func _ready():
 	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(user_prefs.music_volume))
 	AudioServer.set_bus_mute(MUSIC_BUS_ID, user_prefs.music_volume < .05)
 
-enum GLOBAL_STATE {
-	MAIN_MENU,
-	GAMEPLAY,
-	CONVERSATION,
-	PAUSED
-}
-
-const LANGUAGES: Array = [
-	"en",
-	"it"
-]
-
 func get_selected_language() -> String:
 	var s: String = user_prefs.language
 	if not s.is_empty():
 		return s
-	return LANGUAGES[0]
+	return Const.LANGUAGES[0]
 
 func open_settings_menu():
 	if not settings_menu:

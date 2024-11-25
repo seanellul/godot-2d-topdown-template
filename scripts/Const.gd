@@ -1,5 +1,10 @@
 class_name Const extends Node
 
+const LANGUAGES: Array = [
+	"en",
+	"it"
+]
+
 const SAVE_FILE_BASE_PATH := "user://save"
 
 const MENU = {

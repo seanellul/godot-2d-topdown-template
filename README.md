@@ -1,8 +1,8 @@
-# QUICKSTART
+# OVERVIEW
 
 In this section we will explore the main features that this template offers.
 In general, to learn more about a specific topic, you can check "Nodes and Classes definitions" below.
-You can also download and launch the project from the Godot editor (F5) to start a tutorial. The tutorial will explore each single feature giving you suggestions on how to configure the various elements that this template offers.
+You can also download and launch the project from the Godot editor (F5) to start a tutorial. The tutorial will explore some main features, giving you suggestions on how to configure the various elements that this template offers.
 When you start working on your project, you can safely delete all the scenes that start with "Tutorial\_" and configure your starting level in the file Const -> LEVEL.LEVEL_1
 
 ## Character Controller
@@ -116,7 +116,7 @@ Debugging is managed by the Autoload `Debugger`. Check out its script to find ou
 ## Localization
 
 Localization is managed by the default localization system of Godot. The project offers 2 already configured languages: English (en) and Italian (it). Check out the `local` folder to find out all the translated strings.
-To manage the list of languages you can check the constant `LANGUAGES` in `Globals.gd` and remove or add new languages there. Then, you have to create a corresponding `.translation` file in the `local` folder and add (or remove) it in Project Settings -> Localization.
+To manage the list of languages you can check the constant `LANGUAGES` in `Const.gd` and remove or add new languages there. Then, you have to create a corresponding `.translation` file in the `local` folder and add (or remove) it in Project Settings -> Localization.
 
 # NODES AND CLASSES DEFINITIONS
 
