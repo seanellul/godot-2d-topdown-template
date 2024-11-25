@@ -1,5 +1,5 @@
 @icon("../icons/StateCallable.svg")
-extends BaseState
+extends State
 ##Call a method by name from any node.
 class_name StateCallable
 
@@ -10,7 +10,7 @@ class_name StateCallable
 
 func enter():
 	if await_signal_to_complete != "":
-		if node.has_signal(await_signal_to_complete):
+		if node.has_signal(await_signal_to_complete) and !node.is_connected(await_signal_to_complete, complete):
 			node.connect(await_signal_to_complete, complete)
 		else:
 			push_warning("No signal '%s' in %s" % [await_signal_to_complete, node.get_path()])

@@ -4,15 +4,15 @@ extends Node
 class_name StateMachine
 
 @export_category("Config")
-@export var current_state: BaseState = null
+@export var current_state: State = null
 @export var sequence := false ##If true, treat this StateMachine as a sequence where all states will be executed one after the other.
 @export var disabled := false ##Determines if disable this StateMachine
 
 @onready var n_of_states = get_child_count()
 
 var initialized := false
-var previous_state: BaseState = null
-var states: Array[BaseState]
+var previous_state: State = null
+var states: Array[State]
 var params = {}
 
 signal state_changed(old_state, new_state)
@@ -24,7 +24,7 @@ func _ready():
 	_enter_states()
 
 func _init_states():
-	var children = get_children(true).filter(func(node): return node is BaseState)
+	var children = get_children(true).filter(func(node): return node is State)
 	for state in children:
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
@@ -38,10 +38,10 @@ func _get_states():
 	states = []
 	states.append(current_state)
 	for child in current_state.get_children():
-		if child is BaseState and not child.disabled:
+		if child is State and not child.disabled:
 			states.append(child)
 
-func enable_state(state: BaseState):
+func enable_state(state: State):
 	if state == current_state:
 		return
 	if current_state:
@@ -56,7 +56,7 @@ func enable_state(state: BaseState):
 	_get_states()
 	_enter_states()
 
-func disable_state(state: BaseState):
+func disable_state(state: State):
 	state.process_mode = Node.PROCESS_MODE_DISABLED
 	_exit_states()
 	states = []
@@ -104,11 +104,11 @@ func _physics_update_states(delta):
 
 func receive_data(data: DataState):
 	if data:
-		var state_node: BaseState = get_child(data.state_index)
+		var state_node: State = get_child(data.state_index)
 		state_node.enable(params)
 
 func enable_state_by_name(state_name: String):
-	var state_node: BaseState =  get_node_or_null(state_name)
+	var state_node: State =  get_node_or_null(state_name)
 	if state_node:
 		state_node.enable(params)
 	else:
@@ -120,7 +120,7 @@ func enable_next_state(_params = null):
 		var current_state_index = current_state.get_index()
 		next_index = current_state_index + 1
 	if next_index < n_of_states:
-		var next_state: BaseState = get_child(next_index)
+		var next_state: State = get_child(next_index)
 		if next_state:
 			next_state.enable(_params)
 	elif sequence and current_state:

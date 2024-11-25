@@ -1,5 +1,5 @@
 @icon("../icons/StateAnimation.svg")
-extends BaseState
+extends State
 ##Starts an animation from AnimationPlayer or AnimationTree.
 class_name StateAnimation
 

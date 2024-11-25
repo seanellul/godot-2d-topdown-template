@@ -1,4 +1,4 @@
-extends BaseState
+extends State
 class_name StateTween
 
 @export var object: Node2D

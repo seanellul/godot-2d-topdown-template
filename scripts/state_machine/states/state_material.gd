@@ -1,4 +1,4 @@
-extends BaseState
+extends State
 ##Applies a material to a Sprite2D.
 class_name StateMaterial
 

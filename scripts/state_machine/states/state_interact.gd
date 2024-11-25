@@ -1,11 +1,11 @@
 @icon("../icons/StateInteract.svg")
-extends BaseState
+extends State
 ##Handle entity interactions.
 class_name StateInteract
 
 @export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside this area.
-@export var on_interaction: Array[BaseState] ## The states to enable on interaction.
-@export var on_leaving: BaseState ## The state to enable on exiting the area.
+@export var on_interaction: Array[State] ## The states to enable on interaction.
+@export var on_leaving: State ## The state to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_category("Requirements")
 @export_group("Direction")
@@ -15,10 +15,10 @@ class_name StateInteract
 	Const.DIRECTION.RIGHT,
 	Const.DIRECTION.UP
 ) var direction ## The direction the character must face to trigger the interaction.
-@export var on_direction_wrong: BaseState ## State to enable when interacting with the wrong direction.
+@export var on_direction_wrong: State ## State to enable when interacting with the wrong direction.
 @export_group("Items")
 @export var has_items: Array[ContentItem] ## Check if the items are present in the player's inventory.
-@export var on_items_missing: BaseState ## State to enable when items are missing.
+@export var on_items_missing: State ## State to enable when items are missing.
 @export var remove_items := true ## Remove the required items after interaction.
 @export_category("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.

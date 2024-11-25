@@ -1,5 +1,5 @@
 @icon("../icons/StateEntity.svg")
-extends BaseState
+extends State
 ##Base class for all entity states.
 class_name StateEntity
 

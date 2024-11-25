@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://c838vta4pa6y1" path="res://scripts/state_machine/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" uid="uid://bmru2wo8kyt0x" path="res://scripts/state_machine/scripts/change_state_listener.gd" id="8_dt570"]
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="9_3pscl"]
-[ext_resource type="Script" uid="uid://b7ojpo6btobei" path="res://scripts/state_machine/states/base_state.gd" id="9_o85tp"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state.gd" id="9_o85tp"]
 [ext_resource type="PackedScene" uid="uid://5788n4wk6fp1" path="res://scenes/props/gate_front_down.tscn" id="12_70ge1"]
 [ext_resource type="Script" uid="uid://brdukplakk1uu" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/switch.tscn" id="13_64f3m"]

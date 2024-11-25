@@ -1,7 +1,7 @@
-@icon("../icons/BaseState.svg")
+@icon("../icons/State.svg")
 extends Node
 ##Base class for all states.
-class_name BaseState
+class_name State
 
 @export var disabled := false ## Set to true to avoid processing this state.
 @export_category("Advance")
@@ -9,13 +9,13 @@ class_name BaseState
 @export var time_range := Vector2.ZERO ## If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
 @export_group("")
 @export var await_completion := false ## Await the completion of this state before enabling the on_completion state.
-@export var on_completion: BaseState ## State to enable after state completion or on timer timeout.
+@export var on_completion: State ## State to enable after state completion or on timer timeout.
 
 var active := false ## True if the state is currently active.
 var state_machine: StateMachine:
 	set(value):
 		state_machine = value
-		for state in get_children(true).filter(func(node): return node is BaseState):
+		for state in get_children(true).filter(func(node): return node is State):
 			state.state_machine = value
 var timer: TimedState
 

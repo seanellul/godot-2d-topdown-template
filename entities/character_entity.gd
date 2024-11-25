@@ -22,14 +22,14 @@ class_name CharacterEntity
 @export var attack_power := 2 ## The value this entity subtracts from another entity's HP when it attacks.
 @export var attack_speed := 0.08 ## Affects the cooldown time between attacks.
 @export_group("States")
-@export var on_attack: BaseState ## State to enable when this entity attacks.
-@export var on_hit: BaseState ## State to enable when this entity damages another entity.
-@export var on_hurt: BaseState ## State to enable when this entity takes damage.
-@export var on_fall: BaseState ## State to enable when this entity falls.
-@export var on_recovery: BaseState ## State to enable when this entity recovers hp.
-@export var on_death: BaseState ## State to enable when this entity dies (hp == 0).
-@export var on_screen_entered: BaseState ## State to enable when this entity is visible on screen.
-@export var on_screen_exited: BaseState ## State to enable when this entity is outside the visible screen.
+@export var on_attack: State ## State to enable when this entity attacks.
+@export var on_hit: State ## State to enable when this entity damages another entity.
+@export var on_hurt: State ## State to enable when this entity takes damage.
+@export var on_fall: State ## State to enable when this entity falls.
+@export var on_recovery: State ## State to enable when this entity recovers hp.
+@export var on_death: State ## State to enable when this entity dies (hp == 0).
+@export var on_screen_entered: State ## State to enable when this entity is visible on screen.
+@export var on_screen_exited: State ## State to enable when this entity is outside the visible screen.
 
 @onready var hp := max_hp: ## The entity's current hp.
 	set(value):

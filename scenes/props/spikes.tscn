@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://dpbc6iw62na4q"]
 
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_2ngps"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_pkjqp"]
-[ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_sb0cb"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_18kok"]
-[ext_resource type="Script" path="res://items/content_item.gd" id="3_s42s2"]
+[ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="2_pkjqp"]
+[ext_resource type="Script" uid="uid://beryhpdfs68ov" path="res://scenes/props/get_contents.gd" id="2_sb0cb"]
+[ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_18kok"]
+[ext_resource type="Script" uid="uid://dcqe2ncf78h8m" path="res://items/content_item.gd" id="3_s42s2"]
 [ext_resource type="Resource" uid="uid://cvh325i7w1lhf" path="res://items/spike.tres" id="4_fgbx5"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
+[ext_resource type="Script" uid="uid://brdukplakk1uu" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
+[ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
 
 [sub_resource type="Resource" id="Resource_c4pye"]
@@ -182,7 +182,6 @@ script = ExtResource("9_c4pye")
 node = NodePath("../..")
 method_name = "get_contents"
 await_signal_to_complete = "contents_got"
-await_completion = true
 on_completion = NodePath("../down")
 metadata/_custom_type_script = ExtResource("9_c4pye")
 

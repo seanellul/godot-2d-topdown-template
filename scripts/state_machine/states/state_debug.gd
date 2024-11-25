@@ -1,4 +1,4 @@
-extends BaseState
+extends State
 ##Prints a debug message to the terminal.
 class_name StateDebug
 

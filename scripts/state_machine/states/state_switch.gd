@@ -1,8 +1,8 @@
-extends BaseState
+extends State
 ##Enables states of other nodes.
 class_name StateSwitch
 
-@export var states: Array[BaseState] ##The states to switch.
+@export var states: Array[State] ##The states to switch.
 
 var switch := false: ##For debugging purposes.
 	set(value):

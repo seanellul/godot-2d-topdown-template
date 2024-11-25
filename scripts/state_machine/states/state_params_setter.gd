@@ -1,4 +1,4 @@
-extends BaseState
+extends State
 ## Set some properties to a node present in the parent StateMachine params.
 class_name StateParamsSetter
 
