@@ -9,8 +9,6 @@ var user_prefs: UserPrefs
 var settings_menu_scene: PackedScene = preload("res://scenes/menus/settings_menu.tscn")
 var settings_menu = null
 
-var contents_found: Array[ContentItem]
-
 @warning_ignore("unused_signal")
 signal enemy_hurt
 @warning_ignore("unused_signal")

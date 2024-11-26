@@ -102,8 +102,8 @@ func _do_interaction():
 		_reset_interaction()
 
 func _do_leaving():
-	interacting = true
 	if on_leaving:
+		interacting = true
 		on_leaving.enable()
 	if !one_shot:
 		_reset_interaction()

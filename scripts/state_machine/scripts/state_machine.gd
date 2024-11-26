@@ -85,9 +85,9 @@ func _enter_states():
 	print(debug)
 
 func _exit_states():
-	var debug = "%s exited states:" %[get_parent().name]
+	# var debug = "%s exited states:" %[get_parent().name]
 	for state in states:
-		debug += " [%s]" %[state.name]
+		# debug += " [%s]" %[state.name]
 		state.exit()
 		state.active = false
 	# print(debug) #Uncomment to debug exiting states
