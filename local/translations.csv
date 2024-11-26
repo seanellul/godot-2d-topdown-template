@@ -5,7 +5,7 @@ new_game;Nuovo gioco;New game
 continue;Continua;Continue
 settings;Impostazioni;Settings
 quit;Esci;Quit
-tutorial-movement;Alcune azioni sono assegnate al movimento del personaggio.\n Controllale nella [b]Input Map[/b].;Some actions are assigned to the character's movement.\n Check them out in the [b]Input Map[/b].
+tutorial-movement;Alcune azioni sono assegnate al movimento del personaggio. Controllale nella [b]Input Map[/b].;Some actions are assigned to the character's movement. Check them out in the [b]Input Map[/b].
 tutorial-run;Se vuoi muoverti più velocemente, tieni premuto il tasto associato all'azione [b]run[/b].;If you want to move faster, keep pressing the button associated with the [b]run[/b] action.
 tutorial-jump;Il tuo personaggio può saltare per superare ostacoli posizionati sul livello di collisione 3 ('body'). Premi l'azione [b]jump[/b] per saltare.;Your character can jump to overcome obstacles on the collision layer 3 ('body'). Press the [b]jump[/b] action to jump.
 tutorial-fall;Il nodo [i]FallDetector[/i] controllerà che il personaggio non cada su un collider su cui non può stare. In tal caso, verrà abilitato lo stato assegnato a [i]on_fall[/i]. Questo stato riporterà il personaggio alla sua ultima posizione sicura.;The [i]FallDetector[/i] node will check that the character does not fall into a collider that he cannot stand on. In that case, the state assigned to [i]on_fall[/i] will be enabled. This state will return the character to the last safe position.

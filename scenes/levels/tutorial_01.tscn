@@ -28,7 +28,8 @@ position = Vector2(16, 240)
 position = Vector2(1456, 864)
 rotation = 1.5708
 level_path = "res://scenes/levels/tutorial_02.tscn"
-destination_name = "P1"
+destination_name = "Transfer_West"
+facing = 1
 
 [node name="Tutorials" type="CanvasLayer" parent="Events" index="0"]
 follow_viewport_enabled = true
