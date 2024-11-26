@@ -38,6 +38,10 @@ metadata/_custom_type_script = ExtResource("8_joii5")
 [node name="ChangeStateListener" type="Node2D" parent="Props/Gate_Side" index="3" node_paths=PackedStringArray("listen_to")]
 script = ExtResource("6_bu31o")
 listen_to = NodePath("../../Switch")
+change_states = Dictionary[String, String]({
+"off": "up",
+"on": "down"
+})
 metadata/_custom_type_script = ExtResource("6_bu31o")
 
 [node name="Chest" parent="Props" index="4" instance=ExtResource("6_joii5")]
@@ -51,7 +55,7 @@ title = "chest_content"
 metadata/_custom_type_script = ExtResource("8_vjw68")
 
 [node name="Door" parent="Props" index="5" instance=ExtResource("7_bu31o")]
-position = Vector2(432, 24)
+position = Vector2(592, 51)
 
 [node name="closed" parent="Props/Door/StateMachine" index="0" node_paths=PackedStringArray("on_items_missing")]
 has_items = Array[ExtResource("8_joii5")]([SubResource("Resource_gmt2p")])
