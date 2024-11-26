@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="3_xbw31"]
 [ext_resource type="Script" uid="uid://c1u7mi36605he" path="res://scripts/state_machine/states/state_tween.gd" id="4_8p6ij"]
 [ext_resource type="Script" uid="uid://c4b0fjp6mt6ed" path="res://scripts/state_machine/scripts/tween_data.gd" id="5_0n50a"]
-[ext_resource type="Script" uid="uid://brdukplakk1uu" path="res://scripts/state_machine/states/state_animation.gd" id="6_v7cmp"]
-[ext_resource type="Script" uid="uid://bb2muphal1lsa" path="res://scripts/state_machine/states/state_callable.gd" id="10_gbvtw"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="6_v7cmp"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="10_gbvtw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
 size = Vector2(40, 26)

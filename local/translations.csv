@@ -1,7 +1,14 @@
-key,it,en
-en,Inglese,English
-it,Italiano,Italian
-new_game,Nuovo gioco,New game
-continue,Continua,Continue
-settings,Impostazioni,Settings
-quit,Esci,Quit
+key;it;en
+en;Inglese;English
+it;Italiano;Italian
+new_game;Nuovo gioco;New game
+continue;Continua;Continue
+settings;Impostazioni;Settings
+quit;Esci;Quit
+tutorial-movement;;Some actions are assigned to the character's movement.\n Check them out in the [b]Input Map[/b].
+tutorial-run;;If you want to move faster, keep pressing the button associated with the [b]run[/b] action.
+tutorial-jump;;Your character can jump to overcome obstacles on the collision layer 3 ('body'). Press the [b]jump[/b] action to jump.
+tutorial-fall;;The [i]FallDetector[/i] node will check that the character does not fall into a collider that he cannot stand on. In that case, the state assigned to [i]on_fall[/i] will be enabled. This state will return the character to the last safe position.
+tutorial-transfer;;There is a Transfer in front of you. Transfers allow characters to move between levels. Reach the Transfer to move to the next level.
+te4ab6a077b;La porta è chiusa e c'è bisogno di una chiave per aprirla.;The door is closed and you need a key to open it.
+td156eb37a6;Hai trovato:;You found: {{contents_found[0].quantity}} {{contents_found[0].item.resource_name}}

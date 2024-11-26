@@ -28,59 +28,63 @@ position = Vector2(16, 240)
 position = Vector2(1456, 864)
 rotation = 1.5708
 
-[node name="Tutorials" type="CanvasLayer" parent="." index="6"]
+[node name="Tutorials" type="CanvasLayer" parent="Events" index="0"]
 follow_viewport_enabled = true
 
-[node name="Tutorial-movement" type="RichTextLabel" parent="Tutorials" index="0"]
+[node name="Tutorial-movement" type="RichTextLabel" parent="Events/Tutorials" index="0"]
 offset_top = 72.0
 offset_right = 288.0
 offset_bottom = 141.0
-text = "Some actions are assigned to the character's movement. 
-Check them out in the Input Map"
+bbcode_enabled = true
+text = "tutorial-movement"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 1
 
-[node name="Tutorial-run" type="RichTextLabel" parent="Tutorials" index="1"]
+[node name="Tutorial-run" type="RichTextLabel" parent="Events/Tutorials" index="1"]
 offset_left = 176.0
 offset_top = 312.0
 offset_right = 376.0
 offset_bottom = 404.0
-text = "If you want to move faster, keep pressing the button associated with the 'run' action."
+bbcode_enabled = true
+text = "tutorial-run"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 1
 
-[node name="Tutorial-jump" type="RichTextLabel" parent="Tutorials" index="2"]
+[node name="Tutorial-jump" type="RichTextLabel" parent="Events/Tutorials" index="2"]
 offset_left = 856.0
 offset_top = 136.0
 offset_right = 1096.0
 offset_bottom = 228.0
-text = "Your character can jump to overcome obstacles on the collision layer 3 ('body'). Press the 'jump' action to jump."
+bbcode_enabled = true
+text = "tutorial-jump"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 1
 
-[node name="Tutorial-fall" type="RichTextLabel" parent="Tutorials" index="3"]
+[node name="Tutorial-fall" type="RichTextLabel" parent="Events/Tutorials" index="3"]
 offset_left = 856.0
 offset_top = 280.0
 offset_right = 1096.0
 offset_bottom = 487.0
-text = "The 'FallDetector' node will check that the character does not fall into a collider that he cannot stand on. In that case, the state assigned to 'on_fall' will be enabled. The state assigned to your character will return him to the last safe position."
+bbcode_enabled = true
+text = "tutorial-fall"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 1
 
-[node name="Tutorial-transfer" type="RichTextLabel" parent="Tutorials" index="4"]
+[node name="Tutorial-transfer" type="RichTextLabel" parent="Events/Tutorials" index="4"]
 offset_left = 1152.0
 offset_top = 912.0
 offset_right = 1464.0
 offset_bottom = 1020.0
-text = "There is a Transfer in front of you. Transfers allow characters to move between levels. Reach the Transfer to move to the next level."
+bbcode_enabled = true
+text = "tutorial-transfer"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false

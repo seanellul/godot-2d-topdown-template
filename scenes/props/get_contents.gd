@@ -12,6 +12,7 @@ func get_contents(params):
 		return
 	if contents.size() == 0 or not entity:
 		return
+	Globals.contents_found = contents
 	for content in contents:
 		if content.quantity > 0:
 			entity.add_item_to_inventory(content.item, content.quantity)

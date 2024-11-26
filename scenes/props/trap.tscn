@@ -129,7 +129,7 @@ _data = {
 &"up": SubResource("Animation_mq7wd")
 }
 
-[node name="Spikes" type="Sprite2D"]
+[node name="Trap" type="Sprite2D"]
 y_sort_enabled = true
 texture = ExtResource("1_2ngps")
 offset = Vector2(0, 14)

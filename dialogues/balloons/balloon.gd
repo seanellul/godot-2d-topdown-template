@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
+@onready var name_container: Panel = $Balloon/NameContainer
 
 ## The dialogue resource
 var resource: DialogueResource
@@ -43,7 +44,7 @@ var dialogue_line: DialogueLine:
 
 		dialogue_line = next_dialogue_line
 
-		character_label.visible = not dialogue_line.character.is_empty()
+		name_container.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
 
 		dialogue_label.hide()
