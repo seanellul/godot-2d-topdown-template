@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://7kq5lknqxcf2"]
+[gd_scene load_steps=15 format=3 uid="uid://7kq5lknqxcf2"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_okilc"]
 [ext_resource type="PackedScene" uid="uid://dpbc6iw62na4q" path="res://scenes/props/trap.tscn" id="2_imqxm"]
 [ext_resource type="PackedScene" uid="uid://bqi15hafblfrs" path="res://scenes/props/potion.tscn" id="3_lp14j"]
 [ext_resource type="PackedScene" uid="uid://cfx0yov61ftcj" path="res://scenes/props/switch.tscn" id="4_vjw68"]
 [ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side_up.tscn" id="5_h8ccs"]
+[ext_resource type="Script" uid="uid://bmru2wo8kyt0x" path="res://scripts/state_machine/scripts/change_state_listener.gd" id="6_bu31o"]
 [ext_resource type="PackedScene" uid="uid://dw4xkxqhvmyvg" path="res://scenes/props/chest.tscn" id="6_joii5"]
 [ext_resource type="PackedScene" uid="uid://cfb8430tqc358" path="res://scenes/props/door.tscn" id="7_bu31o"]
 [ext_resource type="Script" uid="uid://dcqe2ncf78h8m" path="res://items/content_item.gd" id="8_joii5"]
@@ -33,6 +34,11 @@ metadata/_custom_type_script = ExtResource("8_joii5")
 [node name="Switch" parent="Props" index="2" instance=ExtResource("4_vjw68")]
 
 [node name="Gate_Side" parent="Props" index="3" instance=ExtResource("5_h8ccs")]
+
+[node name="ChangeStateListener" type="Node2D" parent="Props/Gate_Side" index="3" node_paths=PackedStringArray("listen_to")]
+script = ExtResource("6_bu31o")
+listen_to = NodePath("../../Switch")
+metadata/_custom_type_script = ExtResource("6_bu31o")
 
 [node name="Chest" parent="Props" index="4" instance=ExtResource("6_joii5")]
 position = Vector2(336, 48)
@@ -66,12 +72,78 @@ position = Vector2(336, 96)
 [node name="Tutorials" type="CanvasLayer" parent="Events" index="0"]
 follow_viewport_enabled = true
 
-[node name="Tutorial-movement" type="RichTextLabel" parent="Events/Tutorials" index="0"]
+[node name="Tutorial-trap" type="RichTextLabel" parent="Events/Tutorials" index="0"]
 offset_top = 72.0
 offset_right = 288.0
 offset_bottom = 141.0
 bbcode_enabled = true
-text = "tutorial-movement"
+text = "tutorial-trap"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Tutorial-potion" type="RichTextLabel" parent="Events/Tutorials" index="1"]
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 141.0
+bbcode_enabled = true
+text = "tutorial-potion"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Tutorial-contents" type="RichTextLabel" parent="Events/Tutorials" index="2"]
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 141.0
+bbcode_enabled = true
+text = "tutorial-contents"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Tutorial-switch" type="RichTextLabel" parent="Events/Tutorials" index="3"]
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 141.0
+bbcode_enabled = true
+text = "tutorial-switch"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Tutorial-gate" type="RichTextLabel" parent="Events/Tutorials" index="4"]
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 141.0
+bbcode_enabled = true
+text = "tutorial-gate"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Tutorial-chest" type="RichTextLabel" parent="Events/Tutorials" index="5"]
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 141.0
+bbcode_enabled = true
+text = "tutorial-chest"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="Tutorial-door" type="RichTextLabel" parent="Events/Tutorials" index="6"]
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 141.0
+bbcode_enabled = true
+text = "tutorial-door"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
