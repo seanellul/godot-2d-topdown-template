@@ -126,7 +126,7 @@ func _check_falling():
 		on_fall.enable()
 
 ##Used to load entity data (from a save file).
-func receive_data(data: DataEntity, _soft = false):
+func receive_data(data: DataEntity, _full = true):
 	if data:
 		global_position = data.position
 		facing = data.facing

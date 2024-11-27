@@ -1,6 +1,6 @@
 [gd_scene load_steps=65 format=3 uid="uid://dyfyo3gh4e2la"]
 
-[ext_resource type="Script" uid="uid://bkp662xf371ik" path="res://entities/character_entity.gd" id="1_g6455"]
+[ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
 [ext_resource type="Texture2D" uid="uid://b6peokk0rkltn" path="res://entities/shadow.png" id="2_xhiia"]
@@ -492,6 +492,7 @@ material = SubResource("ShaderMaterial_mrbe6")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_mrbe6")
 animation = &"walk-down"
+autoplay = "idle-down"
 
 [node name="BlocksDetector" type="RayCast2D" parent="."]
 modulate = Color(1, 0, 1, 1)

@@ -58,10 +58,10 @@ func reset_values():
 	is_attacking = false
 
 ##Used to save player data to a save file. [br]
-##soft is used to avoid saving some data when moving to another level.
-func get_data(soft):
+##full==false is used to avoid saving some data when moving to another level.
+func get_data(full):
 	var data = DataPlayer.new()
-	if not soft:
+	if full:
 		data.position = position
 		data.facing = facing
 		data.level = Globals.get_current_level().scene_file_path
@@ -72,10 +72,10 @@ func get_data(soft):
 	return data
 
 ##Used to load player data (from a save file or when moving to another level). [br]
-##soft is used to avoid loading some data when moving to another level.
-func receive_data(data, soft = false):
+##full==false is used to avoid loading some data when moving to another level.
+func receive_data(data, full = true):
 	if data:
-		if not soft:
+		if full:
 			global_position = data.position
 			facing = data.facing
 			#level = data.level #TODO: handle level loading

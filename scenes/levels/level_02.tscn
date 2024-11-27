@@ -563,7 +563,7 @@ position = Vector2(283, 109)
 contents = Array[ExtResource("3_v5pqk")]([SubResource("Resource_kxbgd")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(212, 85)
+position = Vector2(576, 0)
 
 [node name="Enemy1" parent="Entities" index="1" instance=ExtResource("3_vnork")]
 position = Vector2(576, 192)
