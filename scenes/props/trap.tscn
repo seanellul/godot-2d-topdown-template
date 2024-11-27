@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dcqe2ncf78h8m" path="res://items/content_item.gd" id="3_s42s2"]
 [ext_resource type="Resource" uid="uid://cvh325i7w1lhf" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
-[ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
 
 [sub_resource type="Resource" id="Resource_c4pye"]

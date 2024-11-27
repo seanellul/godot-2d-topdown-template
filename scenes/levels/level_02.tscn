@@ -645,7 +645,6 @@ position = Vector2(211, 37)
 [node name="AnimatedSprite2D" parent="Entities/NPC" index="2"]
 material = SubResource("ShaderMaterial_4dr30")
 sprite_frames = SubResource("SpriteFrames_dscar")
-autoplay = "idle-down"
 
 [node name="InteractionArea2D" type="CollisionShape2D" parent="Entities/NPC" index="7"]
 shape = SubResource("CircleShape2D_m2te4")

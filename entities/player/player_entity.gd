@@ -60,7 +60,7 @@ func reset_values():
 ##Used to save player data to a save file. [br]
 ##full==false is used to avoid saving some data when moving to another level.
 func get_data(full):
-	var data = DataPlayer.new()
+	var data = DataManager.game_data.player_data[player_id]
 	if full:
 		data.position = position
 		data.facing = facing
@@ -68,18 +68,29 @@ func get_data(full):
 	data.hp = hp
 	data.max_hp = max_hp
 	data.inventory = inventory
-	data.equipped = 0
+	data.equipped = equipped
 	return data
 
 ##Used to load player data (from a save file or when moving to another level). [br]
 ##full==false is used to avoid loading some data when moving to another level.
-func receive_data(data, full = true):
+func receive_data(data, full = true, load_level = true):
 	if data:
 		if full:
 			global_position = data.position
 			facing = data.facing
-			#level = data.level #TODO: handle level loading
+			if load_level:
+				_load_level(data.level)
 		hp = data.hp
 		max_hp = data.max_hp
 		inventory = data.inventory
 		equipped = data.equipped
+
+func _load_level(level):
+	var current_level = Globals.get_current_level()
+	if level:
+		SceneManager.swap_scenes(
+			level,
+			current_level.get_parent(),
+			current_level,
+			Const.TRANSITION.FADE_TO_BLACK
+		)
