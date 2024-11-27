@@ -22,5 +22,9 @@ func exit():
 		node.set(prop, on_exit[prop])
 
 func _get_node():
-	var node = state_machine.params[param_key] if state_machine.params.has(param_key) else null
+	var node = null
+	if state_machine.params.has(param_key):
+		node = state_machine.params[param_key]
+	else:
+		push_warning("Node %s not found in %s" %[param_key, get_path()])
 	return node

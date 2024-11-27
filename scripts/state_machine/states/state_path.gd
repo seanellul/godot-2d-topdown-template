@@ -29,6 +29,8 @@ var target_position := Vector2.ZERO
 
 func enter():
 	super.enter()
+	if current_point_id >= path_curve.point_count:
+		current_point_id = 0
 	_set_target_position()
 
 func update(_delta: float):
@@ -38,12 +40,12 @@ func _set_target_position():
 	target_position = path_curve.get_point_position(current_point_id) + path.global_position
 
 func physics_update(_delta: float):
-	if not entity:
+	if not is_instance_valid(entity):
 		return
 	entity.move_towards(target_position, speed_multiplier, friction_multiplier)
 
 func _check_point_reached():
-	if not entity:
+	if not is_instance_valid(entity):
 		return
 	var distance = entity.global_position.distance_to(target_position)
 	if distance < distance_threshold:
