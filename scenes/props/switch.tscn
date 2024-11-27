@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b3v3fyoyhec5j" path="res://scenes/props/lever.png" id="2_jt7g7"]
 [ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_05j5n"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_k6m0m"]
-[ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="4_t1oes"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="4_t1oes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dlfxg"]
 size = Vector2(32, 18)

@@ -325,7 +325,7 @@ position = Vector2(448, 35)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(292, 288)
+position = Vector2(670, 144)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)

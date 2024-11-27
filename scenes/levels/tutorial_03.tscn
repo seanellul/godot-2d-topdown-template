@@ -1,20 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://hiq1h48g1iql"]
+[gd_scene load_steps=3 format=4 uid="uid://hiq1h48g1iql"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_8k27o"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="2_h7a8q"]
-[ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="3_hp1af"]
-[ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="4_ri27e"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="5_w15w3"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="6_fvwss"]
-[ext_resource type="Script" uid="uid://bl6apqwd8xel3" path="res://scripts/state_machine/states/state_params_setter.gd" id="7_e7ti7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u52sa"]
-
-[sub_resource type="Curve2D" id="Curve2D_cr1mn"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1120, -368, 0, 0, 0, 0, 1120, -272)
-}
-point_count = 2
 
 [node name="Tutorial_03" instance=ExtResource("1_8k27o")]
 
@@ -29,51 +16,3 @@ position = Vector2(400, 672)
 level_path = "res://scenes/levels/tutorial_02.tscn"
 destination_name = "Transfer_North"
 facing = 3
-
-[node name="exit-door" type="Node" parent="Events" index="0"]
-
-[node name="InteractionArea2D" type="CollisionShape2D" parent="Events/exit-door" index="0"]
-position = Vector2(560, 544)
-shape = SubResource("RectangleShape2D_u52sa")
-debug_color = Color(0.991833, 0, 0.260309, 0.42)
-script = ExtResource("3_hp1af")
-metadata/_custom_type_script = ExtResource("3_hp1af")
-
-[node name="Path2D" type="Path2D" parent="Events/exit-door" index="1"]
-position = Vector2(-560, 928)
-curve = SubResource("Curve2D_cr1mn")
-
-[node name="StateMachine" type="Node" parent="Events/exit-door" index="2" node_paths=PackedStringArray("current_state")]
-script = ExtResource("4_ri27e")
-current_state = NodePath("trigger-movement")
-metadata/_custom_type_script = ExtResource("4_ri27e")
-
-[node name="trigger-movement" type="Node" parent="Events/exit-door/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
-script = ExtResource("5_w15w3")
-interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../player_path")]
-direction = 1
-metadata/_custom_type_script = ExtResource("5_w15w3")
-
-[node name="player_path" type="Node" parent="Events/exit-door/StateMachine" index="1" node_paths=PackedStringArray("path", "on_completion")]
-script = ExtResource("6_fvwss")
-path = NodePath("../../Path2D")
-distance_threshold = 3.0
-friction_multiplier = 4.0
-await_completion = true
-on_completion = NodePath("../enable_player")
-
-[node name="disable_player" type="Node" parent="Events/exit-door/StateMachine/player_path" index="0"]
-script = ExtResource("7_e7ti7")
-param_key = "entity"
-on_enter = Dictionary[String, Variant]({
-"input_enabled": false
-})
-
-[node name="enable_player" type="Node" parent="Events/exit-door/StateMachine" index="2"]
-script = ExtResource("7_e7ti7")
-param_key = "entity"
-on_enter = Dictionary[String, Variant]({
-"input_enabled": true
-})
-await_completion = true
