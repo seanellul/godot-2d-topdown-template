@@ -2,7 +2,7 @@ class_name StartScreen extends Control
 
 const template_version: String = "0.1"
 
-var level_to_load
+# var level_to_load
 var user_prefs: UserPrefs
 
 @onready var newgame_button: Button = %NewGame
@@ -28,14 +28,11 @@ func _on_new_game_button_up() -> void:
 
 func _on_continue_button_up() -> void:
 	DataManager.load_game_data()
-	level_to_load = DataManager.game_data.player_data[1].level
-	SceneManager.swap_scenes(Const.LEVEL.GAME_START, get_tree().root, self, Const.TRANSITION.FADE_TO_WHITE)	
+	var level_to_load = DataManager.game_data.player_data[1].level
+	SceneManager.swap_scenes(level_to_load, get_tree().root, self, Const.TRANSITION.FADE_TO_WHITE)	
 
 func _on_settings_button_up() -> void:
 	Globals.open_settings_menu()
 
 func _on_quit_button_up() -> void:
 	get_tree().quit()
-
-func get_data():
-	return level_to_load

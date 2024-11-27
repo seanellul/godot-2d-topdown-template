@@ -92,5 +92,5 @@ func _load_level(level):
 			level,
 			current_level.get_parent(),
 			current_level,
-			Const.TRANSITION.FADE_TO_BLACK
+			Const.TRANSITION.FADE_TO_WHITE
 		)

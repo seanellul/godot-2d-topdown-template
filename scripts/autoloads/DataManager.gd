@@ -10,8 +10,8 @@ signal game_loaded
 
 func _ready():
 	reset_game_data()
-	SceneManager.scene_added.connect(_load_level_data)
 	SceneManager.load_start.connect(_save_level_data)
+	SceneManager.scene_added.connect(_load_level_data)
 
 func reset_game_data():
 	game_data = SaveFileManager.new()
