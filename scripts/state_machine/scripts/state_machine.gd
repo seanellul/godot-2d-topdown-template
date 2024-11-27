@@ -8,7 +8,6 @@ class_name StateMachine
 	set(value):
 		current_state = value
 		current_state_name = current_state.name
-@export var sequence := false ##If true, treat this StateMachine as a sequence where all states will be executed one after the other.
 @export var disabled := false ##Determines if disable this StateMachine
 
 @onready var n_of_states = get_child_count()
@@ -32,7 +31,6 @@ func _init_states():
 	for state in children:
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
-		state.completed.connect(complete_current_state)
 	initialized = true
 	Globals.state_machine_initialized.emit(self)
 
@@ -49,7 +47,7 @@ func enable_state(state: State):
 	if state == current_state:
 		return
 	if current_state:
-		if current_state.await_completion and not sequence:
+		if current_state.await_completion:
 			await current_state.completed
 		previous_state = current_state
 		previous_state.process_mode = PROCESS_MODE_DISABLED
@@ -65,10 +63,6 @@ func disable_state(state: State):
 	_exit_states()
 	states = []
 	current_state = null
-
-func complete_current_state():
-	if sequence:
-		enable_next_state()
 
 func _process(delta):
 	_update_states(delta)
@@ -127,7 +121,7 @@ func enable_next_state(_params = null):
 		var next_state: State = get_child(next_index)
 		if next_state:
 			next_state.enable(_params)
-	elif sequence and current_state:
+	elif current_state:
 		current_state.disable()
 
 func enable_previous_state():

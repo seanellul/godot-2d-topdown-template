@@ -87,12 +87,6 @@ You can also create new states, extending the base script `state.gd` or `state_e
 A `ChangeStateListener` (`change_state_listener.gd`) is a node that, assigned as children of a node with a StateMachine, allows to listen for the change of state of the StateMachine of another node and, for each listening state, associate one to enable.
 Useful for managing, for example, a lever that opens a door: the door can listen for the states of the lever and opens or closes based on the on/off state of the lever.
 
-### Event sequences
-
-In the StateMachine, by setting the `sequence` parameter to true, you can activate a series of states in sequence.
-If necessary, remember to set the `await_completion` parameter to true inside a state and define the next state to enable in `on_completion`.
-This setting is useful for creating cutscenes or managing a series of states automatically.
-
 ## Scenes Transition
 
 Transition between scenes is managed by `SceneManager.gd` from [baconandgames](https://github.com/baconandgames). For more information check out the [official repository](https://github.com/baconandgames/godot4-game-template).
