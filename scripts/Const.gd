@@ -12,8 +12,8 @@ const MENU = {
 }
 
 const LEVEL = {
-	GAME_START = "res://scenes/game.tscn",
-	LEVEL_1 = "res://scenes/levels/level_01.tscn",
+	WORLD = "res://scenes/game.tscn",
+	START_LEVEL = "res://scenes/levels/level_01.tscn",
 }
 
 const TRANSITION = {

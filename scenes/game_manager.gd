@@ -9,7 +9,7 @@ var level_to_load
 func _load_level():
 	var loading = level_to_load != null
 	if not level_to_load:
-		level_to_load = Const.LEVEL.LEVEL_1
+		level_to_load = Const.LEVEL.START_LEVEL
 	if level_to_load and not debug_level:
 		var level = load(level_to_load)
 		world.add_child(level.instantiate())
