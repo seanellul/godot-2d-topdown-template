@@ -41,7 +41,6 @@ func _ready() -> void:
 				area.body_exited.connect(func(_body): _reset_entity())
 
 func enter():
-	_reset_interaction()
 	if area:
 		var areas: Array[Area2D] = area.get_overlapping_areas()
 		for a in areas:

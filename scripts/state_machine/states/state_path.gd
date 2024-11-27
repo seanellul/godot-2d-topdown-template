@@ -7,7 +7,7 @@ class_name StatePath
 @export var loop := false ## If true, after reaching the last point entity will go back to the first one and repeat the path.
 @export var distance_threshold := 2.0
 @export var speed_multiplier := 1.0
-@export var friction_multiplier := 1.0
+@export var friction_multiplier := 6.0 ## Keeping a value greater than 1, the entity will follow the path points more precisely.
 
 @onready var path_curve = path.curve
 @onready var current_point_id: int = 0:
@@ -19,11 +19,7 @@ class_name StatePath
 			else:
 				entity.stop()
 			complete()
-		elif new_id < 0:
-			new_id = path_curve.point_count - 1
 		current_point_id = new_id
-		if current_point_id < path_curve.point_count:
-			_set_target_position()
 
 var target_position := Vector2.ZERO
 
@@ -50,3 +46,5 @@ func _check_point_reached():
 	var distance = entity.global_position.distance_to(target_position)
 	if distance < distance_threshold:
 		current_point_id += 1
+		if current_point_id < path_curve.point_count:
+			_set_target_position()
