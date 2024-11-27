@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side_up.tscn" id="6_5b3ge"]
 [ext_resource type="PackedScene" uid="uid://dw4xkxqhvmyvg" path="res://scenes/props/chest.tscn" id="6_kdswq"]
 [ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="7_e6yb8"]
-[ext_resource type="Script" uid="uid://c838vta4pa6y1" path="res://scripts/state_machine/states/state_path.gd" id="8_285dh"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" uid="uid://bmru2wo8kyt0x" path="res://scripts/state_machine/scripts/change_state_listener.gd" id="8_dt570"]
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="9_3pscl"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state.gd" id="9_o85tp"]
@@ -325,7 +325,7 @@ position = Vector2(448, 35)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(528, 180)
+position = Vector2(292, 288)
 
 [node name="Transfer_North" parent="Transfers" index="0" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, -36)
@@ -357,7 +357,6 @@ curve = SubResource("Curve2D_uycfk")
 [node name="StateMachine" type="Node" parent="Events/Event_01" index="2" node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
-sequence = true
 
 [node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("16_nsalp")
@@ -387,10 +386,11 @@ time_range = Vector2(1, 1)
 await_completion = true
 on_completion = NodePath("../enable_player")
 
-[node name="enable_player" type="Node" parent="Events/Event_01/StateMachine" index="3"]
+[node name="enable_player" type="Node" parent="Events/Event_01/StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("17_pb8k3")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
 "input_enabled": true
 })
 await_completion = true
+on_completion = NodePath("../interact")

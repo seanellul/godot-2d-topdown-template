@@ -3,11 +3,11 @@ extends Node2D
 ##Transfers an entity to a different level or position.
 class_name Transfer
 
-@export_category("Destination settings")
 @export_file("*.tscn") var level_path = "" ## Leave empty to transfer inside the same level.
 @export var destination_name: String = "" ## The name of the destnation. NOTE: destination must be in the "destination" group.
 ##Force the player to face this direction upon arriving to this destination. [br]
 ##Leave empty to keep the same facing direction.
+@export_category("Destination settings")
 @export_enum(
 	Const.DIRECTION.DOWN,
 	Const.DIRECTION.LEFT,
