@@ -37,6 +37,8 @@ func get_data():
 
 ##internal - Used by SceneManager to get data from the outgoing level.
 func receive_data(data):
+	if !data:
+		return
 	destination_name = data.destination_name
 	player_facing = data.player_facing
 

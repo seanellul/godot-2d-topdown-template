@@ -11,11 +11,6 @@ const MENU = {
 	TITLE_SCREEN = "res://scenes/menus/start_screen.gd"
 }
 
-const LEVEL = {
-	WORLD = "res://scenes/game.tscn",
-	START_LEVEL = "res://scenes/levels/level_01.tscn",
-}
-
 const TRANSITION = {
 	FADE_TO_BLACK = "fade_to_black",
 	FADE_FROM_BLACK = "fade_from_black",
