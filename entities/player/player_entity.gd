@@ -60,7 +60,9 @@ func reset_values():
 ##Used to save player data to a save file. [br]
 ##full==false is used to avoid saving some data when moving to another level.
 func get_data(full):
-	var data = DataManager.game_data.player_data[player_id]
+	var data = DataPlayer.new()
+	if DataManager.game_data.player_data.size() > 0:
+		data = DataManager.game_data.player_data[player_id]
 	if full:
 		data.position = position
 		data.facing = facing

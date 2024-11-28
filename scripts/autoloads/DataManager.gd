@@ -24,7 +24,7 @@ func _save_level_data(_loading_screen): ##Used to save nodes state data of the l
 	_save_player_data(false)
 
 func _load_level_data(_loaded_scene, _loading_screen): ##Used to load nodes state data of the level when entering the level.
-	await get_tree().create_timer(0.01).timeout
+	await get_tree().tree_changed
 	_load_nodes_data()
 	_load_player_data(false)
 
