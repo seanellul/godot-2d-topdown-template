@@ -5,15 +5,17 @@ class_name StateNavigation
 
 @export var navigation_agent: NavigationAgent2D
 @export_category("Target")
-@export var target_player_id: = 0: ##If greater than 0, player with the specified id will be set as target.
+@export var target_player_id := 0: ## If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
 		_init_target.call_deferred()
-@export var target: Node2D = null: ##The node to follow.
+@export var target: Node2D = null: ## The node to follow.
 	set(value):
 		target = value
 		if is_node_ready():
-				print("%s is following: %s" %[entity_name, target])
+				print("%s is following: %s" % [entity_name, target])
+@export var speed_multiplier := 1.0
+@export var friction_multiplier := 1.0
 
 var go := false
 
@@ -46,4 +48,4 @@ func _follow():
 		return
 	if entity:
 		var next_path_position = navigation_agent.get_next_path_position()
-		entity.move_towards(next_path_position)
+		entity.move_towards(next_path_position, speed_multiplier, friction_multiplier)

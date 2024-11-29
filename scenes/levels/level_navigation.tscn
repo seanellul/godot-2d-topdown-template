@@ -51,6 +51,8 @@ current_state = NodePath("follow")
 script = ExtResource("4_seybd")
 navigation_agent = NodePath("../../NavigationAgent2D")
 target_player_id = 1
+speed_multiplier = 0.0
+friction_multiplier = 0.0
 
 [node name="idle" type="Node" parent="Entities/Enemy1/StateMachine" index="1"]
 script = ExtResource("5_3wcfp")
