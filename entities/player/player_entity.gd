@@ -15,6 +15,7 @@ func _ready():
 	super._ready()
 	Globals.transfer_start.connect(func(): on_transfer_start.enable())
 	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
+	receive_data(DataManager.get_player_data(player_id))
 
 func reduce_hp(value := 0, from = ""):
 	super.reduce_hp(value, from)
@@ -57,42 +58,26 @@ func reset_values():
 	is_charging = false
 	is_attacking = false
 
-##Used to save player data to a save file. [br]
-##full==false is used to avoid saving some data when moving to another level.
-func get_data(full):
+##Get the player data to save.
+func get_data():
 	var data = DataPlayer.new()
-	if DataManager.game_data.player_data.size() > 0:
-		data = DataManager.game_data.player_data[player_id]
-	if full:
-		data.position = position
-		data.facing = facing
-		data.level = Globals.get_current_level().scene_file_path
+	var player_data = DataManager.get_player_data(player_id)
+	if player_data:
+		data = player_data
+	data.position = position
+	data.facing = facing
 	data.hp = hp
 	data.max_hp = max_hp
 	data.inventory = inventory
 	data.equipped = equipped
 	return data
 
-##Used to load player data (from a save file or when moving to another level). [br]
-##full==false is used to avoid loading some data when moving to another level.
-func receive_data(data, full = true, load_level = true):
+##Handle the received player data (from a save file or when moving to another level).
+func receive_data(data):
 	if data:
-		if full:
-			global_position = data.position
-			facing = data.facing
-			if load_level:
-				_load_level(data.level)
+		global_position = data.position
+		facing = data.facing
 		hp = data.hp
 		max_hp = data.max_hp
 		inventory = data.inventory
 		equipped = data.equipped
-
-func _load_level(level):
-	var current_level = Globals.get_current_level()
-	if level:
-		SceneManager.swap_scenes(
-			level,
-			current_level.get_parent(),
-			current_level,
-			Const.TRANSITION.FADE_TO_WHITE
-		)

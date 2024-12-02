@@ -126,7 +126,7 @@ func _check_falling():
 		on_fall.enable()
 
 ##Used to load entity data (from a save file).
-func receive_data(data: DataEntity, _full = true):
+func receive_data(data: DataEntity):
 	if data:
 		global_position = data.position
 		facing = data.facing
@@ -233,6 +233,14 @@ func consume_item(item: DataItem):
 	elif item_hp < 0:
 		reduce_hp(-item_hp, item.resource_name)
 		hurt()
+
+##Place the entity to a different position facing towards a direction.
+func move_and_face(destination, direction = Vector2.ZERO):
+	position = destination
+	if direction is Vector2 and direction != Vector2.ZERO:
+		facing = direction
+	elif direction:
+		facing = Const.DIR_VECTOR[direction]
 
 ##Useful to reset some entity values to an initial state.
 func reset_values():

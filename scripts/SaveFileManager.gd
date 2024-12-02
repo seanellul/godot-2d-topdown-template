@@ -2,8 +2,9 @@
 extends Resource
 class_name SaveFileManager
 
-@export var nodes_data: Dictionary = {}
-@export var player_data: Dictionary = {}
+@export var nodes_data: Dictionary[String, Variant] = {}
+@export var player_data: Dictionary[int, DataPlayer] = {}
+@export var game_data: DataGame = null
 
 func write_save_file() -> void:
 	ResourceSaver.save(self, get_save_file_path())

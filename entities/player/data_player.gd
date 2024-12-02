@@ -7,4 +7,3 @@ class_name DataPlayer
 @export var max_hp: int
 @export var inventory: Array[ContentItem] = []
 @export var equipped: int
-@export var level = ""

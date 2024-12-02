@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://b31ie7ym22i4i"]
 
-[ext_resource type="Script" uid="uid://6hmvqftpco0f" path="res://scenes/system/transfer.gd" id="1_hh1eg"]
-[ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_1i106"]
+[ext_resource type="Script" path="res://scenes/system/transfer.gd" id="1_hh1eg"]
+[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_1i106"]
 [ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="2_5c8bo"]
-[ext_resource type="Script" uid="uid://bih7omt5j75nf" path="res://scripts/state_machine/states/state_interact.gd" id="3_byffi"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_byffi"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="6_hh1eg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh1eg"]

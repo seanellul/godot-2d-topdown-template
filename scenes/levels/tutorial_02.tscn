@@ -14,10 +14,10 @@
 [ext_resource type="Resource" uid="uid://gdgabla4e12i" path="res://dialogues/tutorial_02.dialogue" id="9_h8ccs"]
 [ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="13_gmt2p"]
 [ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="14_mce06"]
-[ext_resource type="Script" uid="uid://x76l8wcku44e" path="res://scripts/state_machine/scripts/state_machine.gd" id="15_er3gv"]
+[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="15_er3gv"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="16_hvm1c"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="17_ytjl1"]
-[ext_resource type="Script" uid="uid://bl6apqwd8xel3" path="res://scripts/state_machine/states/state_params_setter.gd" id="18_deu1n"]
+[ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="18_deu1n"]
 
 [sub_resource type="Resource" id="Resource_joii5"]
 script = ExtResource("8_joii5")

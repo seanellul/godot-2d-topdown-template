@@ -3,7 +3,6 @@ extends Node
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 
-var n_of_players := 1 ## The number of players the game should handle.
 var user_prefs: UserPrefs
 
 var settings_menu_scene: PackedScene = preload("res://scenes/menus/settings_menu.tscn")
@@ -59,3 +58,8 @@ func get_destination(destination_name: String):
 func get_current_level():
 	var level = get_tree().get_first_node_in_group(Const.GROUP.LEVEL)
 	return level
+
+func load_last_saved_level():
+	var level_to_load = DataManager.get_data().game_data.level
+	if level_to_load:
+		SceneManager.swap_scenes(level_to_load, get_tree().root, self, Const.TRANSITION.FADE_TO_WHITE)
