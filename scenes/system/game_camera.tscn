@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b8ms04atei243"]
 
-[ext_resource type="Script" uid="uid://ds2r6woe6i2p4" path="res://scenes/system/game_camera.gd" id="1_eihhq"]
+[ext_resource type="Script" path="res://scenes/system/game_camera.gd" id="1_eihhq"]
 
 [node name="GameCamera2D" type="Camera2D"]
+process_mode = 3
 position = Vector2(262, 176)
 script = ExtResource("1_eihhq")
 target_player_id = 1

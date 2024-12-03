@@ -232,7 +232,8 @@ func consume_item(item: DataItem):
 		recover_hp(item_hp, item.resource_name)
 	elif item_hp < 0:
 		reduce_hp(-item_hp, item.resource_name)
-		hurt()
+		if hp > 0:
+			hurt()
 
 ##Place the entity to a different position facing towards a direction.
 func move_and_face(destination, direction = Vector2.ZERO):
