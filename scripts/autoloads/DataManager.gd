@@ -38,13 +38,13 @@ func load_level_data():
 	_load_nodes_data()
 
 func load_game() -> void:
-	print_debug("loading...")
+	print("loading...")
 	load_file_data()
 	_load_game_data()
 	game_loaded.emit()
 
 func save_game() -> void:
-	print_debug("saving...")
+	print("saving...")
 	_save_game_data()
 	_save_nodes_data()
 	_save_players_data()

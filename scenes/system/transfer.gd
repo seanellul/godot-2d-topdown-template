@@ -17,7 +17,7 @@ class_name Transfer
 
 func _ready() -> void:
 	SceneManager.load_start.connect(func(_loading_screen): Globals.transfer_start.emit())
-	SceneManager.scene_added.connect(func(incoming_scene,_loading_screen): _complete_transfer(incoming_scene))
+	SceneManager.scene_added.connect(func(incoming_scene, _loading_screen): _complete_transfer(incoming_scene))
 
 func _complete_transfer(incoming_scene):
 	_check_transfer(incoming_scene)
@@ -64,4 +64,3 @@ func _check_transfer(incoming_scene):
 	var level_data = current_level.get_data()
 	if level_data and level_data.destination_name == name:
 		Globals.destination_found.emit(get_path())
-			

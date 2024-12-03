@@ -58,7 +58,6 @@ func physics_update(_delta: float):
 	pass
 
 func complete():
-	print_debug("State %s completed" % [get_path()])
 	completed.emit()
 
 class TimedState:

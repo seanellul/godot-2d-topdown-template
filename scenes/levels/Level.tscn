@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b0b0jp36dubff"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_cq0rv"]
-[ext_resource type="PackedScene" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
+[ext_resource type="PackedScene" uid="uid://8vwu5i52l856" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="TileSet" uid="uid://bqgpil207dwjc" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
 [ext_resource type="Script" path="res://scenes/levels/tilemap_navigation.gd" id="4_6158f"]
 [ext_resource type="Shader" path="res://shaders/water.gdshader" id="4_ud3dr"]

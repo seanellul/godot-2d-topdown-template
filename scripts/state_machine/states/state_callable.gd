@@ -20,7 +20,6 @@ func _call_method_by_name():
 	var callable = Callable(node, method_name)
 	if is_instance_valid(node) and callable.is_valid():
 		print("Calling method %s from %s" % [method_name, node.name])
-		print_debug(callable)
 		if send_sm_params:
 			callable.call(state_machine.params)
 		else:
