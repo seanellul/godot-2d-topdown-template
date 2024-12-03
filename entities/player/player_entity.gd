@@ -84,9 +84,15 @@ func receive_data(data):
 		equipped = data.equipped
 
 func _move_to_destination(destination_path: String):
-		if destination_path:
-			var destination = get_tree().root.get_node(destination_path)
-			if destination:
-				DataManager.save_player_data(player_id, {
-					position = destination.global_position
-				})
+	if !destination_path:
+		return
+	var destination = get_tree().root.get_node(destination_path)
+	if !destination:
+		return
+	var direction = facing
+	if destination is Transfer:
+		direction = Const.DIR_VECTOR[destination.facing]
+	DataManager.save_player_data(player_id, {
+		position = destination.global_position,
+		facing = direction
+	})
