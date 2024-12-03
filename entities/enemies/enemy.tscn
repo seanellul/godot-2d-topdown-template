@@ -1,9 +1,9 @@
-[gd_scene load_steps=60 format=3 uid="uid://2c84y1k62jlc"]
+[gd_scene load_steps=60 format=3]
 
-[ext_resource type="PackedScene" uid="uid://dyfyo3gh4e2la" path="res://entities/entity.tscn" id="1_ftgfs"]
+[ext_resource type="PackedScene" path="res://entities/entity.tscn" id="1_ftgfs"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_fvxof"]
-[ext_resource type="Texture2D" uid="uid://dgbach7bmy1wn" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
-[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="4_msovg"]
+[ext_resource type="Texture2D" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
+[ext_resource type="Texture2D" path="res://entities/player/chara-hero.png" id="4_msovg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_msovg"]
 resource_local_to_scene = true

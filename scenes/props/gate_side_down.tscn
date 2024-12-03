@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://12fxlmpxswqr"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="PackedScene" uid="uid://sqsfj8mr85j8" path="res://scenes/props/gate_side_up.tscn" id="1_lyu40"]
+[ext_resource type="PackedScene" path="res://scenes/props/gate_side_up.tscn" id="1_lyu40"]
 
 [node name="Gate_Side" instance=ExtResource("1_lyu40")]
 start_state_index = 1

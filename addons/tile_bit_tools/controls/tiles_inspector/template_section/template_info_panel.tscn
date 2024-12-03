@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxhlehm73ligy"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tiles_inspector/template_section/template_info_panel.gd" id="1_arkoa"]
-[ext_resource type="PackedScene" uid="uid://bscknm10ko78t" path="res://addons/tile_bit_tools/controls/shared/template_info_list.tscn" id="2_jg88n"]
+[ext_resource type="PackedScene" path="res://addons/tile_bit_tools/controls/shared/template_info_list.tscn" id="2_jg88n"]
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/shared/icon_button.gd" id="5_7b1jd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kuq0c"]

@@ -1,14 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://di8w8pflxt5c4"]
+[gd_scene load_steps=11 format=4]
 
-[ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
-[ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
+[ext_resource type="PackedScene" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_t4uv3"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_navigation.gd" id="4_seybd"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_idle.gd" id="5_3wcfp"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_101ja"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="6_wl5yp"]
-[ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="7_6ttik"]
-[ext_resource type="Script" uid="uid://cqoj7bjmmotqb" path="res://scenes/system/interaction_area.gd" id="7_f107o"]
+[ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="7_6ttik"]
+[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="7_f107o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x5hhv"]
 radius = 32.0

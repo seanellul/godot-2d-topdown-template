@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0ac6cpk1hwcy"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://cfrtv4cd4pm3i" path="res://scenes/menus/inventory.gd" id="1_4mxsq"]
+[ext_resource type="Script" path="res://scenes/menus/inventory.gd" id="1_4mxsq"]
 
 [node name="Inventory" type="CanvasLayer"]
 process_mode = 3

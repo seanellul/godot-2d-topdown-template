@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bscknm10ko78t"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/shared/template_info_list.gd" id="1_6r84n"]
 

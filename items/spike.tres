@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="DataItem" load_steps=2 format=3 uid="uid://cvh325i7w1lhf"]
+[gd_resource type="Resource" script_class="DataItem" load_steps=2 format=3 uid="uid://d2ml0tvw0px5r"]
 
 [ext_resource type="Script" path="res://items/data_item.gd" id="1_n7p0r"]
 
 [resource]
 script = ExtResource("1_n7p0r")
-name = ""
-quantity = 0
-storable = false
-change_hp = -2
+change_hp = -10
+hide_from_inventory = false

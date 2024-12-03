@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bb4xl1j6cf78w"]
+[gd_scene format=3]
 
 [node name="EmbedButton" type="CheckButton"]
 offset_right = 44.0

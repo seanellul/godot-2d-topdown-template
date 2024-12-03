@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx6k2su2g3pj"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/tbt_plugin_control.gd" id="1_6xv2q"]
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/template_manager.gd" id="2_aj7pp"]
-[ext_resource type="PackedScene" uid="uid://job5gqt1xbrh" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/popups/save_template_dialog.tscn" id="3_p4ion"]
-[ext_resource type="PackedScene" uid="uid://cyxr6y64lkue6" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/popups/edit_template_dialog.tscn" id="4_qymya"]
+[ext_resource type="PackedScene" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/popups/save_template_dialog.tscn" id="3_p4ion"]
+[ext_resource type="PackedScene" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/popups/edit_template_dialog.tscn" id="4_qymya"]
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/tiles_manager.gd" id="5_v5epd"]
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tbt_plugin_control/theme_updater.gd" id="6_mie0u"]
 

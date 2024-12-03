@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=4 uid="uid://4titp5750dhi"]
+[gd_scene load_steps=3 format=4]
 
-[ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_tibl0"]
-[ext_resource type="PackedScene" uid="uid://b31ie7ym22i4i" path="res://scenes/system/transfer.tscn" id="2_cv4js"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level.tscn" id="1_tibl0"]
+[ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="2_cv4js"]
 
 [node name="Tutorial_01" instance=ExtResource("1_tibl0")]
 

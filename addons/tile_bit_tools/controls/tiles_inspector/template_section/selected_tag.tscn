@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bco7r2se8g2hn"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tiles_inspector/template_section/selected_tag.gd" id="1_n8esd"]
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/shared/icon_button.gd" id="2_gjwm3"]

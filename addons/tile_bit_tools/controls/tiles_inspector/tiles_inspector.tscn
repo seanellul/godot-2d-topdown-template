@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bijiosgd4td"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://addons/tile_bit_tools/controls/tiles_inspector/tiles_inspector.gd" id="1_hyl5p"]
-[ext_resource type="Texture2D" uid="uid://cheop6l3022pn" path="res://addons/tile_bit_tools/controls/icons/tile_bit_tools_16.svg" id="3_pojdm"]
-[ext_resource type="PackedScene" uid="uid://dkmdolef567aa" path="res://addons/tile_bit_tools/controls/shared/inspector_section_button.tscn" id="4_2qwfq"]
-[ext_resource type="PackedScene" uid="uid://b5nbqr8ah0ay2" path="res://addons/tile_bit_tools/controls/tiles_inspector/tool_buttons/tool_buttons.tscn" id="4_vjqmp"]
-[ext_resource type="PackedScene" uid="uid://dknch2tbr32yh" path="res://addons/tile_bit_tools/controls/tiles_inspector/template_section/templates_section.tscn" id="6_xgtwo"]
+[ext_resource type="Texture2D" path="res://addons/tile_bit_tools/controls/icons/tile_bit_tools_16.svg" id="3_pojdm"]
+[ext_resource type="PackedScene" path="res://addons/tile_bit_tools/controls/shared/inspector_section_button.tscn" id="4_2qwfq"]
+[ext_resource type="PackedScene" path="res://addons/tile_bit_tools/controls/tiles_inspector/tool_buttons/tool_buttons.tscn" id="4_vjqmp"]
+[ext_resource type="PackedScene" path="res://addons/tile_bit_tools/controls/tiles_inspector/template_section/templates_section.tscn" id="6_xgtwo"]
 
 [node name="TilesInspector" type="VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
