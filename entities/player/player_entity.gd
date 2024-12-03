@@ -90,7 +90,7 @@ func _move_to_destination(destination_path: String):
 	if !destination:
 		return
 	var direction = facing
-	if destination is Transfer:
+	if destination is Transfer and destination.facing:
 		direction = Const.DIR_VECTOR[destination.facing]
 	DataManager.save_player_data(player_id, {
 		position = destination.global_position,

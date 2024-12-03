@@ -4,6 +4,6 @@
 
 [node name="GameCamera2D" type="Camera2D"]
 process_mode = 3
-position = Vector2(262, 176)
+position = Vector2(320, 184)
 script = ExtResource("1_eihhq")
 target_player_id = 1

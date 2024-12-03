@@ -18,7 +18,6 @@ shader_parameter/tile = Vector2(5, 5)
 shader_parameter/offset = Vector2(0, 0)
 
 [node name="Level" type="Node2D" groups=["level"]]
-y_sort_enabled = true
 script = ExtResource("1_cq0rv")
 
 [node name="GameCamera2D" parent="." instance=ExtResource("2_d25mt")]

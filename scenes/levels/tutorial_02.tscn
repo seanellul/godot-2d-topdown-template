@@ -1,17 +1,17 @@
-[gd_scene load_steps=23 format=4]
+[gd_scene load_steps=23 format=4 uid="uid://7kq5lknqxcf2"]
 
-[ext_resource type="PackedScene" path="res://scenes/levels/Level.tscn" id="1_okilc"]
+[ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_okilc"]
 [ext_resource type="PackedScene" path="res://scenes/props/trap.tscn" id="2_imqxm"]
 [ext_resource type="PackedScene" path="res://scenes/props/potion.tscn" id="3_lp14j"]
 [ext_resource type="PackedScene" path="res://scenes/props/switch.tscn" id="4_vjw68"]
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_up.tscn" id="5_gmt2p"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/change_state_listener.gd" id="6_bu31o"]
 [ext_resource type="PackedScene" path="res://scenes/props/chest.tscn" id="6_joii5"]
-[ext_resource type="PackedScene" path="res://scenes/props/door.tscn" id="7_bu31o"]
+[ext_resource type="PackedScene" uid="uid://cfb8430tqc358" path="res://scenes/props/door.tscn" id="7_bu31o"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="8_joii5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="8_vjw68"]
 [ext_resource type="Resource" path="res://items/key.tres" id="9_bu31o"]
-[ext_resource type="Resource" path="res://dialogues/tutorial_02.dialogue" id="9_h8ccs"]
+[ext_resource type="Resource" uid="uid://gdgabla4e12i" path="res://dialogues/tutorial_02.dialogue" id="9_h8ccs"]
 [ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="13_gmt2p"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="14_mce06"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="15_er3gv"]
@@ -42,6 +42,7 @@ point_count = 2
 [node name="Tutorial_02" instance=ExtResource("1_okilc")]
 
 [node name="GameCamera2D" parent="." index="0"]
+position = Vector2(768, 552)
 limit_left = -192
 limit_top = -352
 

@@ -9,7 +9,7 @@ signal game_saved
 signal game_loaded
 
 func _ready():
-	load_file_data()
+	reset_file_data()
 
 func get_file_data():
 	return _file
@@ -36,6 +36,7 @@ func save_level_data():
 ## Used to load nodes state data of the level when entering the level.
 func load_level_data():
 	_load_nodes_data()
+	_load_players_data()
 
 func load_game() -> void:
 	print("loading...")
@@ -65,6 +66,12 @@ func _load_nodes_data():
 			get_file_data().nodes_data[path] = _get_node_data(node)
 		if node.has_method("receive_data"):
 			node.receive_data(get_file_data().nodes_data[path])
+
+func _load_players_data():
+	var players = Globals.get_players()
+	print_debug("level_loaded %s" % [players.size()])
+	for player in players:
+		print_debug(player)
 
 func _save_nodes_data():
 	for node in _get_save_nodes():
