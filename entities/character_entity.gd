@@ -256,5 +256,5 @@ func stop(smoothly := false):
 ##Stops the entity and disables its process.
 func disable_entity(value: bool, delay = 0.0):
 	await get_tree().create_timer(delay).timeout
-	process_mode = PROCESS_MODE_DISABLED if value else PROCESS_MODE_INHERIT
 	stop()
+	process_mode = PROCESS_MODE_DISABLED if value else PROCESS_MODE_INHERIT

@@ -2,9 +2,14 @@ extends StateEntity
 ##Stops an entity.
 class_name StateIdle
 
-func enter():
-	idle()
+@export var disable_entity := false
 
-func idle():
+func enter():
+	super.enter()
 	if entity:
 		entity.stop()
+		entity.disable_entity(disable_entity)
+
+func exit():
+	if entity and disable_entity:
+		entity.disable_entity(false)
