@@ -15,6 +15,7 @@ func _ready():
 	super._ready()
 	Globals.transfer_start.connect(func(): on_transfer_start.enable())
 	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
+	Globals.destination_found.connect(func(destination_path): _move_to_destination(destination_path))
 	receive_data(DataManager.get_player_data(player_id))
 
 func reduce_hp(value := 0, from = ""):
@@ -81,3 +82,11 @@ func receive_data(data):
 		max_hp = data.max_hp
 		inventory = data.inventory
 		equipped = data.equipped
+
+func _move_to_destination(destination_path: String):
+		if destination_path:
+			var destination = get_tree().root.get_node(destination_path)
+			if destination:
+				DataManager.save_player_data(player_id, {
+					position = destination.global_position
+				})

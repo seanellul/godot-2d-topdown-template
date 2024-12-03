@@ -15,8 +15,8 @@ static func save_file_exists() -> bool:
 static func load_save_file() -> Resource:
 	var save_path := get_save_file_path()
 	if ResourceLoader.exists(save_path):
-		return ResourceLoader.load(save_path, "")
-	return null
+		return ResourceLoader.load(save_path, "", ResourceLoader.CACHE_MODE_REPLACE)
+	return SaveFileManager.new()
 
 static func get_save_file_path() -> String:
 	# This check allows to save and load a text resource in debug builds and a binary resource in the released project.

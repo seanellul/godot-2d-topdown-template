@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=36 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://8u5h1ar8jt2f" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" uid="uid://dcqe2ncf78h8m" path="res://items/content_item.gd" id="3_myhjs"]
@@ -197,6 +197,14 @@ item = ExtResource("4_qx1j4")
 quantity = 1
 metadata/_custom_type_script = ExtResource("3_myhjs")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrcmr"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svp4f"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cywot"]
 size = Vector2(48, 64)
 
@@ -331,9 +339,21 @@ position = Vector2(670, 144)
 position = Vector2(96, -36)
 destination_name = "Transfer_South"
 
+[node name="InteractionArea2D" parent="Transfers/Transfer_North" index="0"]
+shape = SubResource("RectangleShape2D_vrcmr")
+
+[node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
+direction = 8
+
 [node name="Transfer_South" parent="Transfers" index="1" instance=ExtResource("16_vcg7b")]
 position = Vector2(96, 405)
 destination_name = "Transfer_North"
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_South" index="0"]
+shape = SubResource("RectangleShape2D_svp4f")
+
+[node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
+direction = 1
 
 [node name="Transfer_East" parent="Transfers" index="2" instance=ExtResource("16_vcg7b")]
 position = Vector2(752, 224)
@@ -394,3 +414,6 @@ on_enter = Dictionary[String, Variant]({
 })
 await_completion = true
 on_completion = NodePath("../interact")
+
+[editable path="Transfers/Transfer_North"]
+[editable path="Transfers/Transfer_South"]

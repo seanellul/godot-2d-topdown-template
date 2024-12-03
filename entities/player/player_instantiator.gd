@@ -10,9 +10,9 @@ func _ready() -> void:
 
 func _instantiate_player():
 	var player: PlayerEntity = player_scene.instantiate() as PlayerEntity
-	player.player_id = player_id
-	parent.add_child(player)
-	Globals.player_added_to_scene.emit(player)
 	if player:
-		player.global_position = self.global_position
-		queue_free()
+		player.player_id = player_id
+		player.move_and_face(global_position)
+		parent.add_child.call_deferred(player)
+		Globals.player_added_to_scene.emit(player)
+	queue_free()

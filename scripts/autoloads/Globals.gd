@@ -18,6 +18,8 @@ signal transfer_complete
 signal player_added_to_scene(player: PlayerEntity)
 @warning_ignore("unused_signal")
 signal state_machine_initialized(state_machine: StateMachine)
+@warning_ignore("unused_signal")
+signal destination_found(destination_path: String)
 
 func _ready():
 	user_prefs = UserPrefs.load_or_create()
@@ -60,6 +62,6 @@ func get_current_level():
 	return level
 
 func load_last_saved_level():
-	var level_to_load = DataManager.get_data().game_data.level
+	var level_to_load = DataManager.get_file_data().game_data.level
 	if level_to_load:
-		SceneManager.swap_scenes(level_to_load, get_tree().root, self, Const.TRANSITION.FADE_TO_WHITE)
+		SceneManager.swap_scenes(level_to_load, get_tree().root, get_current_level(), Const.TRANSITION.FADE_TO_WHITE)

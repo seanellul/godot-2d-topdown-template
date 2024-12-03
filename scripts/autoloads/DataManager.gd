@@ -9,11 +9,18 @@ signal game_saved
 signal game_loaded
 
 func _ready():
-	_file = SaveFileManager.new()
-	SceneManager.load_start.connect(_save_level_data)
+	load_file_data()
 
 func get_file_data():
 	return _file
+
+## Called when starting anew game
+func reset_file_data():
+	_file = SaveFileManager.new()
+
+## Called when loading a game
+func load_file_data():
+	_file = SaveFileManager.load_save_file()
 
 func get_player_data(player_id: int):
 	var player_data = get_file_data().player_data if _file else null
@@ -21,34 +28,34 @@ func get_player_data(player_id: int):
 		return player_data[player_id]
 	return null
 
-func _save_level_data(_loading_screen): ## Used to save nodes state data of the level before removing the level.
+## Used to save nodes state data of the level and players data before removing the level.
+func save_level_data():
 	_save_nodes_data()
-	_save_player_data()
+	_save_players_data()
 
-func load_level_data(): ## Used to load nodes state data of the level when entering the level.
+## Used to load nodes state data of the level when entering the level.
+func load_level_data():
 	_load_nodes_data()
-	# _load_player_data()
 
 func load_game() -> void:
 	print_debug("loading...")
-	_file = SaveFileManager.load_save_file()
+	load_file_data()
 	_load_game_data()
-	_load_nodes_data()
-	# _load_player_data()
 	game_loaded.emit()
 
 func save_game() -> void:
 	print_debug("saving...")
 	_save_game_data()
 	_save_nodes_data()
-	_save_player_data()
+	_save_players_data()
 	get_file_data().write_save_file()
 	game_saved.emit()
 
 func _load_game_data():
 	if !get_file_data().game_data:
 		return
-	if get_file_data().game_data.level != Globals.get_current_level().scene_file_path:
+	var current_level = Globals.get_current_level()
+	if current_level and get_file_data().game_data.level != current_level.scene_file_path or !current_level:
 		Globals.load_last_saved_level()
 
 func _load_nodes_data():
@@ -59,24 +66,23 @@ func _load_nodes_data():
 		if node.has_method("receive_data"):
 			node.receive_data(get_file_data().nodes_data[path])
 
-func _load_player_data(): # TODO: delete
-	var players = Globals.get_players()
-	for player in players:
-		var player_data = get_player_data(player.player_id)
-		if player.has_method("receive_data") and player_data:
-			player.receive_data(player_data)
-
 func _save_nodes_data():
 	for node in _get_save_nodes():
 		if node != null:
 			var path = String(node.get_path())
 			get_file_data().nodes_data[path] = _get_node_data(node)
 
-func _save_player_data():
+func _save_players_data():
 	var players = Globals.get_players()
 	for player in players:
 		if player.has_method("get_data"):
 			get_file_data().player_data[player.player_id] = player.get_data()
+
+func save_player_data(player_id: int, data: Dictionary):
+	var player_data: DataPlayer = get_player_data(player_id)
+	if player_data:
+		for key in data.keys():
+			player_data[key] = data[key]
 
 func _save_game_data():
 	get_file_data().game_data = _get_game_data()

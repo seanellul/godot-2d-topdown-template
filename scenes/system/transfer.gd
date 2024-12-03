@@ -17,12 +17,11 @@ class_name Transfer
 
 func _ready() -> void:
 	SceneManager.load_start.connect(func(_loading_screen): Globals.transfer_start.emit())
-	SceneManager.scene_added.connect(func(_incoming_scene,_loading_screen): _complete_transfer())
+	SceneManager.scene_added.connect(func(incoming_scene,_loading_screen): _complete_transfer(incoming_scene))
 
-func _complete_transfer():
-	_setup_player()
+func _complete_transfer(incoming_scene):
+	_check_transfer(incoming_scene)
 	Globals.transfer_complete.emit()
-	process_mode = PROCESS_MODE_INHERIT
 
 func transfer(params):
 	var entity: CharacterEntity = params["entity"]
@@ -38,6 +37,7 @@ func _transfer_to_level(player, scene_to_load):
 			destination_name = destination_name,
 			player_id = player.player_id
 		})
+		DataManager.save_level_data()
 		SceneManager.swap_scenes(
 			scene_to_load,
 			current_level.get_parent(),
@@ -55,13 +55,13 @@ func _transfer_to_position(entity):
 	await get_tree().create_timer(0.5).timeout
 	Globals.transfer_complete.emit()
 
-func _setup_player():
-	await get_tree().physics_frame
-	var current_level: Level = Globals.get_current_level()
-	if current_level:
-		var level_data = current_level.get_data()
-		if level_data:
-			if level_data.destination_name == name:
-				var player = Globals.get_player(level_data.player_id)
-				if player:
-					player.move_and_face(global_position, facing)
+func _check_transfer(incoming_scene):
+	if incoming_scene is not Level:
+		return
+	var current_level: Level = incoming_scene
+	if !current_level:
+		return
+	var level_data = current_level.get_data()
+	if level_data and level_data.destination_name == name:
+		Globals.destination_found.emit(get_path())
+			
