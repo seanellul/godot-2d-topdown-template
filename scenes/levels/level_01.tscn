@@ -426,9 +426,10 @@ libraries = {
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("interaction_area")]
+[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("16_nsalp")
 interaction_area = NodePath("../../InteractionArea2D")
+on_interaction = [NodePath("../down")]
 action_trigger = "interact"
 conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_cag23")])
 one_shot = false
