@@ -1,17 +1,19 @@
-[gd_scene load_steps=65 format=3]
+[gd_scene load_steps=69 format=3 uid="uid://d2nwo602rnihe"]
 
 [ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
-[ext_resource type="Texture2D" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
-[ext_resource type="Texture2D" path="res://entities/shadow.png" id="2_xhiia"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-global.res" id="4_hhyyf"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-attack.res" id="5_gfoxn"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-hurt.res" id="6_3jrrx"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-idle.res" id="6_bqfdd"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-jump.res" id="7_ktamm"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-run.res" id="8_xdo4a"]
-[ext_resource type="AnimationLibrary" path="res://entities/animations/char-walk.res" id="9_ihjft"]
-[ext_resource type="AnimationNodeStateMachine" path="res://entities/animations/char_anim_states.tres" id="10_esda3"]
+[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
+[ext_resource type="Texture2D" uid="uid://b6peokk0rkltn" path="res://entities/shadow.png" id="2_xhiia"]
+[ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="4_hhyyf"]
+[ext_resource type="AnimationLibrary" uid="uid://ddkqxa6prgwqi" path="res://entities/animations/char-attack.res" id="5_gfoxn"]
+[ext_resource type="AnimationLibrary" uid="uid://684lg3hi3vjy" path="res://entities/animations/char-hurt.res" id="6_3jrrx"]
+[ext_resource type="AnimationLibrary" uid="uid://baydqwuyhl514" path="res://entities/animations/char-idle.res" id="6_bqfdd"]
+[ext_resource type="AnimationLibrary" uid="uid://h0p3l5ccisyb" path="res://entities/animations/char-jump.res" id="7_ktamm"]
+[ext_resource type="AnimationLibrary" uid="uid://bbf4lu0d5n0bx" path="res://entities/animations/char-run.res" id="8_xdo4a"]
+[ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="9_ihjft"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://b4nom5gtsxhou" path="res://entities/animations/char_anim_states.tres" id="10_esda3"]
+[ext_resource type="Script" path="res://entities/hit_box.gd" id="13_tgfo6"]
+[ext_resource type="Script" path="res://entities/hurt_box.gd" id="14_68xn4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
 size = Vector2(20, 18)
@@ -465,6 +467,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_geh4k"]
 radius = 3.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jk47u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_528vq"]
+size = Vector2(22, 20)
+
 [node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "sync_rotation", "blocks_detector", "fall_detector")]
 y_sort_enabled = true
 collision_layer = 2
@@ -473,7 +480,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_g6455")
 animation_tree = NodePath("AnimationTree")
-sync_rotation = [NodePath("BlocksDetector")]
+sync_rotation = [NodePath("BlocksDetector"), NodePath("HitBox"), NodePath("HurtBox")]
 blocks_detector = NodePath("BlocksDetector")
 fall_detector = NodePath("FallDetector")
 
@@ -539,3 +546,25 @@ parameters/run/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/run/TimeScale/scale = 0.3
 parameters/walk/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/walk/TimeScale/scale = 0.25
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, 3)
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("13_tgfo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_jk47u")
+debug_color = Color(0.968462, 0.159615, 0.204928, 0.42)
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 80
+monitorable = false
+script = ExtResource("14_68xn4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_528vq")
+debug_color = Color(0.470614, 0.553729, 0.568295, 0.42)
