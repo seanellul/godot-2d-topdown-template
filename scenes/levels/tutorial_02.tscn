@@ -1,13 +1,13 @@
-[gd_scene load_steps=23 format=4 uid="uid://7kq5lknqxcf2"]
+[gd_scene load_steps=22 format=4 uid="uid://7kq5lknqxcf2"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_okilc"]
 [ext_resource type="PackedScene" path="res://scenes/props/trap.tscn" id="2_imqxm"]
 [ext_resource type="PackedScene" path="res://scenes/props/potion.tscn" id="3_lp14j"]
-[ext_resource type="PackedScene" path="res://scenes/props/switch.tscn" id="4_vjw68"]
+[ext_resource type="PackedScene" uid="uid://dvci1ecg1e7l" path="res://scenes/props/switch.tscn" id="4_vjw68"]
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_up.tscn" id="5_gmt2p"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/change_state_listener.gd" id="6_bu31o"]
-[ext_resource type="PackedScene" path="res://scenes/props/chest.tscn" id="6_joii5"]
-[ext_resource type="PackedScene" uid="uid://cfb8430tqc358" path="res://scenes/props/door.tscn" id="7_bu31o"]
+[ext_resource type="PackedScene" uid="uid://bfgn02yd5ftws" path="res://scenes/props/chest.tscn" id="6_joii5"]
+[ext_resource type="PackedScene" path="res://scenes/props/door.tscn" id="7_bu31o"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="8_joii5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="8_vjw68"]
 [ext_resource type="Resource" path="res://items/key.tres" id="9_bu31o"]
@@ -20,12 +20,6 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="18_deu1n"]
 
 [sub_resource type="Resource" id="Resource_joii5"]
-script = ExtResource("8_joii5")
-item = ExtResource("9_bu31o")
-quantity = 1
-metadata/_custom_type_script = ExtResource("8_joii5")
-
-[sub_resource type="Resource" id="Resource_gmt2p"]
 script = ExtResource("8_joii5")
 item = ExtResource("9_bu31o")
 quantity = 1
@@ -98,9 +92,7 @@ position = Vector2(1116, -330)
 
 [node name="StateMachine" parent="Props/Door" index="2" groups=["save"]]
 
-[node name="closed" parent="Props/Door/StateMachine" index="0" node_paths=PackedStringArray("on_items_missing")]
-has_items = Array[ExtResource("8_joii5")]([SubResource("Resource_gmt2p")])
-on_items_missing = NodePath("../msg-door_closed")
+[node name="closed" parent="Props/Door/StateMachine" index="0"]
 one_shot = false
 
 [node name="msg-door_closed" type="Node" parent="Props/Door/StateMachine" index="4" node_paths=PackedStringArray("on_completion")]
@@ -234,7 +226,7 @@ metadata/_custom_type_script = ExtResource("15_er3gv")
 script = ExtResource("16_hvm1c")
 interaction_area = NodePath("../../InteractionArea2D")
 on_interaction = [NodePath("../player_path")]
-direction = 1
+reset_delay = 0.0
 metadata/_custom_type_script = ExtResource("16_hvm1c")
 
 [node name="player_path" type="Node" parent="Events/exit-door/StateMachine" index="1" node_paths=PackedStringArray("path", "on_completion")]

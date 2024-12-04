@@ -1,7 +1,7 @@
 [gd_scene load_steps=84 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
-[ext_resource type="PackedScene" uid="uid://bq1wtpcebv5j2" path="res://scenes/props/key.tscn" id="2_vfs10"]
+[ext_resource type="PackedScene" path="res://scenes/props/key.tscn" id="2_vfs10"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_v5pqk"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="3_vnork"]
 [ext_resource type="Resource" path="res://items/key.tres" id="4_m2te4"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
-[ext_resource type="PackedScene" path="res://entities/entity.tscn" id="9_jsvhf"]
+[ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="9_jsvhf"]
 [ext_resource type="Texture2D" uid="uid://c6o7lhiq368dj" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="10_dscar"]
 [ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="10_kibes"]

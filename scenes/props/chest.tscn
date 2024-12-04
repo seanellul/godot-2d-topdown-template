@@ -1,13 +1,15 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=24 format=3 uid="uid://bfgn02yd5ftws"]
 
-[ext_resource type="Texture2D" path="res://scenes/props/chest.png" id="1_dsvcm"]
+[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://scenes/props/chest.png" id="1_dsvcm"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_afpir"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_cxsuu"]
 [ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_db0e2"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_xbw31"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_tween.gd" id="4_8p6ij"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/tween_data.gd" id="5_0n50a"]
+[ext_resource type="Script" path="res://scripts/state_machine/scripts/check.gd" id="6_gbvtw"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="6_v7cmp"]
+[ext_resource type="Script" path="res://scripts/state_machine/scripts/check_direction.gd" id="7_q6olh"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="10_gbvtw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
@@ -87,6 +89,13 @@ _data = {
 &"opened": SubResource("Animation_r5a30")
 }
 
+[sub_resource type="Resource" id="Resource_6rb7r"]
+resource_name = "direction"
+script = ExtResource("7_q6olh")
+direction = 8
+disabled = false
+metadata/_custom_type_script = ExtResource("7_q6olh")
+
 [sub_resource type="Curve" id="Curve_l0liu"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.507042, 1), 0.0, 0.0, 0, 0, Vector2(0.850704, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -151,7 +160,7 @@ script = ExtResource("3_xbw31")
 interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
 on_interaction = [NodePath("../open")]
 action_trigger = "interact"
-direction = 8
+conditions = Array[ExtResource("6_gbvtw")]([SubResource("Resource_6rb7r")])
 
 [node name="open" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("6_v7cmp")

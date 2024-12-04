@@ -34,9 +34,10 @@ tile_map_data = PackedByteArray("AAAAAAAACgADAAEAAAAAAAEACgADAAEAAAAAAAIACgADAAE
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(400, 624)
 
-[node name="Enemy1" parent="Entities" index="1" instance=ExtResource("2_fvwss")]
+[node name="Enemy1" parent="Entities" index="1" node_paths=PackedStringArray("sync_rotation") instance=ExtResource("2_fvwss")]
 position = Vector2(576, 192)
 wall_min_slide_angle = 0.261799
+sync_rotation = [NodePath("BlocksDetector")]
 
 [node name="StateMachine" type="Node" parent="Entities/Enemy1" index="6" node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_e7ti7")

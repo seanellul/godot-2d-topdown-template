@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://dvci1ecg1e7l"]
 
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_67g6h"]
-[ext_resource type="Texture2D" path="res://scenes/props/lever.png" id="2_jt7g7"]
+[ext_resource type="Texture2D" uid="uid://b3v3fyoyhec5j" path="res://scenes/props/lever.png" id="2_jt7g7"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_05j5n"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_k6m0m"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="4_t1oes"]
@@ -146,6 +146,7 @@ interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
 on_interaction = [NodePath("../on")]
 action_trigger = "interact"
 one_shot = false
+reset_delay = 0.1
 
 [node name="animation_idle_off" type="Node" parent="StateMachine/idle_off" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_k6m0m")
@@ -165,6 +166,7 @@ interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
 on_interaction = [NodePath("../off")]
 action_trigger = "interact"
 one_shot = false
+reset_delay = 0.1
 
 [node name="animation_idle_on" type="Node" parent="StateMachine/idle_on" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_k6m0m")

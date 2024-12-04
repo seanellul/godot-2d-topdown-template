@@ -7,23 +7,13 @@ class_name StateInteract
 @export var on_interaction: Array[State] ## The states to enable on interaction.
 @export var on_leaving: State ## The state to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
-@export_category("Requirements")
-@export_group("Direction")
-@export_flags(
-	Const.DIRECTION.DOWN,
-	Const.DIRECTION.LEFT,
-	Const.DIRECTION.RIGHT,
-	Const.DIRECTION.UP
-) var direction ## The direction the character must face to trigger the interaction.
-@export var on_direction_wrong: State ## State to enable when interacting with the wrong direction.
-@export_group("Items")
-@export var has_items: Array[ContentItem] ## Check if the items are present in the player's inventory.
-@export var on_items_missing: State ## State to enable when items are missing.
-@export var remove_items := true ## Remove the required items after interaction.
+@export_category("Conditions")
+@export var conditions: Array[Check] = [] ## A list of conditions to met in order to trigger the interaction.
+@export var on_condition_not_met: Dictionary[String, State] = {} ## Provide a state to enable if a certain condition is not met. Use the condition's resource_name as key of the Dictionary.
 @export_category("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
-@export var reset_delay := 0.5 ## Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
-@export_flags("Area:4", "Body:8", "Area and Body:12") var check = 4 ## Determines which elements the interaction area should control: only other areas, only bodies, or both. 
+@export var reset_delay := 0.2 ## Determines after how many seconds the interactable can be triggered again. It works only if one_shot is disabled.
+@export_flags("Area:4", "Body:8", "Area and Body:12") var check = 4 ## Determines which elements the interaction area should control: only other areas, only bodies, or both.
 
 var entity: CharacterEntity
 var interacting := false
@@ -41,6 +31,7 @@ func _ready() -> void:
 				area.body_exited.connect(func(_body): _reset_entity())
 
 func enter():
+	_reset_interaction()
 	if area:
 		var areas: Array[Area2D] = area.get_overlapping_areas()
 		for a in areas:
@@ -74,25 +65,16 @@ func _can_interact() -> bool:
 		return false
 	if not action_trigger.is_empty() and not Input.is_action_pressed(action_trigger):
 		return false
-	# Check if entity is facing the right direction
-	var entity_dir = Const.DIR_BIT[entity.facing.floor()]
-	if direction and direction > 0 and (direction & entity_dir) == 0:
-		if on_direction_wrong:
-			on_direction_wrong.enable()
-		return false
-	# If entity is player, checks inventory for the required items
-	if entity is PlayerEntity and has_items.size() > 0:
-		for content: ContentItem in has_items:
-			if entity.is_item_in_inventory(content.item.resource_name, content.quantity) < 0:
-				if on_items_missing:
-					on_items_missing.enable()
-				return false
+	for condition: Check in conditions.filter(func(_check: Check): return !_check.disabled):
+		if !condition.check(entity): # Condition not met
+			if on_condition_not_met.has(condition.resource_name):
+				on_condition_not_met[condition.resource_name].enable()
+			return false
 	return true
 
 func _do_interaction():
 	interacting = true
 	print(entity.name, " interacted with ", get_path())
-	_check_inventory_item()
 	for state in on_interaction:
 		state.enable({
 			"entity": entity
@@ -106,11 +88,6 @@ func _do_leaving():
 		on_leaving.enable()
 	if !one_shot:
 		_reset_interaction()
-
-func _check_inventory_item():
-	if has_items.size() > 0 and remove_items and entity.has_method("remove_item_from_inventory"):
-		for content: ContentItem in has_items:
-			entity.remove_item_from_inventory(content.item.resource_name, content.quantity)
 
 func _reset_interaction():
 	interacting = true
