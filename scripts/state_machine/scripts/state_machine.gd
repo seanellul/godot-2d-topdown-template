@@ -7,8 +7,8 @@ class_name StateMachine
 @export var current_state: State = null:
 	set(value):
 		current_state = value
-		current_state_name = current_state.name
-@export var disabled := false ##Determines if disable this StateMachine
+		current_state_name = current_state.name if current_state else StringName()
+@export var disabled := false ## Determines if disable this StateMachine
 
 @onready var n_of_states = get_child_count()
 
@@ -29,7 +29,6 @@ func _ready():
 func _init_states():
 	var children = get_children(true).filter(func(node): return node is State)
 	for state in children:
-		state.process_mode = Node.PROCESS_MODE_DISABLED
 		state.state_machine = self
 	initialized = true
 	Globals.state_machine_initialized.emit(self)
@@ -47,19 +46,14 @@ func enable_state(state: State):
 	if state == current_state:
 		return
 	if current_state:
-		if current_state.await_completion:
-			await current_state.completed
 		previous_state = current_state
-		previous_state.process_mode = PROCESS_MODE_DISABLED
 	_exit_states()
 	current_state = state
-	current_state.process_mode = PROCESS_MODE_INHERIT
 	state_changed.emit(previous_state, current_state)
 	_get_states()
 	_enter_states()
 
-func disable_state(state: State):
-	state.process_mode = Node.PROCESS_MODE_DISABLED
+func disable_state(_state: State):
 	_exit_states()
 	states = []
 	current_state = null
@@ -71,20 +65,15 @@ func _physics_process(delta):
 	_physics_update_states(delta)
 
 func _enter_states():
-	var debug = "%s entered states:" %[get_parent().name]
 	for state in states:
-		debug += " [%s]" %[state.name]
 		state.enter()
 		state.active = !disabled
-	print(debug)
+	print("%s entered states: %s" % [get_parent().name, states.map(func(state): return state.name)])
 
 func _exit_states():
-	# var debug = "%s exited states:" %[get_parent().name]
 	for state in states:
-		# debug += " [%s]" %[state.name]
 		state.exit()
 		state.active = false
-	# print(debug) #Uncomment to debug exiting states
 
 func _update_states(delta):
 	if disabled or !initialized:
@@ -106,11 +95,11 @@ func receive_data(data: DataState):
 		state_node.enable(params)
 
 func enable_state_by_name(state_name: String):
-	var state_node: State =  get_node_or_null(state_name)
+	var state_node: State = get_node_or_null(state_name)
 	if state_node:
 		state_node.enable(params)
 	else:
-		push_warning("Can't find state with name: %s." %[state_name])
+		push_warning("Can't find state with name: %s." % [state_name])
 
 func enable_next_state(_params = null):
 	var next_index = 0

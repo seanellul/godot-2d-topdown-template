@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="9_jsvhf"]
 [ext_resource type="Texture2D" uid="uid://c6o7lhiq368dj" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="10_dscar"]
-[ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="10_kibes"]
+[ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="10_kibes"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="10_q6ljp"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
@@ -621,7 +621,6 @@ metadata/_custom_type_script = ExtResource("14_dumvw")
 script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 repeats = 1
-await_completion = true
 on_completion = NodePath("../idle")
 
 [node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
@@ -689,7 +688,6 @@ one_shot = false
 script = ExtResource("11_i08cu")
 dialogue = ExtResource("12_bfrr5")
 title = "forest_citizen_talk"
-await_completion = true
 on_completion = NodePath("../interact")
 
 [node name="set_entity" type="Node" parent="Entities/NPC/StateMachine/start_dialogue" index="0"]

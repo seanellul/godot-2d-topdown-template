@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=18 format=3 uid="uid://vju64cd63eqd"]
 
-[ext_resource type="Texture2D" path="res://scenes/props/blocks.png" id="1_2ngps"]
+[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_pkjqp"]
 [ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_sb0cb"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_18kok"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_s42s2"]
-[ext_resource type="Resource" path="res://items/spike.tres" id="4_fgbx5"]
+[ext_resource type="Resource" uid="uid://d2ml0tvw0px5r" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
@@ -181,8 +181,8 @@ animation = "idle"
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "up"
-time_range = Vector2(1, 1)
 on_completion = NodePath("../down")
+time_range = Vector2(1, 1)
 
 [node name="take_damage" type="Node" parent="StateMachine/animation_up" node_paths=PackedStringArray("node")]
 script = ExtResource("9_c4pye")
@@ -195,5 +195,4 @@ metadata/_custom_type_script = ExtResource("9_c4pye")
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "down"
-await_completion = true
 on_completion = NodePath("../idle")

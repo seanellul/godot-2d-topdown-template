@@ -56,7 +56,7 @@ var speed := 0.0 ## The current speed of the entity.
 var invert_moving_direction := false ## Inverts the movement direction. Useful for moving an entity away from the target position.
 var safe_position := Vector2.ZERO ## The last position of the entity that was deemed safe. It is set before a jump and is eventually reassigned to the entity by calling the return_to_safe_position method. The "state_fall" state calls this method, so it is useful if assigned to "on_fall".
 @export var speed_multiplier := 1.0
-@export var friction_multiplier := 6.0
+@export var friction_multiplier := 1.0
 
 @export_group("Actions")
 var is_moving: bool ## True if velocity is non-zero.

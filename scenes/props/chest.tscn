@@ -166,7 +166,6 @@ conditions = Array[ExtResource("6_gbvtw")]([SubResource("Resource_6rb7r")])
 script = ExtResource("6_v7cmp")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
-await_completion = true
 on_completion = NodePath("../call_get_contents")
 
 [node name="tween" type="Node" parent="StateMachine/open" node_paths=PackedStringArray("object")]
@@ -179,7 +178,6 @@ script = ExtResource("10_gbvtw")
 node = NodePath("../..")
 method_name = "get_contents"
 await_signal_to_complete = "contents_got"
-await_completion = true
 on_completion = NodePath("../opened")
 metadata/_custom_type_script = ExtResource("10_gbvtw")
 
@@ -187,4 +185,3 @@ metadata/_custom_type_script = ExtResource("10_gbvtw")
 script = ExtResource("6_v7cmp")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "opened"
-await_completion = true
