@@ -40,7 +40,7 @@ func _get_states():
 	states = []
 	states.append(current_state)
 	for child in current_state.get_children():
-		if child is State and not child.disabled:
+		if child is State and !child.disabled:
 			states.append(child)
 
 func enable_state(state: State):
@@ -87,14 +87,14 @@ func _exit_states():
 	# print(debug) #Uncomment to debug exiting states
 
 func _update_states(delta):
-	if disabled or not initialized:
+	if disabled or !initialized:
 		return
 	for state in states:
 		if state.active:
 			state.update(delta)
 
 func _physics_update_states(delta):
-	if disabled or not initialized:
+	if disabled or !initialized:
 		return
 	for state in states:
 		if state.active:

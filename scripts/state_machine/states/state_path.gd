@@ -4,7 +4,7 @@ extends StateEntity
 class_name StatePath
 
 @export var path: Path2D
-@export var loop := false ## If true, after reaching the last point entity will go back to the first one and repeat the path.
+@export var repeats := 0 ## Repeat the path N times. Leave 0 to repeat indefinitely.
 @export var distance_threshold := 2.0
 
 @onready var path_curve = path.curve
@@ -12,14 +12,17 @@ class_name StatePath
 	set(value):
 		var new_id = value
 		if new_id == path_curve.point_count:
-			if loop:
+			if repeats == 0 or current_repeats < repeats:
 				new_id = 0
+				current_repeats += 1
 			else:
 				entity.stop()
 			complete()
 		current_point_id = new_id
 
 var target_position := Vector2.ZERO
+var current_repeats := 1
+var can_move := false
 
 func enter():
 	super.enter()
@@ -34,12 +37,12 @@ func _set_target_position():
 	target_position = path_curve.get_point_position(current_point_id) + path.global_position
 
 func physics_update(_delta: float):
-	if not is_instance_valid(entity):
-		return
-	entity.move_towards(target_position)
+	can_move = is_instance_valid(entity) and current_point_id < path_curve.point_count
+	if can_move:
+		entity.move_towards(target_position)
 
 func _check_point_reached():
-	if not is_instance_valid(entity):
+	if !can_move:
 		return
 	var distance = entity.global_position.distance_to(target_position)
 	if distance < distance_threshold:

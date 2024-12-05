@@ -604,7 +604,6 @@ one_shot = false
 script = ExtResource("8_285dh")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
-friction_multiplier = 4.0
 await_completion = true
 on_completion = NodePath("../wait")
 

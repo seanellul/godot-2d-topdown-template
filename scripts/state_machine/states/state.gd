@@ -38,7 +38,7 @@ func enable(params = null): ## Enables this state.
 		await timer.timeout
 	if on_completion:
 		on_completion.enable(state_machine.params)
-	if not await_completion and not timer:
+	if !await_completion and !timer:
 		complete()
 
 func disable():
@@ -67,7 +67,7 @@ class TimedState:
 	signal timeout
 
 	func create(parent: Node, time_range: Vector2):
-		if not timer:
+		if !timer:
 			timer = Timer.new()
 			timer.one_shot = true
 			parent.add_child(timer)

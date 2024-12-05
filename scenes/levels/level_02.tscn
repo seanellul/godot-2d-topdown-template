@@ -591,7 +591,6 @@ metadata/_custom_type_script = ExtResource("11_7s6t0")
 [node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2"]
 script = ExtResource("7_n4gru")
 target_player_id = 1
-speed_multiplier = 1.25
 
 [node name="start_wander" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("11_7s6t0")
@@ -618,10 +617,12 @@ on_exit = Dictionary[String, Variant]({
 })
 metadata/_custom_type_script = ExtResource("14_dumvw")
 
-[node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path")]
+[node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path", "on_completion")]
 script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
-loop = true
+repeats = 1
+await_completion = true
+on_completion = NodePath("../idle")
 
 [node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("11_7s6t0")
