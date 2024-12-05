@@ -507,7 +507,7 @@ script = ExtResource("4_b1v48")
 
 [node name="attack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
-on_completion = NodePath("../move")
+on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
 [node name="set_params" type="Node" parent="StateMachine/attack" index="0"]
@@ -523,7 +523,7 @@ on_exit = Dictionary[String, Variant]({
 [node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
 impulse_force = -450.0
-on_completion = NodePath("../move")
+on_completion = [NodePath("../move")]
 time_range = Vector2(0.25, 0.25)
 
 [node name="hurt_animation" type="Node" parent="StateMachine/knockback" index="0" node_paths=PackedStringArray("animation_tree")]
@@ -544,7 +544,7 @@ on_exit = Dictionary[String, Variant]({
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_2ttjo")
 damage = 2
-on_completion = NodePath("../move")
+on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
 [node name="set-is_falling" type="Node" parent="StateMachine/fall" index="0"]

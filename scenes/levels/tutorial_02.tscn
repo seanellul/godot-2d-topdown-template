@@ -100,7 +100,7 @@ script = ExtResource("8_vjw68")
 dialogue = ExtResource("9_h8ccs")
 title = "door_closed"
 await_completion = true
-on_completion = NodePath("../closed")
+on_completion = [NodePath("../closed")]
 metadata/_custom_type_script = ExtResource("8_vjw68")
 
 [node name="P1" parent="Entities" index="0"]
@@ -234,7 +234,7 @@ script = ExtResource("17_ytjl1")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
 await_completion = true
-on_completion = NodePath("../enable_player")
+on_completion = [NodePath("../enable_player")]
 
 [node name="disable_player" type="Node" parent="Events/exit-door/StateMachine/player_path" index="0"]
 script = ExtResource("18_deu1n")

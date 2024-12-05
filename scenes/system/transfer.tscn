@@ -33,5 +33,5 @@ one_shot = false
 script = ExtResource("6_hh1eg")
 node = NodePath("../..")
 method_name = "transfer"
-on_completion = NodePath("../interact")
+on_completion = [NodePath("../interact")]
 metadata/_custom_type_script = ExtResource("6_hh1eg")

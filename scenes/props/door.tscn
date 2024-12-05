@@ -183,7 +183,7 @@ script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "open"
 await_completion = true
-on_completion = NodePath("../opened")
+on_completion = [NodePath("../opened")]
 
 [node name="opened" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_eh4fy")
@@ -195,4 +195,4 @@ script = ExtResource("4_eh4fy")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "close"
 await_completion = true
-on_completion = NodePath("../closed")
+on_completion = [NodePath("../closed")]

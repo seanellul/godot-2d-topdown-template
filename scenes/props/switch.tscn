@@ -157,7 +157,7 @@ animation = "idle_off"
 script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "on"
-on_completion = NodePath("../idle_on")
+on_completion = [NodePath("../idle_on")]
 
 [node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("4_t1oes")
@@ -176,4 +176,4 @@ animation = "idle_on"
 script = ExtResource("4_k6m0m")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "off"
-on_completion = NodePath("../idle_off")
+on_completion = [NodePath("../idle_off")]

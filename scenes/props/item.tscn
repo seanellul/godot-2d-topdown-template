@@ -128,7 +128,7 @@ node = NodePath("../..")
 method_name = "get_contents"
 await_signal_to_complete = "contents_got"
 await_completion = true
-on_completion = NodePath("../picked")
+on_completion = [NodePath("../picked")]
 metadata/_custom_type_script = ExtResource("7_5dcdc")
 
 [node name="picked" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]

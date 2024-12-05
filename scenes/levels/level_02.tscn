@@ -621,7 +621,7 @@ metadata/_custom_type_script = ExtResource("14_dumvw")
 script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
 repeats = 1
-on_completion = NodePath("../idle")
+on_completion = [NodePath("../idle")]
 
 [node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
 script = ExtResource("11_7s6t0")
@@ -688,7 +688,7 @@ one_shot = false
 script = ExtResource("11_i08cu")
 dialogue = ExtResource("12_bfrr5")
 title = "forest_citizen_talk"
-on_completion = NodePath("../interact")
+on_completion = [NodePath("../interact")]
 
 [node name="set_entity" type="Node" parent="Entities/NPC/StateMachine/start_dialogue" index="0"]
 script = ExtResource("14_dumvw")

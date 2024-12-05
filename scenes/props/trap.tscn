@@ -181,7 +181,7 @@ animation = "idle"
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "up"
-on_completion = NodePath("../down")
+on_completion = [NodePath("../down")]
 time_range = Vector2(1, 1)
 
 [node name="take_damage" type="Node" parent="StateMachine/animation_up" node_paths=PackedStringArray("node")]
@@ -195,4 +195,4 @@ metadata/_custom_type_script = ExtResource("9_c4pye")
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "down"
-on_completion = NodePath("../idle")
+on_completion = [NodePath("../idle")]
