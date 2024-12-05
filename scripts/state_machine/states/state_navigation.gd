@@ -43,6 +43,7 @@ func _follow():
 	if !go:
 		return
 	if navigation_agent.is_navigation_finished():
+		complete()
 		return
 	if entity:
 		var next_path_position = navigation_agent.get_next_path_position()

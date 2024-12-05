@@ -8,6 +8,7 @@ class_name StateMaterial
 func enter():
 	if sprite:
 		sprite.material = material
+		complete()
 
 func exit():
 	if sprite:

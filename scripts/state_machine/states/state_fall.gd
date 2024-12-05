@@ -7,3 +7,4 @@ func enter():
 	if entity:
 		entity.return_to_safe_position()
 		entity.reduce_hp(damage, self.name)
+		complete()

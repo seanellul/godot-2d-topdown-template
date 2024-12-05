@@ -75,6 +75,7 @@ func _can_interact() -> bool:
 func _do_interaction():
 	interacting = true
 	print(entity.name, " interacted with ", get_path())
+	complete()
 	for state in on_interaction:
 		state.enable({
 			"entity": entity
