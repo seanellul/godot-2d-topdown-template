@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://vju64cd63eqd"]
+[gd_scene load_steps=19 format=3 uid="uid://vju64cd63eqd"]
 
 [ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_pkjqp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://d2ml0tvw0px5r" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
+[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="6_i2gae"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
 
 [sub_resource type="Resource" id="Resource_c4pye"]
@@ -160,6 +161,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_21v20")
 }
 autoplay = "idle"
+
+[node name="InteractionArea" type="Area2D" parent="."]
+z_index = -1
+position = Vector2(0, 16)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("6_i2gae")
+metadata/_custom_type_script = ExtResource("6_i2gae")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_sb0cb")
+debug_color = Color(0.6, 0.537255, 0.243137, 0.419608)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_18kok")

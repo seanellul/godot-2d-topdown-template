@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=45 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
@@ -19,17 +19,11 @@
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="16_iu1m7"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="16_nsalp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
-[ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://scenes/props/chest.png" id="17_mhiu8"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="17_pb8k3"]
-[ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="18_lswbx"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/check.gd" id="19_3t34l"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_tween.gd" id="19_uujh0"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/tween_data.gd" id="20_3t34l"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/check_direction.gd" id="20_qy4h0"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/check_items.gd" id="21_e5bmj"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="21_qy4h0"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="24_qy4h0"]
-[ext_resource type="Resource" uid="uid://gdgabla4e12i" path="res://dialogues/tutorial_02.dialogue" id="25_e5bmj"]
+[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="21_w4kkx"]
 
 [sub_resource type="Resource" id="Resource_vrcmr"]
 script = ExtResource("3_myhjs")
@@ -215,128 +209,9 @@ item = ExtResource("4_qx1j4")
 quantity = 1
 metadata/_custom_type_script = ExtResource("3_myhjs")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
-size = Vector2(40, 26)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_db0e2"]
-radius = 32.0
-
-[sub_resource type="Animation" id="Animation_cqrp8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_atw4n"]
-resource_name = "idle"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_jcv77"]
-resource_name = "open"
-length = 0.16667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_r5a30"]
-resource_name = "opened"
-length = 0.0333367
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(4, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jt1pw"]
-_data = {
-&"RESET": SubResource("Animation_cqrp8"),
-&"idle": SubResource("Animation_atw4n"),
-&"open": SubResource("Animation_jcv77"),
-&"opened": SubResource("Animation_r5a30")
-}
-
-[sub_resource type="Resource" id="Resource_iqf6e"]
-resource_name = "direction"
-script = ExtResource("20_qy4h0")
-direction = 8
-disabled = false
-metadata/_custom_type_script = ExtResource("20_qy4h0")
-
-[sub_resource type="Resource" id="Resource_stkom"]
-script = ExtResource("3_myhjs")
-item = ExtResource("4_qx1j4")
-quantity = 1
-metadata/_custom_type_script = ExtResource("3_myhjs")
-
-[sub_resource type="Resource" id="Resource_5t8rk"]
-resource_name = "item"
-script = ExtResource("21_e5bmj")
-items = Array[ExtResource("3_myhjs")]([SubResource("Resource_stkom")])
-remove_items = true
-disabled = false
-metadata/_custom_type_script = ExtResource("21_e5bmj")
-
-[sub_resource type="Curve" id="Curve_l0liu"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.507042, 1), 0.0, 0.0, 0, 0, Vector2(0.850704, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Resource" id="Resource_tf1rf"]
-script = ExtResource("20_3t34l")
-curve = SubResource("Curve_l0liu")
-duration = 0.2
-delay = 0.1
-property = "scale"
-end_value = "Vector2(0.1,0.2)"
-
-[sub_resource type="Curve" id="Curve_jy2bj"]
-min_value = -1.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35, 0.3), 0.0, 0.0, 0, 0, Vector2(0.7, -0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Resource" id="Resource_nicjx"]
-script = ExtResource("20_3t34l")
-curve = SubResource("Curve_jy2bj")
-duration = 0.1
-delay = 0.0
-property = "position"
-end_value = "Vector2(10,0)"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhiu8"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrcmr"]
 resource_local_to_scene = true
@@ -347,6 +222,10 @@ script = ExtResource("20_qy4h0")
 direction = 8
 disabled = false
 metadata/_custom_type_script = ExtResource("20_qy4h0")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lswbx"]
+resource_local_to_scene = true
+size = Vector2(64, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_svp4f"]
 resource_local_to_scene = true
@@ -484,83 +363,6 @@ change_states = Dictionary[String, String]({
 position = Vector2(448, 35)
 contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
 
-[node name="Chest2" type="Sprite2D" parent="Props" index="7"]
-y_sort_enabled = true
-position = Vector2(156, 111)
-texture = ExtResource("17_mhiu8")
-hframes = 5
-region_enabled = true
-region_rect = Rect2(0, 38, 210, 38)
-script = ExtResource("18_lswbx")
-contents = Array[ExtResource("3_myhjs")]([SubResource("Resource_iu1m7")])
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Props/Chest2" index="0"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Chest2/StaticBody2D" index="0"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_niryh")
-
-[node name="InteractionArea2D" type="CollisionShape2D" parent="Props/Chest2/StaticBody2D" index="1"]
-z_index = -1
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_db0e2")
-debug_color = Color(0.610154, 0.529703, 0.285078, 0.42)
-script = ExtResource("16_iu1m7")
-metadata/_custom_type_script = ExtResource("16_iu1m7")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Chest2" index="1"]
-libraries = {
-&"": SubResource("AnimationLibrary_jt1pw")
-}
-autoplay = "idle"
-
-[node name="StateMachine" type="Node" parent="Props/Chest2" index="2" node_paths=PackedStringArray("current_state") groups=["save"]]
-script = ExtResource("7_e6yb8")
-current_state = NodePath("idle")
-
-[node name="idle" type="Node" parent="Props/Chest2/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_condition_not_met", "on_completion")]
-script = ExtResource("16_nsalp")
-interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
-action_trigger = "interact"
-conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_iqf6e"), SubResource("Resource_5t8rk")])
-on_condition_not_met = {
-"item": NodePath("../msg-door_closed")
-}
-on_completion = [NodePath("../open")]
-
-[node name="open" type="Node" parent="Props/Chest2/StateMachine" index="1" node_paths=PackedStringArray("animation_player", "on_completion")]
-script = ExtResource("12_kio72")
-animation_player = NodePath("../../AnimationPlayer")
-animation = "open"
-on_completion = [NodePath("../call_get_contents")]
-
-[node name="tween" type="Node" parent="Props/Chest2/StateMachine/open" index="0" node_paths=PackedStringArray("object")]
-script = ExtResource("19_uujh0")
-object = NodePath("../../..")
-tweens = Array[ExtResource("20_3t34l")]([SubResource("Resource_tf1rf"), SubResource("Resource_nicjx")])
-
-[node name="call_get_contents" type="Node" parent="Props/Chest2/StateMachine" index="2" node_paths=PackedStringArray("node", "on_completion")]
-script = ExtResource("21_qy4h0")
-node = NodePath("../..")
-method_name = "get_contents"
-await_signal_to_complete = "contents_got"
-on_completion = [NodePath("../opened")]
-metadata/_custom_type_script = ExtResource("21_qy4h0")
-
-[node name="opened" type="Node" parent="Props/Chest2/StateMachine" index="3" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("12_kio72")
-animation_player = NodePath("../../AnimationPlayer")
-animation = "opened"
-
-[node name="msg-door_closed" type="Node" parent="Props/Chest2/StateMachine" index="4" node_paths=PackedStringArray("on_completion")]
-script = ExtResource("24_qy4h0")
-dialogue = ExtResource("25_e5bmj")
-title = "door_closed"
-on_completion = [NodePath("../idle")]
-metadata/_custom_type_script = ExtResource("24_qy4h0")
-
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(448, 92)
 
@@ -568,7 +370,10 @@ position = Vector2(448, 92)
 position = Vector2(96, -36)
 destination_name = "Transfer_South"
 
-[node name="InteractionArea2D" parent="Transfers/Transfer_North" index="0"]
+[node name="CollisionShape2D" parent="Transfers/Transfer_North/InteractionArea" index="0"]
+shape = SubResource("RectangleShape2D_mhiu8")
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_North" index="1"]
 shape = SubResource("RectangleShape2D_vrcmr")
 
 [node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
@@ -581,7 +386,10 @@ on_completion = []
 position = Vector2(96, 405)
 destination_name = "Transfer_North"
 
-[node name="InteractionArea2D" parent="Transfers/Transfer_South" index="0"]
+[node name="CollisionShape2D" parent="Transfers/Transfer_South/InteractionArea" index="0"]
+shape = SubResource("RectangleShape2D_lswbx")
+
+[node name="InteractionArea2D" parent="Transfers/Transfer_South" index="1"]
 shape = SubResource("RectangleShape2D_svp4f")
 
 [node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
@@ -605,11 +413,23 @@ shape = SubResource("RectangleShape2D_cywot")
 script = ExtResource("16_iu1m7")
 metadata/_custom_type_script = ExtResource("16_iu1m7")
 
-[node name="Path2D" type="Path2D" parent="Events/Event_01" index="1"]
+[node name="InteractionArea" type="Area2D" parent="Events/Event_01" index="1"]
+z_index = -1
+position = Vector2(360, 288)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("21_w4kkx")
+metadata/_custom_type_script = ExtResource("21_w4kkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Event_01/InteractionArea" index="0"]
+shape = SubResource("RectangleShape2D_cywot")
+
+[node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
 position = Vector2(261, 267)
 curve = SubResource("Curve2D_uycfk")
 
-[node name="StateMachine" type="Node" parent="Events/Event_01" index="2" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="Events/Event_01" index="3" node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://cqw82ociq0p1m"]
 
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_rfw3j"]
 [ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_srvdt"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_g7kv4"]
-[ext_resource type="Texture2D" path="res://scenes/props/objs1.png" id="3_qb7gm"]
+[ext_resource type="Texture2D" uid="uid://b4m17oa1l8f77" path="res://scenes/props/objs1.png" id="3_qb7gm"]
+[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="3_srvdt"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="4_i4duu"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="5_d4kg4"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="7_5dcdc"]
@@ -99,6 +100,18 @@ region_enabled = true
 region_rect = Rect2(0, 0, 108, 36)
 script = ExtResource("2_srvdt")
 
+[node name="InteractionArea" type="Area2D" parent="."]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("3_srvdt")
+metadata/_custom_type_script = ExtResource("3_srvdt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_10tvr")
+debug_color = Color(0.658824, 0.513726, 0, 0.419608)
+
 [node name="InteractionArea2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_10tvr")
 debug_color = Color(0.658862, 0.515271, 7.70092e-07, 0.42)
@@ -127,7 +140,6 @@ script = ExtResource("7_5dcdc")
 node = NodePath("../..")
 method_name = "get_contents"
 await_signal_to_complete = "contents_got"
-await_completion = true
 on_completion = [NodePath("../picked")]
 metadata/_custom_type_script = ExtResource("7_5dcdc")
 
@@ -135,4 +147,3 @@ metadata/_custom_type_script = ExtResource("7_5dcdc")
 script = ExtResource("5_d4kg4")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "picked"
-await_completion = true

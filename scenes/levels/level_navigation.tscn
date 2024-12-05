@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://di8w8pflxt5c4"]
+[gd_scene load_steps=13 format=4 uid="uid://di8w8pflxt5c4"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="6_wl5yp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="7_6ttik"]
 [ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="7_f107o"]
+[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="8_0xo8f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x5hhv"]
 radius = 32.0
@@ -85,7 +86,19 @@ debug_color = Color(0.629361, 0.523748, 0.232421, 0.42)
 script = ExtResource("7_f107o")
 metadata/_custom_type_script = ExtResource("7_f107o")
 
-[node name="StateMachine" type="Node" parent="Entities/Enemy2" index="9" node_paths=PackedStringArray("current_state")]
+[node name="InteractionArea" type="Area2D" parent="Entities/Enemy2" index="9"]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("8_0xo8f")
+metadata/_custom_type_script = ExtResource("8_0xo8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy2/InteractionArea" index="0"]
+shape = SubResource("CircleShape2D_x5hhv")
+debug_color = Color(0.627451, 0.52549, 0.231373, 0.419608)
+
+[node name="StateMachine" type="Node" parent="Entities/Enemy2" index="10" node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_t4uv3")
 current_state = NodePath("follow")
 
