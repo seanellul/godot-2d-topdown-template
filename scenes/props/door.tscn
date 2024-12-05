@@ -1,17 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://sqqjx0j33xse"]
+[gd_scene load_steps=14 format=3 uid="uid://sqqjx0j33xse"]
 
 [ext_resource type="Texture2D" uid="uid://cfk0ybg4iyeka" path="res://scenes/props/door.png" id="1_fpb0w"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_a78jy"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_vinnd"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_gxend"]
 [ext_resource type="Script" path="res://scripts/interaction_area.gd" id="3_mctn1"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_eh4fy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wjin"]
 size = Vector2(98, 92)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mctn1"]
-size = Vector2(96, 26)
 
 [sub_resource type="Animation" id="Animation_3vra1"]
 length = 0.001
@@ -137,6 +133,9 @@ _data = {
 &"opened": SubResource("Animation_2lh8i")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mctn1"]
+size = Vector2(96, 26)
+
 [node name="Door" type="Sprite2D"]
 texture = ExtResource("1_fpb0w")
 hframes = 4
@@ -149,13 +148,6 @@ collision_mask = 0
 z_index = -1
 position = Vector2(0, 45)
 shape = SubResource("RectangleShape2D_0wjin")
-
-[node name="InteractionArea2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 94)
-shape = SubResource("RectangleShape2D_mctn1")
-debug_color = Color(0.620077, 0.52578, 0.273905, 0.42)
-script = ExtResource("2_vinnd")
-metadata/_custom_type_script = ExtResource("2_vinnd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -182,7 +174,7 @@ current_state = NodePath("closed")
 
 [node name="closed" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("3_gxend")
-interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
+interaction_area = NodePath("../../InteractionArea")
 action_trigger = "interact"
 on_completion = [NodePath("../open")]
 

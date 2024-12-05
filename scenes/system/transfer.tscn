@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bybfkbp6hi8r0"]
+[gd_scene load_steps=7 format=3 uid="uid://bybfkbp6hi8r0"]
 
 [ext_resource type="Script" path="res://scenes/system/transfer.gd" id="1_hh1eg"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_1i106"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_5c8bo"]
 [ext_resource type="Script" path="res://scripts/interaction_area.gd" id="2_hh1eg"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_byffi"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="6_hh1eg"]
@@ -26,20 +25,13 @@ metadata/_custom_type_script = ExtResource("2_hh1eg")
 shape = SubResource("RectangleShape2D_hh1eg")
 debug_color = Color(0.580392, 0.45098, 0.823529, 0.419608)
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_hh1eg")
-debug_color = Color(0.582159, 0.451963, 0.822019, 0.42)
-script = ExtResource("2_5c8bo")
-metadata/_custom_type_script = ExtResource("2_5c8bo")
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("2_1i106")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "interaction_area_n", "on_completion")]
+[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("3_byffi")
-interaction_area = NodePath("../../InteractionArea2D")
-interaction_area_n = NodePath("../../InteractionArea")
+interaction_area = NodePath("../../InteractionArea")
 one_shot = false
 on_completion = [NodePath("../call_transfer")]
 

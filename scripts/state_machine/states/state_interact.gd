@@ -3,8 +3,7 @@ extends State
 ##Handle entity interactions.
 class_name StateInteract
 
-@export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside this area.
-@export var interaction_area_n: InteractionArea ## Interaction will trigger only if entity is inside this area.
+@export var interaction_area: InteractionArea ## Interaction will trigger only if entity is inside this area.
 @export var on_leaving: Array[State] ## States to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_category("Conditions")
@@ -17,23 +16,20 @@ class_name StateInteract
 
 var entity: CharacterEntity
 var interacting := false
-var area: Area2D
 
 func _ready() -> void:
   if interaction_area:
-    area = interaction_area.area
-  if area:
     if check == 4 or check == 12:
-        area.area_entered.connect(func(_area): _set_entity(_area.get_parent()))
-        area.area_exited.connect(func(_area): _reset_entity())
+        interaction_area.area_entered.connect(func(_area): _set_entity(_area.get_parent()))
+        interaction_area.area_exited.connect(func(_area): _reset_entity())
     if check == 8 or check == 12:
-        area.body_entered.connect(func(_body): _set_entity(_body))
-        area.body_exited.connect(func(_body): _reset_entity())
+        interaction_area.body_entered.connect(func(_body): _set_entity(_body))
+        interaction_area.body_exited.connect(func(_body): _reset_entity())
 
 func enter():
   _reset_interaction()
-  if area:
-    var areas: Array[Area2D] = area.get_overlapping_areas()
+  if interaction_area:
+    var areas: Array[Area2D] = interaction_area.get_overlapping_areas()
     for a in areas:
       _set_entity(a.get_parent())
 

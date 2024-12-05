@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfgn02yd5ftws"]
+[gd_scene load_steps=24 format=3 uid="uid://bfgn02yd5ftws"]
 
 [ext_resource type="Texture2D" uid="uid://cykfen8qlmpcw" path="res://scenes/props/chest.png" id="1_dsvcm"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_afpir"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_cxsuu"]
 [ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_db0e2"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="3_xbw31"]
@@ -15,9 +14,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niryh"]
 size = Vector2(40, 26)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_db0e2"]
-radius = 32.0
 
 [sub_resource type="Animation" id="Animation_cqrp8"]
 length = 0.001
@@ -90,6 +86,9 @@ _data = {
 &"opened": SubResource("Animation_r5a30")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_db0e2"]
+radius = 32.0
+
 [sub_resource type="Resource" id="Resource_6rb7r"]
 resource_name = "direction"
 script = ExtResource("7_q6olh")
@@ -138,14 +137,6 @@ collision_mask = 0
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_niryh")
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="StaticBody2D"]
-z_index = -1
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_db0e2")
-debug_color = Color(0.610154, 0.529703, 0.285078, 0.42)
-script = ExtResource("2_afpir")
-metadata/_custom_type_script = ExtResource("2_afpir")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_jt1pw")
@@ -171,7 +162,7 @@ current_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("3_xbw31")
-interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
+interaction_area = NodePath("../../InteractionArea")
 action_trigger = "interact"
 conditions = Array[ExtResource("6_gbvtw")]([SubResource("Resource_6rb7r")])
 on_completion = [NodePath("../open")]

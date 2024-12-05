@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://7kq5lknqxcf2"]
+[gd_scene load_steps=22 format=4 uid="uid://7kq5lknqxcf2"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_okilc"]
 [ext_resource type="PackedScene" uid="uid://vju64cd63eqd" path="res://scenes/props/trap.tscn" id="2_imqxm"]
@@ -13,7 +13,6 @@
 [ext_resource type="Resource" path="res://items/key.tres" id="9_bu31o"]
 [ext_resource type="Resource" uid="uid://gdgabla4e12i" path="res://dialogues/tutorial_02.dialogue" id="9_h8ccs"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="13_gmt2p"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="14_mce06"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="15_er3gv"]
 [ext_resource type="Script" path="res://scripts/interaction_area.gd" id="15_hvm1c"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="16_hvm1c"]
@@ -207,14 +206,7 @@ horizontal_alignment = 1
 
 [node name="exit-door" type="Node" parent="Events" index="1"]
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="Events/exit-door" index="0"]
-position = Vector2(1120, -368)
-shape = SubResource("RectangleShape2D_aw30f")
-debug_color = Color(0.991833, 0, 0.260309, 0.42)
-script = ExtResource("14_mce06")
-metadata/_custom_type_script = ExtResource("14_mce06")
-
-[node name="InteractionArea" type="Area2D" parent="Events/exit-door" index="1"]
+[node name="InteractionArea" type="Area2D" parent="Events/exit-door" index="0"]
 z_index = -1
 position = Vector2(1120, -368)
 collision_layer = 0
@@ -226,17 +218,17 @@ metadata/_custom_type_script = ExtResource("15_hvm1c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/exit-door/InteractionArea" index="0"]
 shape = SubResource("RectangleShape2D_aw30f")
 
-[node name="Path2D" type="Path2D" parent="Events/exit-door" index="2"]
+[node name="Path2D" type="Path2D" parent="Events/exit-door" index="1"]
 curve = SubResource("Curve2D_lgfh2")
 
-[node name="StateMachine" type="Node" parent="Events/exit-door" index="3" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="Events/exit-door" index="2" node_paths=PackedStringArray("current_state")]
 script = ExtResource("15_er3gv")
 current_state = NodePath("interact")
 metadata/_custom_type_script = ExtResource("15_er3gv")
 
 [node name="interact" type="Node" parent="Events/exit-door/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("16_hvm1c")
-interaction_area = NodePath("../../InteractionArea2D")
+interaction_area = NodePath("../../InteractionArea")
 reset_delay = 0.0
 on_completion = [NodePath("../player_path")]
 metadata/_custom_type_script = ExtResource("16_hvm1c")

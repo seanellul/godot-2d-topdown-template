@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://f0ljdodnvnix"]
+[gd_scene load_steps=42 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_myhjs"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_down.tscn" id="12_70ge1"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://dvci1ecg1e7l" path="res://scenes/props/switch.tscn" id="13_64f3m"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="16_iu1m7"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="16_nsalp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="17_pb8k3"]
@@ -213,10 +212,6 @@ metadata/_custom_type_script = ExtResource("3_myhjs")
 resource_local_to_scene = true
 size = Vector2(64, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrcmr"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
-
 [sub_resource type="Resource" id="Resource_3pila"]
 script = ExtResource("20_qy4h0")
 direction = 8
@@ -224,10 +219,6 @@ disabled = false
 metadata/_custom_type_script = ExtResource("20_qy4h0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lswbx"]
-resource_local_to_scene = true
-size = Vector2(64, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_svp4f"]
 resource_local_to_scene = true
 size = Vector2(64, 32)
 
@@ -302,11 +293,17 @@ z_index = -1
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_pt5lc")
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="Props/Gate_Front" index="1"]
+[node name="InteractionArea" type="Area2D" parent="Props/Gate_Front" index="1"]
+z_index = -1
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("21_w4kkx")
+metadata/_custom_type_script = ExtResource("21_w4kkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Props/Gate_Front/InteractionArea" index="0"]
 shape = SubResource("CircleShape2D_iu1m7")
-debug_color = Color(0.629073, 0.525479, 0.199973, 0.42)
-script = ExtResource("16_iu1m7")
-metadata/_custom_type_script = ExtResource("16_iu1m7")
+debug_color = Color(0.627451, 0.52549, 0.2, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Gate_Front" index="2"]
 libraries = {
@@ -317,9 +314,8 @@ libraries = {
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
+[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("16_nsalp")
-interaction_area = NodePath("../../InteractionArea2D")
 action_trigger = "interact"
 conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_cag23")])
 one_shot = false
@@ -372,9 +368,7 @@ destination_name = "Transfer_South"
 
 [node name="CollisionShape2D" parent="Transfers/Transfer_North/InteractionArea" index="0"]
 shape = SubResource("RectangleShape2D_mhiu8")
-
-[node name="InteractionArea2D" parent="Transfers/Transfer_North" index="1"]
-shape = SubResource("RectangleShape2D_vrcmr")
+debug_color = Color(0.580392, 0.45098, 0.823529, 0.419608)
 
 [node name="interact" parent="Transfers/Transfer_North/StateMachine" index="0"]
 conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_3pila")])
@@ -388,9 +382,7 @@ destination_name = "Transfer_North"
 
 [node name="CollisionShape2D" parent="Transfers/Transfer_South/InteractionArea" index="0"]
 shape = SubResource("RectangleShape2D_lswbx")
-
-[node name="InteractionArea2D" parent="Transfers/Transfer_South" index="1"]
-shape = SubResource("RectangleShape2D_svp4f")
+debug_color = Color(0.580392, 0.45098, 0.823529, 0.419608)
 
 [node name="interact" parent="Transfers/Transfer_South/StateMachine" index="0"]
 conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_d86x1")])
@@ -407,13 +399,7 @@ facing = 1
 
 [node name="Event_01" type="Node" parent="Events" index="0"]
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="Events/Event_01" index="0"]
-position = Vector2(360, 288)
-shape = SubResource("RectangleShape2D_cywot")
-script = ExtResource("16_iu1m7")
-metadata/_custom_type_script = ExtResource("16_iu1m7")
-
-[node name="InteractionArea" type="Area2D" parent="Events/Event_01" index="1"]
+[node name="InteractionArea" type="Area2D" parent="Events/Event_01" index="0"]
 z_index = -1
 position = Vector2(360, 288)
 collision_layer = 0
@@ -425,17 +411,17 @@ metadata/_custom_type_script = ExtResource("21_w4kkx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Event_01/InteractionArea" index="0"]
 shape = SubResource("RectangleShape2D_cywot")
 
-[node name="Path2D" type="Path2D" parent="Events/Event_01" index="2"]
+[node name="Path2D" type="Path2D" parent="Events/Event_01" index="1"]
 position = Vector2(261, 267)
 curve = SubResource("Curve2D_uycfk")
 
-[node name="StateMachine" type="Node" parent="Events/Event_01" index="3" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="Events/Event_01" index="2" node_paths=PackedStringArray("current_state")]
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
 [node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("16_nsalp")
-interaction_area = NodePath("../../InteractionArea2D")
+interaction_area = NodePath("../../InteractionArea")
 action_trigger = "interact"
 one_shot = false
 on_completion = [NodePath("../player_path")]

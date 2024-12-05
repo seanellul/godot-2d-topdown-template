@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://di8w8pflxt5c4"]
+[gd_scene load_steps=12 format=4 uid="uid://di8w8pflxt5c4"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_101ja"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="6_wl5yp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="7_6ttik"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="7_f107o"]
 [ext_resource type="Script" path="res://scripts/interaction_area.gd" id="8_0xo8f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x5hhv"]
@@ -80,13 +79,7 @@ debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
-[node name="DetectPlayerArea" type="CollisionShape2D" parent="Entities/Enemy2" index="8"]
-shape = SubResource("CircleShape2D_x5hhv")
-debug_color = Color(0.629361, 0.523748, 0.232421, 0.42)
-script = ExtResource("7_f107o")
-metadata/_custom_type_script = ExtResource("7_f107o")
-
-[node name="InteractionArea" type="Area2D" parent="Entities/Enemy2" index="9"]
+[node name="InteractionArea" type="Area2D" parent="Entities/Enemy2" index="8"]
 z_index = -1
 collision_layer = 0
 collision_mask = 8
@@ -98,7 +91,7 @@ metadata/_custom_type_script = ExtResource("8_0xo8f")
 shape = SubResource("CircleShape2D_x5hhv")
 debug_color = Color(0.627451, 0.52549, 0.231373, 0.419608)
 
-[node name="StateMachine" type="Node" parent="Entities/Enemy2" index="10" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="Entities/Enemy2" index="9" node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_t4uv3")
 current_state = NodePath("follow")
 
@@ -109,7 +102,7 @@ target_player_id = 1
 
 [node name="to_idle" type="Node" parent="Entities/Enemy2/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_101ja")
-interaction_area = NodePath("../../../DetectPlayerArea")
+interaction_area = NodePath("../../../InteractionArea")
 one_shot = false
 on_completion = [NodePath("../../idle")]
 metadata/_custom_type_script = ExtResource("6_101ja")
