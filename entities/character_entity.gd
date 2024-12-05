@@ -55,6 +55,8 @@ var facing := Vector2.DOWN: ## The direction the entity is facing.
 var speed := 0.0 ## The current speed of the entity.
 var invert_moving_direction := false ## Inverts the movement direction. Useful for moving an entity away from the target position.
 var safe_position := Vector2.ZERO ## The last position of the entity that was deemed safe. It is set before a jump and is eventually reassigned to the entity by calling the return_to_safe_position method. The "state_fall" state calls this method, so it is useful if assigned to "on_fall".
+@export var speed_multiplier := 1.0
+@export var friction_multiplier := 6.0
 
 @export_group("Actions")
 var is_moving: bool ## True if velocity is non-zero.
@@ -132,12 +134,12 @@ func receive_data(data: DataEntity):
 		facing = data.facing
 
 ##Moves the entity towards a position, with the possibility to modify speed and friction.
-func move_towards(_position, speed_increment = 1.0, friction_increment = 1.0):
+func move_towards(_position):
 	var moving_direction = global_position.direction_to(_position)
-	move(moving_direction, speed_increment, friction_increment)
+	move(moving_direction)
 
 ##Handles entity movement, applying the right velocity to the body.
-func move(direction, speed_increment = 1.0, friction_increment = 1.0):
+func move(direction):
 	if is_attacking or is_charging:
 		return
 	var delta = get_process_delta_time()
@@ -147,8 +149,8 @@ func move(direction, speed_increment = 1.0, friction_increment = 1.0):
 	moving_direction *= 1 if not invert_moving_direction else -1
 	if moving_direction != Vector2.ZERO:
 		facing = moving_direction
-		speed = max_speed * speed_increment
-		new_friction = friction * friction_increment
+		speed = max_speed * speed_multiplier
+		new_friction = friction * friction_multiplier
 		target_velocity = moving_direction * speed
 	velocity = velocity.move_toward(target_velocity, new_friction * delta)
 

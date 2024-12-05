@@ -16,5 +16,5 @@ func _handle_inputs():
 		entity.jump()
 	if Input.is_action_just_pressed("attack"):
 		entity.attack()
-	var speed_increment = run_speed_increment if Input.get_action_strength("run") > 0 else 1.0 
-	entity.move(input_dir, speed_increment)
+	entity.speed_multiplier = run_speed_increment if Input.get_action_strength("run") > 0 else 1.0
+	entity.move(input_dir)

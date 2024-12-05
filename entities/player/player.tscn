@@ -531,7 +531,7 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="set_params" type="Node" parent="StateMachine/knockback" index="1"]
+[node name="set-is_hurting" type="Node" parent="StateMachine/knockback" index="1"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
@@ -547,7 +547,7 @@ damage = 2
 time_range = Vector2(0.2, 0.2)
 on_completion = NodePath("../move")
 
-[node name="set_params" type="Node" parent="StateMachine/fall" index="0"]
+[node name="set-is_falling" type="Node" parent="StateMachine/fall" index="0"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
@@ -572,7 +572,7 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="set_params" type="Node" parent="StateMachine/death" index="1"]
+[node name="set-is_hurting" type="Node" parent="StateMachine/death" index="1"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({

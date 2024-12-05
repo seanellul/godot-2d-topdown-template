@@ -21,8 +21,6 @@ class_name StateFollow
 		flee = value
 		if entity:
 			entity.invert_moving_direction = value
-@export var speed_multiplier := 1.0
-@export var friction_multiplier := 1.0
 
 func enter():
 	super.enter()
@@ -38,7 +36,7 @@ func physics_update(_delta):
 
 func _follow():
 	if is_instance_valid(target) and entity:
-		entity.move_towards(target.global_position, speed_multiplier, friction_multiplier)
+		entity.move_towards(target.global_position)
 
 func _init_target():
 	await get_tree().physics_frame

@@ -6,8 +6,6 @@ class_name StatePath
 @export var path: Path2D
 @export var loop := false ## If true, after reaching the last point entity will go back to the first one and repeat the path.
 @export var distance_threshold := 2.0
-@export var speed_multiplier := 1.0
-@export var friction_multiplier := 6.0 ## Keeping a value greater than 1, the entity will follow the path points more precisely.
 
 @onready var path_curve = path.curve
 @onready var current_point_id: int = 0:
@@ -38,7 +36,7 @@ func _set_target_position():
 func physics_update(_delta: float):
 	if not is_instance_valid(entity):
 		return
-	entity.move_towards(target_position, speed_multiplier, friction_multiplier)
+	entity.move_towards(target_position)
 
 func _check_point_reached():
 	if not is_instance_valid(entity):

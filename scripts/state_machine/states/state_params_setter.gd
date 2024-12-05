@@ -3,9 +3,9 @@ extends State
 class_name StateParamsSetter
 
 @export_category("Set Properties")
-@export var param_key: String
-@export var on_enter: Dictionary[String, Variant] ##Set some properties to the node param_key found among the StateMachine params, on entering state.
-@export var on_exit: Dictionary[String, Variant] ##Set some properties to the node param_key found among the StateMachine params, on exiting state.
+@export var param_key: String ## The name of the param as is in the State Machine.
+@export var on_enter: Dictionary[String, Variant] ## Set some properties to the node param_key found among the StateMachine params, on entering state.
+@export var on_exit: Dictionary[String, Variant] ## Set some properties to the node param_key found among the StateMachine params, on exiting state.
 
 func enter():
 	var node = _get_node()
@@ -26,5 +26,5 @@ func _get_node():
 	if state_machine.params.has(param_key):
 		node = state_machine.params[param_key]
 	else:
-		push_warning("Node %s not found in %s" %[param_key, get_path()])
+		push_warning("Node %s not found in %s" % [param_key, get_path()])
 	return node
