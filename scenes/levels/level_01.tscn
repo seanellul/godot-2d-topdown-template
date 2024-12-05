@@ -438,13 +438,13 @@ libraries = {
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="interact" type="Node" parent="Props/Gate_Front/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("16_nsalp")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../down")]
 action_trigger = "interact"
 conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_cag23")])
 one_shot = false
+on_completion = [NodePath("../down")]
 
 [node name="idle_up" type="Node" parent="Props/Gate_Front/StateMachine/interact" index="0" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("12_kio72")
@@ -520,15 +520,15 @@ autoplay = "idle"
 script = ExtResource("7_e6yb8")
 current_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="Props/Chest2/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction", "on_condition_not_met")]
+[node name="idle" type="Node" parent="Props/Chest2/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_condition_not_met", "on_completion")]
 script = ExtResource("16_nsalp")
 interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
-on_interaction = [NodePath("../open")]
 action_trigger = "interact"
 conditions = Array[ExtResource("19_3t34l")]([SubResource("Resource_iqf6e"), SubResource("Resource_5t8rk")])
 on_condition_not_met = {
 "item": NodePath("../msg-door_closed")
 }
+on_completion = [NodePath("../open")]
 
 [node name="open" type="Node" parent="Props/Chest2/StateMachine" index="1" node_paths=PackedStringArray("animation_player", "on_completion")]
 script = ExtResource("12_kio72")
@@ -613,12 +613,12 @@ curve = SubResource("Curve2D_uycfk")
 script = ExtResource("7_e6yb8")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="interact" type="Node" parent="Events/Event_01/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("16_nsalp")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../player_path")]
 action_trigger = "interact"
 one_shot = false
+on_completion = [NodePath("../player_path")]
 
 [node name="player_path" type="Node" parent="Events/Event_01/StateMachine" index="1" node_paths=PackedStringArray("path", "on_completion")]
 script = ExtResource("8_285dh")

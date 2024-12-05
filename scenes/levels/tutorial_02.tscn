@@ -222,10 +222,10 @@ script = ExtResource("15_er3gv")
 current_state = NodePath("interact")
 metadata/_custom_type_script = ExtResource("15_er3gv")
 
-[node name="interact" type="Node" parent="Events/exit-door/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="interact" type="Node" parent="Events/exit-door/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("16_hvm1c")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../player_path")]
+on_completion = [NodePath("../player_path")]
 reset_delay = 0.0
 metadata/_custom_type_script = ExtResource("16_hvm1c")
 

@@ -94,11 +94,11 @@ script = ExtResource("4_seybd")
 navigation_agent = NodePath("../../NavigationAgent2D")
 target_player_id = 1
 
-[node name="to_idle" type="Node" parent="Entities/Enemy2/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="to_idle" type="Node" parent="Entities/Enemy2/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_101ja")
 interaction_area = NodePath("../../../DetectPlayerArea")
-on_interaction = [NodePath("../../idle")]
 one_shot = false
+on_completion = [NodePath("../../idle")]
 metadata/_custom_type_script = ExtResource("6_101ja")
 
 [node name="idle" type="Node" parent="Entities/Enemy2/StateMachine" index="1"]

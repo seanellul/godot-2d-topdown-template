@@ -50,10 +50,10 @@ script = ExtResource("4_u52sa")
 script = ExtResource("5_cr1mn")
 wander_time_range = Vector2(1, 2)
 
-[node name="start_idle" type="Node" parent="Entities/Enemy1/StateMachine/wander" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="start_idle" type="Node" parent="Entities/Enemy1/StateMachine/wander" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_kig7c")
 interaction_area = NodePath("../../../FollowingArea")
-on_interaction = [NodePath("../../idle")]
+on_completion = [NodePath("../../idle")]
 one_shot = false
 check = 8
 metadata/_custom_type_script = ExtResource("6_kig7c")
@@ -62,17 +62,17 @@ metadata/_custom_type_script = ExtResource("6_kig7c")
 script = ExtResource("7_1k2uv")
 target_player_id = 1
 
-[node name="start_wander" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="start_wander" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_kig7c")
 interaction_area = NodePath("../../../TargetReachedArea")
-on_interaction = [NodePath("../../wander")]
+on_completion = [NodePath("../../wander")]
 one_shot = false
 metadata/_custom_type_script = ExtResource("6_kig7c")
 
 [node name="start_path" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="1" node_paths=PackedStringArray("interaction_area", "on_leaving")]
 script = ExtResource("6_kig7c")
 interaction_area = NodePath("../../../FollowingArea")
-on_leaving = NodePath("../../path")
+on_leaving = [NodePath("../../path")]
 one_shot = false
 metadata/_custom_type_script = ExtResource("6_kig7c")
 
@@ -80,10 +80,10 @@ metadata/_custom_type_script = ExtResource("6_kig7c")
 script = ExtResource("8_y0kt7")
 path = NodePath("../../../../Events/Enemy1Path")
 
-[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_kig7c")
 interaction_area = NodePath("../../../TargetDetectionArea")
-on_interaction = [NodePath("../../follow")]
+on_completion = [NodePath("../../follow")]
 one_shot = false
 check = 12
 metadata/_custom_type_script = ExtResource("6_kig7c")

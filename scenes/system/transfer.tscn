@@ -23,11 +23,11 @@ metadata/_custom_type_script = ExtResource("2_5c8bo")
 script = ExtResource("2_1i106")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("3_byffi")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../call_transfer")]
 one_shot = false
+on_completion = [NodePath("../call_transfer")]
 
 [node name="call_transfer" type="Node" parent="StateMachine" node_paths=PackedStringArray("node", "on_completion")]
 script = ExtResource("6_hh1eg")

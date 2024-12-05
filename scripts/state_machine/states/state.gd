@@ -5,7 +5,9 @@ class_name State
 
 @export var disabled := false ## Set to true to avoid processing this state.
 @export_category("Advance")
-@export var on_completion: Array[State] ## States to enable when this state completes or when timer times out.
+## States to enable when this state completes or when timer times out.[br]
+## In a [i]StateInteract[/i] are the states to enable when the interaction triggers.
+@export var on_completion: Array[State]
 @export_group("Await Timer")
 @export var time_range := Vector2.ZERO ## If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
 
@@ -52,10 +54,10 @@ func update(_delta: float):
 func physics_update(_delta: float):
 	pass
 
-func complete():
+func complete(params = null):
 	if !timer or timer and timer.timer.time_left == 0.0:
 		for state in on_completion:
-			state.enable(state_machine.params)
+			state.enable(state_machine.params if !params else params)
 
 class TimedState:
 	var timer: Timer

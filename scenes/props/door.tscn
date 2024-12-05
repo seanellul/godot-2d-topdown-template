@@ -166,10 +166,10 @@ speed_scale = 0.3
 script = ExtResource("2_a78jy")
 current_state = NodePath("closed")
 
-[node name="closed" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="closed" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("3_gxend")
 interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
-on_interaction = [NodePath("../open")]
+on_completion = [NodePath("../open")]
 action_trigger = "interact"
 direction = 8
 

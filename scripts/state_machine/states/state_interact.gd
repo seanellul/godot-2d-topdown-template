@@ -4,8 +4,7 @@ extends State
 class_name StateInteract
 
 @export var interaction_area: InteractionArea2D ## Interaction will trigger only if entity is inside this area.
-@export var on_interaction: Array[State] ## The states to enable on interaction.
-@export var on_leaving: State ## The state to enable on exiting the area.
+@export var on_leaving: Array[State] ## States to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_category("Conditions")
 @export var conditions: Array[Check] = [] ## A list of conditions to met in order to trigger the interaction.
@@ -75,18 +74,14 @@ func _can_interact() -> bool:
 func _do_interaction():
 	interacting = true
 	print(entity.name, " interacted with ", get_path())
-	complete()
-	for state in on_interaction:
-		state.enable({
-			"entity": entity
-		})
+	complete({"entity": entity})
 	if !one_shot:
 		_reset_interaction()
 
 func _do_leaving():
-	if on_leaving:
+	for state in on_leaving:
 		interacting = true
-		on_leaving.enable()
+		state.enable()
 	if !one_shot:
 		_reset_interaction()
 

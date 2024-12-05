@@ -140,13 +140,13 @@ libraries = {
 script = ExtResource("3_05j5n")
 current_state = NodePath("idle_off")
 
-[node name="idle_off" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="idle_off" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("4_t1oes")
 interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
-on_interaction = [NodePath("../on")]
 action_trigger = "interact"
 one_shot = false
 reset_delay = 0.1
+on_completion = [NodePath("../on")]
 
 [node name="animation_idle_off" type="Node" parent="StateMachine/idle_off" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_k6m0m")
@@ -159,13 +159,13 @@ animation_player = NodePath("../../AnimationPlayer")
 animation = "on"
 on_completion = [NodePath("../idle_on")]
 
-[node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="idle_on" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("4_t1oes")
 interaction_area = NodePath("../../StaticBody2D/InteractionArea2D")
-on_interaction = [NodePath("../off")]
 action_trigger = "interact"
 one_shot = false
 reset_delay = 0.1
+on_completion = [NodePath("../off")]
 
 [node name="animation_idle_on" type="Node" parent="StateMachine/idle_on" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_k6m0m")

@@ -580,29 +580,29 @@ script = ExtResource("5_4l2eg")
 script = ExtResource("6_rdt3e")
 wander_time_range = Vector2(1, 2)
 
-[node name="start_idle" type="Node" parent="Entities/Enemy1/StateMachine/wander" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="start_idle" type="Node" parent="Entities/Enemy1/StateMachine/wander" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("11_7s6t0")
 interaction_area = NodePath("../../../FollowingArea")
-on_interaction = [NodePath("../../idle")]
 one_shot = false
 check = 8
+on_completion = [NodePath("../../idle")]
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="follow" type="Node" parent="Entities/Enemy1/StateMachine" index="2"]
 script = ExtResource("7_n4gru")
 target_player_id = 1
 
-[node name="start_wander" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="start_wander" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("11_7s6t0")
 interaction_area = NodePath("../../../TargetReachedArea")
-on_interaction = [NodePath("../../wander")]
 one_shot = false
+on_completion = [NodePath("../../wander")]
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="start_path" type="Node" parent="Entities/Enemy1/StateMachine/follow" index="1" node_paths=PackedStringArray("interaction_area", "on_leaving")]
 script = ExtResource("11_7s6t0")
 interaction_area = NodePath("../../../FollowingArea")
-on_leaving = NodePath("../../path")
+on_leaving = [NodePath("../../path")]
 one_shot = false
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
@@ -620,15 +620,14 @@ metadata/_custom_type_script = ExtResource("14_dumvw")
 [node name="path" type="Node" parent="Entities/Enemy1/StateMachine" index="3" node_paths=PackedStringArray("path", "on_completion")]
 script = ExtResource("8_po55j")
 path = NodePath("../../../../Path2D")
-repeats = 1
 on_completion = [NodePath("../idle")]
 
-[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="start_follow" type="Node" parent="Entities/Enemy1/StateMachine/path" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("11_7s6t0")
 interaction_area = NodePath("../../../TargetDetectionArea")
-on_interaction = [NodePath("../../follow")]
 one_shot = false
 check = 12
+on_completion = [NodePath("../../follow")]
 metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="+friction" type="Node" parent="Entities/Enemy1/StateMachine/path" index="1"]
@@ -677,12 +676,12 @@ metadata/_custom_type_script = ExtResource("10_dscar")
 script = ExtResource("4_qmq1u")
 current_state = NodePath("interact")
 
-[node name="interact" type="Node" parent="Entities/NPC/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="interact" type="Node" parent="Entities/NPC/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("11_7s6t0")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../start_dialogue")]
 action_trigger = "interact"
 one_shot = false
+on_completion = [NodePath("../start_dialogue")]
 
 [node name="start_dialogue" type="Node" parent="Entities/NPC/StateMachine" index="1" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("11_i08cu")

@@ -165,12 +165,12 @@ autoplay = "idle"
 script = ExtResource("3_18kok")
 current_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_5lcsm")
 interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../animation_up")]
 action_trigger = "run"
 one_shot = false
+on_completion = [NodePath("../animation_up")]
 
 [node name="animation_idle" type="Node" parent="StateMachine/idle" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")
