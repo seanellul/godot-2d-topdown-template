@@ -6,7 +6,7 @@ class_name CharacterEntity
 @export_group("Settings")
 @export var animation_tree: AnimationTree ## The AnimationTree attached to this entity, needed to manage animations.
 @export var sync_rotation: Array[Node2D] ## A list of nodes that update their rotation based on the direction the entity is facing.
-@export var health_component: HealthComponent ## The HealthComponent that handles this entity hp.
+@export var health_controller: HealthController ## The HealthController that handles this entity hp.
 @export_group("Movement")
 @export var max_speed = 300.0 ## The maximum speed the entity can reach while moving.
 @export var friction = 2000.0 ## Affects the time it takes for the entity to reach max_speed or to stop.

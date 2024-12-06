@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="3_xnu42"]
 [ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="4_8hp4k"]
 [ext_resource type="Script" uid="uid://b3ctbvwsexswi" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
-[ext_resource type="Script" uid="uid://igey4j36or78" path="res://components/health_component.gd" id="5_gx6sm"]
+[ext_resource type="Script" uid="uid://igey4j36or78" path="res://components/health_controller.gd" id="5_gx6sm"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="6_afbqv"]
 [ext_resource type="PackedScene" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
@@ -465,12 +465,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "health_component", "running_particles", "on_attack", "on_fall") groups=["player"] instance=ExtResource("1_fnaeb")]
+[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "health_controller", "running_particles", "on_attack", "on_fall") groups=["player"] instance=ExtResource("1_fnaeb")]
 y_sort_enabled = false
 script = ExtResource("2_x37y0")
 on_transfer_start = NodePath("StateMachine/auto")
 on_transfer_end = NodePath("StateMachine/move")
-health_component = NodePath("HealthComponent")
+health_controller = NodePath("HealthController")
 running_particles = NodePath("SmokeParticles")
 on_attack = NodePath("StateMachine/attack")
 on_fall = NodePath("StateMachine/fall")
@@ -490,7 +490,7 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_1npff")
 debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
 
-[node name="HealthComponent" type="Node2D" parent="." index="4" node_paths=PackedStringArray("on_hp_0")]
+[node name="HealthController" type="Node2D" parent="." index="4" node_paths=PackedStringArray("on_hp_0")]
 script = ExtResource("5_gx6sm")
 health_bar = ExtResource("2_kl4cw")
 on_hp_0 = NodePath("../StateMachine/death")
@@ -565,7 +565,7 @@ on_exit = Dictionary[String, Variant]({
 
 [node name="reduce_hp" type="Node" parent="StateMachine/fall" index="1" node_paths=PackedStringArray("node")]
 script = ExtResource("14_gx6sm")
-node = NodePath("../../../HealthComponent")
+node = NodePath("../../../HealthController")
 method_name = "change_hp"
 method_params = [-2]
 send_sm_params = false
@@ -605,7 +605,7 @@ player = NodePath("..")
 [node name="HitBox" parent="." index="12"]
 collision_layer = 16
 
-[node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_component", "on_hp_decrease")]
+[node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_controller", "on_hp_decrease")]
 collision_mask = 96
-health_component = NodePath("../HealthComponent")
+health_controller = NodePath("../HealthController")
 on_hp_decrease = NodePath("../StateMachine/knockback")

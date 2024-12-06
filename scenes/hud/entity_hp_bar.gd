@@ -17,11 +17,11 @@ var max_value := 0: ## The max value of the bar.
 @onready var gap = texture_progress.size.x / 2
 
 ##Used to initialize the hp bar.
-func init_hud(health_component: HealthComponent):
+func init_hud(health_controller: HealthController):
 	await self.ready
-	max_value = health_component.max_hp
-	value = health_component.hp
-	health_component.hp_changed.connect(_on_hp_changed)
+	max_value = health_controller.max_hp
+	value = health_controller.hp
+	health_controller.hp_changed.connect(_on_hp_changed)
 
 func _on_hp_changed(hp):
 	value = hp

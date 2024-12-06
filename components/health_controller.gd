@@ -1,23 +1,23 @@
-@icon("res://icons/HealthComponent.svg")
+@icon("res://icons/HealthController.svg")
 extends Node2D
-class_name HealthComponent
+class_name HealthController
 
 @export_group("Health")
-@export var max_hp := 20 ## The total hp of the entity. If the entity has health_bar assigned, it is the value that corresponds to the health_bar completely full.
+@export var max_hp := 20 ## If an health_bar is set, this is the value that corresponds to the health_bar completely full.
 @export var recovery_time := 1.0 ## The waiting time before changing the HP again.
-@export var health_bar: PackedScene ## A PackedScene that displays the entity's HP.
+@export var health_bar: PackedScene ## A PackedScene that displays the HP.
 @export_group("States")
-@export var on_hp_0: State ## State to enable when hp reach 0.
+@export var on_hp_0: State ## State to enable when HP reach 0.
 
 var hp_bar: Node ## The health_bar instance.
-var immortal := false ## Avoids reducing hp.
+var immortal := false ## Avoids reducing HP.
 
-@onready var hp := max_hp: ## The entity's current hp.
+@onready var hp := max_hp:
 	set(new_hp):
 		hp = new_hp
 		hp_changed.emit(hp)
 
-signal hp_changed(value) ## Emitted when hp change.
+signal hp_changed(value) ## Emitted when HP change.
 
 func _ready():
 	_init_health_bar()
@@ -32,7 +32,7 @@ func change_hp(value, from = ""):
 	var new_hp = hp + value
 	if immortal and new_hp < hp:
 		return
-	set_immortal()
+	recover()
 	if new_hp < 0:
 		new_hp = 0
 	elif new_hp > max_hp:
@@ -45,7 +45,7 @@ func change_hp(value, from = ""):
 	if hp == 0 and on_hp_0:
 		on_hp_0.enable()
 
-func set_immortal():
+func recover():
 	immortal = true
 	await get_tree().create_timer(recovery_time).timeout
 	immortal = false
