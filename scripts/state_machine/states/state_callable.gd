@@ -5,6 +5,7 @@ class_name StateCallable
 
 @export var node: Node2D ## The node from which to call the method.
 @export var method_name: String ## The name of the method to call in the node.
+@export var method_params: Array[Variant] = []
 @export var send_sm_params := true ## If true, it will call the method sending the params present in the state machine.
 @export var await_signal_to_complete := "" ## Await for a signal to be emitted on the referenced node before set this state as completed.
 
@@ -23,7 +24,9 @@ func _call_method_by_name():
 	var callable = Callable(node, method_name)
 	if is_instance_valid(node) and callable.is_valid():
 		print("Calling method %s from %s" % [method_name, node.name])
-		if send_sm_params:
+		if method_params.size() > 0:
+			callable.callv(method_params)
+		elif send_sm_params:
 			callable.call(state_machine.params)
 		else:
 			callable.call()

@@ -490,10 +490,9 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_1npff")
 debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
 
-[node name="HealthComponent" type="Node2D" parent="." index="4" node_paths=PackedStringArray("on_hp_decrease", "on_hp_0")]
+[node name="HealthComponent" type="Node2D" parent="." index="4" node_paths=PackedStringArray("on_hp_0")]
 script = ExtResource("5_gx6sm")
 health_bar = ExtResource("2_kl4cw")
-on_hp_decrease = NodePath("../StateMachine/knockback")
 on_hp_0 = NodePath("../StateMachine/death")
 metadata/_custom_type_script = ExtResource("5_gx6sm")
 
@@ -552,9 +551,9 @@ script = ExtResource("8_bp05k")
 on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
-[node name="set-is_falling" type="Node" parent="StateMachine/fall" index="0"]
+[node name="set-is_falling" type="Node" parent="StateMachine/fall" index="0" node_paths=PackedStringArray("node")]
 script = ExtResource("9_fvq3l")
-param_key = "entity"
+node = NodePath("../../..")
 on_enter = Dictionary[String, Variant]({
 "is_falling": true,
 "visible": false
@@ -564,7 +563,15 @@ on_exit = Dictionary[String, Variant]({
 "visible": true
 })
 
-[node name="return_to_safe_position" type="Node" parent="StateMachine/fall" index="1" node_paths=PackedStringArray("node")]
+[node name="reduce_hp" type="Node" parent="StateMachine/fall" index="1" node_paths=PackedStringArray("node")]
+script = ExtResource("14_gx6sm")
+node = NodePath("../../../HealthComponent")
+method_name = "change_hp"
+method_params = [-2]
+send_sm_params = false
+metadata/_custom_type_script = ExtResource("14_gx6sm")
+
+[node name="return_to_safe_position" type="Node" parent="StateMachine/fall" index="2" node_paths=PackedStringArray("node")]
 script = ExtResource("14_gx6sm")
 node = NodePath("../../..")
 method_name = "return_to_safe_position"
@@ -597,8 +604,8 @@ player = NodePath("..")
 
 [node name="HitBox" parent="." index="12"]
 collision_layer = 16
-change_hp = null
 
-[node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_component")]
+[node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_component", "on_hp_decrease")]
 collision_mask = 96
 health_component = NodePath("../HealthComponent")
+on_hp_decrease = NodePath("../StateMachine/knockback")

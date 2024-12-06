@@ -14,6 +14,7 @@ func enter():
 		return
 	for prop in on_enter:
 		set_params_on.set.call_deferred(prop, on_enter[prop])
+	complete()
 
 func exit():
 	var set_params_on = _get_node()

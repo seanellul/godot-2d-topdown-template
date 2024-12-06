@@ -504,8 +504,4 @@ material = SubResource("ShaderMaterial_msovg")
 sprite_frames = SubResource("SpriteFrames_sb13e")
 
 [node name="HitBox" parent="." index="7"]
-z_index = -1
-change_hp = null
-
-[node name="HurtBox" parent="." index="8"]
-z_index = -1
+change_hp = -2

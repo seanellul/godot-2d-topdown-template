@@ -3,6 +3,9 @@ extends Area2D
 class_name HurtBox
 
 @export var health_component: HealthComponent
+@export_group("States")
+@export var on_hp_increase: State ## State to enable when hp increase.
+@export var on_hp_decrease: State ## State to enable when hp decrease.
 
 func _init() -> void:
 	monitorable = false
@@ -16,4 +19,9 @@ func _ready() -> void:
 func _on_hitbox_entered(hitbox: HitBox):
 	if !hitbox or !health_component:
 		return
+	var value = hitbox.change_hp
+	if value < 0 and on_hp_decrease:
+			on_hp_decrease.enable()
+	if value > 0 and on_hp_increase:
+			on_hp_increase.enable()
 	health_component.change_hp(hitbox.change_hp, hitbox.owner.name)
