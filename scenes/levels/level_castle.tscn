@@ -1,20 +1,13 @@
-[gd_scene load_steps=12 format=4]
+[gd_scene load_steps=9 format=4 uid="uid://c2c15rkecvani"]
 
-[ext_resource type="PackedScene" path="res://scenes/levels/Level.tscn" id="1_giuiu"]
-[ext_resource type="PackedScene" path="res://scenes/props/door.tscn" id="2_ruot3"]
-[ext_resource type="Script" path="res://items/content_item.gd" id="3_i3l7c"]
-[ext_resource type="Resource" path="res://items/key.tres" id="4_slxg8"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_debug.gd" id="6_csega"]
-[ext_resource type="PackedScene" path="res://entities/enemies/enemy.tscn" id="7_jtrhe"]
-[ext_resource type="PackedScene" path="res://scenes/props/chest.tscn" id="7_ob3gd"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="8_ij6yd"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_follow.gd" id="10_7uwgo"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_wander.gd" id="10_ng8um"]
-
-[sub_resource type="Resource" id="Resource_o8ck3"]
-script = ExtResource("3_i3l7c")
-item = ExtResource("4_slxg8")
-quantity = 2
+[ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_giuiu"]
+[ext_resource type="PackedScene" uid="uid://sqqjx0j33xse" path="res://scenes/props/door.tscn" id="2_ruot3"]
+[ext_resource type="Script" uid="uid://ckeoajh2lh4kd" path="res://scripts/state_machine/states/state_debug.gd" id="6_csega"]
+[ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="7_jtrhe"]
+[ext_resource type="PackedScene" uid="uid://bfgn02yd5ftws" path="res://scenes/props/chest.tscn" id="7_ob3gd"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/scripts/state_machine.gd" id="8_ij6yd"]
+[ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="10_7uwgo"]
+[ext_resource type="Script" uid="uid://cssu1tiytd4ep" path="res://scripts/state_machine/states/state_wander.gd" id="10_ng8um"]
 
 [node name="Level_Castle" instance=ExtResource("1_giuiu")]
 
@@ -36,20 +29,14 @@ position = Vector2(172, 79)
 [node name="Door" parent="Props" index="1" instance=ExtResource("2_ruot3")]
 position = Vector2(384, -5)
 
-[node name="closed" parent="Props/Door/StateMachine" index="0" node_paths=PackedStringArray("on_items_missing")]
-has_items = Array[ExtResource("3_i3l7c")]([SubResource("Resource_o8ck3")])
-on_items_missing = NodePath("../message_missing_item")
-remove_items = false
-
 [node name="message_missing_item" type="Node" parent="Props/Door/StateMachine" index="4" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("6_csega")
 message = "You don't have enough \"keys\"!
 Required: 2"
-await_completion = true
 on_completion = [NodePath("../closed")]
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(272, 80)
+position = Vector2(602, 320)
 
 [node name="Enemy1" parent="Entities" index="1" instance=ExtResource("7_jtrhe")]
 position = Vector2(586, 80)

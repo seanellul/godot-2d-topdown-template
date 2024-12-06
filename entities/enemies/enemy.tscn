@@ -1,7 +1,7 @@
 [gd_scene load_steps=60 format=3 uid="uid://2c84y1k62jlc"]
 
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="1_ftgfs"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_fvxof"]
+[ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="2_fvxof"]
 [ext_resource type="Texture2D" uid="uid://dgbach7bmy1wn" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="4_msovg"]
 
@@ -503,3 +503,9 @@ max_hp = 10
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_msovg")
 sprite_frames = SubResource("SpriteFrames_sb13e")
+
+[node name="HitBox" parent="." index="7"]
+z_index = -1
+
+[node name="HurtBox" parent="." index="8"]
+z_index = -1
