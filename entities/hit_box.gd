@@ -2,7 +2,7 @@
 extends Area2D
 class_name HitBox
 
-var damage: int = 1
+@export var damage: int = 1
 
 func _init() -> void:
   monitorable = true

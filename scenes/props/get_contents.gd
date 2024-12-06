@@ -15,6 +15,4 @@ func get_contents(params):
 	for content in contents:
 		if content.quantity > 0:
 			entity.add_item_to_inventory(content.item, content.quantity)
-		else:
-			entity.consume_item(content.item)
 	contents_got.emit.call_deferred()

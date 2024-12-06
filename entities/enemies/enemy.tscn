@@ -498,7 +498,6 @@ animations = [{
 [node name="Enemy1" instance=ExtResource("1_ftgfs")]
 max_speed = 100.0
 friction = 1500.0
-max_hp = 10
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_msovg")

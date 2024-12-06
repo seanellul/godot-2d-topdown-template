@@ -3,28 +3,31 @@ extends State
 class_name StateParamsSetter
 
 @export_category("Set Properties")
-@export var param_key: String ## The name of the param as is in the State Machine.
-@export var on_enter: Dictionary[String, Variant] ## Set some properties to the node param_key found among the StateMachine params, on entering state.
-@export var on_exit: Dictionary[String, Variant] ## Set some properties to the node param_key found among the StateMachine params, on exiting state.
+@export var node: Node2D ## The node in which you want to set the properties.[br]If set, takes priority over param_key.
+@export var param_key: String ## Alternatively to selecting a node, you can indicate an element present in the State Machine params in which to set the properties.
+@export var on_enter: Dictionary[String, Variant] ## Set some properties to the node when entering the state.
+@export var on_exit: Dictionary[String, Variant] ## Set some properties to the node when exiting the state.
 
 func enter():
-	var node = _get_node()
-	if not node:
+	var set_params_on = _get_node()
+	if not set_params_on:
 		return
 	for prop in on_enter:
-		node.set(prop, on_enter[prop])
+		set_params_on.set.call_deferred(prop, on_enter[prop])
 
 func exit():
-	var node = _get_node()
-	if not node:
+	var set_params_on = _get_node()
+	if not set_params_on:
 		return
 	for prop in on_exit:
-		node.set(prop, on_exit[prop])
+		set_params_on.set.call_deferred(prop, on_exit[prop])
 
 func _get_node():
-	var node = null
-	if state_machine.params.has(param_key):
-		node = state_machine.params[param_key]
+	var set_params_on = null
+	if node:
+		set_params_on = node
+	elif state_machine.params.has(param_key):
+		set_params_on = state_machine.params[param_key]
 	else:
 		push_warning("Node %s not found in %s" % [param_key, get_path()])
-	return node
+	return set_params_on

@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dfxvfxqwdnh48"]
+[gd_scene load_steps=67 format=3 uid="uid://dfxvfxqwdnh48"]
 
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="3_xnu42"]
 [ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="4_8hp4k"]
 [ext_resource type="Script" uid="uid://b3ctbvwsexswi" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
+[ext_resource type="Script" uid="uid://igey4j36or78" path="res://components/health_component.gd" id="5_gx6sm"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="6_afbqv"]
 [ext_resource type="PackedScene" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
@@ -464,13 +465,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "running_particles", "on_attack", "on_hurt", "on_fall", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
+[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "health_component", "running_particles", "on_attack", "on_hurt", "on_fall", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
 y_sort_enabled = false
 script = ExtResource("2_x37y0")
 on_transfer_start = NodePath("StateMachine/auto")
 on_transfer_end = NodePath("StateMachine/move")
+health_component = NodePath("HealthComponent")
 running_particles = NodePath("SmokeParticles")
-health_bar = ExtResource("2_kl4cw")
 on_attack = NodePath("StateMachine/attack")
 on_hurt = NodePath("StateMachine/knockback")
 on_fall = NodePath("StateMachine/fall")
@@ -491,14 +492,21 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_1npff")
 debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
 
-[node name="AnimatedSprite2D" parent="." index="4"]
+[node name="HealthComponent" type="Node2D" parent="." index="4" node_paths=PackedStringArray("on_hp_decrease", "on_hp_0")]
+script = ExtResource("5_gx6sm")
+health_bar = ExtResource("2_kl4cw")
+on_hp_decrease = NodePath("../StateMachine/knockback")
+on_hp_0 = NodePath("../StateMachine/death")
+metadata/_custom_type_script = ExtResource("5_gx6sm")
+
+[node name="AnimatedSprite2D" parent="." index="5"]
 material = SubResource("ShaderMaterial_afbqv")
 sprite_frames = SubResource("SpriteFrames_gx6sm")
 
-[node name="AnimationTree" parent="." index="8"]
+[node name="AnimationTree" parent="." index="9"]
 parameters/walk/BlendSpace2D/blend_position = Vector2(0.00376654, 0.992565)
 
-[node name="StateMachine" type="Node" parent="." index="9" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." index="10" node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_xnu42")
 current_state = NodePath("move")
 
@@ -579,14 +587,15 @@ on_enter = Dictionary[String, Variant]({
 "is_hurting": true
 })
 
-[node name="Inventory" parent="." index="10" node_paths=PackedStringArray("player") instance=ExtResource("15_gx6sm")]
+[node name="Inventory" parent="." index="11" node_paths=PackedStringArray("player") instance=ExtResource("15_gx6sm")]
 visible = false
 player = NodePath("..")
 
-[node name="HitBox" parent="." index="11"]
+[node name="HitBox" parent="." index="12"]
 z_index = -1
 collision_layer = 16
 
-[node name="HurtBox" parent="." index="12"]
+[node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_component")]
 z_index = -1
 collision_mask = 96
+health_component = NodePath("../HealthComponent")

@@ -18,10 +18,6 @@ func _ready():
 	Globals.destination_found.connect(func(destination_path): _move_to_destination(destination_path))
 	receive_data(DataManager.get_player_data(player_id))
 
-func reduce_hp(value := 0, from = ""):
-	super.reduce_hp(value, from)
-	flash(damage_flash_power)
-
 ##Get the index of the item in inventory, -1 if not found.
 func is_item_in_inventory(item_name: String, quantity := 1) -> int:
 	var item_index := -1
@@ -67,8 +63,8 @@ func get_data():
 		data = player_data
 	data.position = position
 	data.facing = facing
-	data.hp = hp
-	data.max_hp = max_hp
+	data.hp = health_component.hp
+	data.max_hp = health_component.max_hp
 	data.inventory = inventory
 	data.equipped = equipped
 	return data
@@ -78,8 +74,8 @@ func receive_data(data):
 	if data:
 		global_position = data.position
 		facing = data.facing
-		hp = data.hp
-		max_hp = data.max_hp
+		health_component.hp = data.hp
+		health_component.max_hp = data.max_hp
 		inventory = data.inventory
 		equipped = data.equipped
 

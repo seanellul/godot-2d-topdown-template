@@ -2,7 +2,7 @@
 extends Area2D
 class_name HurtBox
 
-signal damaged(value: int)
+@export var health_component: HealthComponent
 
 func _init() -> void:
 	monitorable = false
@@ -14,6 +14,6 @@ func _ready() -> void:
 	area_entered.connect(_on_hitbox_entered)
 
 func _on_hitbox_entered(hitbox: HitBox):
-	if !hitbox:
+	if !hitbox or !health_component:
 		return
-	damaged.emit(hitbox.damage)
+	health_component.change_hp(-hitbox.damage, hitbox.owner.name)
