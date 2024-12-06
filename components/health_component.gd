@@ -37,12 +37,14 @@ func change_hp(value, from = ""):
 		new_hp = 0
 	elif new_hp > max_hp:
 		new_hp = max_hp
-	if new_hp < hp and on_hp_decrease: # Damaged
+	if new_hp < hp: # Damaged
 		print_rich("%s [color=red]damaged[/color] by %s! HP: %s" % [owner.name, from, new_hp])
-		on_hp_decrease.enable()
-	elif new_hp > hp and on_hp_increase: # Recovered
+		if on_hp_decrease:
+			on_hp_decrease.enable()
+	elif new_hp > hp: # Recovered
 		print_rich("%s [color=green]recovered[/color] by %s! HP: %s" % [owner.name, from, new_hp])
-		on_hp_increase.enable()
+		if on_hp_increase:
+			on_hp_increase.enable()
 	hp = new_hp
 	if hp == 0 and on_hp_0:
 		on_hp_0.enable()

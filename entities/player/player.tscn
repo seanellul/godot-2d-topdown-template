@@ -1,7 +1,7 @@
 [gd_scene load_steps=67 format=3 uid="uid://dfxvfxqwdnh48"]
 
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="1_fnaeb"]
-[ext_resource type="PackedScene" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
+[ext_resource type="PackedScene" uid="uid://ry5d5tfsku2i" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
 [ext_resource type="Script" uid="uid://ngyk1y3ddxjb" path="res://entities/player/player_entity.gd" id="2_x37y0"]
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="3_xnu42"]
 [ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="4_8hp4k"]
@@ -597,6 +597,7 @@ player = NodePath("..")
 
 [node name="HitBox" parent="." index="12"]
 collision_layer = 16
+change_hp = null
 
 [node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_component")]
 collision_mask = 96

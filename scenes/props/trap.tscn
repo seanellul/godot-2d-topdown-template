@@ -164,7 +164,7 @@ collision_layer = 64
 collision_mask = 0
 monitoring = false
 script = ExtResource("10_i2gae")
-damage = 2
+change_hp = -2
 metadata/_custom_type_script = ExtResource("10_i2gae")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

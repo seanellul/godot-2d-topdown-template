@@ -16,4 +16,4 @@ func _ready() -> void:
 func _on_hitbox_entered(hitbox: HitBox):
 	if !hitbox or !health_component:
 		return
-	health_component.change_hp(-hitbox.damage, hitbox.owner.name)
+	health_component.change_hp(hitbox.change_hp, hitbox.owner.name)
