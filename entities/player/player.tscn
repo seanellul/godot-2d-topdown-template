@@ -515,15 +515,36 @@ script = ExtResource("12_m3ydn")
 on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
-[node name="set_params" type="Node" parent="StateMachine/attack" index="0"]
+[node name="is_attacking" type="Node" parent="StateMachine/attack" index="0" node_paths=PackedStringArray("node")]
 script = ExtResource("9_fvq3l")
-param_key = "entity"
+node = NodePath("../../..")
 on_enter = Dictionary[String, Variant]({
 "is_attacking": true
 })
 on_exit = Dictionary[String, Variant]({
 "is_attacking": false
 })
+
+[node name="set_immortal" type="Node" parent="StateMachine/attack" index="1" node_paths=PackedStringArray("node")]
+script = ExtResource("9_fvq3l")
+node = NodePath("../../../HealthController")
+on_enter = Dictionary[String, Variant]({
+"immortal": true
+})
+on_exit = Dictionary[String, Variant]({
+"immortal": false
+})
+
+[node name="enable_hitbox" type="Node" parent="StateMachine/attack" index="2" node_paths=PackedStringArray("node")]
+script = ExtResource("9_fvq3l")
+node = NodePath("../../../HitBox/CollisionShape2D")
+on_enter = Dictionary[String, Variant]({
+"disabled": false
+})
+on_exit = Dictionary[String, Variant]({
+"disabled": true
+})
+metadata/_custom_type_script = ExtResource("9_fvq3l")
 
 [node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
@@ -536,7 +557,7 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="set-is_hurting" type="Node" parent="StateMachine/knockback" index="1"]
+[node name="is_hurting" type="Node" parent="StateMachine/knockback" index="1"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
@@ -591,7 +612,7 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="set-is_hurting" type="Node" parent="StateMachine/death" index="1"]
+[node name="is_hurting" type="Node" parent="StateMachine/death" index="1"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
@@ -603,7 +624,13 @@ visible = false
 player = NodePath("..")
 
 [node name="HitBox" parent="." index="12"]
+position = Vector2(0, 0)
 collision_layer = 16
+change_hp = -3
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(8, 0)
+disabled = true
 
 [node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_controller", "on_hp_decrease")]
 collision_mask = 96

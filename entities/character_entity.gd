@@ -177,10 +177,6 @@ func move_and_face(destination, direction = Vector2.ZERO):
 	elif direction:
 		facing = Const.DIR_VECTOR[direction]
 
-##Useful to reset some entity values to an initial state.
-func reset_values():
-	pass
-
 ##Stops the entity, setting its velocity to 0.
 func stop(smoothly := false):
 	if smoothly:

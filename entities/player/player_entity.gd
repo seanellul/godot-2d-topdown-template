@@ -51,10 +51,6 @@ func remove_item_from_inventory(item_name: String, quantity: int):
 			inventory.remove_at(item_index)
 			print("%s removed from %s's inventory! q: 0" % [item_name, self.name])
 
-func reset_values():
-	is_charging = false
-	is_attacking = false
-
 ##Get the player data to save.
 func get_data():
 	var data = DataPlayer.new()
