@@ -15,7 +15,6 @@ var hp_bar: Node ## The health_bar instance.
 
 @onready var hp := max_hp: ## The entity's current hp.
 	set(new_hp):
-		print("%s HP is: %s" % [owner.name, hp])
 		hp = new_hp
 		hp_changed.emit(hp)
 
@@ -39,10 +38,10 @@ func change_hp(value, from = ""):
 	elif new_hp > max_hp:
 		new_hp = max_hp
 	if new_hp < hp and on_hp_decrease: # Damaged
-		print_rich("%s [color=red]HP-[/color] by %s! value: %s" % [owner.name, from, new_hp])
+		print_rich("%s [color=red]damaged[/color] by %s! HP: %s" % [owner.name, from, new_hp])
 		on_hp_decrease.enable()
 	elif new_hp > hp and on_hp_increase: # Recovered
-		print_rich("%s [color=green]HP+[/color] by %s! value: %s" % [owner.name, from, new_hp])
+		print_rich("%s [color=green]recovered[/color] by %s! HP: %s" % [owner.name, from, new_hp])
 		on_hp_increase.enable()
 	hp = new_hp
 	if hp == 0 and on_hp_0:

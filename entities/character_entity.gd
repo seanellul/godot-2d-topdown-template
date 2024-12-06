@@ -21,10 +21,7 @@ var friction_multiplier := 1.0
 @export_group("States")
 @export var on_attack: State ## State to enable when this entity attacks.
 @export var on_hit: State ## State to enable when this entity damages another entity.
-@export var on_hurt: State ## State to enable when this entity takes damage.
 @export var on_fall: State ## State to enable when this entity falls.
-@export var on_recovery: State ## State to enable when this entity recovers hp.
-@export var on_death: State ## State to enable when this entity dies (hp == 0).
 @export var on_screen_entered: State ## State to enable when this entity is visible on screen.
 @export var on_screen_exited: State ## State to enable when this entity is outside the visible screen.
 
