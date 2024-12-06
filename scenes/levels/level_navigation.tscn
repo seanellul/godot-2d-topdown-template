@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_spbgx"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="2_68cva"]
-[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_t4uv3"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="3_t4uv3"]
 [ext_resource type="Script" uid="uid://blcymmqc06vw2" path="res://scripts/state_machine/states/state_navigation.gd" id="4_seybd"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="5_3wcfp"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="5_x5hhv"]

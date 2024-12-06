@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b1smopidsigyw" path="res://items/content_item.gd" id="3_v5pqk"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="3_vnork"]
 [ext_resource type="Resource" path="res://items/key.tres" id="4_m2te4"]
-[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/scripts/state_machine.gd" id="4_qmq1u"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" uid="uid://cssu1tiytd4ep" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
 [ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]

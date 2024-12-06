@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://scenes/props/blocks.png" id="1_5cyoo"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="2_4jk5e"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_h0g83"]
+[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_5cyoo"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="2_4jk5e"]
+[ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="4_h0g83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
 size = Vector2(48, 10)

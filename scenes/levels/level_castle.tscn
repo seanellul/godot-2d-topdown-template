@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=4 uid="uid://c2c15rkecvani"]
+[gd_scene load_steps=10 format=4 uid="uid://c2c15rkecvani"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_giuiu"]
 [ext_resource type="PackedScene" uid="uid://sqqjx0j33xse" path="res://scenes/props/door.tscn" id="2_ruot3"]
+[ext_resource type="Script" path="res://scripts/state_machine/scripts/check.gd" id="3_gftgn"]
 [ext_resource type="Script" uid="uid://ckeoajh2lh4kd" path="res://scripts/state_machine/states/state_debug.gd" id="6_csega"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="7_jtrhe"]
 [ext_resource type="PackedScene" uid="uid://bfgn02yd5ftws" path="res://scenes/props/chest.tscn" id="7_ob3gd"]
-[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/scripts/state_machine.gd" id="8_ij6yd"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="8_ij6yd"]
 [ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="10_7uwgo"]
 [ext_resource type="Script" uid="uid://cssu1tiytd4ep" path="res://scripts/state_machine/states/state_wander.gd" id="10_ng8um"]
 
@@ -25,6 +26,12 @@ tile_map_data = PackedByteArray("AAAKAP3/CQAMAAMAAAAJAP7/CQANAAIAAAAJAP3/CQAQAAA
 
 [node name="Chest" parent="Props" index="0" instance=ExtResource("7_ob3gd")]
 position = Vector2(172, 79)
+
+[node name="idle" parent="Props/Chest/StateMachine" index="0"]
+conditions = Array[ExtResource("3_gftgn")]([])
+
+[node name="tween" parent="Props/Chest/StateMachine/open" index="0"]
+tweens = Array[ExtResource("3_gftgn")]([])
 
 [node name="Door" parent="Props" index="1" instance=ExtResource("2_ruot3")]
 position = Vector2(384, -5)
