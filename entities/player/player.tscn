@@ -2,17 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="1_fnaeb"]
 [ext_resource type="PackedScene" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
-[ext_resource type="Script" path="res://entities/player/player_entity.gd" id="2_x37y0"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_xnu42"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="4_8hp4k"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
+[ext_resource type="Script" uid="uid://ngyk1y3ddxjb" path="res://entities/player/player_entity.gd" id="2_x37y0"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_xnu42"]
+[ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="4_8hp4k"]
+[ext_resource type="Script" uid="uid://b3ctbvwsexswi" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="6_afbqv"]
 [ext_resource type="PackedScene" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_fall.gd" id="12_2ttjo"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
+[ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
+[ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
+[ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
+[ext_resource type="Script" uid="uid://dnu6qwm51wstb" path="res://scripts/state_machine/states/state_fall.gd" id="12_2ttjo"]
+[ext_resource type="Script" uid="uid://b4jgftt0t4d1e" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
 [ext_resource type="PackedScene" path="res://scenes/menus/inventory.tscn" id="15_gx6sm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
@@ -584,7 +584,9 @@ visible = false
 player = NodePath("..")
 
 [node name="HitBox" parent="." index="11"]
+z_index = -1
 collision_layer = 16
 
 [node name="HurtBox" parent="." index="12"]
+z_index = -1
 collision_mask = 96

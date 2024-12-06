@@ -25,7 +25,7 @@ var timer: TimedState
 func _enter_tree():
 	if disabled:
 		active = false
-	if time_range > Vector2.ZERO:
+	elif time_range > Vector2.ZERO:
 		timer = TimedState.new()
 		timer.create(self, time_range)
 
@@ -36,7 +36,7 @@ func enable(params = null): ## Enables this state.
 	if timer:
 		timer.start()
 		await timer.timeout
-		complete()
+		_enable_on_completion(params)
 
 func disable():
 	if state_machine:
@@ -55,9 +55,12 @@ func physics_update(_delta: float):
 	pass
 
 func complete(params = null):
-	if !timer or timer and timer.timer.time_left == 0.0:
-		for state in on_completion:
-			state.enable(state_machine.params if !params else params)
+	if !timer:
+		_enable_on_completion(params)
+
+func _enable_on_completion(params):
+	for state in on_completion:
+		state.enable(state_machine.params if !params else params)
 
 class TimedState:
 	var timer: Timer
