@@ -12,8 +12,8 @@
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
 [ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
-[ext_resource type="Script" uid="uid://dnu6qwm51wstb" path="res://scripts/state_machine/states/state_fall.gd" id="12_2ttjo"]
 [ext_resource type="Script" uid="uid://b4jgftt0t4d1e" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
+[ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="14_gx6sm"]
 [ext_resource type="PackedScene" path="res://scenes/menus/inventory.tscn" id="15_gx6sm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
@@ -465,7 +465,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "health_component", "running_particles", "on_attack", "on_hurt", "on_fall", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
+[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "health_component", "running_particles", "on_attack", "on_fall") groups=["player"] instance=ExtResource("1_fnaeb")]
 y_sort_enabled = false
 script = ExtResource("2_x37y0")
 on_transfer_start = NodePath("StateMachine/auto")
@@ -473,9 +473,7 @@ on_transfer_end = NodePath("StateMachine/move")
 health_component = NodePath("HealthComponent")
 running_particles = NodePath("SmokeParticles")
 on_attack = NodePath("StateMachine/attack")
-on_hurt = NodePath("StateMachine/knockback")
 on_fall = NodePath("StateMachine/fall")
-on_death = NodePath("StateMachine/death")
 
 [node name="SmokeParticles" parent="." index="2" instance=ExtResource("6_dxaj8")]
 process_mode = 3
@@ -550,8 +548,7 @@ on_exit = Dictionary[String, Variant]({
 })
 
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
-script = ExtResource("12_2ttjo")
-damage = 2
+script = ExtResource("8_bp05k")
 on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
@@ -566,6 +563,13 @@ on_exit = Dictionary[String, Variant]({
 "is_falling": false,
 "visible": true
 })
+
+[node name="return_to_safe_position" type="Node" parent="StateMachine/fall" index="1" node_paths=PackedStringArray("node")]
+script = ExtResource("14_gx6sm")
+node = NodePath("../../..")
+method_name = "return_to_safe_position"
+send_sm_params = false
+metadata/_custom_type_script = ExtResource("14_gx6sm")
 
 [node name="auto" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("8_bp05k")
@@ -592,10 +596,8 @@ visible = false
 player = NodePath("..")
 
 [node name="HitBox" parent="." index="12"]
-z_index = -1
 collision_layer = 16
 
 [node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_component")]
-z_index = -1
 collision_mask = 96
 health_component = NodePath("../HealthComponent")

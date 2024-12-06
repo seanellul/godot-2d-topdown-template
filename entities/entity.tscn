@@ -1,7 +1,7 @@
 [gd_scene load_steps=69 format=3 uid="uid://d2nwo602rnihe"]
 
-[ext_resource type="Script" path="res://entities/character_entity.gd" id="1_g6455"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_b5eyi"]
+[ext_resource type="Script" uid="uid://dqakytqwu5cpx" path="res://entities/character_entity.gd" id="1_g6455"]
+[ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="2_b5eyi"]
 [ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="2_dy2m5"]
 [ext_resource type="Texture2D" uid="uid://b6peokk0rkltn" path="res://entities/shadow.png" id="2_xhiia"]
 [ext_resource type="AnimationLibrary" uid="uid://fjwdql68jj7x" path="res://entities/animations/char-global.res" id="4_hhyyf"]
@@ -12,8 +12,8 @@
 [ext_resource type="AnimationLibrary" uid="uid://bbf4lu0d5n0bx" path="res://entities/animations/char-run.res" id="8_xdo4a"]
 [ext_resource type="AnimationLibrary" uid="uid://b3ijldhutcve4" path="res://entities/animations/char-walk.res" id="9_ihjft"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://b4nom5gtsxhou" path="res://entities/animations/char_anim_states.tres" id="10_esda3"]
-[ext_resource type="Script" path="res://entities/hit_box.gd" id="13_tgfo6"]
-[ext_resource type="Script" path="res://entities/hurt_box.gd" id="14_68xn4"]
+[ext_resource type="Script" uid="uid://c0icpyv7syk84" path="res://entities/hit_box.gd" id="13_tgfo6"]
+[ext_resource type="Script" uid="uid://cussxi05gthfd" path="res://entities/hurt_box.gd" id="14_68xn4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c7fes"]
 size = Vector2(20, 18)
@@ -548,6 +548,7 @@ parameters/walk/BlendSpace2D/blend_position = Vector2(0, 0)
 parameters/walk/TimeScale/scale = 0.25
 
 [node name="HitBox" type="Area2D" parent="."]
+z_index = -1
 position = Vector2(0, 3)
 collision_layer = 32
 collision_mask = 0
@@ -559,6 +560,7 @@ shape = SubResource("CircleShape2D_jk47u")
 debug_color = Color(0.968462, 0.159615, 0.204928, 0.42)
 
 [node name="HurtBox" type="Area2D" parent="."]
+z_index = -1
 collision_layer = 0
 collision_mask = 80
 monitorable = false
