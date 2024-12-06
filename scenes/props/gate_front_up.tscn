@@ -168,7 +168,7 @@ script = ExtResource("4_h0g83")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "down"
 await_completion = true
-on_completion = NodePath("../idle_down")
+on_completion = [NodePath("../idle_down")]
 
 [node name="idle_down" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_h0g83")
@@ -180,4 +180,4 @@ script = ExtResource("4_h0g83")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "up"
 await_completion = true
-on_completion = NodePath("../idle_up")
+on_completion = [NodePath("../idle_up")]

@@ -1,13 +1,13 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=18 format=3 uid="uid://vju64cd63eqd"]
 
-[ext_resource type="Texture2D" path="res://scenes/props/blocks.png" id="1_2ngps"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="2_pkjqp"]
+[ext_resource type="Texture2D" uid="uid://dacsyjsh8ayd8" path="res://scenes/props/blocks.png" id="1_2ngps"]
 [ext_resource type="Script" path="res://scenes/props/get_contents.gd" id="2_sb0cb"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_18kok"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="3_s42s2"]
-[ext_resource type="Resource" path="res://items/spike.tres" id="4_fgbx5"]
+[ext_resource type="Resource" uid="uid://d2ml0tvw0px5r" path="res://items/spike.tres" id="4_fgbx5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="4_op40x"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="6_5lcsm"]
+[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="6_i2gae"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_callable.gd" id="9_c4pye"]
 
 [sub_resource type="Resource" id="Resource_c4pye"]
@@ -18,9 +18,6 @@ metadata/_custom_type_script = ExtResource("3_s42s2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oeede"]
 size = Vector2(42, 42)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb0cb"]
-size = Vector2(32, 32)
 
 [sub_resource type="Animation" id="Animation_3660x"]
 length = 0.001
@@ -129,6 +126,9 @@ _data = {
 &"up": SubResource("Animation_mq7wd")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb0cb"]
+size = Vector2(32, 32)
+
 [node name="Trap" type="Sprite2D"]
 y_sort_enabled = true
 texture = ExtResource("1_2ngps")
@@ -148,29 +148,35 @@ collision_mask = 0
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_oeede")
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_sb0cb")
-debug_color = Color(0.598827, 0.537352, 0.243357, 0.42)
-script = ExtResource("2_pkjqp")
-metadata/_custom_type_script = ExtResource("2_pkjqp")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_21v20")
 }
 autoplay = "idle"
 
+[node name="InteractionArea" type="Area2D" parent="."]
+z_index = -1
+position = Vector2(0, 16)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("6_i2gae")
+metadata/_custom_type_script = ExtResource("6_i2gae")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_sb0cb")
+debug_color = Color(0.6, 0.537255, 0.243137, 0.419608)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_18kok")
 current_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("6_5lcsm")
-interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../animation_up")]
+interaction_area = NodePath("../../InteractionArea")
 action_trigger = "run"
 one_shot = false
+on_completion = [NodePath("../animation_up")]
 
 [node name="animation_idle" type="Node" parent="StateMachine/idle" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_op40x")
@@ -181,8 +187,8 @@ animation = "idle"
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "up"
+on_completion = [NodePath("../down")]
 time_range = Vector2(1, 1)
-on_completion = NodePath("../down")
 
 [node name="take_damage" type="Node" parent="StateMachine/animation_up" node_paths=PackedStringArray("node")]
 script = ExtResource("9_c4pye")
@@ -195,5 +201,4 @@ metadata/_custom_type_script = ExtResource("9_c4pye")
 script = ExtResource("4_op40x")
 animation_player = NodePath("../../AnimationPlayer")
 animation = "down"
-await_completion = true
-on_completion = NodePath("../idle")
+on_completion = [NodePath("../idle")]

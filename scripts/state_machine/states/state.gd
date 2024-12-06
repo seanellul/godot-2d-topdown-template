@@ -5,13 +5,16 @@ class_name State
 
 @export var disabled := false ## Set to true to avoid processing this state.
 @export_category("Advance")
+## States to enable when this state completes or when timer times out.[br]
+## In a [i]StateInteract[/i] are the states to enable when the interaction triggers.
+@export var on_completion: Array[State]
 @export_group("Await Timer")
 @export var time_range := Vector2.ZERO ## If greather than 0, await N seconds before completing the state, where N is a random value between min (x) and max (y).
-@export_group("")
-@export var await_completion := false ## Await the completion of this state before enabling the on_completion state.
-@export var on_completion: State ## State to enable after state completion or on timer timeout.
 
-var active := false ## True if the state is currently active.
+var active := false: ## True if the state is the current processing state in the StateMachine.
+	set(value):
+		active = value
+		process_mode = PROCESS_MODE_INHERIT if active else PROCESS_MODE_DISABLED
 var state_machine: StateMachine:
 	set(value):
 		state_machine = value
@@ -19,13 +22,10 @@ var state_machine: StateMachine:
 			state.state_machine = value
 var timer: TimedState
 
-signal completed
-
 func _enter_tree():
 	if disabled:
-		process_mode = PROCESS_MODE_DISABLED
+		active = false
 	if time_range > Vector2.ZERO:
-		await_completion = false # Await for timer timeout instead.
 		timer = TimedState.new()
 		timer.create(self, time_range)
 
@@ -36,9 +36,6 @@ func enable(params = null): ## Enables this state.
 	if timer:
 		timer.start()
 		await timer.timeout
-	if on_completion:
-		on_completion.enable(state_machine.params)
-	if not await_completion and not timer:
 		complete()
 
 func disable():
@@ -57,8 +54,10 @@ func update(_delta: float):
 func physics_update(_delta: float):
 	pass
 
-func complete():
-	completed.emit()
+func complete(params = null):
+	if !timer or timer and timer.timer.time_left == 0.0:
+		for state in on_completion:
+			state.enable(state_machine.params if !params else params)
 
 class TimedState:
 	var timer: Timer
@@ -67,7 +66,7 @@ class TimedState:
 	signal timeout
 
 	func create(parent: Node, time_range: Vector2):
-		if not timer:
+		if !timer:
 			timer = Timer.new()
 			timer.one_shot = true
 			parent.add_child(timer)

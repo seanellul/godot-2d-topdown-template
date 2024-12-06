@@ -12,6 +12,8 @@ class_name CharacterEntity
 @export var blocks_detector: RayCast2D ## A RayCast2D node to identify when the entity is in front of a tile or element that blocks it.
 @export var fall_detector: ShapeCast2D ## A ShapeCast2D node that identifies when the entity is falling, triggering the "on_fall" state.
 @export var running_particles: GPUParticles2D = null ## A GPUParticles2D to enable when the entity is running (is_running == true).
+var speed_multiplier := 1.0
+var friction_multiplier := 1.0
 @export_group("Health")
 @export var max_hp := 20 ## The total hp of the entity. If the entity has health_bar assigned, it is the value that corresponds to the health_bar completely full.
 @export var immortal := false ## Makes the entity undamageable. Exported for testing purposes.
@@ -55,8 +57,6 @@ var facing := Vector2.DOWN: ## The direction the entity is facing.
 var speed := 0.0 ## The current speed of the entity.
 var invert_moving_direction := false ## Inverts the movement direction. Useful for moving an entity away from the target position.
 var safe_position := Vector2.ZERO ## The last position of the entity that was deemed safe. It is set before a jump and is eventually reassigned to the entity by calling the return_to_safe_position method. The "state_fall" state calls this method, so it is useful if assigned to "on_fall".
-@export var speed_multiplier := 1.0
-@export var friction_multiplier := 6.0
 
 @export_group("Actions")
 var is_moving: bool ## True if velocity is non-zero.

@@ -46,7 +46,7 @@ script = ExtResource("6_csega")
 message = "You don't have enough \"keys\"!
 Required: 2"
 await_completion = true
-on_completion = NodePath("../closed")
+on_completion = [NodePath("../closed")]
 
 [node name="P1" parent="Entities" index="0"]
 position = Vector2(272, 80)

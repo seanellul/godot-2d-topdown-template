@@ -10,10 +10,13 @@ class_name StateCallable
 
 func enter():
 	if await_signal_to_complete != "":
-		if node.has_signal(await_signal_to_complete) and !node.is_connected(await_signal_to_complete, complete):
-			node.connect(await_signal_to_complete, complete)
+		if node.has_signal(await_signal_to_complete):
+			if !node.is_connected(await_signal_to_complete, complete):
+				node.connect(await_signal_to_complete, complete)
 		else:
 			push_warning("No signal '%s' in %s" % [await_signal_to_complete, node.get_path()])
+	else:
+		complete.call_deferred()
 	_call_method_by_name()
 
 func _call_method_by_name():

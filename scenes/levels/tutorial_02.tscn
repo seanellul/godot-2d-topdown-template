@@ -1,20 +1,20 @@
 [gd_scene load_steps=22 format=4 uid="uid://7kq5lknqxcf2"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_okilc"]
-[ext_resource type="PackedScene" path="res://scenes/props/trap.tscn" id="2_imqxm"]
+[ext_resource type="PackedScene" uid="uid://vju64cd63eqd" path="res://scenes/props/trap.tscn" id="2_imqxm"]
 [ext_resource type="PackedScene" path="res://scenes/props/potion.tscn" id="3_lp14j"]
 [ext_resource type="PackedScene" uid="uid://dvci1ecg1e7l" path="res://scenes/props/switch.tscn" id="4_vjw68"]
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_up.tscn" id="5_gmt2p"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/change_state_listener.gd" id="6_bu31o"]
 [ext_resource type="PackedScene" uid="uid://bfgn02yd5ftws" path="res://scenes/props/chest.tscn" id="6_joii5"]
-[ext_resource type="PackedScene" path="res://scenes/props/door.tscn" id="7_bu31o"]
+[ext_resource type="PackedScene" uid="uid://sqqjx0j33xse" path="res://scenes/props/door.tscn" id="7_bu31o"]
 [ext_resource type="Script" path="res://items/content_item.gd" id="8_joii5"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_dialogue.gd" id="8_vjw68"]
 [ext_resource type="Resource" path="res://items/key.tres" id="9_bu31o"]
 [ext_resource type="Resource" uid="uid://gdgabla4e12i" path="res://dialogues/tutorial_02.dialogue" id="9_h8ccs"]
-[ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="13_gmt2p"]
-[ext_resource type="Script" path="res://scenes/system/interaction_area.gd" id="14_mce06"]
+[ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="13_gmt2p"]
 [ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="15_er3gv"]
+[ext_resource type="Script" path="res://scripts/interaction_area.gd" id="15_hvm1c"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_interact.gd" id="16_hvm1c"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_path.gd" id="17_ytjl1"]
 [ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="18_deu1n"]
@@ -90,7 +90,7 @@ metadata/_custom_type_script = ExtResource("8_vjw68")
 [node name="Door" parent="Props" index="6" instance=ExtResource("7_bu31o")]
 position = Vector2(1116, -330)
 
-[node name="StateMachine" parent="Props/Door" index="2" groups=["save"]]
+[node name="StateMachine" parent="Props/Door" index="3" groups=["save"]]
 
 [node name="closed" parent="Props/Door/StateMachine" index="0"]
 one_shot = false
@@ -99,8 +99,7 @@ one_shot = false
 script = ExtResource("8_vjw68")
 dialogue = ExtResource("9_h8ccs")
 title = "door_closed"
-await_completion = true
-on_completion = NodePath("../closed")
+on_completion = [NodePath("../closed")]
 metadata/_custom_type_script = ExtResource("8_vjw68")
 
 [node name="P1" parent="Entities" index="0"]
@@ -207,12 +206,17 @@ horizontal_alignment = 1
 
 [node name="exit-door" type="Node" parent="Events" index="1"]
 
-[node name="InteractionArea2D" type="CollisionShape2D" parent="Events/exit-door" index="0"]
+[node name="InteractionArea" type="Area2D" parent="Events/exit-door" index="0"]
+z_index = -1
 position = Vector2(1120, -368)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("15_hvm1c")
+metadata/_custom_type_script = ExtResource("15_hvm1c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/exit-door/InteractionArea" index="0"]
 shape = SubResource("RectangleShape2D_aw30f")
-debug_color = Color(0.991833, 0, 0.260309, 0.42)
-script = ExtResource("14_mce06")
-metadata/_custom_type_script = ExtResource("14_mce06")
 
 [node name="Path2D" type="Path2D" parent="Events/exit-door" index="1"]
 curve = SubResource("Curve2D_lgfh2")
@@ -222,19 +226,18 @@ script = ExtResource("15_er3gv")
 current_state = NodePath("interact")
 metadata/_custom_type_script = ExtResource("15_er3gv")
 
-[node name="interact" type="Node" parent="Events/exit-door/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_interaction")]
+[node name="interact" type="Node" parent="Events/exit-door/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
 script = ExtResource("16_hvm1c")
-interaction_area = NodePath("../../InteractionArea2D")
-on_interaction = [NodePath("../player_path")]
+interaction_area = NodePath("../../InteractionArea")
 reset_delay = 0.0
+on_completion = [NodePath("../player_path")]
 metadata/_custom_type_script = ExtResource("16_hvm1c")
 
 [node name="player_path" type="Node" parent="Events/exit-door/StateMachine" index="1" node_paths=PackedStringArray("path", "on_completion")]
 script = ExtResource("17_ytjl1")
 path = NodePath("../../Path2D")
 distance_threshold = 3.0
-await_completion = true
-on_completion = NodePath("../enable_player")
+on_completion = [NodePath("../enable_player")]
 
 [node name="disable_player" type="Node" parent="Events/exit-door/StateMachine/player_path" index="0"]
 script = ExtResource("18_deu1n")
@@ -249,7 +252,6 @@ param_key = "entity"
 on_enter = Dictionary[String, Variant]({
 "input_enabled": true
 })
-await_completion = true
 
 [editable path="Props/Chest"]
 [editable path="Props/Door"]
