@@ -13,7 +13,9 @@ var inventory: Array[ContentItem] = [] ## The items this player has in its inven
 
 func _ready():
 	super._ready()
-	Globals.transfer_start.connect(func(): on_transfer_start.enable())
+	Globals.transfer_start.connect(func(): 
+		on_transfer_start.enable()
+	)
 	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
 	Globals.destination_found.connect(func(destination_path): _move_to_destination(destination_path))
 	receive_data(DataManager.get_player_data(player_id))
@@ -88,3 +90,8 @@ func _move_to_destination(destination_path: String):
 		position = destination.global_position,
 		facing = direction
 	})
+
+func disable_entity(value: bool, delay = 0.0):
+	await get_tree().create_timer(delay).timeout
+	stop()
+	input_enabled = !value
