@@ -1,6 +1,0 @@
-[gd_scene format=3]
-
-[node name="EmbedButton" type="CheckButton"]
-offset_right = 44.0
-offset_bottom = 24.0
-theme_type_variation = &"MainScreenButton"
