@@ -84,5 +84,6 @@ func _do_leaving():
 
 func _reset_interaction():
 	interacting = true
-	await get_tree().create_timer(reset_delay).timeout
+	if is_instance_valid(get_tree()):
+		await get_tree().create_timer(reset_delay).timeout
 	interacting = false
