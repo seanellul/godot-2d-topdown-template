@@ -1,4 +1,5 @@
 extends Camera2D
+class_name GameCamera
 
 @export var target_player_id := 0: ## If greater than 0, player with the specified id will be set as target.
 	set(value):

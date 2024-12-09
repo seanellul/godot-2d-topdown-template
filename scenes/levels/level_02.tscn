@@ -1,26 +1,27 @@
-[gd_scene load_steps=140 format=4 uid="uid://coghb48bnym1w"]
+[gd_scene load_steps=142 format=4 uid="uid://coghb48bnym1w"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" path="res://scenes/props/key.tscn" id="2_vfs10"]
-[ext_resource type="Script" uid="uid://b1smopidsigyw" path="res://items/content_item.gd" id="3_v5pqk"]
+[ext_resource type="Script" uid="uid://nv5oqptekj8o" path="res://items/content_item.gd" id="3_v5pqk"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="3_vnork"]
 [ext_resource type="Resource" path="res://items/key.tres" id="4_m2te4"]
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
-[ext_resource type="Script" uid="uid://cssu1tiytd4ep" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
-[ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
-[ext_resource type="Texture2D" uid="uid://dgbach7bmy1wn" path="res://entities/enemies/enemy-1.png" id="8_m2te4"]
-[ext_resource type="Script" uid="uid://ckva818l0y2ht" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
+[ext_resource type="Script" uid="uid://okgeqn3q2ctb" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
+[ext_resource type="Script" uid="uid://bq8dy7bm24itm" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
+[ext_resource type="Texture2D" uid="uid://co6eo1e0t5e6x" path="res://entities/enemies/enemy-1.png" id="8_m2te4"]
+[ext_resource type="Script" uid="uid://5rdpjnvbjghn" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="9_jsvhf"]
-[ext_resource type="Texture2D" uid="uid://c6o7lhiq368dj" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
+[ext_resource type="Texture2D" uid="uid://bkmou5a5ciyx6" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="10_kibes"]
-[ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="10_q6ljp"]
+[ext_resource type="Shader" uid="uid://ccy4wuuv2yx2w" path="res://shaders/flash.gdshader" id="10_q6ljp"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
-[ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
-[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="12_4dr30"]
-[ext_resource type="Resource" uid="uid://4ov1i7xrocfo" path="res://dialogues/start.dialogue" id="12_bfrr5"]
+[ext_resource type="Script" uid="uid://pdhgmhyshtoy" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
+[ext_resource type="Texture2D" uid="uid://62u5b878f1op" path="res://entities/player/chara-hero.png" id="12_4dr30"]
+[ext_resource type="Resource" uid="uid://eqt7eivqymtg" path="res://dialogues/start.dialogue" id="12_bfrr5"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
-[ext_resource type="Script" uid="uid://bgm8n3pwwbymt" path="res://scripts/interaction_area.gd" id="18_m2te4"]
+[ext_resource type="Script" uid="uid://7v7e1tnrdfka" path="res://scripts/interaction_area.gd" id="18_m2te4"]
+[ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="22_kxbgd"]
 
 [sub_resource type="Resource" id="Resource_kxbgd"]
 script = ExtResource("3_v5pqk")
@@ -1031,9 +1032,13 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2te4"]
+size = Vector2(83, 82)
+
 [node name="Level_02" instance=ExtResource("1_d5yvb")]
 
 [node name="GameCamera2D" parent="." index="0"]
+position = Vector2(329.916, 178.709)
 limit_left = -384
 limit_top = -320
 
@@ -1054,7 +1059,7 @@ position = Vector2(283, 109)
 contents = Array[ExtResource("3_v5pqk")]([SubResource("Resource_kxbgd")])
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(576, 0)
+position = Vector2(263, 197)
 
 [node name="Enemy1" parent="Entities" index="1" instance=ExtResource("3_vnork")]
 position = Vector2(576, 192)
@@ -1215,6 +1220,43 @@ facing = 2
 
 [node name="Path2D" type="Path2D" parent="." index="5"]
 curve = SubResource("Curve2D_gjsqd")
+
+[node name="shake_camera" type="Node" parent="Events" index="0"]
+
+[node name="StateMachine" type="Node" parent="Events/shake_camera" index="0" node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_qmq1u")
+current_state = NodePath("StateInteract")
+metadata/_custom_type_script = ExtResource("4_qmq1u")
+
+[node name="StateInteract" type="Node" parent="Events/shake_camera/StateMachine" index="0" node_paths=PackedStringArray("interaction_area", "on_completion")]
+script = ExtResource("11_7s6t0")
+interaction_area = NodePath("../../InteractionArea")
+action_trigger = "interact"
+one_shot = false
+on_completion = [NodePath("../shake")]
+metadata/_custom_type_script = ExtResource("11_7s6t0")
+
+[node name="shake" type="Node" parent="Events/shake_camera/StateMachine" index="1" node_paths=PackedStringArray("node", "on_completion")]
+script = ExtResource("22_kxbgd")
+node = NodePath("../../../../GameCamera2D/ShakerComponent2D")
+method_name = "play_shake"
+send_sm_params = false
+on_completion = [NodePath("../StateInteract")]
+time_range = Vector2(2, 2)
+metadata/_custom_type_script = ExtResource("22_kxbgd")
+
+[node name="InteractionArea" type="Area2D" parent="Events/shake_camera" index="1"]
+z_index = -1
+position = Vector2(136, 170)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("18_m2te4")
+metadata/_custom_type_script = ExtResource("18_m2te4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/shake_camera/InteractionArea" index="0"]
+position = Vector2(31.5, 31)
+shape = SubResource("RectangleShape2D_m2te4")
 
 [editable path="Entities/Enemy1"]
 [editable path="Entities/NPC"]
