@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
 [ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
-[ext_resource type="Script" uid="uid://7ch1tti2b30r" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
+[ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
 [ext_resource type="Script" uid="uid://b4jgftt0t4d1e" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
 [ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="14_gx6sm"]
 [ext_resource type="PackedScene" path="res://scenes/menus/inventory.tscn" id="15_gx6sm"]
@@ -566,6 +566,14 @@ on_enter = Dictionary[String, Variant]({
 on_exit = Dictionary[String, Variant]({
 "is_hurting": false
 })
+
+[node name="flash" type="Node" parent="StateMachine/knockback" index="2" node_paths=PackedStringArray("node")]
+script = ExtResource("14_gx6sm")
+node = NodePath("../../..")
+method_name = "flash"
+method_params = [0.3]
+send_statemachine_params = false
+metadata/_custom_type_script = ExtResource("14_gx6sm")
 
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("8_bp05k")

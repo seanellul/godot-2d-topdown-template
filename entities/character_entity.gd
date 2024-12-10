@@ -31,8 +31,6 @@ var screen_notifier: VisibleOnScreenNotifier2D ## The instance of a VisibleOnScr
 var attack_cooldown_timer: Timer ## The timer that manages the cooldown time between attacks.
 var facing := Vector2.DOWN: ## The direction the entity is facing.
 	set(value):
-		if facing != value:
-			pass
 		facing = value
 		for n in sync_rotation:
 			n.rotation = facing.angle()

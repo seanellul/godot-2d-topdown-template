@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bom3r5tu6ppqj" path="res://scenes/props/blocks.png" id="9_3pscl"]
 [ext_resource type="Script" uid="uid://xbo7jkinrdw2" path="res://scripts/state_machine/states/state.gd" id="9_o85tp"]
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_down.tscn" id="12_70ge1"]
-[ext_resource type="Script" uid="uid://7ch1tti2b30r" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
+[ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
 [ext_resource type="PackedScene" uid="uid://dvci1ecg1e7l" path="res://scenes/props/switch.tscn" id="13_64f3m"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="16_nsalp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="16_vcg7b"]
