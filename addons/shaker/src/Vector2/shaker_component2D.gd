@@ -161,10 +161,7 @@ func _progress_shake() -> void:
 				shake_finished.emit()
 				break
 		var _i:int = fmod(index, _shake_position.size())
-		if target is not GameCamera:
-			target.position += -_last_position_shake[_i] + _shake_position[_i]
-		else:
-			target.offset += -_last_position_shake[_i] + _shake_position[_i]
+		target.position += -_last_position_shake[_i] + _shake_position[_i]
 		target.rotation += -_last_rotation_shake[_i] + _shake_rotation[_i]
 		target.scale += -_last_scale_shake[_i] + _shake_scale[_i]
 		
@@ -257,10 +254,7 @@ func set_randomize(value: bool) -> void:
 		for index: int in Targets.size():
 			var target: Node2D = Targets[index]
 			var i = fmod(index, _last_position_shake.size())
-			if target is not GameCamera:
-				target.position += -_last_position_shake[i]
-			else:
-				target.offset += -_last_position_shake[i]
+			target.position += -_last_position_shake[i]
 			target.rotation += -_last_rotation_shake[i]
 			target.scale += -_last_scale_shake[i]
 		_last_position_shake.fill(_last_position_shake[0])

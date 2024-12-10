@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://8vwu5i52l856"]
 
 [ext_resource type="Script" uid="uid://bovx6ytstgvc6" path="res://scenes/system/game_camera.gd" id="1_eihhq"]
-[ext_resource type="Script" uid="uid://cyrqr0ncamfhh" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_8fklm"]
-[ext_resource type="Script" uid="uid://djof2sgq84ddi" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_avawa"]
-[ext_resource type="Script" uid="uid://do63vi72jdhek" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="4_dpl4u"]
-[ext_resource type="Script" uid="uid://dyrsnp7xb2eue" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="5_cvxel"]
-[ext_resource type="Script" uid="uid://b88jddhoptjef" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_4w64h"]
+[ext_resource type="Script" uid="uid://c6wqpvgr6anix" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_8fklm"]
+[ext_resource type="Script" uid="uid://bshuoy6cgjc04" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_avawa"]
+[ext_resource type="Script" uid="uid://c2e0rgn6vsrc" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="4_dpl4u"]
+[ext_resource type="Script" uid="uid://dla1cv4f46r4r" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="5_cvxel"]
+[ext_resource type="Script" uid="uid://cm0kexs6uxw8k" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_4w64h"]
 
 [sub_resource type="Resource" id="Resource_shpqk"]
 script = ExtResource("4_dpl4u")

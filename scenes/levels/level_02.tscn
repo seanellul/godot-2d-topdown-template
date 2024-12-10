@@ -1037,7 +1037,7 @@ size = Vector2(83, 82)
 
 [node name="Level_02" instance=ExtResource("1_d5yvb")]
 
-[node name="GameCamera2D" parent="." index="0"]
+[node name="GameCamera2D" parent="." index="1"]
 position = Vector2(329.916, 178.709)
 limit_left = -384
 limit_top = -320
@@ -1211,15 +1211,15 @@ on_exit = Dictionary[String, Variant]({
 "input_enabled": true
 })
 
+[node name="Path2D" type="Path2D" parent="." index="5"]
+curve = SubResource("Curve2D_gjsqd")
+
 [node name="Transfer_West" parent="Transfers" index="0" instance=ExtResource("10_kibes")]
 position = Vector2(-48, 224)
 rotation = 1.5708
 level_path = "res://scenes/levels/level_01.tscn"
 destination_name = "Transfer_East"
 facing = 2
-
-[node name="Path2D" type="Path2D" parent="." index="5"]
-curve = SubResource("Curve2D_gjsqd")
 
 [node name="shake_camera" type="Node" parent="Events" index="0"]
 
@@ -1238,7 +1238,7 @@ metadata/_custom_type_script = ExtResource("11_7s6t0")
 
 [node name="shake" type="Node" parent="Events/shake_camera/StateMachine" index="1" node_paths=PackedStringArray("node", "on_completion")]
 script = ExtResource("22_kxbgd")
-node = NodePath("../../../../GameCamera2D/ShakerComponent2D")
+node = NodePath("../../../../Shaker")
 method_name = "play_shake"
 send_sm_params = false
 on_completion = [NodePath("../StateInteract")]
