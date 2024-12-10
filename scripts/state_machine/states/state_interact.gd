@@ -1,13 +1,20 @@
+@tool
 @icon("../icons/StateInteract.svg")
 extends State
 ##Handle entity interactions.
 class_name StateInteract
 
-@export var interaction_area: InteractionArea ## Interaction will trigger only if entity is inside this area.
+@export var interaction_area: InteractionArea: ## Interaction will trigger only if entity is inside this area.
+	set(value):
+		interaction_area = value
+		update_configuration_warnings()
 @export var on_leaving: Array[State] ## States to enable on exiting the area.
 @export var action_trigger := "" ## The input action that will trigger the interaction. Leave empty to trigger on area entered.
 @export_category("Conditions")
-@export var conditions: Array[Check] = [] ## A list of conditions to met in order to trigger the interaction.
+@export var conditions: Array[Check] = []: ## A list of conditions to met in order to trigger the interaction.
+	set(value):
+		conditions = value
+		notify_property_list_changed()
 @export var on_condition_not_met: Dictionary[String, State] = {} ## Provide a state to enable if a certain condition is not met. Use the condition's resource_name as key of the Dictionary.
 @export_category("Settings")
 @export var one_shot := true ## If true, it can be interacted only once. Useful for chests or pickable items.
@@ -87,3 +94,13 @@ func _reset_interaction():
 	if is_instance_valid(get_tree()):
 		await get_tree().create_timer(reset_delay).timeout
 	interacting = false
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "on_condition_not_met":
+		if conditions.size() == 0:
+			property.usage = PROPERTY_USAGE_NONE
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if !interaction_area:
+		return ["Set an InteractionArea to make the interaction working."]
+	return []

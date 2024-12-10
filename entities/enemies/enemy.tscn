@@ -527,5 +527,5 @@ metadata/_custom_type_script = ExtResource("6_gj3y3")
 script = ExtResource("7_56i32")
 node = NodePath("../..")
 method_name = "queue_free"
-send_sm_params = false
+send_statemachine_params = false
 metadata/_custom_type_script = ExtResource("7_56i32")

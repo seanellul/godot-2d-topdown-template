@@ -563,7 +563,7 @@ wander_time_range = Vector2(1, 2)
 [node name="Destination_01" type="Marker2D" parent="Transfers" index="0" groups=["destination"]]
 position = Vector2(32, 256)
 
-[node name="Events" parent="." index="5"]
+[node name="Events" parent="." index="6"]
 position = Vector2(172, 148)
 
 [editable path="Props/Chest"]

@@ -1,13 +1,15 @@
+@tool
 @icon("./icons/StateMachine.svg")
 extends Node
 ##Main controller for the states. States should be placed as children of a StateMachine node.
 class_name StateMachine
 
 @export_category("Config")
-@export var current_state: State = null:
+@export var current_state: State = null: ##The currenlty active state. You can also set here the initial state of the StateMachine.
 	set(value):
 		current_state = value
 		current_state_name = current_state.name if current_state else StringName()
+		update_configuration_warnings()
 @export var disabled := false ## Determines if disable this StateMachine
 
 @onready var n_of_states = get_child_count()
@@ -21,6 +23,12 @@ var current_state_name
 signal state_changed(old_state, new_state)
 
 func _ready():
+	if Engine.is_editor_hint():
+		set_process_input(false)
+		set_process_shortcut_input(false)
+		set_process_unhandled_input(false)
+		set_physics_process(false)
+		return
 	await owner.ready
 	_init_states()
 	_get_states()
@@ -116,3 +124,8 @@ func enable_next_state(_params = null):
 func enable_previous_state():
 	if previous_state:
 		previous_state.enable(params)
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if !current_state:
+		return ["Initial state not set."]
+	return []

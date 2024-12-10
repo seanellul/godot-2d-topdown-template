@@ -589,14 +589,14 @@ script = ExtResource("14_gx6sm")
 node = NodePath("../../../HealthController")
 method_name = "change_hp"
 method_params = [-2]
-send_sm_params = false
+send_statemachine_params = false
 metadata/_custom_type_script = ExtResource("14_gx6sm")
 
 [node name="return_to_safe_position" type="Node" parent="StateMachine/fall" index="2" node_paths=PackedStringArray("node")]
 script = ExtResource("14_gx6sm")
 node = NodePath("../../..")
 method_name = "return_to_safe_position"
-send_sm_params = false
+send_statemachine_params = false
 metadata/_custom_type_script = ExtResource("14_gx6sm")
 
 [node name="auto" type="Node" parent="StateMachine" index="4"]
