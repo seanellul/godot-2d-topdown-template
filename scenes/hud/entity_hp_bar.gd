@@ -25,4 +25,3 @@ func init_hud(health_controller: HealthController):
 
 func _on_hp_changed(hp):
 	value = hp
-	print("test")
