@@ -13,12 +13,6 @@ func _init() -> void:
 	collision_layer = 0
 	z_index = -1
 
-func _init() -> void:
-	monitorable = false
-	monitoring = true
-	collision_layer = 0
-	z_index = -1
-
 func _ready() -> void:
 	area_entered.connect(_on_hitbox_entered)
 

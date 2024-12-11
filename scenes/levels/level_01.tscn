@@ -1,16 +1,16 @@
 [gd_scene load_steps=37 format=4 uid="uid://f0ljdodnvnix"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_xvd2c"]
-[ext_resource type="Script" uid="uid://nv5oqptekj8o" path="res://items/content_item.gd" id="3_myhjs"]
+[ext_resource type="Script" uid="uid://y77cm2vrpk36" path="res://items/content_item.gd" id="3_myhjs"]
 [ext_resource type="PackedScene" uid="uid://vju64cd63eqd" path="res://scenes/props/trap.tscn" id="4_avl7y"]
 [ext_resource type="Resource" path="res://items/key.tres" id="4_qx1j4"]
 [ext_resource type="PackedScene" uid="uid://r3iqi7bb4jyw" path="res://scenes/props/potion.tscn" id="5_1ytof"]
 [ext_resource type="PackedScene" path="res://scenes/props/gate_side_up.tscn" id="6_5b3ge"]
 [ext_resource type="PackedScene" uid="uid://bfgn02yd5ftws" path="res://scenes/props/chest.tscn" id="6_kdswq"]
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="7_e6yb8"]
-[ext_resource type="Script" uid="uid://5rdpjnvbjghn" path="res://scripts/state_machine/states/state_path.gd" id="8_285dh"]
+[ext_resource type="Script" uid="uid://7xmvwiyhhd4p" path="res://scripts/state_machine/states/state_path.gd" id="8_285dh"]
 [ext_resource type="Script" uid="uid://ccgjxk0s51hvy" path="res://scripts/state_machine/change_state_listener.gd" id="8_dt570"]
-[ext_resource type="Texture2D" uid="uid://bom3r5tu6ppqj" path="res://scenes/props/blocks.png" id="9_3pscl"]
+[ext_resource type="Texture2D" uid="uid://bqecy4w0m84u4" path="res://scenes/props/blocks.png" id="9_3pscl"]
 [ext_resource type="Script" uid="uid://xbo7jkinrdw2" path="res://scripts/state_machine/states/state.gd" id="9_o85tp"]
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_down.tscn" id="12_70ge1"]
 [ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="12_kio72"]
@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="17_pb8k3"]
 [ext_resource type="Script" uid="uid://dgeu5dy2dlgxo" path="res://scripts/checks/check.gd" id="17_vrcmr"]
 [ext_resource type="Script" uid="uid://cwdbt1w4qmrrg" path="res://scripts/checks/check_direction.gd" id="18_svp4f"]
-[ext_resource type="Script" uid="uid://7v7e1tnrdfka" path="res://scripts/interaction_area.gd" id="21_w4kkx"]
+[ext_resource type="Script" uid="uid://cl0ndrqysd5cr" path="res://scripts/interaction_area.gd" id="21_w4kkx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5lc"]
 size = Vector2(48, 10)
