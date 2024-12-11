@@ -13,14 +13,12 @@ var inventory: Array[ContentItem] = [] ## The items this player has in its inven
 
 func _ready():
 	super._ready()
-	Globals.transfer_start.connect(func(): on_transfer_start.enable())
+	Globals.transfer_start.connect(func(): 
+		on_transfer_start.enable()
+	)
 	Globals.transfer_complete.connect(func(): on_transfer_end.enable())
 	Globals.destination_found.connect(func(destination_path): _move_to_destination(destination_path))
 	receive_data(DataManager.get_player_data(player_id))
-
-func reduce_hp(value := 0, from = ""):
-	super.reduce_hp(value, from)
-	flash(damage_flash_power)
 
 ##Get the index of the item in inventory, -1 if not found.
 func is_item_in_inventory(item_name: String, quantity := 1) -> int:
@@ -55,10 +53,6 @@ func remove_item_from_inventory(item_name: String, quantity: int):
 			inventory.remove_at(item_index)
 			print("%s removed from %s's inventory! q: 0" % [item_name, self.name])
 
-func reset_values():
-	is_charging = false
-	is_attacking = false
-
 ##Get the player data to save.
 func get_data():
 	var data = DataPlayer.new()
@@ -67,8 +61,8 @@ func get_data():
 		data = player_data
 	data.position = position
 	data.facing = facing
-	data.hp = hp
-	data.max_hp = max_hp
+	data.hp = health_controller.hp
+	data.max_hp = health_controller.max_hp
 	data.inventory = inventory
 	data.equipped = equipped
 	return data
@@ -78,8 +72,8 @@ func receive_data(data):
 	if data:
 		global_position = data.position
 		facing = data.facing
-		hp = data.hp
-		max_hp = data.max_hp
+		health_controller.hp = data.hp
+		health_controller.max_hp = data.max_hp
 		inventory = data.inventory
 		equipped = data.equipped
 
@@ -96,3 +90,8 @@ func _move_to_destination(destination_path: String):
 		position = destination.global_position,
 		facing = direction
 	})
+
+func disable_entity(value: bool, delay = 0.0):
+	await get_tree().create_timer(delay).timeout
+	stop()
+	input_enabled = !value

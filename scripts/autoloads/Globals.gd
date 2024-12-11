@@ -9,8 +9,6 @@ var settings_menu_scene: PackedScene = preload("res://scenes/menus/settings_menu
 var settings_menu = null
 
 @warning_ignore("unused_signal")
-signal enemy_hurt
-@warning_ignore("unused_signal")
 signal transfer_start
 @warning_ignore("unused_signal")
 signal transfer_complete

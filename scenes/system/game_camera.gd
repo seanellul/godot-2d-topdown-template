@@ -1,9 +1,12 @@
+@tool
 extends Camera2D
+class_name GameCamera
 
 @export var target_player_id := 0: ## If greater than 0, player with the specified id will be set as target.
 	set(value):
 		target_player_id = value
 		target = null
+		notify_property_list_changed()
 @export var target: Node2D = null: ## The node to follow.
 	set(value):
 		target = value
@@ -42,3 +45,8 @@ func _try_to_set_player_target(_player: PlayerEntity):
 func _follow_target():
 	if is_instance_valid(target):
 		global_position = target.position
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "target":
+		if target_player_id > 0:
+			property.usage = PROPERTY_USAGE_NONE

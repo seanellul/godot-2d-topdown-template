@@ -10,5 +10,4 @@ func enter():
   entity.add_impulse(impulse_force)
   await get_tree().create_timer(impulse_duration).timeout
   entity.stop()
-  entity.reset_values()
   complete()

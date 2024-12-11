@@ -1,18 +1,19 @@
-[gd_scene load_steps=66 format=3 uid="uid://dfxvfxqwdnh48"]
+[gd_scene load_steps=67 format=3 uid="uid://dfxvfxqwdnh48"]
 
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="1_fnaeb"]
-[ext_resource type="PackedScene" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
-[ext_resource type="Script" path="res://entities/player/player_entity.gd" id="2_x37y0"]
-[ext_resource type="Script" path="res://scripts/state_machine/scripts/state_machine.gd" id="3_xnu42"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="4_8hp4k"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
-[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="6_afbqv"]
+[ext_resource type="PackedScene" uid="uid://ry5d5tfsku2i" path="res://scenes/hud/player_hud.tscn" id="2_kl4cw"]
+[ext_resource type="Script" uid="uid://ngyk1y3ddxjb" path="res://entities/player/player_entity.gd" id="2_x37y0"]
+[ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="3_xnu42"]
+[ext_resource type="Shader" uid="uid://bufdq4hbl8q5v" path="res://shaders/flash.gdshader" id="4_8hp4k"]
+[ext_resource type="Script" uid="uid://cj8vax0c5wpqj" path="res://scripts/state_machine/states/state_input_listener.gd" id="4_b1v48"]
+[ext_resource type="Script" uid="uid://igey4j36or78" path="res://components/health_controller.gd" id="5_gx6sm"]
+[ext_resource type="Texture2D" uid="uid://b56l5vsvyh3ut" path="res://entities/player/chara-hero.png" id="6_afbqv"]
 [ext_resource type="PackedScene" path="res://particles/smoke_particles.tscn" id="6_dxaj8"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_fall.gd" id="12_2ttjo"]
-[ext_resource type="Script" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
+[ext_resource type="Script" uid="uid://bftgwq0ccj5yn" path="res://scripts/state_machine/states/state_idle.gd" id="8_bp05k"]
+[ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="9_fvq3l"]
+[ext_resource type="Script" uid="uid://btmy7sadqiuav" path="res://scripts/state_machine/states/state_animation.gd" id="9_p7spi"]
+[ext_resource type="Script" uid="uid://b4jgftt0t4d1e" path="res://scripts/state_machine/states/state_impulse.gd" id="12_m3ydn"]
+[ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="14_gx6sm"]
 [ext_resource type="PackedScene" path="res://scenes/menus/inventory.tscn" id="15_gx6sm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1npff"]
@@ -464,17 +465,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "running_particles", "on_attack", "on_hurt", "on_fall", "on_death") groups=["player"] instance=ExtResource("1_fnaeb")]
+[node name="Player" node_paths=PackedStringArray("on_transfer_start", "on_transfer_end", "health_controller", "running_particles", "on_attack", "on_fall") groups=["player"] instance=ExtResource("1_fnaeb")]
 y_sort_enabled = false
 script = ExtResource("2_x37y0")
 on_transfer_start = NodePath("StateMachine/auto")
 on_transfer_end = NodePath("StateMachine/move")
+health_controller = NodePath("HealthController")
 running_particles = NodePath("SmokeParticles")
-health_bar = ExtResource("2_kl4cw")
 on_attack = NodePath("StateMachine/attack")
-on_hurt = NodePath("StateMachine/knockback")
 on_fall = NodePath("StateMachine/fall")
-on_death = NodePath("StateMachine/death")
 
 [node name="SmokeParticles" parent="." index="2" instance=ExtResource("6_dxaj8")]
 process_mode = 3
@@ -491,14 +490,20 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_1npff")
 debug_color = Color(0.522179, 0.564523, 0.297975, 0.42)
 
-[node name="AnimatedSprite2D" parent="." index="4"]
+[node name="HealthController" type="Node2D" parent="." index="4" node_paths=PackedStringArray("on_hp_0")]
+script = ExtResource("5_gx6sm")
+health_bar = ExtResource("2_kl4cw")
+on_hp_0 = NodePath("../StateMachine/death")
+metadata/_custom_type_script = ExtResource("5_gx6sm")
+
+[node name="AnimatedSprite2D" parent="." index="5"]
 material = SubResource("ShaderMaterial_afbqv")
 sprite_frames = SubResource("SpriteFrames_gx6sm")
 
-[node name="AnimationTree" parent="." index="8"]
+[node name="AnimationTree" parent="." index="9"]
 parameters/walk/BlendSpace2D/blend_position = Vector2(0.00376654, 0.992565)
 
-[node name="StateMachine" type="Node" parent="." index="9" node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." index="10" node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_xnu42")
 current_state = NodePath("move")
 
@@ -510,15 +515,36 @@ script = ExtResource("12_m3ydn")
 on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
-[node name="set_params" type="Node" parent="StateMachine/attack" index="0"]
+[node name="is_attacking" type="Node" parent="StateMachine/attack" index="0" node_paths=PackedStringArray("node")]
 script = ExtResource("9_fvq3l")
-param_key = "entity"
+node = NodePath("../../..")
 on_enter = Dictionary[String, Variant]({
 "is_attacking": true
 })
 on_exit = Dictionary[String, Variant]({
 "is_attacking": false
 })
+
+[node name="set_immortal" type="Node" parent="StateMachine/attack" index="1" node_paths=PackedStringArray("node")]
+script = ExtResource("9_fvq3l")
+node = NodePath("../../../HealthController")
+on_enter = Dictionary[String, Variant]({
+"immortal": true
+})
+on_exit = Dictionary[String, Variant]({
+"immortal": false
+})
+
+[node name="enable_hitbox" type="Node" parent="StateMachine/attack" index="2" node_paths=PackedStringArray("node")]
+script = ExtResource("9_fvq3l")
+node = NodePath("../../../HitBox/CollisionShape2D")
+on_enter = Dictionary[String, Variant]({
+"disabled": false
+})
+on_exit = Dictionary[String, Variant]({
+"disabled": true
+})
+metadata/_custom_type_script = ExtResource("9_fvq3l")
 
 [node name="knockback" type="Node" parent="StateMachine" index="2" node_paths=PackedStringArray("on_completion")]
 script = ExtResource("12_m3ydn")
@@ -531,7 +557,7 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="set-is_hurting" type="Node" parent="StateMachine/knockback" index="1"]
+[node name="is_hurting" type="Node" parent="StateMachine/knockback" index="1"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
@@ -541,15 +567,22 @@ on_exit = Dictionary[String, Variant]({
 "is_hurting": false
 })
 
+[node name="flash" type="Node" parent="StateMachine/knockback" index="2" node_paths=PackedStringArray("node")]
+script = ExtResource("14_gx6sm")
+node = NodePath("../../..")
+method_name = "flash"
+method_params = [0.3]
+send_statemachine_params = false
+metadata/_custom_type_script = ExtResource("14_gx6sm")
+
 [node name="fall" type="Node" parent="StateMachine" index="3" node_paths=PackedStringArray("on_completion")]
-script = ExtResource("12_2ttjo")
-damage = 2
+script = ExtResource("8_bp05k")
 on_completion = [NodePath("../move")]
 time_range = Vector2(0.2, 0.2)
 
-[node name="set-is_falling" type="Node" parent="StateMachine/fall" index="0"]
+[node name="set-is_falling" type="Node" parent="StateMachine/fall" index="0" node_paths=PackedStringArray("node")]
 script = ExtResource("9_fvq3l")
-param_key = "entity"
+node = NodePath("../../..")
 on_enter = Dictionary[String, Variant]({
 "is_falling": true,
 "visible": false
@@ -558,6 +591,21 @@ on_exit = Dictionary[String, Variant]({
 "is_falling": false,
 "visible": true
 })
+
+[node name="reduce_hp" type="Node" parent="StateMachine/fall" index="1" node_paths=PackedStringArray("node")]
+script = ExtResource("14_gx6sm")
+node = NodePath("../../../HealthController")
+method_name = "change_hp"
+method_params = [-2]
+send_statemachine_params = false
+metadata/_custom_type_script = ExtResource("14_gx6sm")
+
+[node name="return_to_safe_position" type="Node" parent="StateMachine/fall" index="2" node_paths=PackedStringArray("node")]
+script = ExtResource("14_gx6sm")
+node = NodePath("../../..")
+method_name = "return_to_safe_position"
+send_statemachine_params = false
+metadata/_custom_type_script = ExtResource("14_gx6sm")
 
 [node name="auto" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("8_bp05k")
@@ -572,19 +620,27 @@ script = ExtResource("9_p7spi")
 animation_tree = NodePath("../../../AnimationTree")
 animation = "hurt"
 
-[node name="set-is_hurting" type="Node" parent="StateMachine/death" index="1"]
+[node name="is_hurting" type="Node" parent="StateMachine/death" index="1"]
 script = ExtResource("9_fvq3l")
 param_key = "entity"
 on_enter = Dictionary[String, Variant]({
 "is_hurting": true
 })
 
-[node name="Inventory" parent="." index="10" node_paths=PackedStringArray("player") instance=ExtResource("15_gx6sm")]
+[node name="Inventory" parent="." index="11" node_paths=PackedStringArray("player") instance=ExtResource("15_gx6sm")]
 visible = false
 player = NodePath("..")
 
-[node name="HitBox" parent="." index="11"]
+[node name="HitBox" parent="." index="12"]
+position = Vector2(0, 0)
 collision_layer = 16
+change_hp = -3
 
-[node name="HurtBox" parent="." index="12"]
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(8, 0)
+disabled = true
+
+[node name="HurtBox" parent="." index="13" node_paths=PackedStringArray("health_controller", "on_hp_decrease")]
 collision_mask = 96
+health_controller = NodePath("../HealthController")
+on_hp_decrease = NodePath("../StateMachine/knockback")

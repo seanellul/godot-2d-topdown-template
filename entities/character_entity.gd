@@ -6,6 +6,7 @@ class_name CharacterEntity
 @export_group("Settings")
 @export var animation_tree: AnimationTree ## The AnimationTree attached to this entity, needed to manage animations.
 @export var sync_rotation: Array[Node2D] ## A list of nodes that update their rotation based on the direction the entity is facing.
+@export var health_controller: HealthController ## The HealthController that handles this entity hp.
 @export_group("Movement")
 @export var max_speed = 300.0 ## The maximum speed the entity can reach while moving.
 @export var friction = 2000.0 ## Affects the time it takes for the entity to reach max_speed or to stop.
@@ -14,39 +15,18 @@ class_name CharacterEntity
 @export var running_particles: GPUParticles2D = null ## A GPUParticles2D to enable when the entity is running (is_running == true).
 var speed_multiplier := 1.0
 var friction_multiplier := 1.0
-@export_group("Health")
-@export var max_hp := 20 ## The total hp of the entity. If the entity has health_bar assigned, it is the value that corresponds to the health_bar completely full.
-@export var immortal := false ## Makes the entity undamageable. Exported for testing purposes.
-@export var immortal_while_is_hurting := true ## Makes the entity immortal while is_hurting == true.
-@export var health_bar: PackedScene ## A PackedScene that displays the entity's HP.
-@export var damage_flash_power = 0.3 ## The flash power that applies to all nodes found in the "flash" group in the entity.
 @export_group("Attack")
 @export var attack_power := 2 ## The value this entity subtracts from another entity's HP when it attacks.
 @export var attack_speed := 0.08 ## Affects the cooldown time between attacks.
 @export_group("States")
 @export var on_attack: State ## State to enable when this entity attacks.
 @export var on_hit: State ## State to enable when this entity damages another entity.
-@export var on_hurt: State ## State to enable when this entity takes damage.
 @export var on_fall: State ## State to enable when this entity falls.
-@export var on_recovery: State ## State to enable when this entity recovers hp.
-@export var on_death: State ## State to enable when this entity dies (hp == 0).
 @export var on_screen_entered: State ## State to enable when this entity is visible on screen.
 @export var on_screen_exited: State ## State to enable when this entity is outside the visible screen.
 
-@onready var hp := max_hp: ## The entity's current hp.
-	set(value):
-		if immortal:
-			return
-		if value < 0:
-			value = 0
-		elif value > max_hp:
-			value = max_hp
-		hp = value
-		print("%s HP is: %s" % [name, hp])
-		hp_changed.emit(hp)
 @onready var input_enabled: bool = self is PlayerEntity ## If enabled, the entity will respond to input-listening states, such as state_interact and state_input_listener.
 
-var hp_bar: Node ## The health_bar instance, if assigned.
 var screen_notifier: VisibleOnScreenNotifier2D ## The instance of a VisibleOnScreenNotifier2D node, automatically created to handle the on_screen_entered and on_screen_exited states in the entity.
 var attack_cooldown_timer: Timer ## The timer that manages the cooldown time between attacks.
 var facing := Vector2.DOWN: ## The direction the entity is facing.
@@ -56,7 +36,7 @@ var facing := Vector2.DOWN: ## The direction the entity is facing.
 			n.rotation = facing.angle()
 var speed := 0.0 ## The current speed of the entity.
 var invert_moving_direction := false ## Inverts the movement direction. Useful for moving an entity away from the target position.
-var safe_position := Vector2.ZERO ## The last position of the entity that was deemed safe. It is set before a jump and is eventually reassigned to the entity by calling the return_to_safe_position method. The "state_fall" state calls this method, so it is useful if assigned to "on_fall".
+var safe_position := Vector2.ZERO ## The last position of the entity that was deemed safe. It is set before a jump and is eventually reassigned to the entity by calling the return_to_safe_position method.
 
 @export_group("Actions")
 var is_moving: bool ## True if velocity is non-zero.
@@ -64,22 +44,15 @@ var is_running: bool ## Ttrue if the entity is moving and speed > max_speed.
 var is_jumping: bool ## True during a jump. It is handled by the jump() and end_jump() methods, called by the "jump" animation.
 var is_attacking: bool ## Set to true when the entity enters the on_attack state, false when it leaves it.
 var is_charging := false ## Set to true when the entity is charging an attack.
-var is_hurting := false: ## Set to true when the entity enters the on_hurt state, false when it leaves it.
-	set(value):
-		is_hurting = value
-		if immortal_while_is_hurting:
-			immortal = is_hurting
+var is_hurting := false ## Set to true when the entity enters the on_hurt state, false when it leaves it.
 var is_blocked := false: ## True when blocks_detector is colliding.
 	get():
 		return blocks_detector.is_colliding() if blocks_detector != null else false
 var is_falling := false ## Set to true when the entity enters the on_fall state, false when it leaves it.
 
-signal hp_changed(value) ## Emitted when this entity hp change.
-signal damaged(hp) ## Emitted when this entity takes damage.
 signal hit ## Emitted when this entity hits something when attacks.
 
 func _ready():
-	_init_health_bar()
 	_init_screen_notifier()
 	_init_attack_cooldown_timer()
 	animation_tree.active = true
@@ -95,12 +68,6 @@ func _physics_process(_delta):
 	is_running = is_moving and speed > max_speed
 	_check_falling()
 	move_and_slide()
-
-func _init_health_bar():
-	if health_bar:
-		hp_bar = health_bar.instantiate()
-		hp_bar.init_hud(self)
-		add_child(hp_bar)
 
 func _init_screen_notifier():
 	if on_screen_entered or on_screen_exited:
@@ -191,31 +158,6 @@ func flash(power := 0.0, duration := 0.1, color := Color.TRANSPARENT):
 		await get_tree().create_timer(duration).timeout
 		flash(0)
 
-##Reduces entity hp.
-func reduce_hp(value := 0, from = ""):
-	if from:
-		print("%s damaged by %s! value: %s" % [name, from, value])
-	hp -= value
-	if hp <= 0:
-		if on_death:
-			on_death.enable()
-	damaged.emit(hp)
-
-##Recovers entity hp.
-func recover_hp(value := 0, from = ""):
-	if from:
-		print("%s regenerated by %s! value: %s" % [name, from, value])
-	hp += value
-	if hp > max_hp:
-		hp = max_hp
-	if on_recovery:
-		on_recovery.enable()
-
-##Useful to be called after reducing entity hp. IMPORTANT: should be called always after reduce_hp.
-func hurt():
-	if on_hurt:
-		on_hurt.enable()
-
 ##Useful for dashing.
 func add_impulse(force := 0.0):
 	velocity += facing * force
@@ -227,16 +169,6 @@ func return_to_safe_position():
 	if safe_position != Vector2.ZERO:
 		global_position = safe_position
 
-##Applies the effect of an item on the entity.
-func consume_item(item: DataItem):
-	var item_hp = item.change_hp
-	if item_hp > 0:
-		recover_hp(item_hp, item.resource_name)
-	elif item_hp < 0:
-		reduce_hp(-item_hp, item.resource_name)
-		if hp > 0:
-			hurt()
-
 ##Place the entity to a different position facing towards a direction.
 func move_and_face(destination, direction = Vector2.ZERO):
 	position = destination
@@ -244,10 +176,6 @@ func move_and_face(destination, direction = Vector2.ZERO):
 		facing = direction
 	elif direction:
 		facing = Const.DIR_VECTOR[direction]
-
-##Useful to reset some entity values to an initial state.
-func reset_values():
-	pass
 
 ##Stops the entity, setting its velocity to 0.
 func stop(smoothly := false):
