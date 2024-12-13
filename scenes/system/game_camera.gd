@@ -17,6 +17,9 @@ class_name GameCamera
 signal target_set
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		set_physics_process(false)
+		return
 	_enable_smoothing(false)
 	Globals.player_added_to_scene.connect(_try_to_set_player_target)
 	target_set.connect(_init_camera)
