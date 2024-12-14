@@ -569,4 +569,5 @@ script = ExtResource("14_68xn4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_528vq")
+disabled = true
 debug_color = Color(0.470614, 0.553729, 0.568295, 0.42)

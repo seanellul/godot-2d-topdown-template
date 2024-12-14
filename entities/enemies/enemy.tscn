@@ -1,9 +1,9 @@
 [gd_scene load_steps=63 format=3 uid="uid://2c84y1k62jlc"]
 
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="1_ftgfs"]
-[ext_resource type="Shader" uid="uid://blugt5j7e8tag" path="res://shaders/flash.gdshader" id="2_fvxof"]
-[ext_resource type="Texture2D" uid="uid://dgbach7bmy1wn" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
-[ext_resource type="Texture2D" uid="uid://vnyc6gy6kvs1" path="res://entities/player/chara-hero.png" id="4_msovg"]
+[ext_resource type="Shader" uid="uid://bufdq4hbl8q5v" path="res://shaders/flash.gdshader" id="2_fvxof"]
+[ext_resource type="Texture2D" uid="uid://dqow7tjfob4br" path="res://entities/enemies/enemy-1.png" id="2_yaoeo"]
+[ext_resource type="Texture2D" uid="uid://b56l5vsvyh3ut" path="res://entities/player/chara-hero.png" id="4_msovg"]
 [ext_resource type="Script" uid="uid://igey4j36or78" path="res://components/health_controller.gd" id="5_ipr6v"]
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="6_gj3y3"]
 [ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="7_56i32"]
@@ -511,6 +511,9 @@ change_hp = -2
 
 [node name="HurtBox" parent="." index="8" node_paths=PackedStringArray("health_controller")]
 health_controller = NodePath("../HealthController")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+disabled = false
 
 [node name="HealthController" type="Node2D" parent="." index="9" node_paths=PackedStringArray("on_hp_0")]
 script = ExtResource("5_ipr6v")

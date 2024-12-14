@@ -1075,7 +1075,6 @@ obstacle_tilemap = NodePath("../terrain2")
 obstacle_tile_id = 6
 
 [node name="water" parent="Layers" index="1"]
-material = null
 tile_map_data = PackedByteArray("AAAGAAsAAQAIAAMAAAAGAAoAAQAIAAAAAAAHAAoAAQAKAAAAAAAHAAsAAQAJAAMAAAAIAAoAAQAJAAEAAAAIAAsAAQALAAMAAAAIAAkAAQAIAAAAAAAJAAkAAQAKAAAAAAAJAAoAAQAJAAMAAAAKAAoAAQAKAAIAAAAKAAkAAQALAAAAAAAKAAsAAQAIAAMAAAALAAsAAQALAAMAAAALAAoAAQALAAAAAAA=")
 
 [node name="terrain2" parent="Layers" index="2"]
@@ -1099,6 +1098,9 @@ avoidance_mask = 2
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" parent="Entities/Enemy1/HurtBox" index="0"]
+disabled = false
 
 [node name="StateMachine" parent="Entities/Enemy1" index="11" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("follow_player")
@@ -1148,6 +1150,9 @@ metadata/_custom_type_script = ExtResource("8_0xo8f")
 shape = SubResource("CircleShape2D_x5hhv")
 debug_color = Color(0.627451, 0.52549, 0.231373, 0.419608)
 
+[node name="CollisionShape2D" parent="Entities/Enemy2/HurtBox" index="0"]
+disabled = false
+
 [node name="StateMachine" parent="Entities/Enemy2" index="12" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("follow_player")
 
@@ -1183,6 +1188,9 @@ avoidance_mask = 2
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" parent="Entities/Enemy3/HurtBox" index="0"]
+disabled = false
 
 [node name="StateMachine" parent="Entities/Enemy3" index="11" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("follow")

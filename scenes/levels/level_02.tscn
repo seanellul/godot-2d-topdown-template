@@ -2,25 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_d5yvb"]
 [ext_resource type="PackedScene" path="res://scenes/props/key.tscn" id="2_vfs10"]
-[ext_resource type="Script" uid="uid://nv5oqptekj8o" path="res://items/content_item.gd" id="3_v5pqk"]
+[ext_resource type="Script" uid="uid://y77cm2vrpk36" path="res://items/content_item.gd" id="3_v5pqk"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="3_vnork"]
 [ext_resource type="Resource" path="res://items/key.tres" id="4_m2te4"]
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="4_qmq1u"]
-[ext_resource type="Script" uid="uid://ddifg1cabao3g" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
-[ext_resource type="Script" uid="uid://okgeqn3q2ctb" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
-[ext_resource type="Script" uid="uid://bq8dy7bm24itm" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
-[ext_resource type="Texture2D" uid="uid://co6eo1e0t5e6x" path="res://entities/enemies/enemy-1.png" id="8_m2te4"]
-[ext_resource type="Script" uid="uid://5rdpjnvbjghn" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
+[ext_resource type="Script" uid="uid://bftgwq0ccj5yn" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
+[ext_resource type="Script" uid="uid://bja7i86t6u2rg" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
+[ext_resource type="Script" uid="uid://60f2t7507ncv" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
+[ext_resource type="Texture2D" uid="uid://dqow7tjfob4br" path="res://entities/enemies/enemy-1.png" id="8_m2te4"]
+[ext_resource type="Script" uid="uid://7xmvwiyhhd4p" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="9_jsvhf"]
-[ext_resource type="Texture2D" uid="uid://bkmou5a5ciyx6" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
+[ext_resource type="Texture2D" uid="uid://02t84m2xu0l1" path="res://entities/npcs/chara-forest.png" id="10_beipp"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="10_kibes"]
-[ext_resource type="Shader" uid="uid://ccy4wuuv2yx2w" path="res://shaders/flash.gdshader" id="10_q6ljp"]
+[ext_resource type="Shader" uid="uid://bufdq4hbl8q5v" path="res://shaders/flash.gdshader" id="10_q6ljp"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="11_7s6t0"]
-[ext_resource type="Script" uid="uid://pdhgmhyshtoy" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
-[ext_resource type="Texture2D" uid="uid://62u5b878f1op" path="res://entities/player/chara-hero.png" id="12_4dr30"]
-[ext_resource type="Resource" uid="uid://eqt7eivqymtg" path="res://dialogues/start.dialogue" id="12_bfrr5"]
+[ext_resource type="Script" uid="uid://o7ealmnjvxrt" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_i08cu"]
+[ext_resource type="Texture2D" uid="uid://b56l5vsvyh3ut" path="res://entities/player/chara-hero.png" id="12_4dr30"]
+[ext_resource type="Resource" uid="uid://bu4hjt0vuxo5b" path="res://dialogues/start.dialogue" id="12_bfrr5"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="14_dumvw"]
-[ext_resource type="Script" uid="uid://7v7e1tnrdfka" path="res://scripts/interaction_area.gd" id="18_m2te4"]
+[ext_resource type="Script" uid="uid://cl0ndrqysd5cr" path="res://scripts/interaction_area.gd" id="18_m2te4"]
 [ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="22_kxbgd"]
 
 [sub_resource type="Resource" id="Resource_kxbgd"]
@@ -1068,6 +1068,9 @@ wall_min_slide_angle = 0.261799
 [node name="AnimatedSprite2D" parent="Entities/Enemy1" index="2"]
 material = SubResource("ShaderMaterial_kxbgd")
 sprite_frames = SubResource("SpriteFrames_lky54")
+
+[node name="CollisionShape2D" parent="Entities/Enemy1/HurtBox" index="0"]
+disabled = false
 
 [node name="TargetDetectionArea2" type="Area2D" parent="Entities/Enemy1" index="9"]
 z_index = -1
