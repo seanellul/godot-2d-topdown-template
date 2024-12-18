@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://dp66ice2hhj8n" path="res://scripts/state_machine/state_machine.gd" id="4_qmq1u"]
 [ext_resource type="Script" uid="uid://bftgwq0ccj5yn" path="res://scripts/state_machine/states/state_idle.gd" id="5_4l2eg"]
 [ext_resource type="Script" uid="uid://bja7i86t6u2rg" path="res://scripts/state_machine/states/state_wander.gd" id="6_rdt3e"]
-[ext_resource type="Script" uid="uid://60f2t7507ncv" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
+[ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="7_n4gru"]
 [ext_resource type="Texture2D" uid="uid://dqow7tjfob4br" path="res://entities/enemies/enemy-1.png" id="8_m2te4"]
 [ext_resource type="Script" uid="uid://7xmvwiyhhd4p" path="res://scripts/state_machine/states/state_path.gd" id="8_po55j"]
 [ext_resource type="PackedScene" uid="uid://d2nwo602rnihe" path="res://entities/entity.tscn" id="9_jsvhf"]
@@ -1068,9 +1068,6 @@ wall_min_slide_angle = 0.261799
 [node name="AnimatedSprite2D" parent="Entities/Enemy1" index="2"]
 material = SubResource("ShaderMaterial_kxbgd")
 sprite_frames = SubResource("SpriteFrames_lky54")
-
-[node name="CollisionShape2D" parent="Entities/Enemy1/HurtBox" index="0"]
-disabled = false
 
 [node name="TargetDetectionArea2" type="Area2D" parent="Entities/Enemy1" index="9"]
 z_index = -1

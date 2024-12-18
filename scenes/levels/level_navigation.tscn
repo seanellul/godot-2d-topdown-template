@@ -5,12 +5,12 @@
 [ext_resource type="Shader" uid="uid://bufdq4hbl8q5v" path="res://shaders/flash.gdshader" id="3_x5hhv"]
 [ext_resource type="Texture2D" uid="uid://b56l5vsvyh3ut" path="res://entities/player/chara-hero.png" id="4_0xo8f"]
 [ext_resource type="Texture2D" uid="uid://dqow7tjfob4br" path="res://entities/enemies/enemy-1.png" id="5_n8vu3"]
-[ext_resource type="Script" uid="uid://cbt03uxfysolr" path="res://scripts/state_machine/states/state_navigation.gd" id="6_qgg8u"]
+[ext_resource type="Script" uid="uid://blcymmqc06vw2" path="res://scripts/state_machine/states/state_navigation.gd" id="6_qgg8u"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="7_6ttik"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="7_x0ugj"]
 [ext_resource type="Script" uid="uid://cl0ndrqysd5cr" path="res://scripts/interaction_area.gd" id="8_0xo8f"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="9_n8vu3"]
-[ext_resource type="Script" uid="uid://60f2t7507ncv" path="res://scripts/state_machine/states/state_follow.gd" id="9_x5hhv"]
+[ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="9_x5hhv"]
 [ext_resource type="Script" uid="uid://bftgwq0ccj5yn" path="res://scripts/state_machine/states/state_idle.gd" id="10_qgg8u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_53nr0"]
@@ -1081,7 +1081,7 @@ tile_map_data = PackedByteArray("AAAGAAsAAQAIAAMAAAAGAAoAAQAIAAAAAAAHAAoAAQAKAAA
 tile_map_data = PackedByteArray("AAACAAMABgALAAIAAAACAAIABgALAAAAAAADAAIABgASAAIAAAADAAEABgAOAAAAAAADAAMABgANAAIAAAAAAAkABgALAAMAAAABAAkABgARAAAAAAACAAkABgAMAAAAAAADAAkABgAMAAAAAAAEAAkABgANAAAAAAABAAoABgALAAIAAAACAAoABgAMAAIAAAADAAoABgAMAAIAAAAEAAoABgANAAIAAAAGAAYABgALAAAAAAAHAAYABgAMAAAAAAAIAAYABgAMAAAAAAAJAAYABgANAAAAAAAJAAcABgANAAIAAAAIAAcABgAMAAIAAAAHAAcABgAMAAIAAAAGAAcABgALAAIAAAAIAAIABgALAAIAAAAIAAEABgALAAAAAAAJAAAABgALAAAAAAAKAAAABgANAAAAAAAKAAEABgANAAIAAAAJAAEABgAUAAEAAAAJAAIABgANAAIAAAAMAAQABgALAAMAAAANAAMABgALAAAAAAAOAAMABgAMAAAAAAAPAAMABgANAAAAAAAPAAQABgANAAEAAAAOAAQABgAMAAEAAAANAAQABgARAAQAAAANAAUABgALAAIAAAAOAAUABgAMAAIAAAAPAAUABgANAAIAAAAMAAsABgALAAIAAAAMAAoABgALAAEAAAAMAAkABgALAAEAAAAMAAgABgALAAAAAAANAAgABgANAAAAAAANAAkABgANAAEAAAANAAoABgANAAEAAAANAAsABgANAAIAAAARAAkABgALAAEAAAARAAgABgALAAAAAAASAAgABgAMAAAAAAATAAkABgANAAEAAAASAAkABgAMAAEAAAASAAoABgAMAAIAAAARAAoABgALAAIAAAATAAoABgANAAIAAAATAAgABgANAAAAAAATAAUABgALAAIAAAAUAAUABgAMAAIAAAAVAAUABgANAAIAAAAVAAQABgANAAAAAAAUAAQABgAMAAAAAAATAAQABgALAAAAAAAQAAAABgALAAEAAAAQAAEABgALAAIAAAARAAEABgAMAAIAAAASAAEABgANAAIAAAASAAAABgANAAEAAAASAP//BgANAAAAAAARAP//BgAMAAAAAAAQAP//BgALAAAAAAARAAAABgAMAAEAAAAWAP//BgALAAAAAAAWAAAABgALAAIAAAAXAAAABgANAAIAAAAXAP//BgANAAAAAAAAAAYABgALAAMAAAABAAYABgANAAMAAAAWAAgABgALAAMAAAAXAAgABgANAAMAAAA=")
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(169, 92)
+position = Vector2(360, 88)
 
 [node name="Enemy1" parent="Entities" index="1" instance=ExtResource("2_68cva")]
 position = Vector2(176, 16)
@@ -1098,9 +1098,6 @@ avoidance_mask = 2
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
-
-[node name="CollisionShape2D" parent="Entities/Enemy1/HurtBox" index="0"]
-disabled = false
 
 [node name="StateMachine" parent="Entities/Enemy1" index="11" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("follow_player")
@@ -1150,9 +1147,6 @@ metadata/_custom_type_script = ExtResource("8_0xo8f")
 shape = SubResource("CircleShape2D_x5hhv")
 debug_color = Color(0.627451, 0.52549, 0.231373, 0.419608)
 
-[node name="CollisionShape2D" parent="Entities/Enemy2/HurtBox" index="0"]
-disabled = false
-
 [node name="StateMachine" parent="Entities/Enemy2" index="12" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("follow_player")
 
@@ -1189,11 +1183,9 @@ debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
-[node name="CollisionShape2D" parent="Entities/Enemy3/HurtBox" index="0"]
-disabled = false
-
 [node name="StateMachine" parent="Entities/Enemy3" index="11" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("follow")
+disabled = true
 
 [node name="follow" type="Node" parent="Entities/Enemy3/StateMachine" index="1"]
 script = ExtResource("9_x5hhv")
