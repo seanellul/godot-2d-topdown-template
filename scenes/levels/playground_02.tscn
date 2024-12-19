@@ -608,7 +608,7 @@ on_completion = [NodePath("../closed")]
 metadata/_custom_type_script = ExtResource("11_yfo47")
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(736, 274)
+position = Vector2(-32, 192)
 
 [node name="NPC" parent="Entities" index="1" instance=ExtResource("2_tk081")]
 position = Vector2(64, 120)

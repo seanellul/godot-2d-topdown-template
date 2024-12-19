@@ -86,7 +86,7 @@ position = Vector2(128, 160)
 position = Vector2(176, 160)
 
 [node name="P1" parent="Entities" index="0"]
-position = Vector2(224, 224)
+position = Vector2(224, 304)
 
 [node name="Transfer_South" parent="Transfers" index="0" instance=ExtResource("5_ygy3h")]
 position = Vector2(224, 352)
