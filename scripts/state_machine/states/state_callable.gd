@@ -29,11 +29,11 @@ func _call_method_by_name():
 	if is_instance_valid(node) and callable.is_valid():
 		print("Calling method %s from %s" % [method_name, node.name])
 		if method_params.size() > 0:
-			callable.callv(method_params)
+			callable.callv.call_deferred(method_params)
 		elif send_statemachine_params:
-			callable.call(state_machine.params)
+			callable.call.call_deferred(state_machine.params)
 		else:
-			callable.call()
+			callable.call.call_deferred()
 	else:
 		push_warning("%s: Invalid method name" % [get_path()])
 

@@ -77,7 +77,8 @@ func _can_interact() -> bool:
 
 func _do_interaction():
 	interacting = true
-	print(entity.name, " interacted with ", get_path())
+	if is_instance_valid(self):
+		print(entity.name, " interacted with ", get_path())
 	complete({"entity": entity})
 	if !one_shot:
 		_reset_interaction()
@@ -91,7 +92,7 @@ func _do_leaving():
 
 func _reset_interaction():
 	interacting = true
-	if is_instance_valid(get_tree()):
+	if is_inside_tree():
 		await get_tree().create_timer(reset_delay).timeout
 	interacting = false
 

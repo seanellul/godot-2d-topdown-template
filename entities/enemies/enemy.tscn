@@ -519,14 +519,14 @@ disabled = false
 script = ExtResource("5_ipr6v")
 max_hp = 10
 recovery_time = 0.2
-on_hp_0 = NodePath("../StateMachine/death")
+on_hp_0 = NodePath("../EnemyStates/death")
 metadata/_custom_type_script = ExtResource("5_ipr6v")
 
-[node name="StateMachine" type="Node" parent="." index="10"]
+[node name="EnemyStates" type="Node" parent="." index="10"]
 script = ExtResource("6_gj3y3")
 metadata/_custom_type_script = ExtResource("6_gj3y3")
 
-[node name="death" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("node")]
+[node name="death" type="Node" parent="EnemyStates" index="0" node_paths=PackedStringArray("node")]
 script = ExtResource("7_56i32")
 node = NodePath("../..")
 method_name = "queue_free"
