@@ -9,8 +9,8 @@ class_name StateDialogue
 
 func enter():
 	if dialogue:
-		get_tree().paused = pause
+		# get_tree().paused = pause
 		DialogueManager.show_dialogue_balloon(dialogue, title)
 		await DialogueManager.dialogue_ended
-		get_tree().paused = false
+		# get_tree().paused = false
 		complete()

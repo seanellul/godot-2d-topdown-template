@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=4]
+[gd_scene load_steps=3 format=4 uid="uid://bidsmseu0vlv6"]
 
-[ext_resource type="PackedScene" path="res://scenes/levels/Level.tscn" id="1_tibl0"]
-[ext_resource type="PackedScene" path="res://scenes/system/transfer.tscn" id="2_cv4js"]
+[ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_tibl0"]
+[ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="2_cv4js"]
 
 [node name="Tutorial_01" instance=ExtResource("1_tibl0")]
 
-[node name="GameCamera2D" parent="." index="0"]
+[node name="GameCamera2D" parent="." index="1"]
 limit_right = 1472
 limit_bottom = 1024
 

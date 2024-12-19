@@ -18,16 +18,10 @@ class_name StateNavigation
 		if is_node_ready():
 				print("%s is following: %s" % [entity_name, target])
 
-var go := false
-
 func enter():
 	super.enter()
 	_init_target.call_deferred()
 	_update_target.call_deferred()
-	go = true
-
-func exit():
-	go = false
 
 func _init_target():
 	if Engine.is_editor_hint():
@@ -48,8 +42,6 @@ func physics_update(_delta):
 	_follow()
 
 func _follow():
-	if !go:
-		return
 	if navigation_agent.is_navigation_finished():
 		complete()
 		return
