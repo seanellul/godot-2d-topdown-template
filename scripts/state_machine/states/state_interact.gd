@@ -77,7 +77,7 @@ func _can_interact() -> bool:
 
 func _do_interaction():
 	interacting = true
-	if is_instance_valid(self):
+	if is_instance_valid(entity):
 		print(entity.name, " interacted with ", get_path())
 	complete({"entity": entity})
 	if !one_shot:
