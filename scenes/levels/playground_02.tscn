@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://b6xeyy0l5h482" path="res://scripts/state_machine/states/state_follow.gd" id="9_h8st3"]
 [ext_resource type="Script" uid="uid://di3e8lyqvjft4" path="res://scripts/state_machine/states/state_params_setter.gd" id="10_cgx8t"]
 [ext_resource type="Resource" uid="uid://dedijdgjlodov" path="res://dialogues/commons.dialogue" id="10_q52oa"]
-[ext_resource type="Script" uid="uid://o7ealmnjvxrt" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_yfo47"]
+[ext_resource type="Script" uid="uid://cwq4nm0vsv1l5" path="res://scripts/state_machine/states/state_dialogue.gd" id="11_yfo47"]
 [ext_resource type="Resource" uid="uid://bu4hjt0vuxo5b" path="res://dialogues/start.dialogue" id="12_k1igu"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="13_q0u2y"]
 [ext_resource type="PackedScene" uid="uid://2c84y1k62jlc" path="res://entities/enemies/enemy.tscn" id="13_wnv1r"]
@@ -661,18 +661,6 @@ dialogue = ExtResource("12_k1igu")
 title = "forest_citizen_talk"
 on_completion = [NodePath("../interact")]
 
-[node name="set_entity" type="Node" parent="Entities/NPC/StateMachine/start_dialogue" index="0"]
-process_mode = 4
-script = ExtResource("10_cgx8t")
-param_key = "entity"
-on_enter = Dictionary[String, Variant]({
-"input_enabled": false
-})
-on_exit = Dictionary[String, Variant]({
-"input_enabled": true
-})
-disabled = true
-
 [node name="Enemy1" parent="Entities" index="2" instance=ExtResource("13_wnv1r")]
 position = Vector2(320, 129)
 wall_min_slide_angle = 0.261799
@@ -786,7 +774,6 @@ metadata/_custom_type_script = ExtResource("10_cgx8t")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Entities/Enemy1" index="15"]
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="Transfer_West" parent="Transfers" index="0" instance=ExtResource("13_q0u2y")]
 position = Vector2(-80, 192)
