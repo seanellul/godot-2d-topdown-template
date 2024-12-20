@@ -1,13 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0b0jp36dubff"]
+[gd_scene load_steps=13 format=3 uid="uid://b0b0jp36dubff"]
 
-[ext_resource type="Script" uid="uid://c5i6j4twejssp" path="res://scenes/levels/level.gd" id="1_cq0rv"]
+[ext_resource type="Script" uid="uid://ck5vmap7rlh0x" path="res://scenes/levels/level.gd" id="1_cq0rv"]
 [ext_resource type="PackedScene" uid="uid://8vwu5i52l856" path="res://scenes/system/game_camera.tscn" id="2_d25mt"]
 [ext_resource type="Script" uid="uid://c6wqpvgr6anix" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="2_wlcp4"]
 [ext_resource type="Script" uid="uid://bshuoy6cgjc04" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="3_1nx8s"]
 [ext_resource type="TileSet" uid="uid://bqgpil207dwjc" path="res://tilesets/tileset_01.tres" id="3_r7s3x"]
-[ext_resource type="Script" uid="uid://cx7pu2ucwptyb" path="res://scenes/levels/tilemap_navigation.gd" id="4_6158f"]
+[ext_resource type="Script" uid="uid://c7b1xfu55p5mn" path="res://scripts/tilemap_navigation.gd" id="4_6158f"]
 [ext_resource type="Script" uid="uid://c2e0rgn6vsrc" path="res://addons/shaker/data/Vector2/ShakerTypeSineWave2D.gd" id="4_h4kvy"]
-[ext_resource type="Shader" uid="uid://bcxem51r7r02s" path="res://shaders/water.gdshader" id="4_ud3dr"]
 [ext_resource type="Script" uid="uid://dla1cv4f46r4r" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="5_k8xa7"]
 [ext_resource type="Script" uid="uid://cm0kexs6uxw8k" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="6_qx4j1"]
 [ext_resource type="PackedScene" path="res://entities/player/player_instantiator.tscn" id="7_a3ws7"]
@@ -36,16 +35,6 @@ bake_internal = 64
 __follow_timeline = false
 metadata/_custom_type_script = ExtResource("6_qx4j1")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6olnu"]
-shader = ExtResource("4_ud3dr")
-shader_parameter/WATER_COL = Color(0.176471, 0.635294, 0.85098, 1)
-shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
-shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
-shader_parameter/alpha = 1.0
-shader_parameter/distortion_speed = 2.0
-shader_parameter/tile = Vector2(5, 5)
-shader_parameter/offset = Vector2(0, 0)
-
 [node name="Level" type="Node2D" groups=["level"]]
 script = ExtResource("1_cq0rv")
 
@@ -69,7 +58,6 @@ tile_set = ExtResource("3_r7s3x")
 script = ExtResource("4_6158f")
 
 [node name="water" type="TileMapLayer" parent="Layers"]
-material = SubResource("ShaderMaterial_6olnu")
 tile_set = ExtResource("3_r7s3x")
 
 [node name="terrain2" type="TileMapLayer" parent="Layers"]

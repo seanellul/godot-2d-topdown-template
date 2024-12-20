@@ -1,6 +1,7 @@
 extends Marker2D
+## Manage player instantiation in a level.
 
-@export var player_scene: PackedScene ## The player instance.
+@export var player_scene: PackedScene ## Reference to the player scene.
 @export_range(1, 4) var player_id := 1 ## The player id.
 
 @onready var parent = get_parent()

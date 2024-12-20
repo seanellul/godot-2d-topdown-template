@@ -1,5 +1,6 @@
 @tool
 extends Camera2D
+##Handle main camera movements and following a target.
 class_name GameCamera
 
 @export var target_player_id := 0: ## If greater than 0, player with the specified id will be set as target.
@@ -10,6 +11,7 @@ class_name GameCamera
 @export var target: Node2D = null: ## The node to follow.
 	set(value):
 		target = value
+		notify_property_list_changed()
 		if is_node_ready() and target:
 			print("%s target set to: %s" % [name, target])
 			target_set.emit()
@@ -17,6 +19,9 @@ class_name GameCamera
 signal target_set
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		set_physics_process(false)
+		return
 	_enable_smoothing(false)
 	Globals.player_added_to_scene.connect(_try_to_set_player_target)
 	target_set.connect(_init_camera)
@@ -49,4 +54,7 @@ func _follow_target():
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "target":
 		if target_player_id > 0:
+			property.usage = PROPERTY_USAGE_NONE
+	if property.name == "target_player_id":
+		if target != null:
 			property.usage = PROPERTY_USAGE_NONE

@@ -644,3 +644,6 @@ disabled = true
 collision_mask = 96
 health_controller = NodePath("../HealthController")
 on_hp_decrease = NodePath("../StateMachine/knockback")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+disabled = false

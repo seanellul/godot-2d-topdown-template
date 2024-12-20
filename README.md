@@ -3,14 +3,14 @@
 In this section we will explore the main features that this project offers.
 In general, to learn more about a specific topic, you can check "Nodes and Classes definitions" below.
 You can also download and launch the project from the Godot editor (F5) to start a tutorial. The tutorial will explore some main features, giving you suggestions on how to configure the various elements that this project offers.
-When you start working on your project, you can safely delete all the scenes that start with "Tutorial\_" and configure your starting level in the file `Const.gd` -> LEVEL.LEVEL_1
+When you start working on your project, you can safely delete all the scenes that start with "playground\_" and configure your starting level in the file `Const.gd` -> LEVEL.LEVEL_1
 
 ## Character Controller
 
 Characters are nodes that can move and perform actions in a level, through the configuration of different states. States can be configured thanks to a StateMachine node.
 States simply call methods already present in the characters.
 To begin with, a character can walk, run, jump, attack, flash and interact with other elements. These features can be expanded by adding new states that call new methods that you can create for the character.
-Additionally, characters have health points that can be represented by a custom HUD.
+Characters can also have a HealthController node to control health points.
 To learn more about characters, check the **Entity** section.
 
 ## Interaction
@@ -21,8 +21,7 @@ Interactions with other elements in the level, such as levers, objects, NPCs or 
 - which states to enable on interaction
 - which states to enable when leaving the interaction area
 - activate the interaction via the input of an action (defined in Input Map)
-- restrict the interaction only in a certain direction (for example: the character must be facing upwards)
-- restrict the interaction only if the character has certain items in his inventory (for example: a key)
+- activate the interaction only if all checks are passed (for example: the character must face a certain direction or an item muste be in the inventory)
 
 ## Inventory
 
@@ -34,8 +33,8 @@ The project provides a data management system. It works in a very simple way: al
 
 ### "save" group
 
-- StateMachine: By assigning the group "save" to a `StateMachine`, you will save the current state of the StateMachine. This is useful, for example, to handle the open/close state of chests or doors.
-- CharacterEntity: By assigning the group "save" to a `CharacterEntity`, you will save the current position and facing direction of the character.
+- StateMachine: By assigning the group "save" to a `StateMachine`, you will save the current state of the StateMachine. This is useful, for example, to handle the state of objects or events, like the open/close state of chests or doors.
+- CharacterEntity: By assigning the group "save" to a `CharacterEntity`, you will save its current position and facing direction.
 
 ### "player" group
 
@@ -43,15 +42,15 @@ The project provides a data management system. It works in a very simple way: al
   The player's data saved is:
 - position
 - facing direction
-- current level
-- max hp and current hp
+- current hp
+- max hp
 - inventory
 - equipped weapon id
 
 You can extend the `PlayerEntity` class and the saved data as you like.
 
-In all cases, the data will be saved and kept even when moving from one level to another (using a `Transfer`). The data is lost if you close the game without saving (to a file). In the project it is possible to save the data quickly thanks to the singleton `Debugger`, by pressing the _F1_ key on the keyboard.
-You can also quickly load data by pressing the _F2_ key.
+In all cases, the data will be saved and kept even when moving from one level to another (using a `Transfer`). The data is lost if you close the game without saving (to a file). It is possible to save the data quickly thanks to the singleton `Debugger`, by pressing the _F1_ key on the keyboard.
+You can also return to the main title by pressing the _F2_ key.
 
 ## States Management
 
@@ -65,20 +64,30 @@ Each state has the following flow:
 
 - **enter**: series of commands to call when the state is enabled
 - **exit**: series of commands to call when the state is disabled
-- **update**: equivalent of `_process`
-- **physics_update**: equivalent of `_physics_process`
+- **update**: series of commands to call in the `_process`
+- **physics_update**: series of commands to call in the `_physics_process`
 
 The states already available in the project are the following:
 
-- **StateAnimation**: allows you to start an animation defined in an `AnimationPlayer` or `AnimationTree`
-- **StateCallable**: allows you to call a method from another node
-- **StateDebug**: allows you to print a message (with `print_debug`) in the terminal. Useful for debugging purposes
-- **StateDialogue**: allows you to start a dialogue defined with the plugin `DialogueManager` (check the **Dialogue System** section)
-- **StateInteract**: allows you to manage interactions with something. You can assign the states to be activated "on_interaction"
-- **StateMaterial**: allows you to change the material of a Sprite2D node
-- **StateParamsSetter**: allows you to set a series of variables of a node when entering and when exiting a state
-- **StateTween**: allows you to define and call a tween on a node
-- **StateEntity**: is the base state from which all the states specific to the Entities extend. Explore the states that extend `StateEntity` to find out more.
+- **StateAnimation**: start an animation defined in an `AnimationPlayer` or `AnimationTree`
+- **StateCallable**: call a method from another node
+- **StateDebug**: print a message (with `print_debug`) in the terminal. Useful for debugging purposes
+- **StateDialogue**: start a dialogue defined with the plugin `DialogueManager` (check the **Dialogue System** section)
+- **StateInteract**: manage interactions with something. You can assign the states to be activated on interaction in "on_completion"
+- **StateMaterial**: change the material of a Sprite2D node
+- **StateParamsSetter**: set properties of a node when entering and/or exiting a state
+- **StateTween**: define and call a tween on a node
+- **StateEntity**: is the base state from which all the states specific to the Entities extend.
+
+The states that extend `StateEntity` are:
+
+- **StateFollow**: make the entity follow a target (without using NavigationAgent2D)
+- **StateIdle**: stop the entity and possibly disable it
+- **StateImpulse**: apply an impulse to the entity
+- **StateInputListener**: handle inputs to move and control the entity (like the player)
+- **StateNavigation**: make the entity follow a target using a NavigationAgent2D (useful to avoid obstacles)
+- **StatePath**: make the entity follow a path defined in a Path2D
+- **StateWander**: make the entity wander around randomly
 
 You can also create new states, extending the base script `state.gd` or `state_entity.gd`.
 
@@ -138,12 +147,14 @@ The `entity.tscn` node is structured as follows:
   - FallDetector
   - AnimationPlayer
   - AnimationTree
+  - HitBox
+  - HurtBox
 
 ###### Entity
 
 *CharacterEntity < CharacterBody2D* <br>
 All properties and methods in the `character_entity.gd` script have comments.
-You can check the comments to better understand the functionality of the script.
+You can check the comments to better understand its functionalities.
 
 ###### CollisionShape2D
 
@@ -181,6 +192,7 @@ The `player.tscn` node inherits from `entity.tscn`. Here, we explore nodes that 
   - SmokeParticles
   - InteractionTrigger
   - StateMachine (`state_machine.gd`)
+  - Inventory (`inventory.gd`)
 
 ###### Player
 
@@ -203,12 +215,16 @@ All properties and methods in the `player_entity.gd` script have comments. You c
 
 A level is a game area where playable characters, NPCs, any enemies, and props are present. The base node for levels is `Level.tscn`, which has attached the script `level.gd`. The Level node can be used as a starting node for creating new levels. It already has a structure of nodes within it, making it fully functional. Exploring the present nodes, we find:
 
+- Shaker
 - GameCamera2D
 - Layers
 - Props
 - Entities
 - Transfers
 - Events
+
+#### Shaker
+Useful to shake the screen. To shake the screen just call the method `play_shake` on the node using a `StateCallable`.
 
 #### GameCamera2D
 
@@ -224,44 +240,20 @@ Regarding the tileset, to facilitate the definition of Terrain Sets, the `TileBi
 
 #### Props
 
-You can use this node as a parent to keep the props you add to the level organized. Props can be interactive elements or simple non-interactive decorations in the level.
+You can use this node as a parent to keep the props you add to the level. Props can be interactive elements or simple non-interactive decorations in the level.
 
 #### Entities
 
-You can use this node as a parent to keep the entities you add to the level organized. Entities are the game’s characters. For more information on entities, see the **Entities** section.
-Here you can add `Marker2D` nodes to indicate the spawn position of each player. The `level.gd` script will handle instantiating a player at the `Marker2D` position. You have to name these nodes based on the `player_id` to associate with the player, as follows:
-
-- **P1**: instantiates a player with `player_id` 1
-- **P2**: instantiates a player with `player_id` 2
-- **P3**: instantiates a player with `player_id` 3
-- **P4**: instantiates a player with `player_id` 4
-  and so on.
+You can use this node as a parent to keep the entities you add to the level. Entities are the game’s characters.
+Here you can add `Marker2D` nodes with a `player_instantiator.gd` script to indicate the spawn position of each player. The `player_instantiator.gd` script will handle instantiating a player at the `Marker2D` position with the defined `player_id`.
 
 #### Transfers
 
-You can use this node as a parent to keep the transfers you add to the level organized. A Transfer allows the player to move from one level to another. For more information on transfers, see the **Transfers** section.
+You can use this node as a parent to keep the transfers you add to the level. A Transfer allows the player to move from one level to another. Check the `transfer.gd` script to learn more.
 
 #### Events
 
-You can use this node as a parent to keep the events you add to the level organized. Events are state machines that trigger a sequence of states, useful for creating cutscenes or automated character movements. For more information on events, see the **State Management** section.
-
-## Transfers
-
-A Transfer is a node that, upon interaction, allows a player to move to another level.
-This node has simply been structured to perform the transfer:
-
-- to a position in the same level (the current scene)
-- to a position in any other level (a scene that has the `level.gd` attached and has the group "level" assigned)
-
-Moving to another level is done by calling the `swap_scenes` method of the `SceneManager`.
-
-A Transfer is structured like this:
-
-- Transfer (`transfer.gd`)
-  - InteractionArea2D
-  - StateMachine
-    - interact
-    - call_transfer
+You can use this node as a parent to keep the events you add to the level. Events are state machines that trigger a sequence of states, useful for creating cutscenes or automated character movements.
 
 ### Transfer
 
@@ -270,14 +262,3 @@ Parent node that contains the script `transfer.gd` that performs the transfer, w
 - `level_path`: the path of the level to transfer to. Leave empty if you want to move within the same level
 - `destination_name`: the name of the node to use as a reference to set the destination position. This node should have assigned the "destination" group to work properly
 - `facing`: changes the facing direction of the player, forcing it to face the direction configured here. Useful if the starting Transfer is East, so the player is facing right when interacting with it, but the destination is North, so the player will need to face down upon arriving.
-
-### InteractionArea2D
-
-It's a utility script that generates an `Area2D` and assigns a `CollisionShape2D` node to it, already configured to respond correctly to interactions handled by the `StateInteract` state.
-
-### StateMachine
-
-The `StateMachine` associated with this node, which contains the following states:
-
-- **interact** (`StateInteract`): handles the player interaction. When the player enters the area defined by the `InteractionArea2D`, it enables the next state, namely:
-- **call_transfer** (`StateCallable`): when activated, calls the `transfer` method of `transfer.gd`, which performs the player transfer.

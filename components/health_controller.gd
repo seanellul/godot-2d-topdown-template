@@ -1,5 +1,6 @@
 @icon("res://icons/HealthController.svg")
 extends Node2D
+## Controls the HP of an entity or any object, draw an health bar and decide what to do when HP reach 0.
 class_name HealthController
 
 @export_group("Health")
