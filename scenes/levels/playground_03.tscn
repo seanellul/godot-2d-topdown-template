@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cpbp3ry6upm5f"]
+[gd_scene load_steps=11 format=4 uid="uid://cpbp3ry6upm5f"]
 
 [ext_resource type="PackedScene" uid="uid://b0b0jp36dubff" path="res://scenes/levels/Level.tscn" id="1_1wluo"]
 [ext_resource type="PackedScene" uid="uid://dg314c7dkjyup" path="res://scenes/props/key.tscn" id="2_hv67p"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/props/gate_front_up.tscn" id="4_c51mq"]
 [ext_resource type="PackedScene" uid="uid://bybfkbp6hi8r0" path="res://scenes/system/transfer.tscn" id="5_ygy3h"]
 [ext_resource type="Script" uid="uid://cl0ndrqysd5cr" path="res://scripts/interaction_area.gd" id="5_yy2wo"]
+[ext_resource type="Script" uid="uid://dd2m5xedjwd4m" path="res://scripts/state_machine/states/state_callable.gd" id="7_6gsca"]
 [ext_resource type="Script" uid="uid://cmc5vhgmy6nat" path="res://scripts/state_machine/states/state_interact.gd" id="7_akxd2"]
 [ext_resource type="PackedScene" uid="uid://vju64cd63eqd" path="res://scenes/props/trap.tscn" id="7_ygy3h"]
 
@@ -63,6 +64,13 @@ action_trigger = "interact"
 one_shot = false
 on_completion = [NodePath("../../down")]
 metadata/_custom_type_script = ExtResource("7_akxd2")
+
+[node name="shake_screen" type="Node" parent="Props/Gate_Front/StateMachine/down" index="0" node_paths=PackedStringArray("node")]
+script = ExtResource("7_6gsca")
+node = NodePath("../../../../../Shaker")
+method_name = "play_shake"
+send_statemachine_params = false
+metadata/_custom_type_script = ExtResource("7_6gsca")
 
 [node name="Trap" parent="Props" index="4" instance=ExtResource("7_ygy3h")]
 position = Vector2(224, 160)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=4 uid="uid://dayefv6yyr2we"]
 
-[ext_resource type="Script" uid="uid://cwbd5ath2sq1g" path="res://scripts/start_screen.gd" id="1_flm04"]
+[ext_resource type="Script" uid="uid://cyncm32qdovi5" path="res://scripts/start_screen.gd" id="1_flm04"]
 
 [sub_resource type="Image" id="Image_76tfe"]
 data = {
@@ -1139,7 +1139,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_flm04")
-start_level = "res://scenes/levels/level_01.tscn"
+start_level = "uid://b70sj1xr15rx7"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
